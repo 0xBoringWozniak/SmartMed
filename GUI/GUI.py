@@ -1,11 +1,16 @@
-import logging
+from .apps import *
 
-logging.basicConfig(filename='~/../logs/start.log', level=logging.DEBUG)
+# logging decorator
+import sys
+sys.path.append("..")
+from logs.logger import debug
 
 
 class GUI:
+	'''Qt apps manipulator'''
 	def __init__(self):
 		pass
 
-	def display(self):
-		logging.debug('START GUI')
+	@debug
+	def start_gui(self):
+		pass

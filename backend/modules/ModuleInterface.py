@@ -1,13 +1,18 @@
 from abc import ABC, abstractmethod
 from typing import Dict
 
+# logging decorator
+import sys
+sys.path.append("...")
+from logs.logger import debug
+
 
 class Module(ABC):
 	def __init__(self, settings: Dict):
 		self.settings = settings
 		super().__init__()
 
-	@abstractmethod
+	@debug
 	def _prepare_data(self):
 		'''manipulate data according to settings'''
 		raise NotImplementedError
@@ -22,6 +27,7 @@ class Module(ABC):
 		'''generate dash using DashContsructor'''
 		raise NotImplementedError
 
+	@debug
 	def run(self):
 		'''
 		start module

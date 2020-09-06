@@ -2,20 +2,21 @@ from GUI import GUI
 from backend import ModuleManipulator
 
 
-gui = GUI()
-settings = gui.display()
+if __name__ == '__main__':
+    gui = GUI()
+    settings = gui.start_gui()  # empty
 
-settings = {'MODULE': 'STATS',
-			'MODULE_SETTINGS': {
-								'data': {'path': '/Users/ba/Documents/SmartMed/backend/modules/fr_bitmex.csv'},
-								'metrics': {
-											'mean': True,
-											'std': True,
-											'max': True
-											}
-								}
-			}
+    # temp settings
+    settings = {'MODULE': 'STATS',
+                'MODULE_SETTINGS': {
+                    'data': {'preprocessing': {'AUTO': False, 'fillna': 'mean'},
+                             'path': '/Users/ba/Documents/SmartMed/backend/modules/fr_bitmex.csv'},
+                    'metrics': {
+                        'mean': True,
+                        'std': True,
+                        'max': True
+                    }
+                }
+                }
 
-
-module = ModuleManipulator(settings)
-module.start()
+    ModuleManipulator(settings).start()

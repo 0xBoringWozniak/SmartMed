@@ -6,4 +6,4 @@ import pandas as pd
 
 
 class PredictionDashboard():
-	pass
+    pass
