@@ -66,7 +66,11 @@ class StatisticsDashboard(Dashboard):
 						id='yaxis_column_name',
 						options=[{'label': i, 'value': i}
 								 for i in available_indicators],
+<<<<<<< HEAD
 						value=available_indicators[1]
+=======
+						value=available_indicators[0]
+>>>>>>> dev
 					)
 				], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
 			]),
