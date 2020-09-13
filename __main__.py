@@ -10,7 +10,7 @@ if __name__ == '__main__':
     settings = {'MODULE': 'STATS',
                 'MODULE_SETTINGS': {
                     'data': {'preprocessing': {'AUTO': False, 'fillna': 'mean'},
-                             'path': '/Users/ba/Documents/SmartMed/backend/modules/fr_bitmex.csv'},
+                             'path': 'C:/projects/SmartMed/backend/modules/random.csv'},
                     'metrics': {
                         'mean': True,
                         'std': True,
