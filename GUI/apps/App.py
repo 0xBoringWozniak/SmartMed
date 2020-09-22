@@ -22,4 +22,4 @@ class App(ABC):
 	@debug
 	def start(self):
 		'''display QT app'''
-		pass
+		print('Start {}'.foramt(self.__name__))
