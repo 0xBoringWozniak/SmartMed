@@ -26,9 +26,9 @@ class PandasPreprocessor:
 	@debug
 	def preprocess(self):
 		if self.settings['preprocessing']['AUTO']:
-			return pd.read_csv(self.settings['path'], sep=';')
+			return pd.read_csv(self.settings['path'], sep=',')
 		else:
-			self.df = pd.read_csv(self.settings['path'], sep=';')
+			self.df = pd.read_csv(self.settings['path'], sep=',')
 			self.__fillna(self.settings['preprocessing']['fillna'])
 			self.__encoding(self.settings['preprocessing']['encoding'])
 			self.__scale(self.settings['preprocessing']['scaling'])
