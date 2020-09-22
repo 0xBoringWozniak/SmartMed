@@ -51,7 +51,7 @@ class StatisticsDashboard(Dashboard):
 						id='xaxis_column_name',
 						options=[{'label': i, 'value': i}
 								 for i in available_indicators],
-						value=available_indicators[2]
+						value=available_indicators[0]
 					)
 				], style={'width': '48%', 'display': 'inline-block'}),
 				html.Div([
@@ -59,7 +59,7 @@ class StatisticsDashboard(Dashboard):
 						id='yaxis_column_name',
 						options=[{'label': i, 'value': i}
 								 for i in available_indicators],
-						value=available_indicators[3]
+						value=available_indicators[0]
 					)
 				], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
 			]),

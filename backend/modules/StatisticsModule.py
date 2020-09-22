@@ -2,11 +2,14 @@ import pandas as pd
 
 from .ModuleInterface import Module
 from .dash import StatisticsDashboard
+from .dataprep import PandasPreprocessor
 
 
 class StatisticsModule(Module, StatisticsDashboard):
 	def _prepare_data(self):
-		return pd.read_csv(self.settings['data']['path'])
+		pp = PandasPreprocessor(self.settings['data'])
+		pp.preprocess()
+		return pp.df
 	
 	def _prepare_dashboard_settings(self):
 		settings = dict()
