@@ -1,5 +1,2 @@
-from ..App import App
-
-
-class StatisticsApp(App):
+class StatisticsApp():
 	pass

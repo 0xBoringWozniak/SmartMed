@@ -1,4 +1,2 @@
-from ..App import App
-
-class BioequivalenceApp(App):
+class BioequivalenceApp():
 	pass

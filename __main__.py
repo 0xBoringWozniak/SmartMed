@@ -6,6 +6,8 @@ if __name__ == '__main__':
 	gui = GUI()
 	settings = gui.start_gui()  # empty
 
+	print(settings)
+	
 	# temp settings
 	settings = {'MODULE': 'STATS',
 				'MODULE_SETTINGS': {
@@ -16,7 +18,7 @@ if __name__ == '__main__':
 											   'encoding': 'label_encoding',
 											   'scaling': False
 											  },
-							'path': 'winequality-white.csv'
+							'path': 'titanic.csv'
 							},
 					'metrics': {
 						'AUTO': False,
