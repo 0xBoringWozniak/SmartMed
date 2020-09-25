@@ -11,6 +11,7 @@ sys.path.append("...")
 from logs.logger import debug
 
 class PredictionApp(Ui_MainWindow_predict, QtWidgets.QMainWindow):
+    switch_window = QtCore.pyqtSignal()
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -18,13 +19,8 @@ class PredictionApp(Ui_MainWindow_predict, QtWidgets.QMainWindow):
         self.__build_buttons()
 
     def __build_buttons(self):
-        self.checkBox.clicked.connect(self.button_choice_1)
-        self.checkBox_2.clicked.connect(self.button_choice_2)
-
-    
-    def button_choice_1(self):
-    	print('work1')
+        self.pushButton.clicked.connect(self.pushbutton_handler)
 
 
-    def button_choice_2(self):
-    	print('work2')
+    def pushbutton_handler(self):
+        self.switch_window.emit()

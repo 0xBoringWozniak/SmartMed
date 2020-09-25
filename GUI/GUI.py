@@ -21,7 +21,7 @@ class GUI:
     def start_gui(self):
         '''display QT app'''
         app = StartingApp()
-        app.show()
+        app.start()
         self.mainQt.exec_()
 
         return app.settings
