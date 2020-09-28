@@ -1,4 +1,4 @@
-from .MainStatsWindowLogic import MainStatsWindowLogic
+from .WrappedMainWindow import WrappedMainWindow
 from .WrappedSecondWindow import WrappedSecondWindow
 
 # logging decorator
@@ -11,8 +11,8 @@ class StatisticsApp():
     def __init__(self):
         self.settings = {}
 
-        self.main_window = MainStatsWindowLogic()
-        self.second_window = SecondStatsWindowLogic()
+        self.main_window = WrappedMainWindow()
+        self.second_window = WrappedSecondWindow()
 
         self.__build_connections()
 

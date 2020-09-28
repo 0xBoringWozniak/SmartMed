@@ -5,7 +5,7 @@ from .StartingWindow import *
 from ..StatisticsApp.StatisticsApp import StatisticsApp
 
 # UI_main rename
-class StartingWindowLogic(Ui_MainWindow, QtWidgets.QMainWindow):
+class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
     def __init__(self):
         self.settings = {}
 

@@ -11,10 +11,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class MainStatsWindow(object):
+class MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(446, 306)
+        MainWindow.resize(600, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -25,9 +25,9 @@ class MainStatsWindow(object):
         self.checkBoxChoice2 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBoxChoice2.setObjectName("checkBoxChoice2")
         self.verticalLayout.addWidget(self.checkBoxChoice2)
-        self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonBack.setObjectName("pushButtonBack")
-        self.verticalLayout.addWidget(self.pushButtonBack)
+        self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonNext.setObjectName("pushButtonNext")
+        self.verticalLayout.addWidget(self.pushButtonNext)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -38,4 +38,4 @@ class MainStatsWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.checkBoxChoice1.setText(_translate("MainWindow", "Tool 1 (Yes/No)"))
         self.checkBoxChoice2.setText(_translate("MainWindow", "Tool 2 (Yes/No)"))
-        self.pushButtonBack.setText(_translate("MainWindow", "Back"))
+        self.pushButtonNext.setText(_translate("MainWindow", "Next"))

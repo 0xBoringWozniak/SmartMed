@@ -1,6 +1,6 @@
 import os
 
-from .StartingWindowLogic import StartingWindowLogic
+from .WrappedStartingWindow import WrappedStartingWindow
 
 # logging decorator
 import sys
@@ -11,7 +11,7 @@ from logs.logger import debug
 class StartingApp():
     def __init__(self):
         self.settings = {}
-        self.startingWindow = StartingWindowLogic()
+        self.startingWindow = WrappedStartingWindow()
 
     def start(self):
         self.startingWindow.show()
