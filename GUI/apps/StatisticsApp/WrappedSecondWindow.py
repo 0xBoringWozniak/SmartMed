@@ -1,9 +1,9 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication)
-from .SecondStatsWindow import SecondStatsWindow
+from .SecondWindow import SecondWindow
 
 
-class SecondStatsWindowLogic(SecondStatsWindow, QtWidgets.QMainWindow):
+class WrappedSecondWindow(SecondWindow, QtWidgets.QMainWindow):
 
     def __init__(self):
         super().__init__()

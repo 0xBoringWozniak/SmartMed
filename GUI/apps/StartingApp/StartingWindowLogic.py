@@ -17,12 +17,12 @@ class StartingWindowLogic(Ui_MainWindow, QtWidgets.QMainWindow):
         # self.push_stats_button...
 
         # create button and add signal
-        self.pushButton.clicked.connect(self.button_stats)
-        self.pushButton_2.clicked.connect(self.button_prediction)
-        self.pushButton_3.clicked.connect(self.button_bioeq)
-        self.pushButton_4.clicked.connect(self.done)
+        self.pushButtonStat.clicked.connect(self.button_stats)
+        self.pushButtonPred.clicked.connect(self.button_prediction)
+        self.pushButtonBioeq.clicked.connect(self.button_bioeq)
+        self.pushButtonDone.clicked.connect(self.done)
         
-        self.commandLinkButton.clicked.connect(self.path_to_file)
+        self.PathToFileButton.clicked.connect(self.path_to_file)
 
     def done(self):
         self.close()

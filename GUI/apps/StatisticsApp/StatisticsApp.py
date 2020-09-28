@@ -1,5 +1,5 @@
 from .MainStatsWindowLogic import MainStatsWindowLogic
-from .SecondStatsWindowLogic import SecondStatsWindowLogic
+from .WrappedSecondWindow import WrappedSecondWindow
 
 # logging decorator
 import sys

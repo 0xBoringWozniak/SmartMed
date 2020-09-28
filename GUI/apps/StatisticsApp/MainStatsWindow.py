@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'PredictionApp.ui'
+# Form implementation generated from reading ui file 'MainStatsWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -14,20 +14,21 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class MainStatsWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(450, 301)
+        MainWindow.resize(446, 306)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(300, 210, 113, 32))
-        self.pushButton.setObjectName("pushButton")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.checkBoxChoice1 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBoxChoice1.setObjectName("checkBoxChoice1")
+        self.verticalLayout.addWidget(self.checkBoxChoice1)
+        self.checkBoxChoice2 = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBoxChoice2.setObjectName("checkBoxChoice2")
+        self.verticalLayout.addWidget(self.checkBoxChoice2)
+        self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonBack.setObjectName("pushButtonBack")
+        self.verticalLayout.addWidget(self.pushButtonBack)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 450, 22))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -35,4 +36,6 @@ class MainStatsWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton.setText(_translate("MainWindow", "Next"))
+        self.checkBoxChoice1.setText(_translate("MainWindow", "Tool 1 (Yes/No)"))
+        self.checkBoxChoice2.setText(_translate("MainWindow", "Tool 2 (Yes/No)"))
+        self.pushButtonBack.setText(_translate("MainWindow", "Back"))
