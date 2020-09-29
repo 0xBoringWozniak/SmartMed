@@ -14,7 +14,11 @@ class StatisticsDashboard(Dashboard):
 						 self._generate_linear(),
 						 self._generate_scatter(),
 						 self._generate_heatmap(),
-						 self._generate_corr()])
+						 self._generate_corr(),
+						 self._generate_box(),
+						 self._generate_hist(),
+						 self._generate_log(),
+						 self._generate_linlog()])
 
 	def _generate_table(self, max_rows=10):
 		df = self.settings['data'].describe().reset_index()
@@ -145,4 +149,141 @@ class StatisticsDashboard(Dashboard):
 		])
 		], style={'margin':'100px'})
 
+	def _generate_box(self):
+		df = self.settings['data']
+		df.rename(columns=lambda x: x[:11], inplace=True)
+		fig = px.box(df)
+		markdown_text='''
+		A box plot is a statistical representation of numerical data through their quartiles. 
+		'''
+		return html.Div([html.Div(html.H1(children='Box plot'), style={'text-align':'center'}),
+			dcc.Markdown(children=markdown_text),
+				dcc.Graph(
+        			id='box',
+        			figure=fig
+    			)
+			], style={'margin':'100px'})
 
+	def _generate_hist(self):
+		df = self.settings['data']
+		df.rename(columns=lambda x: x[:11], inplace=True)
+		fig = px.histogram(df)
+		markdown_text='''
+		A histogram is representation of the distribution of numerical data, where the data are binned and the count for each bin is represented. 
+		'''
+		
+		def update_hist(xaxis_column_name_hist):
+			fig = px.histogram(
+				self.settings['data'], x=xaxis_column_name_hist)
+			fig.update_xaxes(title=xaxis_column_name_hist)
+
+			return fig
+
+		self.app.callback(dash.dependencies.Output('Histogram', 'figure'),
+						  dash.dependencies.Input('xaxis_column_name_hist', 'value'))(update_hist)
+
+
+		available_indicators = self.settings['data'].columns.unique()
+		return html.Div([html.Div(html.H1(children='Histogram'), style={'text-align':'center'}),
+			dcc.Markdown(children=markdown_text),
+
+				html.Div([
+					dcc.Dropdown(
+						id='xaxis_column_name_hist',
+						options=[{'label': i, 'value': i}
+								 for i in available_indicators],
+						value=available_indicators[0]
+					)
+				]),
+			dcc.Graph(id='Histogram')], style={'margin':'100px'}
+		)
+
+	def _generate_log(self):
+
+		def update_graph(xaxis_column_name_log, yaxis_column_name_log,):
+			fig = px.scatter(
+				self.settings['data'], x=xaxis_column_name_log, y=yaxis_column_name_log)
+			fig.update_xaxes(title=xaxis_column_name_log,
+							 type='log')
+			fig.update_yaxes(title=yaxis_column_name_log,
+							 type='log')
+
+			return fig
+
+		self.app.callback(dash.dependencies.Output('log_graph', 'figure'),
+						   [dash.dependencies.Input('xaxis_column_name_log', 'value'),
+						   dash.dependencies.Input('yaxis_column_name_log', 'value')])(update_graph)
+
+		available_indicators = self.settings['data'].columns.unique()
+		return html.Div([
+			html.Div([
+				html.Div([
+					dcc.Dropdown(
+						id='xaxis_column_name_log',
+						options=[{'label': i, 'value': i}
+								 for i in available_indicators],
+						value=available_indicators[0]
+					)
+				], style={'width': '48%', 'display': 'inline-block'}),
+				html.Div([
+					dcc.Dropdown(
+						id='yaxis_column_name_log',
+						options=[{'label': i, 'value': i}
+								 for i in available_indicators],
+						value=available_indicators[0]
+					)
+				], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
+			]),
+			dcc.Graph(id='log_graph')]
+		)
+
+	def _generate_linlog(self):
+
+		def update_graph(xaxis_column_name_linlog, yaxis_column_name_linlog,
+						 xaxis_type_linlog, yaxis_type_linlog):
+			fig = px.scatter(
+				self.settings['data'], x=xaxis_column_name_linlog, y=yaxis_column_name_linlog)
+			fig.update_xaxes(title=xaxis_column_name_linlog,
+							 type='linear' if xaxis_type_linlog == 'Linear' else 'log')
+			fig.update_yaxes(title=yaxis_column_name_linlog,
+							 type='linear' if yaxis_type_linlog == 'Linear' else 'log')
+
+			return fig
+
+		self.app.callback(dash.dependencies.Output('linlog_graph', 'figure'),
+						   [dash.dependencies.Input('xaxis_column_name_linlog', 'value'),
+						   dash.dependencies.Input('yaxis_column_name_linlog', 'value')],
+						  dash.dependencies.Input('xaxis_type_linlog', 'value'),
+						  dash.dependencies.Input('yaxis_type_linlog', 'value'))(update_graph)
+
+		available_indicators = self.settings['data'].columns.unique()
+		return html.Div([
+			html.Div([
+				html.Div([
+					dcc.Dropdown(
+						id='xaxis_column_name_linlog',
+						options=[{'label': i, 'value': i}
+								 for i in available_indicators],
+						value=available_indicators[0]
+					),
+					dcc.RadioItems(
+						id='xaxis_type_linlog',
+						options=[{'label': i, 'value': i} for i in ['Linear', 'Log']],
+						value='Linear'
+					)
+				], style={'width': '48%', 'display': 'inline-block'}),
+				html.Div([
+					dcc.Dropdown(
+						id='yaxis_column_name_linlog',
+						options=[{'label': i, 'value': i} for i in available_indicators],
+						value=available_indicators[0]
+					),
+					dcc.RadioItems(
+						id='yaxis_type_linlog',
+						options=[{'label': i, 'value': i} for i in ['Linear', 'Log']],
+						value='Linear'
+					)
+				], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
+			]),
+			dcc.Graph(id='linlog_graph')]
+		)
