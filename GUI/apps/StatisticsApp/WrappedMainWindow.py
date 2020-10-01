@@ -4,23 +4,24 @@ from .MainWindow import MainWindow
 
 
 class WrappedMainWindow(MainWindow, QtWidgets.QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
+	def __init__(self):
+		super().__init__()
+		self.setupUi(self)
+		self.settings = {}
+		self.__build_buttons()
 
-        self.__build_buttons()
+	def __build_buttons(self):
+		self.pushButtonNext.clicked.connect(self.next)
+		self.checkBoxChoice1.clicked.connect(self.choice1)
+		self.checkBoxChoice2.clicked.connect(self.choice2)
 
-    def __build_buttons(self):
-        self.pushButtonNext.clicked.connect(self.next)
-        self.checkBoxChoice1.clicked.connect(self.choice1)
-        self.checkBoxChoice2.clicked.connect(self.choice2)
+	def next(self):
+		self.hide()
+		self.leaf_2.show()
 
-    def next(self):
-        self.hide()
-        self.child.show()
+	def choice1(self):
+		print('1')
 
-    def choice1(self):
-    	print('1')
 
-    def choice2(self):
-    	print('2')
+	def choice2(self):
+		print('2')
