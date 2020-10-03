@@ -1,4 +1,7 @@
+import pickle
+
 from .apps import *
+
 
 # logging decorator
 import sys
@@ -23,5 +26,9 @@ class GUI:
         app = StartingApp()
         app.start()
         self.mainQt.exec_()
+
+        with open('settings.py', 'rb') as f:
+            app.settings = pickle.load(f)
+        print(app.settings)
 
         return app.settings

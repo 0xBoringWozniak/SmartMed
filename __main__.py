@@ -1,16 +1,14 @@
 from GUI import GUI
 from backend import ModuleManipulator
-import pickle
 
 
 if __name__ == '__main__':
 	gui = GUI()
-	gui.start_gui()  # empty
+	settings = gui.start_gui()  # empty
 
-	with open('settings.py', 'rb') as f:
-		settings = pickle.load(f)
-		print(settings)
 
+
+	ModuleManipulator(settings).start()
 	
 	# temp settings
 	'''settings = {'MODULE': 'STATS',
@@ -50,4 +48,4 @@ if __name__ == '__main__':
 				'''
 
 
-	ModuleManipulator(settings).start()
+

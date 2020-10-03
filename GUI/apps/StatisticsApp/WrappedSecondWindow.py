@@ -22,7 +22,6 @@ class WrappedSecondWindow(SecondWindow, QtWidgets.QMainWindow):
 						}
 					}
 
-		self.checkBox_1.setChecked(True)
 		self.checkBox_2.setChecked(True)
 		self.checkBox_3.setChecked(True)
 		self.checkBox_4.setChecked(True)
@@ -36,7 +35,6 @@ class WrappedSecondWindow(SecondWindow, QtWidgets.QMainWindow):
 	def __build_buttons(self):
 		self.pushButtonBack.clicked.connect(self.back)
 		self.pushButtonNext.clicked.connect(self.next)
-		self.checkBox_1.clicked.connect(self.auto)
 		self.checkBox_2.clicked.connect(self.check_count)
 		self.checkBox_3.clicked.connect(self.check_mean)
 		self.checkBox_4.clicked.connect(self.check_std)
@@ -50,49 +48,15 @@ class WrappedSecondWindow(SecondWindow, QtWidgets.QMainWindow):
 
 
 	def next(self):
-		self.settings['MODULE'] = 'STATISTICS'
 		with open('settings.py', 'rb') as f:
 			data = pickle.load(f)
-			data.update(self.settings)
+			data['MODULE_SETTINGS'].update(self.settings)
 		with open('settings.py', 'wb') as f:
 			pickle.dump(data, f)
 		self.hide()
 		self.leaf_3.show()
 
 
-	def auto(self):
-		if self.checkBox_1.isChecked() == False:
-			self.settings['AUTO'] = False
-			self.checkBox_2.setChecked(False)
-			self.settings['count'] = False
-			self.checkBox_3.setChecked(False)
-			self.settings['mean'] = False
-			self.checkBox_4.setChecked(False)
-			self.settings['std'] = False
-			self.checkBox_5.setChecked(False)
-			self.settings['max'] = False
-			self.checkBox_6.setChecked(False)
-			self.settings['min'] = False
-			self.checkBox_7.setChecked(False)
-			self.settings['25%'] = False
-			self.settings['50%'] = False
-			self.settings['75%'] = False
-		else:
-			self.settings['AUTO'] = True
-			self.checkBox_2.setChecked(True)
-			self.settings['count'] = True
-			self.checkBox_3.setChecked(True)
-			self.settings['mean'] = True
-			self.checkBox_4.setChecked(True)
-			self.settings['std'] = True
-			self.checkBox_5.setChecked(True)
-			self.settings['max'] = True
-			self.checkBox_6.setChecked(True)
-			self.settings['min'] = True
-			self.checkBox_7.setChecked(True)
-			self.settings['25%'] = True
-			self.settings['50%'] = True
-			self.settings['75%'] = True
 
 
 	def check_count(self):

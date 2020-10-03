@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'MainStatsWindow.ui'
+# Form implementation generated from reading ui file 'mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -17,17 +17,19 @@ class MainWindow(object):
         MainWindow.resize(600, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.checkBoxChoice1 = QtWidgets.QCheckBox(self.centralwidget)
-        self.checkBoxChoice1.setObjectName("checkBoxChoice1")
-        self.verticalLayout.addWidget(self.checkBoxChoice1)
-        self.checkBoxChoice2 = QtWidgets.QCheckBox(self.centralwidget)
-        self.checkBoxChoice2.setObjectName("checkBoxChoice2")
-        self.verticalLayout.addWidget(self.checkBoxChoice2)
+        self.commandLinkButton = QtWidgets.QCommandLinkButton(self.centralwidget)
+        self.commandLinkButton.setGeometry(QtCore.QRect(290, 330, 193, 41))
+        self.commandLinkButton.setObjectName("commandLinkButton")
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonNext.setGeometry(QtCore.QRect(450, 400, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
-        self.verticalLayout.addWidget(self.pushButtonNext)
+        self.comboBox1 = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox1.setGeometry(QtCore.QRect(270, 100, 181, 26))
+        self.comboBox1.setToolTipDuration(10)
+        self.comboBox1.setObjectName("comboBox1")
+        self.comboBox2 = QtWidgets.QComboBox(self.centralwidget)
+        self.comboBox2.setGeometry(QtCore.QRect(260, 230, 181, 26))
+        self.comboBox2.setObjectName("comboBox2")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -36,6 +38,6 @@ class MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.checkBoxChoice1.setText(_translate("MainWindow", "Tool 1 (Yes/No)"))
-        self.checkBoxChoice2.setText(_translate("MainWindow", "Tool 2 (Yes/No)"))
-        self.pushButtonNext.setText(_translate("MainWindow", "Next"))
+        self.commandLinkButton.setText(_translate("MainWindow", "Path to file"))
+        self.pushButtonNext.setText(_translate("MainWindow", "next"))
+        self.comboBox1.setToolTip(_translate("MainWindow", "tool tip", "tool tip"))

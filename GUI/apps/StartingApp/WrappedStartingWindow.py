@@ -8,7 +8,8 @@ from ..StatisticsApp.StatisticsApp import StatisticsApp
 # UI_main rename
 class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
 	def __init__(self):
-		self.settings = {}
+
+		self.settings = { }
 		super().__init__()
 		self.setupUi(self)
 		self.__build_buttons()
@@ -22,7 +23,7 @@ class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
 		self.pushButtonBioeq.clicked.connect(self.button_bioeq)
 		self.pushButtonDone.clicked.connect(self.done)
 		
-		self.PathToFileButton.clicked.connect(self.path_to_file)
+
 
 	def done(self):
 		self.close()
@@ -42,13 +43,4 @@ class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
 	def button_bioeq(self):
 		self.settings['MODULE'] = 'BIOEQ'
 
-	def path_to_file(self):
-		self.settings['data'] = {'preprocessing': {
-											   'AUTO': False,
-											   'fillna': 'mean',
-											   'encoding': 'label_encoding',
-											   'scaling': False
-											  },
-								'path': ''
-								}
-		self.settings['data']['path'] = QtWidgets.QFileDialog.getOpenFileName()[0]
+	

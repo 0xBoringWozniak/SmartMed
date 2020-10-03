@@ -10,7 +10,7 @@ from logs.logger import debug
 
 class StartingApp():
     def __init__(self):
-        self.settings = {}
+        
         self.startingWindow = WrappedStartingWindow()
 
     def start(self):
