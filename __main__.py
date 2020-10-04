@@ -3,49 +3,13 @@ from backend import ModuleManipulator
 
 
 if __name__ == '__main__':
-	gui = GUI()
-	settings = gui.start_gui()  # empty
 
+	try:
+		settings = GUI().start_gui()
+	except Exception as e:
+		print('GUI ERROR: ', e)
 
-
-	ModuleManipulator(settings).start()
-	
-	# temp settings
-	'''settings = {'MODULE': 'STATS',
-				'MODULE_SETTINGS': {
-					'AUTO': False,
-					'data': {'preprocessing': {
-											   'AUTO': False,
-											   'fillna': 'mean',
-											   'encoding': 'label_encoding',
-											   'scaling': False
-											  },
-							'path': 'titanic.csv'
-							},
-					'metrics': {
-						'AUTO': False,
-						'count': True,
-						'mean': True,
-						'std': True,
-						'max': True,
-						'min': True,
-						'25%': True,
-						'50%': True,
-						'75%': True
-					},
-					'grahics': {
-						'AUTO': False,
-						'linear': True,
-						'log': True,
-						'corr': True,
-						'heatmap': True,
-						'scatter': True,
-						'hist': True,
-						'box': True
-					}
-				}
-				}
-				'''
-
-
-
+	try:
+		ModuleManipulator(settings).start()
+	except Exception as e:
+		print('BACKEND ERROR: ', e)
