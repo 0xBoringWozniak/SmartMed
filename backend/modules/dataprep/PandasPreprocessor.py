@@ -14,8 +14,8 @@ class PandasPreprocessor:
 
 	def __init__(self, settings: Dict):
 		self.settings = settings  # settings['data']
-		self.numerics_list = ['int16', 'int32',
-							  'int64', 'float16', 'float32', 'float64']
+		self.numerics_list = {'int16', 'int32',
+							  'int64', 'float16', 'float32', 'float64'}
 
 	@debug
 	def __read_file(self):
@@ -78,3 +78,6 @@ class PandasPreprocessor:
 
 	def get_numeric_df(self, df):
 		return df.select_dtypes(include=self.numerics_list)
+
+	def get_categorical_df(self, df):
+		return df.select_dtypes(exclude=self.numerics_list)
