@@ -11,7 +11,8 @@ from logs.logger import debug
 class Dashboard(ABC):
 	'''Dashboard Interface'''
 	def __init__(self):
-		self.app = dash.Dash(server=True)
+		external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+		self.app = dash.Dash(server=True, external_stylesheets=external_stylesheets)
 
 	@debug
 	@abstractmethod
