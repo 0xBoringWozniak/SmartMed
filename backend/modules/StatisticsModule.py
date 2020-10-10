@@ -2,22 +2,40 @@ import pandas as pd
 
 from .ModuleInterface import Module
 from .dash import StatisticsDashboard
-from .dataprep import PandasPreprocessor
 
 
 class StatisticsModule(Module, StatisticsDashboard):
+
 	def _prepare_data(self):
-		pp = PandasPreprocessor(self.settings['data'])
-		pp.preprocess()
-		return pp.df
-	
+		self.pp.preprocess()
+		return self.pp.df
+
 	def _prepare_dashboard_settings(self):
 		settings = dict()
 
 		settings['metrics'] = []
 		for metric in self.settings['metrics'].keys():
-			if self.settings['metrics']:
+			if self.settings['metrics'][metric]:
 				settings['metrics'].append(metric)
+
+		settings['graphs'] = []
+		for graph in self.settings['graphs'].keys():
+			if self.settings['graphs'][graph]:
+				settings['graphs'].append(graph)
+
+		if 'linear' in settings['graphs'] and 'log' in settings['graphs']:
+			settings['graphs'].append('linlog')
+
+		self.graph_to_method = {
+			'linear': self._generate_linear,
+			'log': self._generate_log,
+			'corr': self._generate_corr,
+			'heatmap': self._generate_heatmap,
+			'scatter': self._generate_scatter,
+			'hist': self._generate_hist,
+			'box': self._generate_box,
+			'linlog': self._generate_linlog
+		}
 
 		settings['data'] = self.data
 

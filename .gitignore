@@ -131,3 +131,8 @@ dmypy.json
 *.xlsx
 *.tsc
 *.csh
+
+# settings
+settings.py
+settings
+settings.pickle
