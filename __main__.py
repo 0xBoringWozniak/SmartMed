@@ -17,7 +17,7 @@ if __name__ == '__main__':
 											   'encoding': 'label_encoding',
 											   'scaling': False
 											  },
-							'path': 'C:/projects/SmartMed/backend/modules/random.csv'
+							'path': 'C:/projects/SmartMed/backend/modules/winequality-white.csv'
 							},
 					'metrics': {
 						'AUTO': False,
