@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class MainWindow(object):
+class PreprocessingWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(600, 480)
@@ -23,6 +23,11 @@ class MainWindow(object):
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonNext.setGeometry(QtCore.QRect(450, 400, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
+
+        self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonBack.setGeometry(QtCore.QRect(340, 400, 113, 32))
+        self.pushButtonBack.setObjectName("pushButtonBack")
+
         self.comboBox1 = QtWidgets.QComboBox(self.centralwidget)
         self.comboBox1.setGeometry(QtCore.QRect(270, 100, 181, 26))
         self.comboBox1.setToolTipDuration(10)
@@ -40,4 +45,5 @@ class MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.commandLinkButton.setText(_translate("MainWindow", "Path to file"))
         self.pushButtonNext.setText(_translate("MainWindow", "next"))
+        self.pushButtonBack.setText(_translate("MainWindow", "back"))
         self.comboBox1.setToolTip(_translate("MainWindow", "tool tip", "tool tip"))

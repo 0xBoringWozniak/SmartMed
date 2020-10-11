@@ -3,16 +3,16 @@ import pickle
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication)
 
-from .SecondWindow import SecondWindow
+from .MetricsWindow import MetricsWindow
 
 
-class WrappedSecondWindow(SecondWindow, QtWidgets.QMainWindow):
+class WrappedMetricsWindow(MetricsWindow, QtWidgets.QMainWindow):
 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.settings = {'metrics':
-                         {
+        self.setWindowTitle('Cтатистические метрики')
+        self.settings = {
                              'count': True,
                              'mean': True,
                              'std': True,
@@ -22,8 +22,7 @@ class WrappedSecondWindow(SecondWindow, QtWidgets.QMainWindow):
                              '50%': True,
                              '75%': True
                          }
-                         }
-
+                         
         self.checkBox_2.setChecked(True)
         self.checkBox_3.setChecked(True)
         self.checkBox_4.setChecked(True)
@@ -45,67 +44,67 @@ class WrappedSecondWindow(SecondWindow, QtWidgets.QMainWindow):
 
     def back(self):
         self.hide()
-        self.leaf_1.show()
+        self.parent.show()
 
     def next(self):
         with open('settings.py', 'rb') as f:
             data = pickle.load(f)
-            data['MODULE_SETTINGS'].update(self.settings)
+            data['MODULE_SETTINGS']['metrics'].update(self.settings)
 
         with open('settings.py', 'wb') as f:
             pickle.dump(data, f)
 
         self.hide()
-        self.leaf_3.show()
+        self.child.show()
 
     def check_count(self):
         if self.checkBox_2.isChecked():
             self.checkBox_2.setChecked(True)
-            self.settings['metrics']['count'] = True
+            self.settings['count'] = True
         else:
             self.checkBox_2.setChecked(False)
-            self.settings['metrics']['count'] = False
+            self.settings['count'] = False
 
     def check_mean(self):
         if self.checkBox_3.isChecked():
             self.checkBox_3.setChecked(True)
-            self.settings['metrics']['mean'] = True
+            self.settings['mean'] = True
         else:
             self.checkBox_3.setChecked(False)
-            self.settings['metrics']['mean'] = False
+            self.settings['mean'] = False
 
     def check_std(self):
         if self.checkBox_4.isChecked():
             self.checkBox_4.setChecked(True)
-            self.settings['metrics']['std'] = True
+            self.settings['std'] = True
         else:
             self.checkBox_4.setChecked(False)
-            self.settings['metrics']['std'] = False
+            self.settings['std'] = False
 
     def check_max(self):
         if self.checkBox_5.isChecked():
             self.checkBox_5.setChecked(True)
-            self.settings['metrics']['max'] = True
+            self.settings['max'] = True
         else:
             self.checkBox_5.setChecked(False)
-            self.settings['metrics']['max'] = False
+            self.settings['max'] = False
 
     def check_min(self):
         if self.checkBox_6.isChecked():
             self.checkBox_6.setChecked(True)
-            self.settings['metrics']['min'] = True
+            self.settings['min'] = True
         else:
             self.checkBox_6.setChecked(False)
-            self.settings['metrics']['min'] = False
+            self.settings['min'] = False
 
     def check_quants(self):
         if self.checkBox_7.isChecked():
             self.checkBox_7.setChecked(True)
-            self.settings['metrics']['25%'] = True
-            self.settings['metrics']['50%'] = True
-            self.settings['metrics']['75%'] = True
+            self.settings['25%'] = True
+            self.settings['50%'] = True
+            self.settings['75%'] = True
         else:
             self.checkBox_7.setChecked(False)
-            self.settings['metrics']['25%'] = False
-            self.settings['metrics']['50%'] = False
-            self.settings['metrics']['75%'] = False
+            self.settings['25%'] = False
+            self.settings['50%'] = False
+            self.settings['75%'] = False

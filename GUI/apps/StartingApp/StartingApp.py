@@ -15,4 +15,3 @@ class StartingApp():
     @debug
     def start(self):
         self.startingWindow.show()
-        return self.startingWindow.settings

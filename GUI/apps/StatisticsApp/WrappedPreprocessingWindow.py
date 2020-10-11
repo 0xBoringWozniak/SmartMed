@@ -3,15 +3,23 @@ import pickle
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication)
 
-from .MainWindow import MainWindow
+from .PreprocessingWindow import PreprocessingWindow
 
 
-class WrappedMainWindow(MainWindow, QtWidgets.QMainWindow):
+class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.settings = {'MODULE_SETTINGS': {}, 'MODULE': 'STATS'}
+        self.settings = {'MODULE_SETTINGS': {
+            'metrics': {}, 'graphs': {}}, 'MODULE': 'STATS'}
+        self.settings['MODULE_SETTINGS']['data'] = {'preprocessing': {
+            'fillna': 'mean',
+            'encoding': 'label_encoding',
+            'scaling': False
+        },
+            'path': ''
+        }
         self.__build_buttons()
         self.setWindowTitle('Препроцессинг')
         self.comboBox1.addItems(["средним/модой (аналогично)",
@@ -25,7 +33,12 @@ class WrappedMainWindow(MainWindow, QtWidgets.QMainWindow):
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
+        self.pushButtonBack.clicked.connect(self.back)
         self.commandLinkButton.clicked.connect(self.path_to_file)
+
+    def back(self):
+        self.hide()
+        self.parent.show()
 
     def next(self):
         value1 = self.comboBox1.currentText()
@@ -56,17 +69,9 @@ class WrappedMainWindow(MainWindow, QtWidgets.QMainWindow):
             pickle.dump(self.settings, f)
 
         self.hide()
-        self.leaf_2.show()
+        self.child.show()
 
     def path_to_file(self):
-        settings = {}
-        settings['data'] = {'preprocessing': {
-            'fillna': 'mean',
-            'encoding': 'label_encoding',
-            'scaling': False
-        },
-            'path': ''
-        }
 
-        settings['data']['path'] = QtWidgets.QFileDialog.getOpenFileName()[0]
-        self.settings['MODULE_SETTINGS'].update(settings)
+        self.settings['MODULE_SETTINGS']['data']['path'] = QtWidgets.QFileDialog.getOpenFileName()[
+            0]

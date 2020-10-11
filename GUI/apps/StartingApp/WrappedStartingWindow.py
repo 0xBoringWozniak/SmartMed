@@ -4,7 +4,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication)
 
 from .StartingWindow import *
-from ..StatisticsApp.StatisticsApp import StatisticsApp
+from ..StatisticsApp.StatisticsAppController import StatisticsApp
 
 # logging decorator
 import sys
@@ -20,6 +20,8 @@ class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
+        self.setWindowTitle('SmartMedProject')
+
 
     def __build_buttons(self):
         # create button and add signals
@@ -28,13 +30,13 @@ class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
         self.pushButtonBioeq.clicked.connect(self.button_bioeq)
         self.pushButtonDone.clicked.connect(self.done)
 
-    @debug
     def done(self):
         self.close()
 
+
     def button_stats(self):
         self.hide()
-        app = StatisticsApp()
+        app = StatisticsApp(menu_window=self)
         app.start()
 
         # update settings
