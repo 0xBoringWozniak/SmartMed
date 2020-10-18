@@ -1,7 +1,8 @@
 import pickle
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication)
+from PyQt5.QtWidgets import (
+    QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .PreprocessingWindow import PreprocessingWindow
 
@@ -41,24 +42,32 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
         self.parent.show()
 
     def next(self):
-        value1 = self.comboBox1.currentText()
-        value2 = self.comboBox2.currentText()
+        while self.settings['MODULE_SETTINGS']['data']['path'] == '':
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("Error")
+            msg.setInformativeText('Please, choose path to file')
+            msg.setWindowTitle("Error")
+            msg.exec_()
+            return 
+        value_na = self.comboBox1.currentText()
+        value_encoding = self.comboBox2.currentText()
 
-        if value1 == 'средним/модой (аналогично)':
+        if value_na == 'средним/модой (аналогично)':
             self.settings['MODULE_SETTINGS']['data']['fillna'] = 'mean'
-        elif value1 == 'заданным значием (требуется ввод для каждого столбца отдельно)':
+        elif value_na == 'заданным значием (требуется ввод для каждого столбца отдельно)':
             self.settings['MODULE_SETTINGS']['data']['fillna'] = 'exact_value'
-        elif value1 == 'откидывание строк с пропущенными значениями':
+        elif value_na == 'откидывание строк с пропущенными значениями':
             self.settings['MODULE_SETTINGS']['data']['fillna'] = 'dropna'
         else:
             self.settings['MODULE_SETTINGS']['data']['fillna'] = 'median'
-        if value2 == 'label encoding':
+        if value_encoding == 'label encoding':
             self.settings['MODULE_SETTINGS']['data'][
                 'encoding'] = 'label_encoding'
-        elif value2 == 'dummy encoding':
+        elif value_encoding == 'dummy encoding':
             self.settings['MODULE_SETTINGS']['data'][
                 'encoding'] = 'dummy encoding'
-        elif value2 == 'one hot encoding':
+        elif value_encoding == 'one hot encoding':
             self.settings['MODULE_SETTINGS']['data'][
                 'encoding'] = 'one hot encoding'
         else:

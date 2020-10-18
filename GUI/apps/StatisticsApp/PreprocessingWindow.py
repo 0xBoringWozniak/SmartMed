@@ -18,7 +18,7 @@ class PreprocessingWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.commandLinkButton = QtWidgets.QCommandLinkButton(self.centralwidget)
-        self.commandLinkButton.setGeometry(QtCore.QRect(290, 330, 193, 41))
+        self.commandLinkButton.setGeometry(QtCore.QRect(50, 400, 113, 32))
         self.commandLinkButton.setObjectName("commandLinkButton")
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonNext.setGeometry(QtCore.QRect(450, 400, 113, 32))
@@ -29,11 +29,11 @@ class PreprocessingWindow(object):
         self.pushButtonBack.setObjectName("pushButtonBack")
 
         self.comboBox1 = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox1.setGeometry(QtCore.QRect(270, 100, 181, 26))
+        self.comboBox1.setGeometry(QtCore.QRect(50, 100, 181, 26))
         self.comboBox1.setToolTipDuration(10)
         self.comboBox1.setObjectName("comboBox1")
         self.comboBox2 = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox2.setGeometry(QtCore.QRect(260, 230, 181, 26))
+        self.comboBox2.setGeometry(QtCore.QRect(50, 150, 181, 26))
         self.comboBox2.setObjectName("comboBox2")
         MainWindow.setCentralWidget(self.centralwidget)
 
