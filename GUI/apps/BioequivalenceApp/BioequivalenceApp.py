@@ -1,0 +1,2 @@
+class BioequivalenceApp():
+	pass

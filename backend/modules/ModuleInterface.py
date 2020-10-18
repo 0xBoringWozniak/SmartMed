@@ -6,17 +6,21 @@ import sys
 sys.path.append("...")
 from logs.logger import debug
 
+from .dataprep import PandasPreprocessor
+
 
 class Module(ABC):
+
 	def __init__(self, settings: Dict):
 		self.settings = settings
+		self.pp = PandasPreprocessor(settings['data'])
 		super().__init__()
 
 	@debug
 	def _prepare_data(self):
 		'''manipulate data according to settings'''
 		raise NotImplementedError
-	
+
 	@abstractmethod
 	def _prepare_dashboard_settings(self):
 		'''construct dashboard settings'''
@@ -40,6 +44,3 @@ class Module(ABC):
 		self.settings = self._prepare_dashboard_settings()
 		self._prepare_dashboard()
 		self.start()
-
-
-		
