@@ -1,9 +1,12 @@
+import pylatex
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 
 import plotly.express as px
 import pandas as pd
+
+from .markdown_text import *
 
 from .Dashboard import Dashboard
 
@@ -24,15 +27,14 @@ class StatisticsDashboard(Dashboard):
 		df = df[df['index'].isin(self.settings['metrics'])]
 		df = df.rename(columns={"index": "metrics"})
 		cols = df.columns
-		markdown_text='''
-		Table illustrates main statistical characteristics of the sample.  
-		Count: number of elements in a column.  
-		Mean: $$\frac{\sum\limits_{i=1}^n x_i}{n}$$'''
+		len_t = str(len(df.columns)*10-10)+'%'
+		len_text = str(98-len(df.columns)*10+10)+'%'
 		for j in range(1,len(cols)):
 			for i in range(len(df)):
 				df.iloc[i, j] = float('{:.3f}'.format(float(df.iloc[i, j])))
 		if len(df.columns) <= 5:
-			return html.Div([html.Div(html.H1(children='Describe table'), style={'text-align':'center'}),
+			return html.Div([html.Div(html.H1(children='Описательная таблица'), style={'text-align':'center'}),
+				html.Div([
 				html.Div([
 					html.Div([html.Table([
 					html.Thead(
@@ -43,14 +45,15 @@ class StatisticsDashboard(Dashboard):
 							html.Td(df.iloc[i][col]) for col in df.columns
 						]) for i in range(min(len(df), max_rows))
 					])
-				])],style={'width': '48%', 'display': 'inline-block'}),
-					html.Div(dcc.Markdown(children=markdown_text), style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
+				])],style={'border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'})],
+					style={'width': len_t, 'display': 'inline-block'}),
+					html.Div(dcc.Markdown(children=markdown_text_table), style={'width': len_text, 'float': 'right', 'display': 'inline-block'})
 					])
 				], style={'margin':'50px'}
 			)
 		else:
-			return html.Div([html.Div(html.H1(children='Desribe table'), style={'text-align':'center'}),
-				dcc.Markdown(children=markdown_text),
+			return html.Div([html.Div(html.H1(children='Описательная таблица'), style={'text-align':'center'}),
+				dcc.Markdown(children=markdown_text_table),
 					html.Div([html.Table([
 					html.Thead(
 						html.Tr([html.Th(col) for col in df.columns])
@@ -60,7 +63,7 @@ class StatisticsDashboard(Dashboard):
 							html.Td(df.iloc[i][col]) for col in df.columns
 						]) for i in range(min(len(df), max_rows))
 					])
-				])])	
+				])],style={'border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'})
 				], style={'margin':'50px'}
 			)
 
@@ -81,15 +84,11 @@ class StatisticsDashboard(Dashboard):
 						  [dash.dependencies.Input('xaxis_column_name', 'value'),
 						   dash.dependencies.Input('yaxis_column_name', 'value')])(update_graph)
 
-		markdown_text='''
-		Graph shows relation between two columns of the data (x-axis coordinates are values of the data column chosen in the left dropdown
-		and y-axis coordinate are values of the data column chosen in the right dropdown).
-		'''
 
 		df = self.pp.get_numeric_df(self.settings['data'])
 		available_indicators = df.columns.unique()
 
-		return html.Div([html.Div(html.H1(children='Linear graph'), style={'text-align':'center'}),
+		return html.Div([html.Div(html.H1(children='Линейный график'), style={'text-align':'center'}),
 			html.Div([
 			html.Div([
 				html.Div([
@@ -109,57 +108,55 @@ class StatisticsDashboard(Dashboard):
 					)
 				], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
 			]),
-			dcc.Graph(id='linear_graph')], style={'width': '78%', 'display': 'inline-block'}),
-			html.Div(dcc.Markdown(children=markdown_text), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
+			dcc.Graph(id='linear_graph')], style={'width': '78%', 'display': 'inline-block','border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+			html.Div(dcc.Markdown(children=markdown_text_lin), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
 		)
 
 	def _generate_scatter(self):
 		df = self.pp.get_numeric_df(self.settings['data']).copy()
 		df.rename(columns=lambda x: x[:11], inplace=True)
 		fig = px.scatter_matrix(df, height=700)
-		markdown_text='''
-		Scatter matrix illustrates correlation between all columns of the data.
-		'''
-		return html.Div([html.Div(html.H1(children='Scatter matrix'), style={'text-align':'center'}),
+		fig.update_xaxes(tickangle=90)
+		for annotation in fig['layout']['annotations']: 
+			annotation['textangle']=-90
+		return html.Div([html.Div(html.H1(children='Матрица рассеяния'), style={'text-align':'center'}),
 			html.Div([
 				html.Div(dcc.Graph(
         			id='scatter_matrix',
         			figure=fig
-    			),style={'width': '78%', 'display': 'inline-block'}),
-    			html.Div(dcc.Markdown(children=markdown_text), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])
+    			),style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+    			html.Div(dcc.Markdown(children=markdown_text_scatter), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])
 			], style={'margin':'100px'})
 
 	def _generate_heatmap(self):
+		df = self.pp.get_numeric_df(self.settings['data']).copy()
 		numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
-		df = df.select_dtypes(include=numerics).copy()
+		df = df.select_dtypes(include=numerics)
 		df.rename(columns=lambda x: x[:11], inplace=True)
 		fig = px.imshow(df)
-		markdown_text = '''
-		Heat map depicts the magnitude for each column using different colors.
-		'''
-		return html.Div([html.Div(html.H1(children='Heat map'), style={'text-align':'center'}),
+		return html.Div([html.Div(html.H1(children='Хитмап'), style={'text-align':'center'}),
 			html.Div([
 				html.Div(dcc.Graph(
         			id='heatmap',
         			figure=fig
-    			),style={'width': '78%', 'display': 'inline-block'}),
-    			html.Div(dcc.Markdown(children=markdown_text), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])
+    			),style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+    			html.Div(dcc.Markdown(children=markdown_text_heatmap), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])
 			], style={'margin':'100px'})
 
 	def _generate_corr(self, max_rows=10):
-		df = self.pp.get_numeric_df(self.settings['data'])['data'].copy()
-		df.rename(columns=lambda x: x[:11], inplace=True)
+		df = self.pp.get_numeric_df(self.settings['data'])
+		#df.rename(columns=lambda x: x[:11], inplace=True)
 
 		df = df.corr()
 		cols = df.columns
+		len_t = str(len(df.columns)*10)+'%'
+		len_text = str(98-len(df.columns)*10)+'%'
 		for j in range(len(cols)):
 			for i in range(len(df)):
 				df.iloc[i, j] = float('{:.3f}'.format(float(df.iloc[i, j])))
-		markdown_text = '''
-		Table shows pairwise pearson correlation of columns.
-		'''
 		if len(df.columns) <= 5:
-			return html.Div([html.Div(html.H1(children='Correlation'), style={'text-align':'center'}),
+			return html.Div([html.Div(html.H1(children='Таблица корреляций'), style={'text-align':'center'}),
+				html.Div([
 				html.Div([
 					html.Div([html.Table([
 					html.Thead(
@@ -170,14 +167,15 @@ class StatisticsDashboard(Dashboard):
 							html.Td(df.iloc[i][col]) for col in df.columns
 						]) for i in range(min(len(df), max_rows))
 					])
-				])],style={'width': '48%', 'display': 'inline-block'}),
-					html.Div(dcc.Markdown(children=markdown_text), style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
+				])],style={'border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'})],
+					style={'width': len_t, 'display': 'inline-block'}),
+					html.Div(dcc.Markdown(children=markdown_text_corr), style={'width': len_text, 'float': 'right', 'display': 'inline-block'})
 					])
 				], style={'margin':'50px'}
 			)
 		else:
-			return html.Div([html.Div(html.H1(children='Correlation'), style={'text-align':'center'}),
-				dcc.Markdown(children=markdown_text),
+			return html.Div([html.Div(html.H1(children='Таблица корреляций'), style={'text-align':'center'}),
+				dcc.Markdown(children=markdown_text_corr),
 					html.Div([html.Table([
 					html.Thead(
 						html.Tr([html.Th(col) for col in df.columns])
@@ -187,33 +185,27 @@ class StatisticsDashboard(Dashboard):
 							html.Td(df.iloc[i][col]) for col in df.columns
 						]) for i in range(min(len(df), max_rows))
 					])
-				])])	
+				])],style={'border-color':'rgb(192, 192, 192)','border-style': 'solid','padding':'5px'})	
 				], style={'margin':'50px'}
 			)
 
 	def _generate_box(self):
-		df = self.pp.get_numeric_df(self.settings['data']).copy()
-		df.rename(columns=lambda x: x[:11], inplace=True)
+		df = self.pp.get_numeric_df(self.settings['data'])
+		#df.rename(columns=lambda x: x[:11], inplace=True)
 		fig = px.box(df)
-		markdown_text = '''
-		A box plot is a statistical representation of numerical data through their quartiles. 
-		'''
-		return html.Div([html.Div(html.H1(children='Box plot'), style={'text-align':'center'}),
+		return html.Div([html.Div(html.H1(children='Ящик с усами'), style={'text-align':'center'}),
 			html.Div([
 				html.Div(dcc.Graph(
         			id='box',
         			figure=fig
-    			),style={'width': '78%', 'display': 'inline-block'}),
-    			html.Div(dcc.Markdown(children=markdown_text), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])
+    			),style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+    			html.Div(dcc.Markdown(children=markdown_text_box), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])
 			], style={'margin':'100px'})
 
 	def _generate_hist(self):
-		df = self.pp.get_numeric_df(self.settings['data']).copy()
-		df.rename(columns=lambda x: x[:11], inplace=True)
+		df = self.pp.get_numeric_df(self.settings['data'])
+		#df.rename(columns=lambda x: x[:11], inplace=True)
 		fig = px.histogram(df)
-		markdown_text = '''
-		A histogram is representation of the distribution of numerical data, where the data are binned and the count for each bin is represented. 
-		'''
 
 		def update_hist(xaxis_column_name_hist):
 			fig = px.histogram(
@@ -227,8 +219,7 @@ class StatisticsDashboard(Dashboard):
 
 		available_indicators = self.settings['data'].columns.unique()
 
-		return html.Div([html.Div(html.H1(children='Histogram'), style={'text-align':'center'}),
-					html.Div([
+		return html.Div([html.Div(html.H1(children='Гистограмма'), style={'text-align':'center'}),
 					html.Div([
 					dcc.Dropdown(
 						id='xaxis_column_name_hist',
@@ -236,8 +227,8 @@ class StatisticsDashboard(Dashboard):
 								 for i in available_indicators],
 						value=available_indicators[0]
 					),
-				dcc.Graph(id='Histogram')],style={'width': '78%', 'display': 'inline-block'}),
-					html.Div(dcc.Markdown(children=markdown_text), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])],
+				dcc.Graph(id='Histogram')],style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+					html.Div(dcc.Markdown(children=markdown_text_hist), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})],
 					 style={'margin':'100px'}
 		)
 
@@ -258,15 +249,11 @@ class StatisticsDashboard(Dashboard):
 						  [dash.dependencies.Input('xaxis_column_name_log', 'value'),
 						   dash.dependencies.Input('yaxis_column_name_log', 'value')])(update_graph)
 
-		markdown_text='''
-		Graph shows relation between two columns of the data (x-axis coordinates are values of the data column chosen in the left dropdown
-		and y-axis coordinate are values of the data column chosen in the right dropdown).
-		'''
 
 		df = self.pp.get_numeric_df(self.settings['data'])
 		available_indicators = df.columns.unique()
 
-		return html.Div([html.Div(html.H1(children='Logarithmic graph'), style={'text-align':'center'}),
+		return html.Div([html.Div(html.H1(children='Логарифмический график'), style={'text-align':'center'}),
 			html.Div([
 			html.Div([
 				html.Div([
@@ -286,8 +273,8 @@ class StatisticsDashboard(Dashboard):
 					)
 				], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
 			]),
-			dcc.Graph(id='log_graph')], style={'width': '78%', 'display': 'inline-block'}),
-			html.Div(dcc.Markdown(children=markdown_text), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
+			dcc.Graph(id='log_graph')], style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+			html.Div(dcc.Markdown(children=markdown_text_log), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
 		)
 
 	def _generate_linlog(self):
@@ -310,10 +297,12 @@ class StatisticsDashboard(Dashboard):
 			'xaxis_type_linlog', 'value'),
 			dash.dependencies.Input('yaxis_type_linlog', 'value'))(update_graph)
 
+
 		df = self.pp.get_numeric_df(self.settings['data'])
 		available_indicators = df.columns.unique()
 
-		return html.Div([
+		return html.Div([html.Div(html.H1(children='Линейный/логарифмический график'), style={'text-align':'center'}),
+			html.Div([
 			html.Div([
 						html.Div([
 							dcc.Dropdown(
@@ -344,6 +333,7 @@ class StatisticsDashboard(Dashboard):
 							)
 						], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
 						]),
-			dcc.Graph(id='linlog_graph')]
+			dcc.Graph(id='linlog_graph')], style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+			html.Div(dcc.Markdown(children=markdown_text_linlog), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
 
 		)
