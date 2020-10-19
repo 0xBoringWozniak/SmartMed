@@ -30,12 +30,14 @@ class StatisticsModule(Module, StatisticsDashboard):
 			'linear': self._generate_linear,
 			'log': self._generate_log,
 #			'corr': self._generate_corr,
-			'heatmap': self._generate_heatmap,
-			'scatter': self._generate_scatter,
+#			'heatmap': self._generate_heatmap,
+#			'scatter': self._generate_scatter,
 			'hist': self._generate_hist,
 			'box': self._generate_box,
 			'linlog': self._generate_linlog,
 			'corr': self._generate_piechart, #после добавления в GUI поменять corr на piechart
+			'scatter': self._generate_dotplot,
+			'heatmap': self._generate_box_hist,
 		}
 
 		settings['data'] = self.data
