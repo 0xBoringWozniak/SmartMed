@@ -17,7 +17,8 @@ class PreprocessingWindow(object):
         MainWindow.resize(600, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.commandLinkButton = QtWidgets.QCommandLinkButton(self.centralwidget)
+        self.commandLinkButton = QtWidgets.QCommandLinkButton(
+            self.centralwidget)
         self.commandLinkButton.setGeometry(QtCore.QRect(50, 400, 113, 32))
         self.commandLinkButton.setObjectName("commandLinkButton")
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
@@ -43,7 +44,9 @@ class PreprocessingWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.commandLinkButton.setText(_translate("MainWindow", "Path to file"))
+        self.commandLinkButton.setText(
+            _translate("MainWindow", "Path to file"))
         self.pushButtonNext.setText(_translate("MainWindow", "next"))
         self.pushButtonBack.setText(_translate("MainWindow", "back"))
-        self.comboBox1.setToolTip(_translate("MainWindow", "tool tip", "tool tip"))
+        self.comboBox1.setToolTip(_translate(
+            "MainWindow", "tool tip", "tool tip"))
