@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'mainwindow.ui'
+# Form implementation generated from reading ui file 'PreprocessingWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -17,25 +17,26 @@ class PreprocessingWindow(object):
         MainWindow.resize(600, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.commandLinkButton = QtWidgets.QCommandLinkButton(
-            self.centralwidget)
-        self.commandLinkButton.setGeometry(QtCore.QRect(50, 400, 113, 32))
+        self.commandLinkButton = QtWidgets.QCommandLinkButton(self.centralwidget)
+        self.commandLinkButton.setGeometry(QtCore.QRect(10, 290, 261, 31))
+        self.commandLinkButton.setDescription("")
         self.commandLinkButton.setObjectName("commandLinkButton")
-        self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonNext.setGeometry(QtCore.QRect(450, 400, 113, 32))
-        self.pushButtonNext.setObjectName("pushButtonNext")
-
-        self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonBack.setGeometry(QtCore.QRect(340, 400, 113, 32))
-        self.pushButtonBack.setObjectName("pushButtonBack")
-
         self.comboBox1 = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox1.setGeometry(QtCore.QRect(50, 100, 181, 26))
+        self.comboBox1.setGeometry(QtCore.QRect(10, 170, 271, 26))
         self.comboBox1.setToolTipDuration(10)
         self.comboBox1.setObjectName("comboBox1")
-        self.comboBox2 = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox2.setGeometry(QtCore.QRect(50, 150, 181, 26))
-        self.comboBox2.setObjectName("comboBox2")
+        self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
+        self.pushButtonNext.setObjectName("pushButtonNext")
+        self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
+        self.pushButtonBack.setObjectName("pushButtonBack")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(10, -20, 431, 181))
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(10, 220, 571, 51))
+        self.label_2.setObjectName("label_2")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -44,9 +45,9 @@ class PreprocessingWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.commandLinkButton.setText(
-            _translate("MainWindow", "Path to file"))
-        self.pushButtonNext.setText(_translate("MainWindow", "next"))
-        self.pushButtonBack.setText(_translate("MainWindow", "back"))
-        self.comboBox1.setToolTip(_translate(
-            "MainWindow", "tool tip", "tool tip"))
+        self.commandLinkButton.setText(_translate("MainWindow", "Загрузка данных"))
+        self.comboBox1.setToolTip(_translate("MainWindow", "tool tip", "tool tip"))
+        self.pushButtonNext.setText(_translate("MainWindow", "Далее"))
+        self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:600; text-decoration: underline;\">Предварительная обработка данных</span></p><p><br/><br/></p><p><span style=\" font-size:14pt;\">Выберите опции предварительной обработки данных:</span></p><p><span style=\" font-size:14pt;\">Метод заполнения пропущенных данных:</span></p></body></html>"))
+        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p>Для того, чтобы выполнить загрузку данных, кликните на кнопку ниже &quot;Загрузка данных&quot;.</p><p>В открывшемся окне выберите файл в формате <span style=\" font-weight:600;\">&quot;xlsx&quot;</span> или <span style=\" font-weight:600;\">&quot;csv&quot;</span>.</p><p><br/></p></body></html>"))

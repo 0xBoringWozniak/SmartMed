@@ -2,7 +2,7 @@ import pickle
 import time
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication)
+from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .VisualizationWindow import VisualizationWindow
 
@@ -63,11 +63,18 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         # self.child.show()
 
     def check_linear(self):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("This is a message box")
+        msg.setInformativeText("This is additional information")
+        msg.setWindowTitle("MessageBox demo")
+        msg.setDetailedText("The details are as follows:")
+        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
         if self.checkBoxLinear.isChecked():
             self.checkBoxLinear.setChecked(True)
             self.settings['linear'] = True
         else:
-            self.checkBox_2.setChecked(False)
+            self.checkBoxLinear.setChecked(False)
             self.settings['linear'] = False
 
     def check_log(self):

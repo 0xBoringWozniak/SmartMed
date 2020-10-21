@@ -29,8 +29,6 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
                                  "медианным/модой (численные/категориальные соответсвенно)"
                                  ])
 
-        self.comboBox2.addItems(["label encoding", "dummy encoding",
-                                 "one hot encoding", "binary encoding"])
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
@@ -51,7 +49,6 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
             msg.exec_()
             return 
         value_na = self.comboBox1.currentText()
-        value_encoding = self.comboBox2.currentText()
 
         if value_na == 'средним/модой (аналогично)':
             self.settings['MODULE_SETTINGS']['data']['fillna'] = 'mean'
@@ -61,19 +58,7 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
             self.settings['MODULE_SETTINGS']['data']['fillna'] = 'dropna'
         else:
             self.settings['MODULE_SETTINGS']['data']['fillna'] = 'median'
-        if value_encoding == 'label encoding':
-            self.settings['MODULE_SETTINGS']['data'][
-                'encoding'] = 'label_encoding'
-        elif value_encoding == 'dummy encoding':
-            self.settings['MODULE_SETTINGS']['data'][
-                'encoding'] = 'dummy encoding'
-        elif value_encoding == 'one hot encoding':
-            self.settings['MODULE_SETTINGS']['data'][
-                'encoding'] = 'one hot encoding'
-        else:
-            self.settings['MODULE_SETTINGS']['data'][
-                'encoding'] = 'binary encoding'
-
+        
         with open('settings.py', 'wb') as f:
             pickle.dump(self.settings, f)
 

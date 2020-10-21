@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ThirdWindow.ui'
+# Form implementation generated from reading ui file 'MetricsWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -19,15 +19,15 @@ class MetricsWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonNext.setGeometry(QtCore.QRect(450, 400, 113, 32))
+        self.pushButtonNext.setGeometry(QtCore.QRect(470, 420, 113, 32))
         self.pushButtonNext.setToolTipDuration(10)
         self.pushButtonNext.setObjectName("pushButtonNext")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonBack.setGeometry(QtCore.QRect(340, 400, 113, 32))
+        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
         self.pushButtonBack.setToolTipDuration(10)
         self.pushButtonBack.setObjectName("pushButtonBack")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(50, 40, 411, 281))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(10, 80, 411, 281))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -50,6 +50,9 @@ class MetricsWindow(object):
         self.checkBoxQuants = QtWidgets.QCheckBox(self.verticalLayoutWidget)
         self.checkBoxQuants.setObjectName("checkBoxQuants")
         self.verticalLayout.addWidget(self.checkBoxQuants)
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(10, 10, 291, 31))
+        self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -58,13 +61,14 @@ class MetricsWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButtonNext.setText(_translate("MainWindow", "Next"))
-        self.pushButtonBack.setText(_translate("MainWindow", "Back"))
+        self.pushButtonNext.setText(_translate("MainWindow", "Далее"))
+        self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
         self.checkBoxCount.setText(_translate("MainWindow", "объем выборки"))
-        self.checkBoxMean.setText(_translate("MainWindow", "среднее по фиче"))
-        self.checkBoxStd.setText(_translate(
-            "MainWindow", "стандартное отклонение по фиче"))
-        self.checkBoxMax.setText(_translate("MainWindow", "максимальное"))
-        self.checkBoxMin.setText(_translate("MainWindow", "минимальное"))
-        self.checkBoxQuants.setText(_translate(
-            "MainWindow", "стандратные квантили"))
+        self.checkBoxMean.setText(_translate("MainWindow", "среднее по столбцу"))
+        self.checkBoxStd.setToolTip(_translate("MainWindow", "<html><head/><body><p>Показывает разброс значений в столбце</p></body></html>"))
+        self.checkBoxStd.setText(_translate("MainWindow", "стандартное отклонение по столбцу"))
+        self.checkBoxMax.setText(_translate("MainWindow", "максимальное значение в столбце"))
+        self.checkBoxMin.setText(_translate("MainWindow", "минимальное значение в столбце"))
+        self.checkBoxQuants.setToolTip(_translate("MainWindow", "<html><head/><body><p>По этим значениям можно оценить распределение выборки</p><p><br/></p></body></html>"))
+        self.checkBoxQuants.setText(_translate("MainWindow", "квантили 25, 50, 75"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:600; text-decoration: underline;\">Выбор статистических метрик</span></p></body></html>"))
