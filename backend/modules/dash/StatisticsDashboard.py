@@ -1,8 +1,10 @@
 import pylatex
 import dash
+import dash_table
 import dash_core_components as dcc
 import dash_html_components as html
 
+import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
 
@@ -36,16 +38,11 @@ class StatisticsDashboard(Dashboard):
 			return html.Div([html.Div(html.H1(children='Описательная таблица'), style={'text-align':'center'}),
 				html.Div([
 				html.Div([
-					html.Div([html.Table([
-					html.Thead(
-						html.Tr([html.Th(col) for col in df.columns])
-					),
-					html.Tbody([
-						html.Tr([
-							html.Td(df.iloc[i][col]) for col in df.columns
-						]) for i in range(min(len(df), max_rows))
-					])
-				])],style={'border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'})],
+					html.Div([dash_table.DataTable(
+					    id='table',
+					    columns=[{"name": i, "id": i} for i in df.columns],
+					    data=df.to_dict('records')
+					)],style={'border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px','margin':'5px'})],
 					style={'width': len_t, 'display': 'inline-block'}),
 					html.Div(dcc.Markdown(children=markdown_text_table), style={'width': len_text, 'float': 'right', 'display': 'inline-block'})
 					])
@@ -54,19 +51,13 @@ class StatisticsDashboard(Dashboard):
 		else:
 			return html.Div([html.Div(html.H1(children='Описательная таблица'), style={'text-align':'center'}),
 				dcc.Markdown(children=markdown_text_table),
-					html.Div([html.Table([
-					html.Thead(
-						html.Tr([html.Th(col) for col in df.columns])
-					),
-					html.Tbody([
-						html.Tr([
-							html.Td(df.iloc[i][col]) for col in df.columns
-						]) for i in range(min(len(df), max_rows))
-					])
-				])],style={'border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'})
+					html.Div([dash_table.DataTable(
+					    id='table',
+					    columns=[{"name": i, "id": i} for i in df.columns],
+					    data=df.to_dict('records')
+    			)],style={'border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px','margin':'5px'})
 				], style={'margin':'50px'}
 			)
-
 
 	def _generate_linear(self):
 
@@ -158,16 +149,11 @@ class StatisticsDashboard(Dashboard):
 			return html.Div([html.Div(html.H1(children='Таблица корреляций'), style={'text-align':'center'}),
 				html.Div([
 				html.Div([
-					html.Div([html.Table([
-					html.Thead(
-						html.Tr([html.Th(col) for col in df.columns])
-					),
-					html.Tbody([
-						html.Tr([
-							html.Td(df.iloc[i][col]) for col in df.columns
-						]) for i in range(min(len(df), max_rows))
-					])
-				])],style={'border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'})],
+					html.Div([dash_table.DataTable(
+					    id='corr',
+					    columns=[{"name": i, "id": i} for i in df.columns],
+					    data=df.to_dict('records')
+					    )],style={'border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'})],
 					style={'width': len_t, 'display': 'inline-block'}),
 					html.Div(dcc.Markdown(children=markdown_text_corr), style={'width': len_text, 'float': 'right', 'display': 'inline-block'})
 					])
@@ -176,16 +162,11 @@ class StatisticsDashboard(Dashboard):
 		else:
 			return html.Div([html.Div(html.H1(children='Таблица корреляций'), style={'text-align':'center'}),
 				dcc.Markdown(children=markdown_text_corr),
-					html.Div([html.Table([
-					html.Thead(
-						html.Tr([html.Th(col) for col in df.columns])
-					),
-					html.Tbody([
-						html.Tr([
-							html.Td(df.iloc[i][col]) for col in df.columns
-						]) for i in range(min(len(df), max_rows))
-					])
-				])],style={'border-color':'rgb(192, 192, 192)','border-style': 'solid','padding':'5px'})	
+					html.Div([dash_table.DataTable(
+					    id='corr',
+					    columns=[{"name": i, "id": i} for i in df.columns],
+					    data=df.to_dict('records'))
+					],style={'border-color':'rgb(192, 192, 192)','border-style': 'solid','padding':'5px'})	
 				], style={'margin':'50px'}
 			)
 
@@ -337,3 +318,120 @@ class StatisticsDashboard(Dashboard):
 			html.Div(dcc.Markdown(children=markdown_text_linlog), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
 
 		)
+
+	def _generate_piechart(self):
+		df = self.pp.get_categorical_df(self.settings['data'])
+		fig = px.pie(df)
+
+		def update_pie(xaxis_column_name_pie):
+			fig = px.pie(
+				df, values=df_counts, names=df_unique)
+			fig.update_xaxes(title=xaxis_column_name_pie)
+			return fig
+
+		self.app.callback(dash.dependencies.Output('Pie Chart', 'figure'),
+						 dash.dependencies.Input('xaxis_column_name_pie', 'value'))(update_pie)
+
+		available_indicators = df.columns.unique()
+		return html.Div([html.Div(html.H1(children='Pie Chart'), style={'text-align': 'center'}),
+						 dcc.Markdown(children=markdown_text_pie),
+						 html.Div([
+							 dcc.Dropdown(
+								 id='xaxis_column_name_pie',
+								 options=[{'label': i, 'value': i}
+										  for i in available_indicators],
+								 value=available_indicators[0]
+							 )
+						 ]),
+						 dcc.Graph(id='Pie Chart')], style={'margin': '100px'}
+						)
+
+	def _generate_dotplot(self):
+		df = self.settings['data']
+		df_num = self.pp.get_numeric_df(df)
+		df_cat = self.pp.get_categorical_df(df)
+		available_indicators_num = df_num.columns.unique()
+		available_indicators_cat = df_cat.columns.unique()
+		fig = go.Figure()
+
+		fig.update_layout(title="Dot Plot",
+						  	xaxis_title="Value",
+						  	yaxis_title="Number")
+
+
+		def update_dot(xaxis_column_name_dotplot, yaxis_column_name_dotplot):
+			fig = px.scatter(
+				df,
+				x=xaxis_column_name_dotplot,
+				y=yaxis_column_name_dotplot,
+				title=xaxis_column_name_dotplot,
+				labels={"xaxis_column_name_dotplot": "yaxis_column_name_dotplot"}
+			)
+
+			return fig
+
+		self.app.callback(dash.dependencies.Output('Dot Plot', 'figure'),
+							  dash.dependencies.Input('xaxis_column_name_dotplot', 'value'),
+							  dash.dependencies.Input('yaxis_column_name_dotplot', 'value'))(update_dot)
+
+
+		return html.Div([html.Div(html.H1(children='Dotplot'), style={'text-align': 'center'}),
+					 dcc.Markdown(children=markdown_text_dotplot),
+
+					 html.Div([
+						 dcc.Markdown(children="Выберите ось ОХ:"),
+						 dcc.Dropdown(
+							 id='xaxis_column_name_dotplot',
+							 options=[{'label': i, 'value': i}
+									  for i in available_indicators_num],
+							 value=available_indicators_num[0]
+						 ),
+						 dcc.Markdown(children="Выберите ось ОY:"),
+						 dcc.Dropdown(
+							 id='yaxis_column_name_dotplot',
+							 options=[{'label': i, 'value': i}
+									  for i in available_indicators_cat],
+							 value=available_indicators_cat[0]
+						 )
+					 ]),
+					 dcc.Graph(id = 'Dot Plot', figure=fig)], style={'margin': '100px'}
+					) 
+
+	def _generate_box_hist(self):
+		df = self.pp.get_numeric_df(self.settings['data'])
+		fig_hist = px.histogram(df)
+		fig_box = px.box(df)
+		def update_hist(xaxis_column_name_box_hist):
+			fig_hist = px.histogram(
+				self.settings['data'], x=xaxis_column_name_box_hist)
+			fig_hist.update_xaxes(title=xaxis_column_name_box_hist)
+			return fig_hist
+
+		self.app.callback(dash.dependencies.Output('Histogram_boxhist', 'figure'),
+					  	dash.dependencies.Input('xaxis_column_name_box_hist', 'value'))(update_hist)
+
+		def update_box(xaxis_column_name_box_hist):
+			fig_box = px.box(
+				self.settings['data'], x=xaxis_column_name_box_hist)
+			fig_box.update_xaxes(title=xaxis_column_name_box_hist)
+
+			return fig_box
+
+		self.app.callback(dash.dependencies.Output('Box_boxhist', 'figure'),
+						  dash.dependencies.Input('xaxis_column_name_box_hist', 'value'))(update_box)
+
+		available_indicators = self.settings['data'].columns.unique()
+		return html.Div([html.Div(html.H1(children='Histogram and box'), style={'text-align': 'center'}),
+						 dcc.Markdown(children=markdown_text_histbox),
+
+						 html.Div([
+							 dcc.Dropdown(
+								 id='xaxis_column_name_box_hist',
+								 options=[{'label': i, 'value': i}
+										  for i in available_indicators],
+								 value=available_indicators[0]
+							 )
+						 ]),
+						 dcc.Graph(id='Histogram_boxhist'),
+						 dcc.Graph(id='Box_boxhist')], style = {'margin': '100px'},
+						)
