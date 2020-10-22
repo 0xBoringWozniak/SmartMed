@@ -16,8 +16,9 @@ class Dashboard(ABC):
 
 	def __init__(self):
 		external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+		external_scripts = ['https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML']
 		self.app = dash.Dash(
-			server=True, external_stylesheets=external_stylesheets)
+			server=True, external_stylesheets=external_stylesheets, external_scripts=external_scripts)
 
 	@debug
 	@abstractmethod

@@ -38,10 +38,12 @@ class PandasPreprocessor:
 
 	@debug
 	def preprocess(self):
+
 		self.__read_file()
 		self.__fillna(self.settings['preprocessing']['fillna'])
 		self.__encoding(self.settings['preprocessing']['encoding'])
 		self.__scale(self.settings['preprocessing']['scaling'])
+
 
 	@debug
 	def __fillna(self, value):
