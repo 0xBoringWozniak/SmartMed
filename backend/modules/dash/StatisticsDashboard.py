@@ -1,5 +1,6 @@
 import pylatex
 import dash
+import dash_table
 import dash_core_components as dcc
 import dash_html_components as html
 
@@ -7,6 +8,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
 
+from .markdown_text import *
 
 from .Dashboard import Dashboard
 
@@ -27,57 +29,35 @@ class StatisticsDashboard(Dashboard):
 		df = df[df['index'].isin(self.settings['metrics'])]
 		df = df.rename(columns={"index": "metrics"})
 		cols = df.columns
-		markdown_text = '''
-		Table illustrates main statistical characteristics of the sample.
-		Среднее \n$\ \overline{x}=\ \\frac{\sum\limits_{i=1}^n\ x_i}{n}\ $
-		Описательная статистика (точечная оценка), являющаяся мерой центральной тенденции для приближенно нормально распределенных данных.
-
-
-		Стандартное отклонение \n$SD=\sqrt{\\frac{\sum_{i=1}^{n}\ {\ \left(\ x_i-\overline{x}\ \\right)\ }^2}{n-1}}$
-		Стандартное отклонение показывает, как распределены значения относительно среднего в нашей выборке.
-		Другими словами, можно понять на сколько велик разброс величины.
-
-
-		Объем выборки - Число случаев, включённых в выборочную совокупность.
-		От количества объектов исследования зависит мощность статистических методов, применяемых для обработки результатов эксперимента.
-
-
-
-		Квартили – это значения признака в ранжированном ряду распределения, выбранные таким образом, что 25% единиц совокупности будут меньше по величине $Q_1$;
-		25% будут заключены между $Q_1$ и $Q_2$; 25% - между $Q_2$ и $Q_3$; остальные 25% превосходят $Q_3$.
-		\n$Q_1=x_{Q_1}\ +i\ \\frac{{\\frac{1}{4}}\sum f_i\ -\ S_{Q_1-1}}{f_{Q_1}}\ $
-		нижняя граница интервала, содержащего нижний квартиль, i-шаг интервала,
-		$𝑆_{𝑄_1−1}$-накопленные частоты интервала, предшествующего интервалу, содержащему нижний квартиль, $𝑓_{𝑄_1}$-частота интервала, содержащего нижний квартиль.
-
-
-		Максимальное число (числа), не меньшее (не меньшие), чем все остальные.
-
-
-		Минимальное число (числа), которое не больше всех остальных.
-		'''
-
-		for j in range(1, len(cols)):
+		len_t = str(len(df.columns)*10-10)+'%'
+		len_text = str(98-len(df.columns)*10+10)+'%'
+		for j in range(1,len(cols)):
 			for i in range(len(df)):
 				df.iloc[i, j] = float('{:.3f}'.format(float(df.iloc[i, j])))
-		return html.Div([html.Div(html.H1(children='Desribe table'), style={'text-align': 'center'}),
-						 html.Div([
-							 html.Div([html.Table([
-								 html.Thead(
-									 html.Tr([html.Th(col)
-											  for col in df.columns])
-								 ),
-								 html.Tbody([
-									 html.Tr([
-										 html.Td(df.iloc[i][col]) for col in df.columns
-									 ]) for i in range(min(len(df), max_rows))
-								 ]),
-
-							 ])], style={'width': '48%', 'display': 'inline-block'}),
-							 html.Div(dcc.Markdown(children=markdown_text), style={
-								 'width': '48%', 'float': 'right', 'display': 'inline-block'})
-						 ])
-						 ], style={'margin': '50px'}
-						)
+		if len(df.columns) <= 5:
+			return html.Div([html.Div(html.H1(children='Описательная таблица'), style={'text-align':'center'}),
+				html.Div([
+				html.Div([
+					html.Div([dash_table.DataTable(
+					    id='table',
+					    columns=[{"name": i, "id": i} for i in df.columns],
+					    data=df.to_dict('records')
+					)],style={'border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px','margin':'5px'})],
+					style={'width': len_t, 'display': 'inline-block'}),
+					html.Div(dcc.Markdown(children=markdown_text_table), style={'width': len_text, 'float': 'right', 'display': 'inline-block'})
+					])
+				], style={'margin':'50px'}
+			)
+		else:
+			return html.Div([html.Div(html.H1(children='Описательная таблица'), style={'text-align':'center'}),
+				dcc.Markdown(children=markdown_text_table),
+					html.Div([dash_table.DataTable(
+					    id='table',
+					    columns=[{"name": i, "id": i} for i in df.columns],
+					    data=df.to_dict('records')
+    			)],style={'border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px','margin':'5px'})
+				], style={'margin':'50px'}
+			)
 
 	def _generate_linear(self):
 
@@ -95,132 +75,122 @@ class StatisticsDashboard(Dashboard):
 						  [dash.dependencies.Input('xaxis_column_name', 'value'),
 						   dash.dependencies.Input('yaxis_column_name', 'value')])(update_graph)
 
-		markdown_text = '''
-		Каждый элемент данных представлен в виде точки на графике, заданной по двум столбцам (x и y).
-		'''
 
 		df = self.pp.get_numeric_df(self.settings['data'])
 		available_indicators = df.columns.unique()
 
-		return html.Div([html.Div(html.H1(children='Graph'), style={'text-align': 'center'}),
-						 dcc.Markdown(children=markdown_text),
-						 html.Div([
-							 html.Div([
-								 dcc.Dropdown(
-									 id='xaxis_column_name',
-									 options=[{'label': i, 'value': i}
-											  for i in available_indicators],
-									 value=available_indicators[0]
-								 )
-							 ], style={'width': '48%', 'display': 'inline-block'}),
-							 html.Div([
-								 dcc.Dropdown(
-									 id='yaxis_column_name',
-									 options=[{'label': i, 'value': i}
-											  for i in available_indicators],
-									 value=available_indicators[1]
-								 )
-							 ], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
-						 ]),
-						 dcc.Graph(id='linear_graph')], style={'margin': '100px'}
-						)
+		return html.Div([html.Div(html.H1(children='Линейный график'), style={'text-align':'center'}),
+			html.Div([
+			html.Div([
+				html.Div([
+					dcc.Dropdown(
+						id='xaxis_column_name',
+						options=[{'label': i, 'value': i}
+								 for i in available_indicators],
+						value=available_indicators[0]
+					)
+				], style={'width': '48%', 'display': 'inline-block'}),
+				html.Div([
+					dcc.Dropdown(
+						id='yaxis_column_name',
+						options=[{'label': i, 'value': i}
+								 for i in available_indicators],
+						 value=available_indicators[1]
+					)
+				], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
+			]),
+			dcc.Graph(id='linear_graph')], style={'width': '78%', 'display': 'inline-block','border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+			html.Div(dcc.Markdown(children=markdown_text_lin), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
+		)
 
 	def _generate_scatter(self):
-		df = self.pp.get_numeric_df(self.settings['data'])
-		# df.rename(columns=lambda x: x[:11], inplace=True)
-		fig = px.scatter_matrix(df, width=700, height=700)
-		markdown_text = '''
-		На диаграммах рассеяния ряд точек отображает значения по двум переменным. 
-		Сила корреляции определяется по тому, насколько близко расположены друг от друга точки на графике.
-		'''
-		return html.Div([html.Div(html.H1(children='Scatter matrix'), style={'text-align': 'center'}),
-						 dcc.Markdown(children=markdown_text),
-						 dcc.Graph(
-			id='scatter_matrix',
-			figure=fig
-		)
-		], style={'margin': '100px'})
+		df = self.pp.get_numeric_df(self.settings['data']).copy()
+		df.rename(columns=lambda x: x[:11], inplace=True)
+		fig = px.scatter_matrix(df, height=700)
+		fig.update_xaxes(tickangle=90)
+		for annotation in fig['layout']['annotations']: 
+			annotation['textangle']=-90
+		return html.Div([html.Div(html.H1(children='Матрица рассеяния'), style={'text-align':'center'}),
+			html.Div([
+				html.Div(dcc.Graph(
+        			id='scatter_matrix',
+        			figure=fig
+    			),style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+    			html.Div(dcc.Markdown(children=markdown_text_scatter), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])
+			], style={'margin':'100px'})
 
 	def _generate_heatmap(self):
-		df = self.settings['data']
+		df = self.pp.get_numeric_df(self.settings['data']).copy()
 		numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
 		df = df.select_dtypes(include=numerics)
-
-		# df.rename(columns=lambda x: x[:11], inplace=True)
+		df.rename(columns=lambda x: x[:11], inplace=True)
 		fig = px.imshow(df)
-		markdown_text = '''
-		При оформлении в табличном формате тепловые карты позволяют всесторонне анализировать 
-		многомерные данные за счет распределения переменных по рядам и столбцам 
-		и закрашивания цветом ячеек таблицы.
-		'''
-		return html.Div([html.Div(html.H1(children='Heat map'), style={'text-align': 'center'}),
-						 dcc.Markdown(children=markdown_text),
-						 dcc.Graph(
-			id='heatmap',
-			figure=fig
-		)
-		], style={'margin': '100px'})
+		return html.Div([html.Div(html.H1(children='Хитмап'), style={'text-align':'center'}),
+			html.Div([
+				html.Div(dcc.Graph(
+        			id='heatmap',
+        			figure=fig
+    			),style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+    			html.Div(dcc.Markdown(children=markdown_text_heatmap), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])
+			], style={'margin':'100px'})
 
 	def _generate_corr(self, max_rows=10):
 		df = self.pp.get_numeric_df(self.settings['data'])
-		# df.rename(columns=lambda x: x[:11], inplace=True)
+		#df.rename(columns=lambda x: x[:11], inplace=True)
+
 		df = df.corr()
 		cols = df.columns
+		len_t = str(len(df.columns)*10)+'%'
+		len_text = str(98-len(df.columns)*10)+'%'
 		for j in range(len(cols)):
 			for i in range(len(df)):
 				df.iloc[i, j] = float('{:.3f}'.format(float(df.iloc[i, j])))
-		markdown_text = '''
-		Рассчитывает коэффициенты корреляции между всеми выбранными переменными попарно. 
-		Корреляция – это мера связи между двумя переменными. Коэффициент корреляции может 
-		изменяться от -1.00 до +1.00. Значение -1.00 означает полностью отрицательную корреляцию, 
-		значение +1.00 означает полностью положительную корреляцию. Значение 0.00 означает отсутствие корреляции. 
-		'''
-		return html.Div([html.Div(html.H1(children='Correlation'), style={'text-align': 'center'}),
-						 html.Div([
-							 html.Div([html.Table([
-								 html.Thead(
-									 html.Tr([html.Th(col)
-											  for col in df.columns])
-								 ),
-								 html.Tbody([
-									 html.Tr([
-										 html.Td(df.iloc[i][col]) for col in df.columns
-									 ]) for i in range(min(len(df), max_rows))
-								 ])
-							 ])], style={'width': '48%', 'display': 'inline-block'}),
-							 html.Div(dcc.Markdown(children=markdown_text), style={
-								 'width': '48%', 'float': 'right', 'display': 'inline-block'})
-						 ])
-						 ], style={'margin': '100px'})
+		if len(df.columns) <= 5:
+			return html.Div([html.Div(html.H1(children='Таблица корреляций'), style={'text-align':'center'}),
+				html.Div([
+				html.Div([
+					html.Div([dash_table.DataTable(
+					    id='corr',
+					    columns=[{"name": i, "id": i} for i in df.columns],
+					    data=df.to_dict('records')
+					    )],style={'border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'})],
+					style={'width': len_t, 'display': 'inline-block'}),
+					html.Div(dcc.Markdown(children=markdown_text_corr), style={'width': len_text, 'float': 'right', 'display': 'inline-block'})
+					])
+				], style={'margin':'50px'}
+			)
+		else:
+			return html.Div([html.Div(html.H1(children='Таблица корреляций'), style={'text-align':'center'}),
+				dcc.Markdown(children=markdown_text_corr),
+					html.Div([dash_table.DataTable(
+					    id='corr',
+					    columns=[{"name": i, "id": i} for i in df.columns],
+					    data=df.to_dict('records'))
+					],style={'border-color':'rgb(192, 192, 192)','border-style': 'solid','padding':'5px'})	
+				], style={'margin':'50px'}
+			)
 
 	def _generate_box(self):
 		df = self.pp.get_numeric_df(self.settings['data'])
-		# df.rename(columns=lambda x: x[:11], inplace=True)
+		#df.rename(columns=lambda x: x[:11], inplace=True)
 		fig = px.box(df)
-		markdown_text = '''
-		Данный вид диаграммы используется для визуального представления групп числовых данных через квартили.
-		Прямые линии, которые исходят из ящика, называются «усами» и используются для обозначения степени разброса 
-		за пределами верхнего и нижнего квартилей
-		'''
-		return html.Div([html.Div(html.H1(children='Box plot'), style={'text-align': 'center'}),
-						 dcc.Markdown(children=markdown_text),
-						 dcc.Graph(
-			id='box',
-			figure=fig
-		)
-		], style={'margin': '100px'})
+		return html.Div([html.Div(html.H1(children='Ящик с усами'), style={'text-align':'center'}),
+			html.Div([
+				html.Div(dcc.Graph(
+        			id='box',
+        			figure=fig
+    			),style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+    			html.Div(dcc.Markdown(children=markdown_text_box), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])
+			], style={'margin':'100px'})
 
 	def _generate_hist(self):
-		# df.rename(columns=lambda x: x[:11], inplace=True)
 		df = self.pp.get_numeric_df(self.settings['data'])
+		#df.rename(columns=lambda x: x[:11], inplace=True)
 		fig = px.histogram(df)
-		markdown_text = '''
-		Диаграмма, построенная в столбчатой форме, в которой величина показателя изображается графически в виде столбика. 
-		'''
 
 		def update_hist(xaxis_column_name_hist):
 			fig = px.histogram(
-				self.settings['data'], x=xaxis_column_name_hist)
+				self.pp.get_numeric_df(self.settings['data']), x=xaxis_column_name_hist)
 			fig.update_xaxes(title=xaxis_column_name_hist)
 
 			return fig
@@ -228,72 +198,24 @@ class StatisticsDashboard(Dashboard):
 		self.app.callback(dash.dependencies.Output('Histogram', 'figure'),
 						  dash.dependencies.Input('xaxis_column_name_hist', 'value'))(update_hist)
 
-
 		available_indicators = self.settings['data'].columns.unique()
-		return html.Div([html.Div(html.H1(children='Histogram'), style={'text-align': 'center'}),
-						 dcc.Markdown(children=markdown_text),
 
-						 html.Div([
-							 dcc.Dropdown(
-								 id='xaxis_column_name_hist',
-								 options=[{'label': i, 'value': i}
-										  for i in available_indicators],
-								 value=available_indicators[0]
-							 )
-						 ]),
-						 dcc.Graph(id='Histogram')], style = {'margin': '100px'},
-						)
+		return html.Div([html.Div(html.H1(children='Гистограмма'), style={'text-align':'center'}),
+					html.Div([
+					dcc.Dropdown(
+						id='xaxis_column_name_hist',
+						options=[{'label': i, 'value': i}
+								 for i in available_indicators],
+						value=available_indicators[0]
+					),
+				dcc.Graph(id='Histogram')],style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+					html.Div(dcc.Markdown(children=markdown_text_hist), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})],
+					 style={'margin':'100px'}
+		)
 
-	def _generate_box_hist(self):
-		df = self.pp.get_numeric_df(self.settings['data'])
-		fig_hist = px.histogram(df)
-		fig_box = px.box(df)
-		markdown_text = '''
-		Гистограмма - это диаграмма, построенная в столбчатой форме, в которой величина показателя изображается графически в виде столбика. 
-		В свою очередь, ящик с усами используется для визуального представления групп числовых данных через квартили. 
-		Прямые линии, которые исходят из ящика, называются «усами» и используются для обозначения степени разброса за пределами верхнего и нижнего квартилей. 
-		'''
-
-		def update_hist(xaxis_column_name_box_hist):
-			fig_hist = px.histogram(
-				self.settings['data'], x=xaxis_column_name_box_hist)
-			fig_hist.update_xaxes(title=xaxis_column_name_box_hist)
-
-			return fig_hist
-
-		self.app.callback(dash.dependencies.Output('Histogram_boxhist', 'figure'),
-						  dash.dependencies.Input('xaxis_column_name_box_hist', 'value'))(update_hist)
-
-		def update_box(xaxis_column_name_box_hist):
-			fig_box = px.box(
-				self.settings['data'], x=xaxis_column_name_box_hist)
-			fig_box.update_xaxes(title=xaxis_column_name_box_hist)
-
-			return fig_box
-
-		self.app.callback(dash.dependencies.Output('Box_boxhist', 'figure'),
-						  dash.dependencies.Input('xaxis_column_name_box_hist', 'value'))(update_box)
-
-		available_indicators = self.settings['data'].columns.unique()
-		return html.Div([html.Div(html.H1(children='Histogram'), style={'text-align': 'center'}),
-						 dcc.Markdown(children=markdown_text),
-
-						 html.Div([
-							 dcc.Dropdown(
-								 id='xaxis_column_name_box_hist',
-								 options=[{'label': i, 'value': i}
-										  for i in available_indicators],
-								 value=available_indicators[0]
-							 )
-						 ]),
-						 dcc.Graph(id='Histogram_boxhist'),
-						 dcc.Graph(id='Box_boxhist')], style = {'margin': '100px'},
-						)
 
 	def _generate_log(self):
-		markdown_text = '''	
-		Каждый элемент данных представлен в виде точки на графике, заданной по двум столбцам (x и y).
-		'''
+
 		def update_graph(xaxis_column_name_log, yaxis_column_name_log,):
 			fig = px.scatter(
 				self.settings['data'], x=xaxis_column_name_log, y=yaxis_column_name_log)
@@ -308,36 +230,36 @@ class StatisticsDashboard(Dashboard):
 						  [dash.dependencies.Input('xaxis_column_name_log', 'value'),
 						   dash.dependencies.Input('yaxis_column_name_log', 'value')])(update_graph)
 
+
 		df = self.pp.get_numeric_df(self.settings['data'])
 		available_indicators = df.columns.unique()
 
-		return html.Div([
+		return html.Div([html.Div(html.H1(children='Логарифмический график'), style={'text-align':'center'}),
 			html.Div([
-						dcc.Markdown(children=markdown_text),
-						html.Div([
-							dcc.Dropdown(
-								id='xaxis_column_name_log',
-								options=[{'label': i, 'value': i}
-										 for i in available_indicators],
-								value=available_indicators[0]
-							)
-						], style={'width': '48%', 'display': 'inline-block'}),
-						html.Div([
-							dcc.Dropdown(
-								id='yaxis_column_name_log',
-								options=[{'label': i, 'value': i}
-										 for i in available_indicators],
-								value=available_indicators[0]
-							)
-						], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
-						]),
-			dcc.Graph(id='log_graph')]
+			html.Div([
+				html.Div([
+					dcc.Dropdown(
+						id='xaxis_column_name_log',
+						options=[{'label': i, 'value': i}
+								 for i in available_indicators],
+						value=available_indicators[0]
+					)
+				], style={'width': '48%', 'display': 'inline-block'}),
+				html.Div([
+					dcc.Dropdown(
+						id='yaxis_column_name_log',
+						options=[{'label': i, 'value': i}
+								 for i in available_indicators],
+						 value=available_indicators[1]
+					)
+				], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
+			]),
+			dcc.Graph(id='log_graph')], style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+			html.Div(dcc.Markdown(children=markdown_text_log), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
 		)
 
 	def _generate_linlog(self):
-		markdown_text = '''	
-		Каждый элемент данных представлен в виде точки на графике, заданной по двум столбцам (x и y).
-		'''
+
 		def update_graph(xaxis_column_name_linlog, yaxis_column_name_linlog,
 						 xaxis_type_linlog, yaxis_type_linlog):
 			fig = px.scatter(
@@ -356,12 +278,13 @@ class StatisticsDashboard(Dashboard):
 			'xaxis_type_linlog', 'value'),
 			dash.dependencies.Input('yaxis_type_linlog', 'value'))(update_graph)
 
+
 		df = self.pp.get_numeric_df(self.settings['data'])
 		available_indicators = df.columns.unique()
 
-		return html.Div([
+		return html.Div([html.Div(html.H1(children='Линейный/логарифмический график'), style={'text-align':'center'}),
 			html.Div([
-						dcc.Markdown(children=markdown_text),
+			html.Div([
 						html.Div([
 							dcc.Dropdown(
 								id='xaxis_column_name_linlog',
@@ -391,34 +314,27 @@ class StatisticsDashboard(Dashboard):
 							)
 						], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
 						]),
-			dcc.Graph(id='linlog_graph')]
+			dcc.Graph(id='linlog_graph')], style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+			html.Div(dcc.Markdown(children=markdown_text_linlog), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
 
 		)
 
 	def _generate_piechart(self):
 		df = self.pp.get_categorical_df(self.settings['data'])
 		fig = px.pie(df)
-		markdown_text = '''
-		Данны вид диаграммы используется для отображения данных в виде круговой диаграммы, 
-		в которой размер доли отображает размер конкретного параметра
-		'''
 
 		def update_pie(xaxis_column_name_pie):
-			df_counts = df[xaxis_column_name_pie].value_counts()
-			df_unique = df[xaxis_column_name_pie].unique()
 			fig = px.pie(
 				df, values=df_counts, names=df_unique)
 			fig.update_xaxes(title=xaxis_column_name_pie)
-
 			return fig
 
 		self.app.callback(dash.dependencies.Output('Pie Chart', 'figure'),
-						  dash.dependencies.Input('xaxis_column_name_pie', 'value'))(update_pie)
+						 dash.dependencies.Input('xaxis_column_name_pie', 'value'))(update_pie)
 
 		available_indicators = df.columns.unique()
 		return html.Div([html.Div(html.H1(children='Pie Chart'), style={'text-align': 'center'}),
-						 dcc.Markdown(children=markdown_text),
-
+						 dcc.Markdown(children=markdown_text_pie),
 						 html.Div([
 							 dcc.Dropdown(
 								 id='xaxis_column_name_pie',
@@ -439,10 +355,9 @@ class StatisticsDashboard(Dashboard):
 		fig = go.Figure()
 
 		fig.update_layout(title="Dot Plot",
-						  xaxis_title="Value",
-						  yaxis_title="Number")
+						  	xaxis_title="Value",
+						  	yaxis_title="Number")
 
-		markdown_text_dotplot = 'This is Dot Plot.'
 
 		def update_dot(xaxis_column_name_dotplot, yaxis_column_name_dotplot):
 			fig = px.scatter(
@@ -456,8 +371,8 @@ class StatisticsDashboard(Dashboard):
 			return fig
 
 		self.app.callback(dash.dependencies.Output('Dot Plot', 'figure'),
-						  dash.dependencies.Input('xaxis_column_name_dotplot', 'value'),
-						  dash.dependencies.Input('yaxis_column_name_dotplot', 'value'))(update_dot)
+							  dash.dependencies.Input('xaxis_column_name_dotplot', 'value'),
+							  dash.dependencies.Input('yaxis_column_name_dotplot', 'value'))(update_dot)
 
 
 		return html.Div([html.Div(html.H1(children='Dotplot'), style={'text-align': 'center'}),
@@ -480,4 +395,43 @@ class StatisticsDashboard(Dashboard):
 						 )
 					 ]),
 					 dcc.Graph(id = 'Dot Plot', figure=fig)], style={'margin': '100px'}
-					)
+					) 
+
+	def _generate_box_hist(self):
+		df = self.pp.get_numeric_df(self.settings['data'])
+		fig_hist = px.histogram(df)
+		fig_box = px.box(df)
+		def update_hist(xaxis_column_name_box_hist):
+			fig_hist = px.histogram(
+				self.settings['data'], x=xaxis_column_name_box_hist)
+			fig_hist.update_xaxes(title=xaxis_column_name_box_hist)
+			return fig_hist
+
+		self.app.callback(dash.dependencies.Output('Histogram_boxhist', 'figure'),
+					  	dash.dependencies.Input('xaxis_column_name_box_hist', 'value'))(update_hist)
+
+		def update_box(xaxis_column_name_box_hist):
+			fig_box = px.box(
+				self.settings['data'], x=xaxis_column_name_box_hist)
+			fig_box.update_xaxes(title=xaxis_column_name_box_hist)
+
+			return fig_box
+
+		self.app.callback(dash.dependencies.Output('Box_boxhist', 'figure'),
+						  dash.dependencies.Input('xaxis_column_name_box_hist', 'value'))(update_box)
+
+		available_indicators = self.settings['data'].columns.unique()
+		return html.Div([html.Div(html.H1(children='Histogram and box'), style={'text-align': 'center'}),
+						 dcc.Markdown(children=markdown_text_histbox),
+
+						 html.Div([
+							 dcc.Dropdown(
+								 id='xaxis_column_name_box_hist',
+								 options=[{'label': i, 'value': i}
+										  for i in available_indicators],
+								 value=available_indicators[0]
+							 )
+						 ]),
+						 dcc.Graph(id='Histogram_boxhist'),
+						 dcc.Graph(id='Box_boxhist')], style = {'margin': '100px'},
+						)

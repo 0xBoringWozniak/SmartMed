@@ -1,0 +1,1 @@
+from .StatisticsAppController import StatisticsApp

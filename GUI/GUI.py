@@ -1,5 +1,5 @@
 import pickle
-
+import os
 from PyQt5 import QtWidgets
 
 from .apps import *
@@ -29,5 +29,6 @@ class GUI:
 
 		with open('settings.py', 'rb') as f:
 			app.settings = pickle.load(f)
-
+		os.remove('settings.py')
+		
 		return app.settings

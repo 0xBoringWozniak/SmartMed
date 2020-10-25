@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'design.ui'
+# Form implementation generated from reading ui file 'startingWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -17,24 +17,27 @@ class StartingWindow(object):
         MainWindow.resize(600, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.centralwidget)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.verticalLayout = QtWidgets.QVBoxLayout()
+        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(90, 170, 411, 141))
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.pushButtonStat = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonStat = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.pushButtonStat.setObjectName("pushButtonStat")
         self.verticalLayout.addWidget(self.pushButtonStat)
-        self.pushButtonBioeq = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonBioeq = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.pushButtonBioeq.setObjectName("pushButtonBioeq")
         self.verticalLayout.addWidget(self.pushButtonBioeq)
-        self.pushButtonPred = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonPred = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.pushButtonPred.setObjectName("pushButtonPred")
         self.verticalLayout.addWidget(self.pushButtonPred)
-        self.verticalLayout_2.addLayout(self.verticalLayout)
-        self.PathToFileButton = QtWidgets.QCommandLinkButton(self.centralwidget)
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(110, 70, 371, 41))
+        self.label.setObjectName("label")
         self.pushButtonDone = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonDone.setGeometry(QtCore.QRect(460, 410, 121, 32))
         self.pushButtonDone.setObjectName("pushButtonDone")
-        self.verticalLayout_2.addWidget(self.pushButtonDone)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -43,7 +46,8 @@ class StartingWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButtonStat.setText(_translate("MainWindow", "STATISTICS"))
-        self.pushButtonBioeq.setText(_translate("MainWindow", "BIOEQ"))
-        self.pushButtonPred.setText(_translate("MainWindow", "PREDICTION"))
-        self.pushButtonDone.setText(_translate("MainWindow", "Done"))
+        self.pushButtonStat.setText(_translate("MainWindow", "Статический анализ"))
+        self.pushButtonBioeq.setText(_translate("MainWindow", "Биоэквивалентность"))
+        self.pushButtonPred.setText(_translate("MainWindow", "Предсказательные модели"))
+        self.label.setText(_translate("MainWindow", "Для начала работы с модулем выберите один из файлов:"))
+        self.pushButtonDone.setText(_translate("MainWindow", "Завершить"))
