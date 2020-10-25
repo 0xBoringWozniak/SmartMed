@@ -333,8 +333,8 @@ class StatisticsDashboard(Dashboard):
 						 dash.dependencies.Input('xaxis_column_name_pie', 'value'))(update_pie)
 
 		available_indicators = df.columns.unique()
-		return html.Div([html.Div(html.H1(children='Pie Chart'), style={'text-align': 'center'}),
-						 dcc.Markdown(children=markdown_text_pie),
+		return html.Div([html.Div([html.Div(html.H1(children='Круговая диаграмма'), style={'text-align': 'center'}),
+						 #dcc.Markdown(children=markdown_text_pie),
 						 html.Div([
 							 dcc.Dropdown(
 								 id='xaxis_column_name_pie',
@@ -343,7 +343,9 @@ class StatisticsDashboard(Dashboard):
 								 value=available_indicators[0]
 							 )
 						 ]),
-						 dcc.Graph(id='Pie Chart')], style={'margin': '100px'}
+						 dcc.Graph(id='Pie Chart')], style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+						 html.Div(dcc.Markdown(children=markdown_text_pie),
+				 			style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style = {'margin': '100px'}
 						)
 
 	def _generate_dotplot(self):
@@ -375,8 +377,8 @@ class StatisticsDashboard(Dashboard):
 							  dash.dependencies.Input('yaxis_column_name_dotplot', 'value'))(update_dot)
 
 
-		return html.Div([html.Div(html.H1(children='Dotplot'), style={'text-align': 'center'}),
-					 dcc.Markdown(children=markdown_text_dotplot),
+		return html.Div([html.Div([html.Div(html.H1(children='Точечный график'), style={'text-align': 'center'}),
+					 #dcc.Markdown(children=markdown_text_dotplot),
 
 					 html.Div([
 						 dcc.Markdown(children="Выберите ось ОХ:"),
@@ -394,8 +396,10 @@ class StatisticsDashboard(Dashboard):
 							 value=available_indicators_cat[0]
 						 )
 					 ]),
-					 dcc.Graph(id = 'Dot Plot', figure=fig)], style={'margin': '100px'}
-					) 
+					 dcc.Graph(id = 'Dot Plot', figure=fig)], style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+					 html.Div(dcc.Markdown(children=markdown_text_dotplot),
+				 		style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style = {'margin': '100px'}
+					)
 
 	def _generate_box_hist(self):
 		df = self.pp.get_numeric_df(self.settings['data'])
@@ -421,7 +425,7 @@ class StatisticsDashboard(Dashboard):
 						  dash.dependencies.Input('xaxis_column_name_box_hist', 'value'))(update_box)
 
 		available_indicators = self.settings['data'].columns.unique()
-		return html.Div([html.Div(html.H1(children='Histogram and box'), style={'text-align': 'center'}),
+		return html.Div([html.Div([html.Div(html.H1(children='Гистограмма и "ящик с усами"'), style={'text-align': 'center'}),
 						 dcc.Markdown(children=markdown_text_histbox),
 
 						 html.Div([
@@ -433,5 +437,7 @@ class StatisticsDashboard(Dashboard):
 							 )
 						 ]),
 						 dcc.Graph(id='Histogram_boxhist'),
-						 dcc.Graph(id='Box_boxhist')], style = {'margin': '100px'},
-						)
+						 dcc.Graph(id='Box_boxhist')], style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+						 html.Div(dcc.Markdown(children=markdown_text_dotplot),
+								 style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style = {'margin': '100px'}
+						 )

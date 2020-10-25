@@ -2,28 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed053fd7-10d6-4d8a-ab02-8cccb546b9d5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/SmartMed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SmartMed.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/modules/StatisticsModule.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modules/StatisticsModule.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/modules/dash/StatisticsDashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modules/dash/StatisticsDashboard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/modules/dash/markdown_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/modules/dash/markdown_text.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/__main__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,47 +27,16 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="9" />
-    <option name="y" value="39" />
-    <option name="width" value="1890" />
-    <option name="height" value="960" />
-  </component>
+  <component name="ProjectId" id="1jN8NSyA6QSEY61NK2VnnNlBgxm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="SmartMed" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SmartMed" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="__main__" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -121,37 +79,30 @@
     </task>
     <servers />
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info active="true" anchor="bottom" id="Event Log" sideWeight="0.50039715" side_tool="true" visible="true" weight="0.32978722" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960285" weight="0.32978722" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/__main__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+  <component name="WindowStateProjectService">
+    <state width="629" height="2" key="GridCell.Tab.0.bottom" timestamp="1603638528705">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="629" height="2" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1603638528705" />
+    <state width="629" height="2" key="GridCell.Tab.0.center" timestamp="1603638528704">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="629" height="2" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1603638528704" />
+    <state width="629" height="2" key="GridCell.Tab.0.left" timestamp="1603638528704">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="629" height="2" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1603638528704" />
+    <state width="629" height="2" key="GridCell.Tab.0.right" timestamp="1603638528705">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="629" height="2" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1603638528705" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1603633523021">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1603633523021" />
+    <state x="337" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1603633166980">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="337" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1603633166980" />
   </component>
 </project>
