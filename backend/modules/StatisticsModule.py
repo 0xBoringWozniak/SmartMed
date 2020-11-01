@@ -27,14 +27,15 @@ class StatisticsModule(Module, StatisticsDashboard):
 			settings['graphs'].append('linlog')
 
 		self.graph_to_method = {
-			'linear': self._generate_linear(),
+			'linear': self._generate_linear,
 			'log': self._generate_log,
+			#'dotplot': self._generate_dotplot,
 			'corr': self._generate_corr,
-			'heatmap': self._generate_heatmap(),
+			'heatmap': self._generate_piechart,
 			'scatter': self._generate_scatter,
 			'hist': self._generate_hist,
 			'box': self._generate_box,
-			'linlog': self._generate_linlog()
+			'linlog': self._generate_box_hist
 		}
 
 		settings['data'] = self.data
