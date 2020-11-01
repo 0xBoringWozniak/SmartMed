@@ -40,7 +40,7 @@ class StatisticsDashboard(Dashboard):
 				html.Div([
 					html.Div([dash_table.DataTable(
 					    id='table',
-					    columns=[{"name": i, "id": i} for i in df.columns],
+					    columns=[{"name": i, "id": i, "deletable":True} for i in df.columns],
 					    data=df.to_dict('records')
 					)],style={'border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px','margin':'5px'})],
 					style={'width': len_t, 'display': 'inline-block'}),
@@ -53,7 +53,7 @@ class StatisticsDashboard(Dashboard):
 				dcc.Markdown(children=markdown_text_table),
 					html.Div([dash_table.DataTable(
 					    id='table',
-					    columns=[{"name": i, "id": i} for i in df.columns],
+					    columns=[{"name": i, "id": i, "deletable":True} for i in df.columns],
 					    data=df.to_dict('records')
     			)],style={'border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px','margin':'5px'})
 				], style={'margin':'50px'}
@@ -184,21 +184,17 @@ class StatisticsDashboard(Dashboard):
 			], style={'margin':'100px'})
 
 	def _generate_hist(self):
-		df = self.pp.get_numeric_df(self.settings['data'])
-		#df.rename(columns=lambda x: x[:11], inplace=True)
-		fig = px.histogram(df)
-
 		def update_hist(xaxis_column_name_hist):
-			fig = px.histogram(
-				self.pp.get_numeric_df(self.settings['data']), x=xaxis_column_name_hist)
+			fig = go.Figure(data=go.Histogram(
+				x=self.pp.get_numeric_df(self.settings['data'])[xaxis_column_name_hist]))
 			fig.update_xaxes(title=xaxis_column_name_hist)
+			fig.update_layout(bargap=0.1)
 
 			return fig
-
 		self.app.callback(dash.dependencies.Output('Histogram', 'figure'),
 						  dash.dependencies.Input('xaxis_column_name_hist', 'value'))(update_hist)
 
-		available_indicators = self.settings['data'].columns.unique()
+		available_indicators = self.pp.get_numeric_df(self.settings['data']).columns.unique()
 
 		return html.Div([html.Div(html.H1(children='Гистограмма'), style={'text-align':'center'}),
 					html.Div([
