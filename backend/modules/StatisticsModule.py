@@ -35,6 +35,16 @@ class StatisticsModule(Module, StatisticsDashboard):
 			'hist': self._generate_hist,
 			'box': self._generate_box,
 			'linlog': self._generate_linlog
+			
+			#'dotplot': self._generate_dotplot,
+			#'corr': self._generate_corr,
+			#'heatmap': self._generate_piechart,
+			#'scatter': self._generate_scatter,
+			#'hist': self._generate_hist,
+			#'box': self._generate_box,
+			#'linlog': self._generate_box_hist
+			
+
 		}
 
 		settings['data'] = self.data
