@@ -1,8 +1,8 @@
 import pickle
 
-from PyQt5 import QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
-    QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
+    QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
 
 from .PreprocessingWindow import PreprocessingWindow
 
@@ -33,7 +33,7 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
         self.pushButtonBack.clicked.connect(self.back)
-        self.commandLinkButton.clicked.connect(self.path_to_file)
+        self.pushButton.clicked.connect(self.path_to_file)
 
     def back(self):
         self.hide()
@@ -42,7 +42,7 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
     def next(self):
         while self.settings['MODULE_SETTINGS']['data']['path'] == '':
             msg = QMessageBox()
-            msg.setIcon(QMessageBox.Critical)
+            msg.setIcon(QMessageBox.Warning)
             msg.setText("Error")
             msg.setInformativeText('Please, choose path to file')
             msg.setWindowTitle("Error")
@@ -66,6 +66,5 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
         self.child.show()
 
     def path_to_file(self):
-
         self.settings['MODULE_SETTINGS']['data']['path'] = QtWidgets.QFileDialog.getOpenFileName()[
             0]

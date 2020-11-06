@@ -36,7 +36,7 @@ class StartingWindow(object):
         self.pushButtonBiQ.setGeometry(QtCore.QRect(510, 230, 51, 31))
         self.pushButtonBiQ.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("/Users/timofejvilkov/Desktop/q.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../q.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButtonBiQ.setIcon(icon)
         self.pushButtonBiQ.setObjectName("pushButtonBiQ")
         self.pushButton_PredQ = QtWidgets.QPushButton(self.centralwidget)
