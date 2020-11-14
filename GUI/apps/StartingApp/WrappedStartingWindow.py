@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication, QMess
 
 from .StartingWindow import *
 from ..StatisticsApp.StatisticsAppController import StatisticsApp
+from ..PredictionApp.PredictionAppController import PredictionApp
 
 # logging decorator
 import sys
@@ -71,7 +72,9 @@ class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
         return app.settings
 
     def button_prediction(self):
-        self.settings['MODULE'] = 'PREDICTION'
+        self.hide()
+        app = PredictionApp(menu_window=self)
+        app.start()
 
     def button_bioeq(self):
         self.settings['MODULE'] = 'BIOEQ'

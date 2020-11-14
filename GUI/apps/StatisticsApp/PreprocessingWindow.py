@@ -22,7 +22,7 @@ class PreprocessingWindow(object):
         self.comboBox1.setToolTipDuration(10)
         self.comboBox1.setObjectName("comboBox1")
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonNext.setGeometry(QtCore.QRect(500, 420, 113, 32))
+        self.pushButtonNext.setGeometry(QtCore.QRect(480, 420, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
