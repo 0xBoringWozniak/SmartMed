@@ -23,7 +23,10 @@ class Module(ABC):
 
 	@abstractmethod
 	def _prepare_dashboard_settings(self):
-		'''construct dashboard settings'''
+		'''
+		construct dashboard settings
+		here you can start model or make any other calculations
+		'''
 		raise NotImplementedError
 
 	@abstractmethod

@@ -25,6 +25,11 @@ class StatisticsModule(Module, StatisticsDashboard):
 
 		if 'linear' in settings['graphs'] and 'log' in settings['graphs']:
 			settings['graphs'].append('linlog')
+			settings['graphs'].remove('linear')
+			settings['graphs'].remove('log')
+
+		if 'box' in settings['graphs'] and 'hist' in settings['graphs']:
+			settings['graphs'].append('boxhist')
 
 		self.graph_to_method = {
 			'linear': self._generate_linear,
@@ -34,7 +39,10 @@ class StatisticsModule(Module, StatisticsDashboard):
 			'scatter': self._generate_scatter,
 			'hist': self._generate_hist,
 			'box': self._generate_box,
-			'linlog': self._generate_linlog
+			'linlog': self._generate_linlog,
+			'dotplot': self._generate_dotplot,
+			'piechart': self._generate_piechart,
+			'boxhist': self._generate_box_hist
 		}
 
 		settings['data'] = self.data

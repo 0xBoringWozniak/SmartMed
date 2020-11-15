@@ -26,9 +26,3 @@ class GUI:
 		app = StartingApp()
 		app.start()
 		self.mainQt.exec_()
-
-		with open('settings.py', 'rb') as f:
-			app.settings = pickle.load(f)
-		os.remove('settings.py')
-		
-		return app.settings

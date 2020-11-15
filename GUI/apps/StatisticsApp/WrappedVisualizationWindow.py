@@ -1,10 +1,17 @@
 import pickle
 import time
+import threading
 
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .VisualizationWindow import VisualizationWindow
+
+
+import sys
+sys.path.append("...")
+
+from backend import ModuleManipulator
 
 
 class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
@@ -58,12 +65,19 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         with open('settings.py', 'rb') as f:
             data = pickle.load(f)
             data['MODULE_SETTINGS']['graphs'].update(self.settings)
-
+        
         with open('settings.py', 'wb') as f:
             pickle.dump(data, f)
-        self.close()
-        # self.hide()
-        # self.child.show()
+
+        with open('settings.py', 'rb') as f:
+            settings = pickle.load(f)
+
+        print(settings)
+        module_starter = ModuleManipulator(settings)
+        threading.Thread(target=module_starter.start, daemon=True).start()
+
+        self.hide()
+        self.child.show()
 
 
 
