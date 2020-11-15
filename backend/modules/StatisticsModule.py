@@ -23,6 +23,7 @@ class StatisticsModule(Module, StatisticsDashboard):
 			if self.settings['graphs'][graph]:
 				settings['graphs'].append(graph)
 
+		# replace log and linear to linlog multiple graph
 		if 'linear' in settings['graphs'] and 'log' in settings['graphs']:
 			settings['graphs'].append('linlog')
 			settings['graphs'].remove('linear')
