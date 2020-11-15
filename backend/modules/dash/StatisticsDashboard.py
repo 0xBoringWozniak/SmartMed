@@ -213,7 +213,6 @@ class StatisticsDashboard(Dashboard):
 					 style={'margin':'100px'}
 		)
 
-
 	def _generate_log(self):
 
 		def update_graph(xaxis_column_name_log, yaxis_column_name_log,):
