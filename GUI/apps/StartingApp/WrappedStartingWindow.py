@@ -1,10 +1,13 @@
 import pickle
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication)
+from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .StartingWindow import *
 from ..StatisticsApp.StatisticsAppController import StatisticsApp
+from ..BioequivalenceApp.BioequivalenceAppController import BioequivalenceApp
+from ..PredictionApp.PredictionAppController import PredictionApp
+
 
 # logging decorator
 import sys
@@ -16,7 +19,7 @@ class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
 
     def __init__(self):
 
-        self.settings = {}
+        #self.settings = {}
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
@@ -30,8 +33,11 @@ class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
         self.pushButtonBioeq.clicked.connect(self.button_bioeq)
         self.pushButtonDone.clicked.connect(self.done)
 
+
     def done(self):
         self.close()
+
+
 
 
     def button_stats(self):
@@ -43,7 +49,12 @@ class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
         return app.settings
 
     def button_prediction(self):
-        self.settings['MODULE'] = 'PREDICTION'
+        self.hide()
+        app = PredictionApp(menu_window=self)
+        app.start()
+
 
     def button_bioeq(self):
-        self.settings['MODULE'] = 'BIOEQ'
+        self.hide()
+        app = BioequivalenceApp(menu_window=self)
+        app.start()

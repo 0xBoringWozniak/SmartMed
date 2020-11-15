@@ -1,7 +1,7 @@
 import pickle
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication)
+from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .MetricsWindow import MetricsWindow
 
@@ -42,6 +42,7 @@ class WrappedMetricsWindow(MetricsWindow, QtWidgets.QMainWindow):
         self.checkBoxMin.clicked.connect(self.check_min)
         self.checkBoxQuants.clicked.connect(self.check_quants)
 
+
     def back(self):
         self.hide()
         self.parent.show()
@@ -56,6 +57,9 @@ class WrappedMetricsWindow(MetricsWindow, QtWidgets.QMainWindow):
 
         self.hide()
         self.child.show()
+
+
+
 
     def check_count(self):
         if self.checkBoxCount.isChecked():
