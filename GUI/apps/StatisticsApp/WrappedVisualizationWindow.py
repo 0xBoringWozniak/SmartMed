@@ -69,7 +69,6 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         with open('settings.py', 'rb') as f:
             settings = pickle.load(f)
 
-        print(settings)
         module_starter = ModuleManipulator(settings)
         threading.Thread(target=module_starter.start, daemon=True).start()
 
