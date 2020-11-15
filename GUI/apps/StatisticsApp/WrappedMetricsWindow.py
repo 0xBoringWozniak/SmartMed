@@ -41,9 +41,6 @@ class WrappedMetricsWindow(MetricsWindow, QtWidgets.QMainWindow):
         self.checkBoxMax.clicked.connect(self.check_max)
         self.checkBoxMin.clicked.connect(self.check_min)
         self.checkBoxQuants.clicked.connect(self.check_quants)
-        self.pushButtonCountQ.clicked.connect(self.count_q)
-        self.pushButtonStdQ.clicked.connect(self.std_q)
-        self.pushButtonQuantsQ.clicked.connect(self.quants_q)
 
 
     def back(self):
@@ -61,29 +58,7 @@ class WrappedMetricsWindow(MetricsWindow, QtWidgets.QMainWindow):
         self.hide()
         self.child.show()
 
-    def count_q(self):
-        msg = QMessageBox()
-        #third param - width from left, first - lenght from ceiling
-        #msg.setGeometry(QtCore.QRect(500, 500, 500, 40))
-        msg.setIcon(QMessageBox.Information)
-        msg.setInformativeText('Общее число исследуемых людей')
-        msg.exec_()
 
-    def std_q(self):
-        msg = QMessageBox()
-        #third param - width from left, first - lenght from ceiling
-        #msg.setGeometry(QtCore.QRect(500, 500, 500, 40))
-        msg.setIcon(QMessageBox.Information)
-        msg.setInformativeText('Показывает распределение значений выборки относительно среднего')
-        msg.exec_()
-
-    def quants_q(self):
-        msg = QMessageBox()
-        #third param - width from left, first - lenght from ceiling
-        #msg.setGeometry(QtCore.QRect(500, 500, 500, 40))
-        msg.setIcon(QMessageBox.Information)
-        msg.setInformativeText('Квантили делят данные на равное количество наблюдений')
-        msg.exec_()
 
 
     def check_count(self):

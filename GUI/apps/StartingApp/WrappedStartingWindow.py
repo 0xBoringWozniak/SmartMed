@@ -29,9 +29,7 @@ class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
         self.pushButtonPred.clicked.connect(self.button_prediction)
         self.pushButtonBioeq.clicked.connect(self.button_bioeq)
         self.pushButtonDone.clicked.connect(self.done)
-        self.pushButtonStatQ.clicked.connect(self.stat_q)
-        self.pushButtonBiQ.clicked.connect(self.bi_q)
-        self.pushButton_PredQ.clicked.connect(self.pred_q)
+
 
     def done(self):
         self.close()

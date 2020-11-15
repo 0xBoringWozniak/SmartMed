@@ -45,10 +45,6 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         self.checkBoxHist.clicked.connect(self.check_hist)
         self.checkBoxBox.clicked.connect(self.check_box)
         self.checkBoxDot.clicked.connect(self.check_dot)
-        self.pushButtonHeatmapQ.clicked.connect(self.heatmap_q)
-        self.pushButtonBoxQ.clicked.connect(self.box_q)
-        self.pushButtonHistQ.clicked.connect(self.hist_q)
-        self.pushButtonCorrQ.clicked.connect(self.corr_q)
 
     def back(self):
         self.hide()
@@ -66,37 +62,6 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         # self.hide()
         # self.child.show()
 
-    def heatmap_q(self):
-        msg = QMessageBox()
-        #third param - width from left, first - lenght from ceiling
-        #msg.setGeometry(QtCore.QRect(500, 500, 500, 40))
-        msg.setIcon(QMessageBox.Information)
-        msg.setInformativeText('Графическое представление данных, где индивидуальные значения в таблице отображаются при помощи цвета')
-        msg.exec_()
-
-    def box_q(self):
-        msg = QMessageBox()
-        #third param - width from left, first - lenght from ceiling
-        #msg.setGeometry(QtCore.QRect(500, 500, 500, 40))
-        msg.setIcon(QMessageBox.Information)
-        msg.setInformativeText('Показывает медиану, нижний и верхний квартили, минимальное и максимальное значение выборки, выбросы.')
-        msg.exec_()
-
-    def hist_q(self):
-        msg = QMessageBox()
-        #third param - width from left, first - lenght from ceiling
-        #msg.setGeometry(QtCore.QRect(500, 500, 500, 40))
-        msg.setIcon(QMessageBox.Information)
-        msg.setInformativeText('Гистограмма представялет собой несколько столбцов одиннаковой ширины, каждый из которых отвечает за определенную категорию данных')
-        msg.exec_()
-
-    def corr_q(self):
-        msg = QMessageBox()
-        #third param - width from left, first - lenght from ceiling
-        #msg.setGeometry(QtCore.QRect(500, 500, 500, 40))
-        msg.setIcon(QMessageBox.Information)
-        msg.setInformativeText('Таблица, содержащая коэфициенты корреляции между всеми возможными переменными')
-        msg.exec_()
 
 
     def check_linear(self):
