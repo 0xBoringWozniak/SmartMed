@@ -13,6 +13,8 @@ class Module(ABC):
 
 	def __init__(self, settings: Dict):
 		self.settings = settings
+
+		# preprocessor to manipulate with data
 		self.pp = PandasPreprocessor(settings['data'])
 		super().__init__()
 

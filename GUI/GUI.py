@@ -1,8 +1,6 @@
-import pickle
-import os
 from PyQt5 import QtWidgets
 
-from .apps import *
+from .apps import StartingApp
 
 # logging decorator
 import sys
@@ -11,18 +9,18 @@ from logs.logger import debug
 
 
 class GUI:
-	'''Qt apps manipulator'''
+    '''Qt apps manipulator'''
 
-	def __init__(self):
-		self.__make_QAapp()
+    def __init__(self):
+        self.__make_QAapp()
 
-	@debug
-	def __make_QAapp(self):
-		self.mainQt = QtWidgets.QApplication(sys.argv)
+    @debug
+    def __make_QAapp(self):
+        self.mainQt = QtWidgets.QApplication(sys.argv)
 
-	@debug
-	def start_gui(self):
-		'''display QT app'''
-		app = StartingApp()
-		app.start()
-		self.mainQt.exec_()
+    @debug
+    def start_gui(self):
+        '''display QT app'''
+        app = StartingApp()
+        app.start()
+        self.mainQt.exec_()
