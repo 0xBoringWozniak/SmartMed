@@ -20,7 +20,10 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
             'heatmap': True,
             'scatter': True,
             'hist': True,
-            'box': True
+            'box': True,
+            'piechart': True,
+            'dotplot': True,
+            'boxhist': True
         }
         self.checkBoxBar.setChecked(True)
         self.checkBoxLinear.setChecked(True)

@@ -5,6 +5,9 @@ from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication, QMess
 
 from .StartingWindow import *
 from ..StatisticsApp.StatisticsAppController import StatisticsApp
+from ..BioequivalenceApp.BioequivalenceAppController import BioequivalenceApp
+from ..PredictionApp.PredictionAppController import PredictionApp
+
 
 # logging decorator
 import sys
@@ -35,29 +38,6 @@ class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
         self.close()
 
 
-    def stat_q(self):
-        msg = QMessageBox()
-        #third param - width from left, first - lenght from ceiling
-        #msg.setGeometry(QtCore.QRect(500, 500, 500, 40))
-        msg.setIcon(QMessageBox.Information)
-        msg.setInformativeText('Описательный анализ подразумевает получение обощенной информации о данных')
-        msg.exec_()
-
-    def bi_q(self):
-        msg = QMessageBox()
-        #third param - width from left, first - lenght from ceiling
-        #msg.setGeometry(QtCore.QRect(500, 500, 500, 40))
-        msg.setIcon(QMessageBox.Information)
-        msg.setInformativeText('Биоэквивалентность проводит исследование идентичности свойств биодоступности у исходного аппарата и дженерика')
-        msg.exec_()
-
-    def pred_q(self):
-        msg = QMessageBox()
-        #third param - width from left, first - lenght from ceiling
-        #msg.setGeometry(QtCore.QRect(500, 500, 500, 40))
-        msg.setIcon(QMessageBox.Information)
-        msg.setInformativeText('Предсказательный анализ выполняет прогнозирование на основе наколпенной информации')
-        msg.exec_()
 
 
     def button_stats(self):
@@ -69,7 +49,12 @@ class WrappedStartingWindow(StartingWindow, QtWidgets.QMainWindow):
         return app.settings
 
     def button_prediction(self):
-        self.settings['MODULE'] = 'PREDICTION'
+        self.hide()
+        app = PredictionApp(menu_window=self)
+        app.start()
+
 
     def button_bioeq(self):
-        self.settings['MODULE'] = 'BIOEQ'
+        self.hide()
+        app = BioequivalenceApp(menu_window=self)
+        app.start()
