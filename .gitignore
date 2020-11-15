@@ -101,6 +101,9 @@ celerybeat-schedule
 .env
 .venv
 .SmartMedVenv
+SmartMedVenv
+.idea/
+.idea
 env/
 venv/
 ENV/
@@ -128,6 +131,7 @@ dmypy.json
 
 # Data
 *.csv
+*.tsv
 *.xlsx
 *.tsc
 *.csh
