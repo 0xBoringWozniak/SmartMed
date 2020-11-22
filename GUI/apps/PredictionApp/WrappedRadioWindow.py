@@ -13,8 +13,10 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        self.setWindowTitle('Что-то там')
-        self.settings = { 'MODULE': 'PREDICT'}
+        self.setWindowTitle('Что-то там 1')
+        self.settings = {'MODULE_SETTINGS': {
+        'model': 'linreg'},
+         'MODULE': 'PREDICT'}
        
        
 
