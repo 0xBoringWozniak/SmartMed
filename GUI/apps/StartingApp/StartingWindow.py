@@ -40,7 +40,7 @@ class StartingWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "Для начала работы с модулем выберите один из файлов:"))
+        self.label.setText(_translate("MainWindow", "Для начала работы с модулем выберите файл:"))
         self.pushButtonDone.setText(_translate("MainWindow", "Завершить"))
         self.pushButtonStat.setText(_translate("MainWindow", "Статический анализ"))
         self.pushButtonBioeq.setText(_translate("MainWindow", "Биоэквивалентность"))

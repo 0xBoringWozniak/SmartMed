@@ -1,11 +1,15 @@
 import pickle
 import time
+import os
 import threading
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
+from PyQt5.QtWidgets import (
+    QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
+from PyQt5.QtCore import QTimer
 
 from .VisualizationWindow import VisualizationWindow
+from .WaitingSpinnerWidget import QtWaitingSpinner
 
 
 import sys
@@ -41,6 +45,8 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         self.checkBoxScatter.setChecked(True)
         self.checkBoxDot.setChecked(True)
         self.__build_buttons()
+        self.spinner = QtWaitingSpinner(self)
+        self.layout().addWidget(self.spinner)
 
     def __build_buttons(self):
         self.pushButton.clicked.connect(self.back)
@@ -60,11 +66,10 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         self.parent.show()
 
     def done(self):
-
         with open('settings.py', 'rb') as f:
             data = pickle.load(f)
             data['MODULE_SETTINGS']['graphs'].update(self.settings)
-        
+
         with open('settings.py', 'wb') as f:
             pickle.dump(data, f)
 
@@ -74,19 +79,15 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         module_starter = ModuleManipulator(settings)
         threading.Thread(target=module_starter.start, daemon=True).start()
 
+
         self.hide()
+        if os.path.exists('settings.py'):
+            os.remove('settings.py')
         self.child.show()
 
-
-
     def check_linear(self):
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Information)
-        msg.setText("This is a message box")
-        msg.setInformativeText("This is additional information")
-        msg.setWindowTitle("MessageBox demo")
-        msg.setDetailedText("The details are as follows:")
-        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        self.spinner.start()
+        QTimer.singleShot(1000, self.spinner.stop)
         if self.checkBoxLinear.isChecked():
             self.checkBoxLinear.setChecked(True)
             self.settings['linear'] = True
@@ -151,9 +152,9 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
             self.settings['dotplot'] = False
 
     def check_pie(self):
-        if self.checkBoxBar.isChecked():
-            self.checkBoxBar.setChecked(True)
+        if self.checkBoxPie.isChecked():
+            self.checkBoxPie.setChecked(True)
             self.settings['piechart'] = True
         else:
-            self.checkBoxBar.setChecked(False)
+            self.checkBoxPie.setChecked(False)
             self.settings['piechart'] = False

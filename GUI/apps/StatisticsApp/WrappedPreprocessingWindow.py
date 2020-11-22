@@ -1,8 +1,9 @@
 import pickle
+import os
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
-    QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
+    QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .PreprocessingWindow import PreprocessingWindow
 
@@ -36,6 +37,8 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
         self.pushButton.clicked.connect(self.path_to_file)
 
     def back(self):
+        if os.path.exists('settings.py'):
+            os.remove('settings.py')
         self.hide()
         self.parent.show()
 
@@ -68,3 +71,5 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
     def path_to_file(self):
         self.settings['MODULE_SETTINGS']['data']['path'] = QtWidgets.QFileDialog.getOpenFileName()[
             0]
+
+
