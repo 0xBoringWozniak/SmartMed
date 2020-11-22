@@ -6,7 +6,7 @@ import threading
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, QEventLoop
 
 from .VisualizationWindow import VisualizationWindow
 from .WaitingSpinnerWidget import QtWaitingSpinner
@@ -45,8 +45,7 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         self.checkBoxScatter.setChecked(True)
         self.checkBoxDot.setChecked(True)
         self.__build_buttons()
-        self.spinner = QtWaitingSpinner(self)
-        self.layout().addWidget(self.spinner)
+
 
     def __build_buttons(self):
         self.pushButton.clicked.connect(self.back)
@@ -62,10 +61,13 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         self.checkBoxDot.clicked.connect(self.check_dot)
 
     def back(self):
+        
+        self.hide()
         self.hide()
         self.parent.show()
 
     def done(self):
+
         with open('settings.py', 'rb') as f:
             data = pickle.load(f)
             data['MODULE_SETTINGS']['graphs'].update(self.settings)
@@ -78,16 +80,20 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
 
         module_starter = ModuleManipulator(settings)
         threading.Thread(target=module_starter.start, daemon=True).start()
-
-
-        self.hide()
+        self.spinner = QtWaitingSpinner(self)
+        self.layout().addWidget(self.spinner)
+        self.spinner.start()
+        #QTimer.singleShot(10000, self.spinner.stop)
+        loop = QEventLoop()
+        QTimer.singleShot(10000, loop.quit)
+        loop.exec_()
+        self.spinner.stop()
         if os.path.exists('settings.py'):
             os.remove('settings.py')
         self.child.show()
 
     def check_linear(self):
-        self.spinner.start()
-        QTimer.singleShot(1000, self.spinner.stop)
+
         if self.checkBoxLinear.isChecked():
             self.checkBoxLinear.setChecked(True)
             self.settings['linear'] = True

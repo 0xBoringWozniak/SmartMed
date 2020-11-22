@@ -22,7 +22,7 @@ class DownloadWindow(object):
         self.comboBox.setToolTipDuration(10)
         self.comboBox.setObjectName("comboBox")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(10, 270, 271, 32))
+        self.pushButton.setGeometry(QtCore.QRect(10, 350, 271, 32))
         self.pushButton.setObjectName("pushButton")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))

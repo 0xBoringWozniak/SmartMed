@@ -25,9 +25,9 @@ class WrappedFinishWindow(FinishWindow, QtWidgets.QMainWindow):
         self.parent.show()
 
     def done(self):
-
-        with open('settings.py', 'rb') as f:
-            settings = pickle.load(f)
+        if os.path.exists('settings.py'):
+            with open('settings.py', 'rb') as f:
+                settings = pickle.load(f)
         module_starter = ModuleManipulator(settings)
         threading.Thread(target=module_starter.start, daemon=True).start()
 
