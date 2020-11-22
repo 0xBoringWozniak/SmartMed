@@ -1,4 +1,6 @@
-from numpy import np
+from abc import ABC
+
+import numpy as np
 
 
 class Model(ABC):
@@ -11,4 +13,4 @@ class Model(ABC):
         self.model = self.model.fit(self.x, self.y)
     
     def predict(self, x: np.array) -> float:
-        return self.model.predict(x) 
+        return self.model.predict(x)
