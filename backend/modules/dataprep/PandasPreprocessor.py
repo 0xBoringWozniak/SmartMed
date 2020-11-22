@@ -9,6 +9,9 @@ sys.path.append("..")
 from logs.logger import debug
 
 
+class ExtentionFileException(Exception):
+    pass
+
 class PandasPreprocessor:
     '''Class to preprocessing any datasets'''
 
@@ -34,7 +37,8 @@ class PandasPreprocessor:
             self.df = pd.read_excel(self.settings['path'], sep='\t')
 
         else:
-            self.df = pd.read_csv(self.settings['path'])
+            raise ExtentionFileException
+            
 
     @debug
     def preprocess(self):

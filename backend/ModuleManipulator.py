@@ -7,6 +7,10 @@ from .modules import *
 logging.basicConfig(filename='~/../logs/start.log', level=logging.DEBUG)
 
 
+class ModuleChooseException(Exception):
+    pass
+
+
 class ModuleManipulator:
 
     def __init__(self, settings: Dict):
@@ -25,5 +29,7 @@ class ModuleManipulator:
             module = BioequivalenceModule(self.settings['MODULE_SETTINGS'])
             logging.debug('BioequivalenceModule with settings{}'.format(
                 self.settings['MODULE_SETTINGS']))
+        else:
+            raise ModuleChooseException
 
         module.run()

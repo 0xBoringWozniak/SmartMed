@@ -3,12 +3,14 @@ from typing import Dict
 import numpy as np
 
 from .ModuleInterface import Module
-from .dash import PredictionDashboard
+from .PredictionDashboardSwitcher import DahsboardSwitcher
 
 from .ModelManipulator import ModelManipulator
 
 
-class PredictionModule(Module, PredictionDashboard):
+ModelDashboard = DahsboardSwitcher().choose()
+
+class PredictionModule(Module, ModelDashboard):
 
     def _prepare_data(self):
         self.pp.preprocess()
