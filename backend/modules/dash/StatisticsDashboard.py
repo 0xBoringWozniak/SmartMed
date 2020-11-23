@@ -100,7 +100,7 @@ class StatisticsDashboard(Dashboard):
 						 value=available_indicators[1]
 					)
 				], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
-			]),
+			], style={'padding': '5px'}),
 			dcc.Graph(id='linear_graph')], style={'width': '78%', 'display': 'inline-block','border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
 			html.Div(dcc.Markdown(children=markdown_text_lin), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
 		)
@@ -240,9 +240,7 @@ class StatisticsDashboard(Dashboard):
 			html.Div([
 			html.Div([
 				html.Div([
-
 					dcc.Markdown(children="Выберите показатель для оси ОХ:"),
-
 					dcc.Dropdown(
 						id='xaxis_column_name_log',
 						options=[{'label': i, 'value': i}
@@ -251,9 +249,7 @@ class StatisticsDashboard(Dashboard):
 					)
 				], style={'width': '48%', 'display': 'inline-block'}),
 				html.Div([
-
 					dcc.Markdown(children="Выберите показатель для оси ОY:"),
-
 					dcc.Dropdown(
 						id='yaxis_column_name_log',
 						options=[{'label': i, 'value': i}
@@ -261,7 +257,7 @@ class StatisticsDashboard(Dashboard):
 						 value=available_indicators[1]
 					)
 				], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
-			]),
+			], style={'padding': '5px'}),
 			dcc.Graph(id='log_graph')], style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
 			html.Div(dcc.Markdown(children=markdown_text_log), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
 		)
@@ -294,9 +290,7 @@ class StatisticsDashboard(Dashboard):
 			html.Div([
 			html.Div([
 						html.Div([
-
 							dcc.Markdown(children="Выберите показатель для оси ОХ:"),
-
 							dcc.Dropdown(
 								id='xaxis_column_name_linlog',
 								options=[{'label': i, 'value': i}
@@ -311,9 +305,7 @@ class StatisticsDashboard(Dashboard):
 							)
 						], style={'width': '48%', 'display': 'inline-block'}),
 						html.Div([
-
 							dcc.Markdown(children="Выберите показатель для оси ОY:"),
-
 							dcc.Dropdown(
 								id='yaxis_column_name_linlog',
 								options=[{'label': i, 'value': i}
@@ -327,7 +319,7 @@ class StatisticsDashboard(Dashboard):
 								value='Linear'
 							)
 						], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
-						]),
+						], style={'padding': '5px'}),
 			dcc.Graph(id='linlog_graph')], style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
 			html.Div(dcc.Markdown(children=markdown_text_linlog), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
 
@@ -338,7 +330,6 @@ class StatisticsDashboard(Dashboard):
 		fig = px.pie(df)
 
 		def update_pie(xaxis_column_name_pie):
-
 			df_counts = df[xaxis_column_name_pie].value_counts()
 			df_unique = df[xaxis_column_name_pie].unique()
 
@@ -352,26 +343,34 @@ class StatisticsDashboard(Dashboard):
 
 		available_indicators = df.columns.unique()
 
-		return html.Div([html.Div(html.H1(children='Круговая диаграмма'), style={'text-align': 'center'}),
-					 html.Div([
+		if df.size > 0:
+			return html.Div([html.Div(html.H1(children='Круговая диаграмма'), style={'text-align': 'center'}),
 						 html.Div([
 							 html.Div([
-								 dcc.Markdown(children="Выберите показатель для оси ОX:"),
-								 dcc.Dropdown(
-									 id='xaxis_column_name_pie',
-									 options=[{'label': i, 'value': i}
-											  for i in available_indicators],
-									 value=available_indicators[0]
-								 )
+								 html.Div([
+									 dcc.Markdown(children="Выберите показатель для оси ОX:"),
+									 dcc.Dropdown(
+										 id='xaxis_column_name_pie',
+										 options=[{'label': i, 'value': i}
+												  for i in available_indicators],
+										 value=available_indicators[0]
+									 )
 
-							 ], style={'width': '48%', 'display': 'inline-block'})
-						 ]),
-						 dcc.Graph(id='Pie Chart', figure=fig)], style={'width': '78%', 'display': 'inline-block',
-																	   'border-color': 'rgb(220, 220, 220)',
-																	   'border-style': 'solid', 'padding': '5px'}),
-					 html.Div(dcc.Markdown(children=markdown_text_pie), style={'width': '18%', 'float': 'right',
+								 ], style={'width': '48%', 'display': 'inline-block', 'padding': '5px'})
+							 ]),
+							 dcc.Graph(id='Pie Chart', figure=fig)], style={'width': '78%', 'display': 'inline-block',
+																			'border-color': 'rgb(220, 220, 220)',
+																			'border-style': 'solid', 'padding': '5px'}),
+						 html.Div(dcc.Markdown(children=markdown_text_pie), style={'width': '18%', 'float': 'right',
 																				   'display': 'inline-block'})],
-					style={'margin': '100px'})
+						style={'margin': '100px'})
+		else:
+			return html.Div([html.Div(html.H1(children='Круговая диаграмма'), style={'text-align': 'center'}),
+						 html.Div(dcc.Markdown(
+							 children='Ошибка: невозможно построить круговую диаграмму, т.к. нет категориальных данных.'),
+							 style={'width': '80%', 'display': 'inline-block'})],
+						style={'margin': '100px'})
+
 
 	def _generate_dotplot(self):
 		df = self.settings['data']
@@ -391,9 +390,7 @@ class StatisticsDashboard(Dashboard):
 				df,
 				x=xaxis_column_name_dotplot,
 				y=yaxis_column_name_dotplot,
-
 				#title=xaxis_column_name_dotplot,
-
 				labels={"xaxis_column_name_dotplot": "yaxis_column_name_dotplot"}
 			)
 
@@ -403,8 +400,8 @@ class StatisticsDashboard(Dashboard):
 							  dash.dependencies.Input('xaxis_column_name_dotplot', 'value'),
 							  dash.dependencies.Input('yaxis_column_name_dotplot', 'value'))(update_dot)
 
-
-		return html.Div([html.Div(html.H1(children='Точечная диаграмма'), style={'text-align': 'center'}),
+		if df_cat.size > 0:
+			return html.Div([html.Div(html.H1(children='Точечная диаграмма'), style={'text-align': 'center'}),
 						 html.Div([
 							html.Div([
 								html.Div([
@@ -426,12 +423,18 @@ class StatisticsDashboard(Dashboard):
 									)
 
 								], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
-							]),
+							], style={'padding': '5px'}),
 					     dcc.Graph(id='Dot Plot', figure=fig)], style={'width': '78%', 'display': 'inline-block',
 																		'border-color': 'rgb(220, 220, 220)',
 																		'border-style': 'solid', 'padding':'5px'}),
 						 html.Div(dcc.Markdown(children=markdown_text_dotplot),style={'width': '18%', 'float': 'right',
 															'display': 'inline-block'})],style={'margin': '100px'})
+		else:
+			return html.Div([html.Div(html.H1(children='Точечная диаграмма'), style={'text-align': 'center'}),
+						 html.Div(dcc.Markdown(
+							 children='Ошибка: невозможно построить точечную диаграмму, т.к. нет категориальных данных.'),
+							 style={'width': '80%', 'display': 'inline-block'})
+						], style={'margin': '100px'})
 
 
 	def _generate_box_hist(self):
@@ -471,7 +474,7 @@ class StatisticsDashboard(Dashboard):
 										value=available_indicators[0]
 									)
 
-								], style={'width': '48%', 'display': 'inline-block'})
+								], style={'width': '48%', 'display': 'inline-block', 'padding': '5px'})
 							]),
 							 html.Div([
 								 dcc.Graph(id='Histogram_boxhist', figure=fig_hist),
