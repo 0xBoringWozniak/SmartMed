@@ -9,7 +9,7 @@ class Model(ABC):
         self.x = x
         self.y = y
 
-    def fit(self) -> np.array:
+    def fit(self):
         self.model = self.model.fit(self.x, self.y)
     
     def predict(self, x: np.array) -> float:
