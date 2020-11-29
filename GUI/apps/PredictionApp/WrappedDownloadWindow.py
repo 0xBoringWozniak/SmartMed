@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
 
 from .DownloadWindow import DownloadWindow
+from ..utils import get_columns
 
 
 class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
@@ -34,8 +35,7 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         self.child.show()
 
     def path_to_file(self):
-         data = QtWidgets.QFileDialog.getOpenFileName()[0]
-
-         self.columns = pd.read_excel(data).columns
-         print(list(self.columns))
-         self.comboBox.addItems(self.columns)
+        path = QtWidgets.QFileDialog.getOpenFileName()[0]
+        col = get_columns(path).columns
+        print(list(col))
+        self.comboBox.addItems(col)

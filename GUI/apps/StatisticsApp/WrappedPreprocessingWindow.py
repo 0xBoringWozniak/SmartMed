@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .PreprocessingWindow import PreprocessingWindow
+from ..utils import remove_if_exists
 
 
 class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
@@ -37,8 +38,7 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
         self.pushButton.clicked.connect(self.path_to_file)
 
     def back(self):
-        if os.path.exists('settings.py'):
-            os.remove('settings.py')
+        remove_if_exists()
         self.hide()
         self.parent.show()
 

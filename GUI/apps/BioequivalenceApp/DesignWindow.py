@@ -11,30 +11,26 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class RadioWindow(object):
+class DesignWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(600, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(40, 140, 160, 131))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(40, 140, 170, 131))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.radioButton_3 = QtWidgets.QRadioButton(self.verticalLayoutWidget)
-        self.radioButton_3.setAutoFillBackground(True)
-        self.radioButton_3.setObjectName("radioButton_3")
-        self.verticalLayout.addWidget(self.radioButton_3)
-        self.radioButton_2 = QtWidgets.QRadioButton(self.verticalLayoutWidget)
-        self.radioButton_2.setAutoFillBackground(True)
-        self.radioButton_2.setObjectName("radioButton_2")
-        self.verticalLayout.addWidget(self.radioButton_2)
-        self.radioButton = QtWidgets.QRadioButton(self.verticalLayoutWidget)
-        self.radioButton.setAutoFillBackground(True)
-        self.radioButton.setObjectName("radioButton")
-        self.verticalLayout.addWidget(self.radioButton)
+        self.radioButton_cross = QtWidgets.QRadioButton(self.verticalLayoutWidget)
+        self.radioButton_cross.setAutoFillBackground(True)
+        self.radioButton_cross.setObjectName("radioButton_cross")
+        self.verticalLayout.addWidget(self.radioButton_cross)
+        self.radioButton_parall = QtWidgets.QRadioButton(self.verticalLayoutWidget)
+        self.radioButton_parall.setAutoFillBackground(True)
+        self.radioButton_parall.setObjectName("radioButton_parall")
+        self.verticalLayout.addWidget(self.radioButton_parall)
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
         self.pushButtonBack.setObjectName("pushButtonBack")
@@ -49,8 +45,7 @@ class RadioWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.radioButton_3.setText(_translate("MainWindow", "RadioButton"))
-        self.radioButton_2.setText(_translate("MainWindow", "RadioButton"))
-        self.radioButton.setText(_translate("MainWindow", "RadioButton"))
+        self.radioButton_cross.setText(_translate("MainWindow", "Перекрёстный дизайн"))
+        self.radioButton_parall.setText(_translate("MainWindow", "Параллельный дизайн"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))

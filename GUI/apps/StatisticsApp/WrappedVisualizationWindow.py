@@ -10,6 +10,7 @@ from PyQt5.QtCore import QTimer, QEventLoop
 
 from .VisualizationWindow import VisualizationWindow
 from .WaitingSpinnerWidget import QtWaitingSpinner
+from ..utils import remove_if_exists
 
 
 import sys
@@ -88,8 +89,7 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         QTimer.singleShot(10000, loop.quit)
         loop.exec_()
         self.spinner.stop()
-        if os.path.exists('settings.py'):
-            os.remove('settings.py')
+        remove_if_exists()
         self.child.show()
 
     def check_linear(self):
