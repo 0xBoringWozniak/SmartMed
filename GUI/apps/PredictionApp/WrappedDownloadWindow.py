@@ -3,10 +3,13 @@ import pandas as pd
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
-    QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
+    QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .DownloadWindow import DownloadWindow
+from ..Notification import NotificationWindow
+from PyQt5.QtCore import Qt
 from ..utils import get_columns
+
 
 
 class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
@@ -17,7 +20,6 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         self.__build_buttons()
         self.setWindowTitle('Что-то там 2')
         self.columns =''
-       
 
     def __build_buttons(self):
         #плохо с неймингом, надо переделать бек некст
@@ -35,7 +37,14 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         self.child.show()
 
     def path_to_file(self):
-        path = QtWidgets.QFileDialog.getOpenFileName()[0]
-        col = get_columns(path).columns
-        print(list(col))
-        self.comboBox.addItems(col)
+        w = QWidget()
+        def callback():
+            pass
+        NotificationWindow.info(
+            'Warning', 'Calculus, originally called infinitesimal calculus or "the calculus of infinitesimals", is the mathematical study of continuous change', callback=callback)
+        w.show()
+
+        #path = QtWidgets.QFileDialog.getOpenFileName()[0]
+        #col = get_columns(path).columns
+        #print(list(col))
+        #self.comboBox.addItems(col)

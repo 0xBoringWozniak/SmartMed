@@ -2,9 +2,10 @@ import pickle
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
-    QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
-
+    QWidget, QToolTip, QPushButton, QApplication, QMessageBox, QTableWidget)
+from ..DLG import Dlg
 from .RadioWindow import RadioWindow
+
 
 
 class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
@@ -33,3 +34,4 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
             pickle.dump(self.settings, f)
         self.hide()
         self.child.show()
+
