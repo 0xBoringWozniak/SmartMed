@@ -18,13 +18,12 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        self.setWindowTitle('Что-то там 2')
+        self.setWindowTitle('Загрузка данных')
         self.columns =''
 
     def __build_buttons(self):
         #плохо с неймингом, надо переделать бек некст
-        self.pushButtonBack.clicked.connect(self.back
-            )
+        self.pushButtonBack.clicked.connect(self.back)
         self.pushButtonNext.clicked.connect(self.next)
         self.pushButton.clicked.connect(self.path_to_file)
     def back(self):
@@ -37,14 +36,7 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         self.child.show()
 
     def path_to_file(self):
-        w = QWidget()
-        def callback():
-            pass
-        NotificationWindow.info(
-            'Warning', 'Calculus, originally called infinitesimal calculus or "the calculus of infinitesimals", is the mathematical study of continuous change', callback=callback)
-        w.show()
-
-        #path = QtWidgets.QFileDialog.getOpenFileName()[0]
-        #col = get_columns(path).columns
-        #print(list(col))
-        #self.comboBox.addItems(col)
+        path = QtWidgets.QFileDialog.getOpenFileName()[0]
+        #if path != '':
+          #  col = get_columns(path).columns
+           # self.comboBox.addItems(col)

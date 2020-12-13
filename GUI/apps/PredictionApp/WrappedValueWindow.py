@@ -3,21 +3,16 @@ import pickle
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, QTableWidget)
-from .RadioWindow import RadioWindow
+from .ValueWindow import ValueWindow
 
 
 
-class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
+class WrappedValueWindow(ValueWindow, QtWidgets.QMainWindow):
    
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        self.setWindowTitle('Препроцессинг')
-        self.settings = {'MODULE_SETTINGS': {
-        'model': 'linreg'},
-         'MODULE': 'PREDICT'}
-       
        
 
     def __build_buttons(self):
@@ -26,11 +21,9 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
 
     def back(self):
         self.hide()
-        self.parent.show()
+        self.parent_regression.show()
 
     def next(self):
-        with open('settings.py', 'wb') as f:
-            pickle.dump(self.settings, f)
         self.hide()
-        self.child.show()
+        self.child_linear.show()
 
