@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'pred_radio.ui'
+# Form implementation generated from reading ui file 'DesignWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -14,28 +14,23 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class DesignWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(600, 480)
+        MainWindow.resize(640, 454)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(40, 140, 170, 131))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.radioButton_cross = QtWidgets.QRadioButton(self.verticalLayoutWidget)
-        self.radioButton_cross.setAutoFillBackground(True)
-        self.radioButton_cross.setObjectName("radioButton_cross")
-        self.verticalLayout.addWidget(self.radioButton_cross)
-        self.radioButton_parall = QtWidgets.QRadioButton(self.verticalLayoutWidget)
-        self.radioButton_parall.setAutoFillBackground(True)
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(70, 50, 421, 31))
+        self.label.setObjectName("label")
+        self.radioButton_parall = QtWidgets.QRadioButton(self.centralwidget)
+        self.radioButton_parall.setGeometry(QtCore.QRect(100, 130, 171, 20))
         self.radioButton_parall.setObjectName("radioButton_parall")
-        self.verticalLayout.addWidget(self.radioButton_parall)
+        self.radioButton_cross = QtWidgets.QRadioButton(self.centralwidget)
+        self.radioButton_cross.setGeometry(QtCore.QRect(100, 180, 251, 20))
+        self.radioButton_cross.setObjectName("radioButton_cross")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
+        self.pushButtonBack.setGeometry(QtCore.QRect(340, 400, 113, 32))
         self.pushButtonBack.setObjectName("pushButtonBack")
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
+        self.pushButtonNext.setGeometry(QtCore.QRect(490, 400, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -45,7 +40,8 @@ class DesignWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.radioButton_cross.setText(_translate("MainWindow", "Перекрёстный дизайн"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Укажите, с какой выборкой проводится работа:</span></p></body></html>"))
         self.radioButton_parall.setText(_translate("MainWindow", "Параллельный дизайн"))
+        self.radioButton_cross.setText(_translate("MainWindow", "Перекрестный дизайн"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))

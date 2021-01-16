@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class ChoiceWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(600, 480)
+        MainWindow.resize(640, 454)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -32,6 +32,9 @@ class ChoiceWindow(object):
         self.radioButtonLogit = QtWidgets.QRadioButton(self.verticalLayoutWidget)
         self.radioButtonLogit.setObjectName("radioButtonLogit")
         self.verticalLayout.addWidget(self.radioButtonLogit)
+        self.radioButtonTree = QtWidgets.QRadioButton(self.verticalLayoutWidget)
+        self.radioButtonTree.setObjectName("radioButtonTree")
+        self.verticalLayout.addWidget(self.radioButtonTree)
         self.radioButtonRoc = QtWidgets.QRadioButton(self.verticalLayoutWidget)
         self.radioButtonRoc.setObjectName("radioButtonRoc")
         self.verticalLayout.addWidget(self.radioButtonRoc)
@@ -55,6 +58,7 @@ class ChoiceWindow(object):
         self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Для начала основого этапа выберите</span></p><p><span style=\" font-size:18pt;\"> одну из регрессионных моделей:</span></p></body></html>"))
         self.radioButtonLinear.setText(_translate("MainWindow", "Множественная(линейная) регрессия"))
         self.radioButtonLogit.setText(_translate("MainWindow", "Логистическая регрессия"))
+        self.radioButtonTree.setText(_translate("MainWindow", "Деревья классификации"))
         self.radioButtonRoc.setText(_translate("MainWindow", "ROC-анализ"))
         self.radioButtonPol.setText(_translate("MainWindow", "Полиномиальная регрессия"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))

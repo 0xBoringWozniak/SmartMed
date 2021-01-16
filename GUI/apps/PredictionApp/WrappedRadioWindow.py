@@ -14,11 +14,6 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
         self.setupUi(self)
         self.__build_buttons()
         self.setWindowTitle('Препроцессинг')
-        self.settings = {'MODULE_SETTINGS': {
-        'model': 'linreg'},
-         'MODULE': 'PREDICT'}
-       
-       
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
@@ -29,8 +24,7 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
         self.parent.show()
 
     def next(self):
-        with open('settings.py', 'wb') as f:
-            pickle.dump(self.settings, f)
+
         self.hide()
         self.child.show()
 

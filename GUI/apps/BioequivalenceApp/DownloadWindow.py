@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'pred_download.ui'
+# Form implementation generated from reading ui file 'DownloadWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -14,17 +14,24 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class DownloadWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(600, 480)
+        MainWindow.resize(640, 454)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.pushButtondDownload = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtondDownload.setGeometry(QtCore.QRect(40, 320, 113, 32))
-        self.pushButtondDownload.setObjectName("pushButtondDownload")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(40, 10, 171, 51))
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(40, 60, 581, 241))
+        self.label_2.setObjectName("label_2")
+        self.pushButtonDownload = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonDownload.setGeometry(QtCore.QRect(40, 330, 113, 32))
+        self.pushButtonDownload.setAutoFillBackground(True)
+        self.pushButtonDownload.setObjectName("pushButtonDownload")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonBack.setGeometry(QtCore.QRect(460, 420, 113, 32))
+        self.pushButtonBack.setGeometry(QtCore.QRect(320, 410, 113, 32))
         self.pushButtonBack.setObjectName("pushButtonBack")
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonNext.setGeometry(QtCore.QRect(330, 420, 113, 32))
+        self.pushButtonNext.setGeometry(QtCore.QRect(490, 410, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -34,6 +41,8 @@ class DownloadWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButtondDownload.setText(_translate("MainWindow", "Загрузка"))
-        self.pushButtonBack.setText(_translate("MainWindow", "Вперед"))
-        self.pushButtonNext.setText(_translate("MainWindow", "Назад"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Загрузка данных</span></p></body></html>"))
+        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Для того, чтобы выполнить загрузку данных, кликните на кнопку ниже “Загрузка”. </span></p><p><span style=\" font-size:12pt;\">В открывшемся окне выберите 2 файла в формате “.xlsx”, “xs” </span></p><p><span style=\" font-size:12pt;\">или “csv”. Первый файл должен содержать информацию о пациентах, принимавших</span></p><p><span style=\" font-size:12pt;\">тестовый препарат, а второй - о пациентах, принимавший референсный препарат.</span></p><p><span style=\" font-size:12pt;\">Обратите внимание, что в первой строке должен быть указан момент времени </span></p><p><span style=\" font-size:12pt;\">в часах, в который зафиксирована концентрация. </span></p><p><span style=\" font-size:12pt;\">В первом столбце должен быть порядковый номер пациента, а в следующих - показатели </span></p><p><span style=\" font-size:12pt;\">концентрации в фиксированный момент </span></p><p><span style=\" font-size:12pt;\">времени.</span></p><p><span style=\" font-size:12pt;\"><br/></span></p></body></html>"))
+        self.pushButtonDownload.setText(_translate("MainWindow", "Загрузка"))
+        self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
+        self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))

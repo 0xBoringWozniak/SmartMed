@@ -21,9 +21,9 @@ class WrappedRockValueWindow(RockValueWindow, QtWidgets.QMainWindow):
 
     def back(self):
         self.hide()
-        self.parent_rock.show()
+        self.parent.show()
 
     def next(self):
-        #self.child.show()
-        pass
+        self.child.show()
+
 

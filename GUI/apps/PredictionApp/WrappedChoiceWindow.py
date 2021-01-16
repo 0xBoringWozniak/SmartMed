@@ -14,7 +14,6 @@ class WrappedChoiceWindow(ChoiceWindow, QtWidgets.QMainWindow):
         self.setupUi(self)
         self.__build_buttons()
         self.setWindowTitle('Выбор регрессии')
-        #self.radioButtonLinear.SetChecked(True)
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
@@ -26,14 +25,17 @@ class WrappedChoiceWindow(ChoiceWindow, QtWidgets.QMainWindow):
 
     def next(self):
         self.hide()
-        if self.radioButtonLinear.isChecked():
-            self.child_regression.show()
-        elif self.radioButtonLogit.isChecked():
-            self.child_regression.show()
-        elif self.radioButtonPol.isChecked():
-            self.child_regression.show()
+        if self.radioButtonLinear.isChecked() or self.radioButtonLogit.isChecked() or self.radioButtonPol.isChecked():
+            self.child_linear.show()
+            with open('settings.py', 'rb') as f:
+                data = pickle.load(f)
+            col = data['MODULE_SETTINGS']['columns']
+            self.child_linear.comboBox.addItems(col)
+        elif self.radioButtonRoc.isChecked():
+            self.child_roc.show()
         else:
-            self.child_rock.show()
+            self.child_tree.show()
+
 
         
         

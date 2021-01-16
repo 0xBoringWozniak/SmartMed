@@ -19,6 +19,7 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         self.setupUi(self)
         self.__build_buttons()
         self.setWindowTitle('Загрузка данных')
+        self.settings = {'MODULE':'PREDICT', 'MODULE_SETTINGS': {'path': '','columns': ''}}
         self.columns =''
 
     def __build_buttons(self):
@@ -35,8 +36,12 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         self.hide()
         self.child.show()
 
+
     def path_to_file(self):
         path = QtWidgets.QFileDialog.getOpenFileName()[0]
-        #if path != '':
-          #  col = get_columns(path).columns
+        if path != '':
+          self.settings['MODULE_SETTINGS']['columns'] = get_columns(path).columns
+        with open('settings.py', 'wb') as f:
+            pickle.dump(self.settings, f)
+
            # self.comboBox.addItems(col)
