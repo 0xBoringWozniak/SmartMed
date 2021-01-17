@@ -36,10 +36,10 @@ class RocCurvesWindow(object):
         self.checkBoxPaint.setObjectName("checkBoxPaint")
         self.verticalLayout.addWidget(self.checkBoxPaint)
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 131, 32))
+        self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 121, 32))
+        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
         self.pushButtonBack.setObjectName("pushButtonBack")
         MainWindow.setCentralWidget(self.centralwidget)
 

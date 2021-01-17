@@ -46,7 +46,7 @@ class PreprocessingWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.comboBox1.setToolTip(_translate("MainWindow", "tool tip", "tool tip"))
-        self.pushButtonNext.setText(_translate("MainWindow", "Далее"))
+        self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:600; text-decoration: underline;\">Предварительная обработка данных</span></p><p><br/><br/></p><p><span style=\" font-size:14pt;\">Выберите опции предварительной обработки данных:</span></p><p><span style=\" font-size:14pt;\">Метод заполнения пропущенных данных:</span></p></body></html>"))
         self.label_2.setText(_translate("MainWindow", "<html><head/><body><p>Для того, чтобы выполнить загрузку данных, кликните на кнопку ниже &quot;Загрузка данных&quot;.</p><p>В открывшемся окне выберите файл в формате <span style=\" font-weight:600;\">&quot;xlsx&quot;</span> или <span style=\" font-weight:600;\">&quot;csv&quot;</span>.</p><p><br/></p></body></html>"))

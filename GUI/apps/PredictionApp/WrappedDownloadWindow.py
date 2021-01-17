@@ -19,7 +19,9 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         self.setupUi(self)
         self.__build_buttons()
         self.setWindowTitle('Загрузка данных')
-        self.settings = {'MODULE':'PREDICT', 'MODULE_SETTINGS': {'path': '','columns': ''}}
+        self.settings = {'MODULE':'PREDICT', 'MODULE_SETTINGS': {'path': '','columns': '',\
+                                             'preprocessing': '', 'model': ''
+                            }}
         self.columns =''
 
     def __build_buttons(self):

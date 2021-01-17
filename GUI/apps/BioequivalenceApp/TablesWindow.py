@@ -57,5 +57,5 @@ class TablesWindow(object):
         self.checkBoxFeatures.setText(_translate("MainWindow", "Индивидуальные фармокинетические свойства препарата"))
         self.checkBoxDistrub.setText(_translate("MainWindow", "Распределение ключевых параметров по группам"))
         self.checkBoxPowers.setText(_translate("MainWindow", "Статистические мощности по ключевым параметрам"))
-        self.pushButtonNext.setText(_translate("MainWindow", "вперед"))
-        self.pushButtonBack.setText(_translate("MainWindow", "назад"))
+        self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
+        self.pushButtonBack.setText(_translate("MainWindow", "Назад"))

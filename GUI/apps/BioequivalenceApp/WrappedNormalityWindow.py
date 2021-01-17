@@ -14,7 +14,7 @@ class WrappedNormalityWindow(NormalityWindow, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        self.setWindowTitle('Что-то там')
+        #self.setWindowTitle('Что-то там')
     
 
     def __build_buttons(self):

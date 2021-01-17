@@ -14,7 +14,7 @@ class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        self.setWindowTitle('Что-то там')
+        #self.setWindowTitle('Что-то там')
     
 
     def __build_buttons(self):
@@ -38,4 +38,3 @@ class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
             pickle.dump(settings, f)
         self.hide()
         self.child.show()
-        print(settings)

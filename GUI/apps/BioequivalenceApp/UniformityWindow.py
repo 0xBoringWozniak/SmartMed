@@ -41,7 +41,7 @@ class UniformityWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButtonDone.setText(_translate("MainWindow", "завершить"))
-        self.pushButtonBack.setText(_translate("MainWindow", "назад"))
+        self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
         self.label.setText(_translate("MainWindow", " Выберите, каким способом выполнется \n"
 " проверка данных на однородность:"))
         self.radioButtonF.setText(_translate("MainWindow", "F-критерий "))

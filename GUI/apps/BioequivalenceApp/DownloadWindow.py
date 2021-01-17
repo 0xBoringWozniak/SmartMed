@@ -36,6 +36,7 @@ class DownloadWindow(object):
         self.pushButtonDownload1 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonDownload1.setGeometry(QtCore.QRect(30, 360, 211, 31))
         self.pushButtonDownload1.setObjectName("pushButtonDownload1")
+
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)

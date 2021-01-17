@@ -13,7 +13,7 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        self.setWindowTitle('Что-то там')
+        #self.setWindowTitle('Что-то там')
         self.settings = { 'MODULE': 'BIOEQ', 'MODULE_SETTINGS': {'path_test': '', 'path_ref': '' }}
   
     def __build_buttons(self):

@@ -64,6 +64,6 @@ class RadioWindow(object):
         self.radioButtonUser.setText(_translate("MainWindow", "Заданным значением"))
         self.radioButtonDropNa.setText(_translate("MainWindow", "Откидыванием строк с пропущенными значениями"))
         self.radioButtonMediane.setText(_translate("MainWindow", "Медианными / модой"))
-        self.radioButtonAvg.setText(_translate("MainWindow", "Средним / модом"))
+        self.radioButtonAvg.setText(_translate("MainWindow", "Средним / модой"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))

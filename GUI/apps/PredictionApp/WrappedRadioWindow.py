@@ -14,6 +14,7 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
         self.setupUi(self)
         self.__build_buttons()
         self.setWindowTitle('Препроцессинг')
+        self.radioButtonDropNa.setChecked(True)
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
@@ -24,7 +25,19 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
         self.parent.show()
 
     def next(self):
-
+        if self.radioButtonDropNa.isChecked():
+            var = 'dropna'
+        elif self.radioButtonUser.isChecked():
+            var = 'value'
+        elif self.radioButtonMediane.isChecked():
+            var = 'mediane'
+        else:
+            var = 'avg'
+        with open('settings.py', 'rb') as f:
+            data = pickle.load(f)
+            data['MODULE_SETTINGS']['preprocessing'] = var
+        with open('settings.py', 'wb') as f:
+            pickle.dump(data, f)
         self.hide()
         self.child.show()
 

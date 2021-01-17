@@ -24,6 +24,13 @@ class WrappedValueWindow(ValueWindow, QtWidgets.QMainWindow):
         self.parent.show()
 
     def next(self):
+        var = self.comboBox.currentText()
+        with open('settings.py', 'rb') as f:
+                data = pickle.load(f)
+        data['MODULE_SETTINGS'].update({'variable': var})
+        with open('settings.py', 'wb') as f:
+            pickle.dump(data, f)
         self.hide()
         self.child_linear.show()
+
 

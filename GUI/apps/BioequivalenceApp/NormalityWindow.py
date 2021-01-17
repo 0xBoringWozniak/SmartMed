@@ -40,8 +40,8 @@ class NormalityWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton.setText(_translate("MainWindow", "вперед"))
-        self.pushButton_2.setText(_translate("MainWindow", "назад"))
+        self.pushButton.setText(_translate("MainWindow", "Вперед"))
+        self.pushButton_2.setText(_translate("MainWindow", "Назад"))
         self.label.setText(_translate("MainWindow", " Выберите, каким способом выполнется \n"
 " проверка данных на нормальность:"))
         self.radioButtonColm.setText(_translate("MainWindow", "Критерий Колмогорова-Смирнова"))
