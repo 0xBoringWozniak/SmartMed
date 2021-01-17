@@ -4,10 +4,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
 
-from .RocAnyl import RocAnyl
+from .RocGraphsWindow import RocGraphsWindow
 
 
-class WrappedRocAnyl(RocAnyl, QtWidgets.QMainWindow):
+class WrappedRocGraphsWindow(RocGraphsWindow, QtWidgets.QMainWindow):
 
     def __init__(self):
         super().__init__()
@@ -23,6 +23,5 @@ class WrappedRocAnyl(RocAnyl, QtWidgets.QMainWindow):
         self.parent.show()
 
     def done(self):
-        print('suka')
         self.close()
         

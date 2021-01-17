@@ -27,10 +27,10 @@ class ValueWindow(object):
         self.comboBox.setGeometry(QtCore.QRect(180, 200, 271, 26))
         self.comboBox.setObjectName("comboBox")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonBack.setGeometry(QtCore.QRect(310, 390, 113, 32))
+        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
         self.pushButtonBack.setObjectName("pushButtonBack")
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonNext.setGeometry(QtCore.QRect(490, 390, 113, 32))
+        self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
         MainWindow.setCentralWidget(self.centralwidget)
 

@@ -7,6 +7,8 @@ from .WrappedLinearGraphWindow import WrappedLinearGraphWindow
 from .WrappedTreeFeaturesWindow import WrappedTreeFeaturesWindow
 from .WrappedTreeVisualWindow import WrappedTreeVisualWindow
 from.WrappedRocAnyl import WrappedRocAnyl
+from .WrappedRocCurvesWindow import WrappedRocCurvesWindow
+from .WrappedRocGraphsWindow import WrappedRocGraphsWindow
 
 #from..StartingApp.WrappedStartingWindow import WrappedStartingWindow
 

@@ -32,7 +32,14 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         self.parent.show()
 
     def next(self):
-        
+        while self.settings['MODULE_SETTINGS']['path'] == '':
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Error")
+            msg.setInformativeText('Please, choose path to file')
+            msg.setWindowTitle("Error")
+            msg.exec_()
+            return 
         self.hide()
         self.child.show()
 
@@ -41,6 +48,7 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         path = QtWidgets.QFileDialog.getOpenFileName()[0]
         if path != '':
           self.settings['MODULE_SETTINGS']['columns'] = get_columns(path).columns
+          self.settings['MODULE_SETTINGS']['path'] = path
         with open('settings.py', 'wb') as f:
             pickle.dump(self.settings, f)
 

@@ -27,10 +27,10 @@ class DownloadWindow(object):
         self.pushButton.setGeometry(QtCore.QRect(210, 210, 181, 32))
         self.pushButton.setObjectName("pushButton")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonBack.setGeometry(QtCore.QRect(310, 400, 113, 32))
+        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
         self.pushButtonBack.setObjectName("pushButtonBack")
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonNext.setGeometry(QtCore.QRect(480, 400, 113, 32))
+        self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
         MainWindow.setCentralWidget(self.centralwidget)
 

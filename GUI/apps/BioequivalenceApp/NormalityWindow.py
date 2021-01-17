@@ -14,14 +14,14 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class NormalityWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(640, 480)
+        MainWindow.resize(600, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(480, 400, 113, 32))
+        self.pushButton.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(320, 400, 113, 32))
+        self.pushButton_2.setGeometry(QtCore.QRect(330, 420, 113, 32))
         self.pushButton_2.setObjectName("pushButton_2")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(110, 80, 351, 51))

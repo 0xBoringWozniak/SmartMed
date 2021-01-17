@@ -45,10 +45,10 @@ class RadioWindow(object):
         self.radioButtonAvg.setObjectName("radioButtonAvg")
         self.verticalLayout.addWidget(self.radioButtonAvg)
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonNext.setGeometry(QtCore.QRect(490, 400, 113, 32))
+        self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonBack.setGeometry(QtCore.QRect(340, 400, 113, 32))
+        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
         self.pushButtonBack.setObjectName("pushButtonBack")
         MainWindow.setCentralWidget(self.centralwidget)
 

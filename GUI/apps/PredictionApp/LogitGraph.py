@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(640, 454)
+        MainWindow.resize(600, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -39,10 +39,10 @@ class Ui_MainWindow(object):
         self.checkBoxResid.setObjectName("checkBoxResid")
         self.verticalLayout.addWidget(self.checkBoxResid)
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonBack.setGeometry(QtCore.QRect(340, 400, 113, 32))
+        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
         self.pushButtonBack.setObjectName("pushButtonBack")
         self.pushButtonDone = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonDone.setGeometry(QtCore.QRect(500, 400, 113, 32))
+        self.pushButtonDone.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonDone.setObjectName("pushButtonDone")
         MainWindow.setCentralWidget(self.centralwidget)
 
