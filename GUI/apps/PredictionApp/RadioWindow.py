@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'pred_radio.ui'
+# Form implementation generated from reading ui file 'RadioWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -17,18 +17,39 @@ class RadioWindow(object):
         MainWindow.resize(600, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(100, 40, 341, 51))
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(110, 90, 391, 21))
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(120, 130, 261, 16))
+        self.label_3.setObjectName("label_3")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(40, 140, 160, 131))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 160, 355, 121))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
-        self.pushButtonBack.setObjectName("pushButtonBack")
+        self.radioButtonUser = QtWidgets.QRadioButton(self.verticalLayoutWidget)
+        self.radioButtonUser.setObjectName("radioButtonUser")
+        self.verticalLayout.addWidget(self.radioButtonUser)
+        self.radioButtonDropNa = QtWidgets.QRadioButton(self.verticalLayoutWidget)
+        self.radioButtonDropNa.setObjectName("radioButtonDropNa")
+        self.verticalLayout.addWidget(self.radioButtonDropNa)
+        self.radioButtonMediane = QtWidgets.QRadioButton(self.verticalLayoutWidget)
+        self.radioButtonMediane.setObjectName("radioButtonMediane")
+        self.verticalLayout.addWidget(self.radioButtonMediane)
+        self.radioButtonAvg = QtWidgets.QRadioButton(self.verticalLayoutWidget)
+        self.radioButtonAvg.setObjectName("radioButtonAvg")
+        self.verticalLayout.addWidget(self.radioButtonAvg)
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
+        self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
+        self.pushButtonBack.setObjectName("pushButtonBack")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -37,5 +58,12 @@ class RadioWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Предварительная обработка данных</span></p></body></html>"))
+        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:14pt;\">Выберите опции предварительной обработки данных:</span></p></body></html>"))
+        self.label_3.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">Заполнение пропущенных значений:</p></body></html>"))
+        self.radioButtonUser.setText(_translate("MainWindow", "Заданным значением"))
+        self.radioButtonDropNa.setText(_translate("MainWindow", "Откидыванием строк с пропущенными значениями"))
+        self.radioButtonMediane.setText(_translate("MainWindow", "Медианными / модой"))
+        self.radioButtonAvg.setText(_translate("MainWindow", "Средним / модой"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
+        self.pushButtonBack.setText(_translate("MainWindow", "Назад"))

@@ -55,7 +55,7 @@ class MetricsWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButtonNext.setText(_translate("MainWindow", "Далее"))
+        self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:600; text-decoration: underline;\">Выбор статистических метрик</span></p></body></html>"))
         self.checkBoxMax.setText(_translate("MainWindow", "максимальное значение в столбце"))

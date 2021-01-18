@@ -2,20 +2,17 @@ import pickle
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
-    QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
+    QWidget, QToolTip, QPushButton, QApplication, QMessageBox, QTableWidget)
+from .ValueWindow import ValueWindow
 
-from .RadioWindow import RadioWindow
 
 
-class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
-
+class WrappedValueWindow(ValueWindow, QtWidgets.QMainWindow):
+   
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        self.setWindowTitle('Что-то там')
-        self.settings = { 'MODULE': 'BIOEQ'}
-       
        
 
     def __build_buttons(self):
@@ -27,7 +24,13 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
         self.parent.show()
 
     def next(self):
+        var = self.comboBox.currentText()
+        with open('settings.py', 'rb') as f:
+                data = pickle.load(f)
+        data['MODULE_SETTINGS'].update({'variable': var})
         with open('settings.py', 'wb') as f:
-            pickle.dump(self.settings, f)
+            pickle.dump(data, f)
         self.hide()
-        self.child.show()
+        self.child_linear.show()
+
+

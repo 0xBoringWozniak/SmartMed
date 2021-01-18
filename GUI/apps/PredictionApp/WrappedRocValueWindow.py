@@ -3,18 +3,17 @@ import pickle
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, QTableWidget)
-from .RadioWindow import RadioWindow
+from .RocValueWindow import RocValueWindow
 
 
 
-class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
+class WrappedRocValueWindow(RocValueWindow, QtWidgets.QMainWindow):
    
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        self.setWindowTitle('Препроцессинг')
-        self.radioButtonDropNa.setChecked(True)
+       
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
@@ -25,19 +24,13 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
         self.parent.show()
 
     def next(self):
-        if self.radioButtonDropNa.isChecked():
-            var = 'dropna'
-        elif self.radioButtonUser.isChecked():
-            var = 'value'
-        elif self.radioButtonMediane.isChecked():
-            var = 'mediane'
-        else:
-            var = 'avg'
+        var = self.comboBox.currentText()
         with open('settings.py', 'rb') as f:
-            data = pickle.load(f)
-            data['MODULE_SETTINGS']['preprocessing'] = var
+                data = pickle.load(f)
+        data['MODULE_SETTINGS'].update({'variable': var})
         with open('settings.py', 'wb') as f:
             pickle.dump(data, f)
         self.hide()
         self.child.show()
+
 
