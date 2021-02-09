@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
 
 from .TreeVisualWindow import TreeVisualWindow
-
+from SmartMedApp.backend import ModuleManipulator
 
 class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
 
@@ -66,6 +66,8 @@ class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
             pickle.dump(data, f)
         self.close()
         self.child.show()
+        module_starter = ModuleManipulator(settings)
+        threading.Thread(target=module_starter.start, daemon=True).start()
         print(data)
 
         

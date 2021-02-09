@@ -1,11 +1,12 @@
 import pickle
+import threading
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
 
 from .LinearGraphWindow import LinearGraphWindow
-
+from SmartMedApp.backend import ModuleManipulator
 
 class WrappedLinearGraphWindow(LinearGraphWindow, QtWidgets.QMainWindow):
 
@@ -48,6 +49,8 @@ class WrappedLinearGraphWindow(LinearGraphWindow, QtWidgets.QMainWindow):
             pickle.dump(data, f)
         self.close()
         self.child.show()
+        module_starter = ModuleManipulator(settings)
+        threading.Thread(target=module_starter.start, daemon=True).start()
         print(data)
 
     def distr_resid(self):

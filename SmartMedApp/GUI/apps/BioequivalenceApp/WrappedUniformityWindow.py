@@ -1,11 +1,12 @@
 import pickle
+import threading
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .UniformityWindow import UniformityWindow
-
+from SmartMedApp.backend import ModuleManipulator
 
 
 class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
@@ -36,5 +37,7 @@ class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
             settings['MODULE_SETTINGS']['uniformity'] = 'Leven'
         with open('settings.py', 'wb') as f:
             pickle.dump(settings, f)
+        module_starter = ModuleManipulator(settings)
+        threading.Thread(target=module_starter.start, daemon=True).start()
         self.hide()
         self.child.show()

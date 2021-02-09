@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
 
 from .RocGraphsWindow import RocGraphsWindow
-
+from SmartMedApp.backend import ModuleManipulator
 
 class WrappedRocGraphsWindow(RocGraphsWindow, QtWidgets.QMainWindow):
 
@@ -41,6 +41,8 @@ class WrappedRocGraphsWindow(RocGraphsWindow, QtWidgets.QMainWindow):
         data['MODULE_SETTINGS'].pop('columns')
         with open('settings.py', 'wb') as f:
             pickle.dump(data, f)
+        module_starter = ModuleManipulator(settings)
+        threading.Thread(target=module_starter.start, daemon=True).start()
         self.close()
         self.child.show()
         print(data)
