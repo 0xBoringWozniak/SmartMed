@@ -31,7 +31,7 @@ class WrappedNormalityWindow(NormalityWindow, QtWidgets.QMainWindow):
         with open('settings.py', 'rb') as f:
             settings = pickle.load(f)
         if self.radioButtonColm.isChecked():
-            settings['MODULE_SETTINGS']['normality'] = 'Colmogorov'
+            settings['MODULE_SETTINGS']['normality'] = 'Kolmogorov'
         else:
             settings['MODULE_SETTINGS']['normality'] = 'Shapiro'
         with open('settings.py', 'wb') as f:
