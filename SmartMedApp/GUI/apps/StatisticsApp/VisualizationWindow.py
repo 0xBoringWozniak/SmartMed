@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
         self.label.setGeometry(QtCore.QRect(70, 30, 301, 31))
         self.label.setObjectName("label")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(70, 90, 356, 311))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(70, 70, 356, 321))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -64,6 +64,9 @@ class Ui_MainWindow(object):
         self.checkBoxLog = QtWidgets.QCheckBox(self.verticalLayoutWidget)
         self.checkBoxLog.setObjectName("checkBoxLog")
         self.verticalLayout.addWidget(self.checkBoxLog)
+        self.checkBoxPie = QtWidgets.QCheckBox(self.verticalLayoutWidget)
+        self.checkBoxPie.setObjectName("checkBoxPie")
+        self.verticalLayout.addWidget(self.checkBoxPie)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -85,3 +88,4 @@ class Ui_MainWindow(object):
         self.checkBoxBox.setText(_translate("MainWindow", "график ящик усы"))
         self.checkBoxBar.setText(_translate("MainWindow", "Столбцовая диаграмма"))
         self.checkBoxLog.setText(_translate("MainWindow", "График логарифмической зависимости"))
+        self.checkBoxPie.setText(_translate("MainWindow", "Круговая диаграмма"))
