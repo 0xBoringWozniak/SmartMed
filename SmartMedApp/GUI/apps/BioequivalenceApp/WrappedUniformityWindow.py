@@ -7,6 +7,8 @@ from PyQt5.QtWidgets import (
 
 from .UniformityWindow import UniformityWindow
 from SmartMedApp.backend import ModuleManipulator
+from ..WaitingSpinnerWidget import QtWaitingSpinner
+from PyQt5.QtCore import QTimer, QEventLoop
 
 
 class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
@@ -39,6 +41,14 @@ class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
             pickle.dump(settings, f)
         module_starter = ModuleManipulator(settings)
         threading.Thread(target=module_starter.start, daemon=True).start()
+        self.spinner = QtWaitingSpinner(self)
+        self.layout().addWidget(self.spinner)
+        self.spinner.start()
+        #QTimer.singleShot(10000, self.spinner.stop)
+        loop = QEventLoop()
+        QTimer.singleShot(10000, loop.quit)
+        loop.exec_()
+        self.spinner.stop()
         self.hide()
         self.child.show()
         print(settings)

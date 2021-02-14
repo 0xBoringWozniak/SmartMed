@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import QTimer, QEventLoop
 
 from .VisualizationWindow import VisualizationWindow
-from .WaitingSpinnerWidget import QtWaitingSpinner
+from ..WaitingSpinnerWidget import QtWaitingSpinner
 from ..utils import remove_if_exists
 
 from SmartMedApp.backend import ModuleManipulator

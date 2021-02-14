@@ -27,3 +27,4 @@ class WrappedFinishWindow(FinishWindow, QtWidgets.QMainWindow):
     def done(self):
         
         self.close()
+        

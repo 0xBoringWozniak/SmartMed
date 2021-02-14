@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import (
 from .LinearGraphWindow import LinearGraphWindow
 from SmartMedApp.backend import ModuleManipulator
 from ..utils import remove_if_exists
+from ..WaitingSpinnerWidget import QtWaitingSpinner
+from PyQt5.QtCore import QTimer, QEventLoop
 
 class WrappedLinearGraphWindow(LinearGraphWindow, QtWidgets.QMainWindow):
 
@@ -50,8 +52,17 @@ class WrappedLinearGraphWindow(LinearGraphWindow, QtWidgets.QMainWindow):
             pickle.dump(data, f)
         self.close()
         self.child.show()
-        module_starter = ModuleManipulator(settings)
+        self.spinner = QtWaitingSpinner(self)
+        self.layout().addWidget(self.spinner)
+        self.spinner.start()
+        #QTimer.singleShot(10000, self.spinner.stop)
+        loop = QEventLoop()
+        QTimer.singleShot(10000, loop.quit)
+        loop.exec_()
+        self.spinner.stop()
+        module_starter = ModuleManipulator(data)
         threading.Thread(target=module_starter.start, daemon=True).start()
+        
         print(data)
         remove_if_exists()
 
