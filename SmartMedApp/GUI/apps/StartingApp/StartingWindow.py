@@ -24,7 +24,7 @@ class StartingWindow(object):
         self.pushButtonDone.setGeometry(QtCore.QRect(450, 420, 121, 32))
         self.pushButtonDone.setObjectName("pushButtonDone")
         self.pushButtonStat = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonStat.setGeometry(QtCore.QRect(100, 90, 401, 32))
+        self.pushButtonStat.setGeometry(QtCore.QRect(90, 90, 401, 32))
         self.pushButtonStat.setObjectName("pushButtonStat")
         self.pushButtonBioeq = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonBioeq.setGeometry(QtCore.QRect(90, 200, 401, 32))
