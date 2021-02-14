@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import (
 
 from .LinearGraphWindow import LinearGraphWindow
 from SmartMedApp.backend import ModuleManipulator
+from ..utils import remove_if_exists
 
 class WrappedLinearGraphWindow(LinearGraphWindow, QtWidgets.QMainWindow):
 
@@ -52,6 +53,7 @@ class WrappedLinearGraphWindow(LinearGraphWindow, QtWidgets.QMainWindow):
         module_starter = ModuleManipulator(settings)
         threading.Thread(target=module_starter.start, daemon=True).start()
         print(data)
+        remove_if_exists()
 
     def distr_resid(self):
         if self.checkBoxDistribResid.isChecked():

@@ -41,3 +41,4 @@ class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
         threading.Thread(target=module_starter.start, daemon=True).start()
         self.hide()
         self.child.show()
+        print(settings)

@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import (
 
 from .TreeVisualWindow import TreeVisualWindow
 from SmartMedApp.backend import ModuleManipulator
+from ..utils import remove_if_exists
 
 class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
 
@@ -69,5 +70,6 @@ class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
         module_starter = ModuleManipulator(settings)
         threading.Thread(target=module_starter.start, daemon=True).start()
         print(data)
+        remove_if_exists()
 
         

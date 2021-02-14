@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import (
 
 from .RocGraphsWindow import RocGraphsWindow
 from SmartMedApp.backend import ModuleManipulator
+from ..utils import remove_if_exists
 
 class WrappedRocGraphsWindow(RocGraphsWindow, QtWidgets.QMainWindow):
 
@@ -46,4 +47,5 @@ class WrappedRocGraphsWindow(RocGraphsWindow, QtWidgets.QMainWindow):
         self.close()
         self.child.show()
         print(data)
+        remove_if_exists()
         

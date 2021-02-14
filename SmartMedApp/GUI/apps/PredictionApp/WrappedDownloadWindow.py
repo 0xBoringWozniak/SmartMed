@@ -8,7 +8,8 @@ from PyQt5.QtWidgets import (
 from .DownloadWindow import DownloadWindow
 from ..Notification import NotificationWindow
 from PyQt5.QtCore import Qt
-from ..utils import get_columns
+from ..utils import get_columns, remove_if_exists
+
 
 
 
@@ -30,6 +31,7 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         self.pushButtonNext.clicked.connect(self.next)
         self.pushButton.clicked.connect(self.path_to_file)
     def back(self):
+        remove_if_exists()
         self.hide()
         self.parent.show()
 
