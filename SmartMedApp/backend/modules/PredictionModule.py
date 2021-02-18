@@ -1,14 +1,15 @@
 import pandas as pd
+import numpy as np
 
 from .ModuleInterface import Module
 from .dash import PredictionDashboard
+from .ModelManipulator import ModelManipulator
 
 
 class PredictionModule(Module, PredictionDashboard):
 
     def _prepare_data(self):
-        self.pp.preprocess()
-        return self.pp.df
+        pass
 
     def _prepare_dashboard_settings(self):
 
@@ -18,6 +19,8 @@ class PredictionModule(Module, PredictionDashboard):
 
         self.model = ModelManipulator(
             x=x, y=y, model_type=settings['model']).create()
+
+        self.model.fit()
 
     def _prepare_dashboard(self):
         pass

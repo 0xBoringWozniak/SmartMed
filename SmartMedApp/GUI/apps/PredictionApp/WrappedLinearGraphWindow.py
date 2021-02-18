@@ -49,7 +49,7 @@ class WrappedLinearGraphWindow(LinearGraphWindow, QtWidgets.QMainWindow):
             pickle.dump(data, f)
         self.close()
         self.child.show()
-        module_starter = ModuleManipulator(settings)
+        module_starter = ModuleManipulator(data)
         threading.Thread(target=module_starter.start, daemon=True).start()
         print(data)
 
