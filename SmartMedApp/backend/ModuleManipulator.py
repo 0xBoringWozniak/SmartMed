@@ -18,6 +18,7 @@ class ModuleManipulator:
             print('StatisticsModule with settings:{}'.format(
                 self.settings['MODULE_SETTINGS']))
         elif self.settings['MODULE'] == 'PREDICT':
+            print(self.settings['MODULE_SETTINGS'])
             module = PredictionModule(self.settings['MODULE_SETTINGS'])
             print('PredictionModule with settings: {}'.format(
                 self.settings['MODULE_SETTINGS']))

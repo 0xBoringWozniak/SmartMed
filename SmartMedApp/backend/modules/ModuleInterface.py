@@ -5,8 +5,6 @@ import sys
 
 from SmartMedApp.logs.logger import debug
 
-from .dataprep import PandasPreprocessor
-
 
 class Module(ABC):
 
@@ -14,9 +12,6 @@ class Module(ABC):
 
 		# get settings['MODULE_SETTINGS']
 		self.settings = settings
-
-		# custom class preprocessor with pandas
-		self.pp = PandasPreprocessor(settings['data'])
 
 		# call dash.Dashboard __init__ to create Dashboard object
 		super().__init__()

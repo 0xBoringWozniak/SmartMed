@@ -69,7 +69,6 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
         self.child.show()
 
     def path_to_file(self):
-        self.settings['MODULE_SETTINGS']['data']['path'] = QtWidgets.QFileDialog.getOpenFileName()[
-            0]
+        self.settings['MODULE_SETTINGS']['data']['path'] = QtWidgets.QFileDialog.getOpenFileName()[0]
 
 

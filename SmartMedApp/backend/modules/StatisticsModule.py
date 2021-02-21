@@ -3,10 +3,14 @@ import pandas as pd
 from .ModuleInterface import Module
 from .dash import StatisticsDashboard
 
+from .dataprep import PandasPreprocessor
+
 
 class StatisticsModule(Module, StatisticsDashboard):
 
     def _prepare_data(self):
+        # custom class preprocessor with pandas
+        self.pp = PandasPreprocessor(self.settings['data'])
         self.pp.preprocess()
         return self.pp.df
 

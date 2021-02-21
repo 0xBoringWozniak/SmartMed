@@ -26,11 +26,11 @@ class WrappedChoiceWindow(ChoiceWindow, QtWidgets.QMainWindow):
 
     def get_model(self):
         if self.radioButtonLinear.isChecked():
-            var = 'linear'
+            var = 'linreg'
         elif self.radioButtonLogit.isChecked():
-            var = 'logit'
+            var = 'logreg'
         elif self.radioButtonPol.isChecked():
-            var = 'polynom'
+            var = 'polynomreg'
         elif self.radioButtonRoc.isChecked():
             var = 'roc'
         else:
