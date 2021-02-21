@@ -52,14 +52,7 @@ class WrappedLinearGraphWindow(LinearGraphWindow, QtWidgets.QMainWindow):
             pickle.dump(data, f)
         self.close()
         self.child.show()
-        self.spinner = QtWaitingSpinner(self)
-        self.layout().addWidget(self.spinner)
-        self.spinner.start()
-        #QTimer.singleShot(10000, self.spinner.stop)
-        loop = QEventLoop()
-        QTimer.singleShot(10000, loop.quit)
-        loop.exec_()
-        self.spinner.stop()
+        
         module_starter = ModuleManipulator(data)
         threading.Thread(target=module_starter.start, daemon=True).start()
         
