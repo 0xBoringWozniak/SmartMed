@@ -1,8 +1,5 @@
 import logging
 
-logging.basicConfig(filename='logs/start.log', level=logging.DEBUG)
-
-
 def debug(fn):
 	print('debug...')
 
