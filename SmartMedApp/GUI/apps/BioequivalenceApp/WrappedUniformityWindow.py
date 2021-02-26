@@ -9,6 +9,7 @@ from .UniformityWindow import UniformityWindow
 from SmartMedApp.backend import ModuleManipulator
 from ..WaitingSpinnerWidget import QtWaitingSpinner
 from PyQt5.QtCore import QTimer, QEventLoop
+from ..utils import remove_if_exists
 
 
 class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
@@ -17,6 +18,7 @@ class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
+        self.radioButtonF.setChecked(True)
         #self.setWindowTitle('Что-то там')
     
 
@@ -28,7 +30,7 @@ class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
 
     def back(self):
         self.hide()
-        self.parent.show()
+        self.parent_parral.show()
 
     def done(self):
         with open('settings.py', 'rb') as f:
@@ -50,5 +52,6 @@ class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
         loop.exec_()
         self.spinner.stop()
         self.hide()
-        self.child.show()
-        print(settings)
+        self.child_parral.show()
+        remove_if_exists()
+

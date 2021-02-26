@@ -4,11 +4,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
-from .TablesWindow import TablesWindow
+from .TablesWindowCross import TablesWindowCross
 
 
 
-class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
+class WrappedTablesWindowCross(TablesWindowCross, QtWidgets.QMainWindow):
 
     def __init__(self):
         super().__init__()
@@ -18,11 +18,10 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
         
         self.checkBoxFeatures.setChecked(True)
         self.checkBoxСriteria.setChecked(True)
-        self.checkBoxDisp.setChecked(True)
 
-        self.settings = {'tables' : {'criteria': 'True',
-                                    'features': 'True',
-                                    'var': 'True'}}
+        self.settings = {'tables' : {'avg_auc': 'True',
+                                    'anal_resylts': 'True',
+                                    }}
 
 
     def __build_buttons(self):
@@ -30,35 +29,27 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
         self.pushButtonBack.clicked.connect(self.back)
         self.checkBoxСriteria.clicked.connect(self.features)
         self.checkBoxFeatures.clicked.connect(self.distrub)
-        self.checkBoxDisp.clicked.connect(self.powers)
 
     def features(self):
         if self.checkBoxСriteria.isChecked():
             self.checkBoxСriteria.setChecked(True)
-            self.settings['tables']['criteria'] = True
+            self.settings['tables']['avg_auc'] = True
         else:
             self.checkBoxСriteria.setChecked(False)
-            self.settings['tables']['criteria'] = False
+            self.settings['tables']['avg_auc'] = False
 
     def distrub(self):
         if self.checkBoxFeatures.isChecked():
             self.checkBoxFeatures.setChecked(True)
-            self.settings['tables']['features'] = True
+            self.settings['tables']['anal_resylts'] = True
         else:
             self.checkBoxFeatures.setChecked(False)
-            self.settings['tables']['features'] = False
+            self.settings['tables']['anal_resylts'] = False
 
-    def powers(self):
-        if self.checkBoxDisp.isChecked():
-            self.checkBoxDisp.setChecked(True)
-            self.settings['tables']['var'] = True
-        else:
-            self.checkBoxDisp.setChecked(False)
-            self.settings['tables']['var'] = False
 
     def back(self):
         self.hide()
-        self.parent_parral.show()
+        self.parent_cross.show()
 
     def next(self):
 
@@ -68,6 +59,5 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
         with open('settings.py', 'wb') as f:
             pickle.dump(settings, f)
         self.hide()
-        self.child_parral.show()
-
+        self.child_cross.show()
 

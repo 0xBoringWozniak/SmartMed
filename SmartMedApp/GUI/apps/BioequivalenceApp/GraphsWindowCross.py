@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'TablesWindow.ui'
+# Form implementation generated from reading ui file 'GraphsWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class TablesWindow(object):
+class GraphsWindowCross(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(600, 480)
@@ -29,15 +29,15 @@ class TablesWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.checkBoxСriteria = QtWidgets.QCheckBox(self.verticalLayoutWidget)
-        self.checkBoxСriteria.setObjectName("checkBoxСriteria")
-        self.verticalLayout.addWidget(self.checkBoxСriteria)
-        self.checkBoxFeatures = QtWidgets.QCheckBox(self.verticalLayoutWidget)
-        self.checkBoxFeatures.setObjectName("checkBoxFeatures")
-        self.verticalLayout.addWidget(self.checkBoxFeatures)
-        self.checkBoxDisp = QtWidgets.QCheckBox(self.verticalLayoutWidget)
-        self.checkBoxDisp.setObjectName("checkBoxDisp")
-        self.verticalLayout.addWidget(self.checkBoxDisp)
+        self.checkBoxAllinGroup = QtWidgets.QCheckBox(self.verticalLayoutWidget)
+        self.checkBoxAllinGroup.setObjectName("checkBoxAllinGroup")
+        self.verticalLayout.addWidget(self.checkBoxAllinGroup)
+        self.checkBoxLogAllinGroup = QtWidgets.QCheckBox(self.verticalLayoutWidget)
+        self.checkBoxLogAllinGroup.setObjectName("checkBoxLogAllinGroup")
+        self.verticalLayout.addWidget(self.checkBoxLogAllinGroup)
+        self.checkBoxLogForEachGroup = QtWidgets.QCheckBox(self.verticalLayoutWidget)
+        self.checkBoxLogForEachGroup.setObjectName("checkBoxLogForEachGroup")
+        self.verticalLayout.addWidget(self.checkBoxLogForEachGroup)
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
@@ -52,10 +52,10 @@ class TablesWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "Выбор таблиц"))
+        self.label.setText(_translate("MainWindow", "Выбор графиков"))
         self.label_2.setText(_translate("MainWindow", "Выберите таблицы, Вы которые хотели бы увидеть:"))
-        self.checkBoxСriteria.setText(_translate("MainWindow", "Выполнение проверявшихся критериев"))
-        self.checkBoxFeatures.setText(_translate("MainWindow", "Распределение ключевых параметров по группам "))
-        self.checkBoxDisp.setText(_translate("MainWindow", "Результаты классического дисперсионного анализа"))
+        self.checkBoxAllinGroup.setText(_translate("MainWindow", "Индивидуальные графики для пациентов, где изображена \n концентрация обоих препаратов"))
+        self.checkBoxLogAllinGroup.setText(_translate("MainWindow", "Графики, на которых показаны средние концентрации \n обоих препаратов по группам"))
+        self.checkBoxLogForEachGroup.setText(_translate("MainWindow", "График, где данные обобщены по двум препаратам"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))

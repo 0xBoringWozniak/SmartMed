@@ -70,7 +70,7 @@ class WrappedGraphsWindow(GraphsWindow, QtWidgets.QMainWindow):
 
     def back(self):
         self.hide()
-        self.parent.show()
+        self.parent_parral.show()
 
     def next(self):
         with open('settings.py', 'rb') as f:
@@ -79,5 +79,5 @@ class WrappedGraphsWindow(GraphsWindow, QtWidgets.QMainWindow):
         with open('settings.py', 'wb') as f:
             pickle.dump(settings, f)
         self.hide()
-        self.child.show()
+        self.child_parral.show()
 

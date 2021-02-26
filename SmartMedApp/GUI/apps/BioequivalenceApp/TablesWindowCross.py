@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class TablesWindow(object):
+class TablesWindowCross(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(600, 480)
@@ -35,9 +35,6 @@ class TablesWindow(object):
         self.checkBoxFeatures = QtWidgets.QCheckBox(self.verticalLayoutWidget)
         self.checkBoxFeatures.setObjectName("checkBoxFeatures")
         self.verticalLayout.addWidget(self.checkBoxFeatures)
-        self.checkBoxDisp = QtWidgets.QCheckBox(self.verticalLayoutWidget)
-        self.checkBoxDisp.setObjectName("checkBoxDisp")
-        self.verticalLayout.addWidget(self.checkBoxDisp)
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
@@ -54,8 +51,7 @@ class TablesWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "Выбор таблиц"))
         self.label_2.setText(_translate("MainWindow", "Выберите таблицы, Вы которые хотели бы увидеть:"))
-        self.checkBoxСriteria.setText(_translate("MainWindow", "Выполнение проверявшихся критериев"))
-        self.checkBoxFeatures.setText(_translate("MainWindow", "Распределение ключевых параметров по группам "))
-        self.checkBoxDisp.setText(_translate("MainWindow", "Результаты классического дисперсионного анализа"))
+        self.checkBoxСriteria.setText(_translate("MainWindow", "Средние площади под графиком по каждому препарату в группе"))
+        self.checkBoxFeatures.setText(_translate("MainWindow", "Результаты двухфакторного дисперсионного анализа"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
