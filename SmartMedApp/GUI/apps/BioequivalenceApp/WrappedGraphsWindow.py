@@ -5,7 +5,11 @@ from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .GraphsWindow import GraphsWindow
-
+from SmartMedApp.backend import ModuleManipulator
+from ..WaitingSpinnerWidget import QtWaitingSpinner
+from PyQt5.QtCore import QTimer, QEventLoop
+from ..utils import remove_if_exists
+import threading
 
 
 class WrappedGraphsWindow(GraphsWindow, QtWidgets.QMainWindow):
@@ -78,6 +82,18 @@ class WrappedGraphsWindow(GraphsWindow, QtWidgets.QMainWindow):
         settings['MODULE_SETTINGS'].update(self.settings)
         with open('settings.py', 'wb') as f:
             pickle.dump(settings, f)
+
+        module_starter = ModuleManipulator(settings)
+        threading.Thread(target=module_starter.start, daemon=True).start()
+        self.spinner = QtWaitingSpinner(self)
+        self.layout().addWidget(self.spinner)
+        self.spinner.start()
+        #QTimer.singleShot(10000, self.spinner.stop)
+        loop = QEventLoop()
+        QTimer.singleShot(10000, loop.quit)
+        loop.exec_()
+        self.spinner.stop()
         self.hide()
         self.child_parral.show()
+        remove_if_exists()
 

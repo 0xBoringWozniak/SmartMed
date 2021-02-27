@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .DesignWindow import DesignWindow
+from ..utils import remove_if_exists
 
 
 
@@ -25,6 +26,7 @@ class WrappedDesignWindow(DesignWindow, QtWidgets.QMainWindow):
 
     def back(self):
         self.hide()
+        remove_if_exists()
         self.parent.show()
 
     def next(self):

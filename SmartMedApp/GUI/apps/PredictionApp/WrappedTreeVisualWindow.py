@@ -73,6 +73,7 @@ class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
         threading.Thread(target=module_starter.start, daemon=True).start()
         self.spinner = QtWaitingSpinner(self)
         self.layout().addWidget(self.spinner)
+        remove_if_exists()
         self.spinner.start()
         #QTimer.singleShot(10000, self.spinner.stop)
         loop = QEventLoop()
@@ -80,6 +81,6 @@ class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
         loop.exec_()
         self.spinner.stop()
         print(data)
-        remove_if_exists()
+        
 
         

@@ -16,9 +16,10 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
         self.__build_buttons()
         #self.setWindowTitle('Что-то там')
         
+        self.checkBoxDistrub.setChecked(True)
         self.checkBoxFeatures.setChecked(True)
-        self.checkBoxСriteria.setChecked(True)
-        self.checkBoxDisp.setChecked(True)
+        self.checkBoxPowers.setChecked(True)
+        self.checkBoxRes.setChecked(True)
 
         self.settings = {'tables' : {'criteria': 'True',
                                     'features': 'True',
@@ -28,32 +29,32 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
         self.pushButtonBack.clicked.connect(self.back)
-        self.checkBoxСriteria.clicked.connect(self.features)
-        self.checkBoxFeatures.clicked.connect(self.distrub)
-        self.checkBoxDisp.clicked.connect(self.powers)
+        self.checkBoxFeatures.clicked.connect(self.features)
+        self.checkBoxDistrub.clicked.connect(self.distrub)
+        self.checkBoxPowers.clicked.connect(self.powers)
 
     def features(self):
-        if self.checkBoxСriteria.isChecked():
-            self.checkBoxСriteria.setChecked(True)
+        if self.checkBoxFeatures.isChecked():
+            self.checkBoxFeatures.setChecked(True)
             self.settings['tables']['criteria'] = True
         else:
-            self.checkBoxСriteria.setChecked(False)
+            self.checkBoxFeatures.setChecked(False)
             self.settings['tables']['criteria'] = False
 
     def distrub(self):
-        if self.checkBoxFeatures.isChecked():
-            self.checkBoxFeatures.setChecked(True)
+        if self.checkBoxDistrub.isChecked():
+            self.checkBoxDistrub.setChecked(True)
             self.settings['tables']['features'] = True
         else:
-            self.checkBoxFeatures.setChecked(False)
+            self.checkBoxDistrub.setChecked(False)
             self.settings['tables']['features'] = False
 
     def powers(self):
-        if self.checkBoxDisp.isChecked():
-            self.checkBoxDisp.setChecked(True)
+        if self.checkBoxPowers.isChecked():
+            self.checkBoxPowers.setChecked(True)
             self.settings['tables']['var'] = True
         else:
-            self.checkBoxDisp.setChecked(False)
+            self.checkBoxPowers.setChecked(False)
             self.settings['tables']['var'] = False
 
     def back(self):

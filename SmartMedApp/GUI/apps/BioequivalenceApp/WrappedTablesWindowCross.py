@@ -17,8 +17,9 @@ class WrappedTablesWindowCross(TablesWindowCross, QtWidgets.QMainWindow):
         #self.setWindowTitle('Что-то там')
         
         self.checkBoxFeatures.setChecked(True)
-        self.checkBoxСriteria.setChecked(True)
-
+        self.checkBoxCriteria.setChecked(True)
+        self.checkBox.setChecked(True)
+        
         self.settings = {'tables' : {'avg_auc': 'True',
                                     'anal_resylts': 'True',
                                     }}
@@ -27,7 +28,8 @@ class WrappedTablesWindowCross(TablesWindowCross, QtWidgets.QMainWindow):
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
         self.pushButtonBack.clicked.connect(self.back)
-        self.checkBoxСriteria.clicked.connect(self.features)
+
+        #self.checkBoxСriteria.clicked.connect(self.features)
         self.checkBoxFeatures.clicked.connect(self.distrub)
 
     def features(self):
