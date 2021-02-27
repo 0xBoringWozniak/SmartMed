@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class GraphsWindow(object):
+class GraphsWindowCross(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(600, 480)
@@ -32,9 +32,6 @@ class GraphsWindow(object):
         self.checkBoxAllinGroup = QtWidgets.QCheckBox(self.verticalLayoutWidget)
         self.checkBoxAllinGroup.setObjectName("checkBoxAllinGroup")
         self.verticalLayout.addWidget(self.checkBoxAllinGroup)
-        self.checkBoxForEachGroup = QtWidgets.QCheckBox(self.verticalLayoutWidget)
-        self.checkBoxForEachGroup.setObjectName("checkBoxForEachGroup")
-        self.verticalLayout.addWidget(self.checkBoxForEachGroup)
         self.checkBoxLogForEachGroup = QtWidgets.QCheckBox(self.verticalLayoutWidget)
         self.checkBoxLogForEachGroup.setObjectName("checkBoxLogForEachGroup")
         self.verticalLayout.addWidget(self.checkBoxLogForEachGroup)
@@ -53,13 +50,10 @@ class GraphsWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Выберите таблицы, Вы которые хотели бы увидеть:</span></p></body></html>"))
-        self.checkBoxLogAllinGroup.setText(_translate("MainWindow", "Прологорифмированный график зависимости концентрации \n"
-" препарата от времени для всех пациентов в каждой группе"))
-        self.checkBoxAllinGroup.setText(_translate("MainWindow", "График зависимости концентрации препарата от времени \n"
-" для всех пациентов в каждой группе"))
-        self.checkBoxForEachGroup.setText(_translate("MainWindow", "Обобщенный график зависимости концентрации препарата \n"
-" от времени для каждой группы"))
-        self.checkBoxLogForEachGroup.setText(_translate("MainWindow", "Прологоримфированный обощенный график зависимости \n"
-" концентрации препарата от времени для каждой группы"))
-        self.pushButtonNext.setText(_translate("MainWindow", "Завершить"))
+        self.checkBoxLogAllinGroup.setText(_translate("MainWindow", "Индивидуальные графики для пациентов, где изображена \n"
+" концентрация обоих препаратов"))
+        self.checkBoxAllinGroup.setText(_translate("MainWindow", "Графики, на которых показаны средние концентрации \n"
+" обоих препаратов по группам"))
+        self.checkBoxLogForEachGroup.setText(_translate("MainWindow", "График, где данные обобщены по двум препаратам"))
+        self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))

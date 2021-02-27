@@ -7,6 +7,9 @@ from PyQt5.QtWidgets import (
 
 from .LinearGraphWindow import LinearGraphWindow
 from SmartMedApp.backend import ModuleManipulator
+from ..utils import remove_if_exists
+from ..WaitingSpinnerWidget import QtWaitingSpinner
+from PyQt5.QtCore import QTimer, QEventLoop
 
 class WrappedLinearGraphWindow(LinearGraphWindow, QtWidgets.QMainWindow):
 
@@ -49,9 +52,12 @@ class WrappedLinearGraphWindow(LinearGraphWindow, QtWidgets.QMainWindow):
             pickle.dump(data, f)
         self.close()
         self.child.show()
+        
         module_starter = ModuleManipulator(data)
         threading.Thread(target=module_starter.start, daemon=True).start()
+        
         print(data)
+        remove_if_exists()
 
     def distr_resid(self):
         if self.checkBoxDistribResid.isChecked():

@@ -16,13 +16,14 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
         self.__build_buttons()
         #self.setWindowTitle('Что-то там')
         
-        self.checkBoxFeatures.setChecked(True)
         self.checkBoxDistrub.setChecked(True)
+        self.checkBoxFeatures.setChecked(True)
         self.checkBoxPowers.setChecked(True)
+        self.checkBoxRes.setChecked(True)
 
-        self.settings = {'tables' : {'features': 'True',
-                                    'distrub': 'True',
-                                    'powers': 'True'}}
+        self.settings = {'tables' : {'criteria': 'True',
+                                    'features': 'True',
+                                    'var': 'True'}}
 
 
     def __build_buttons(self):
@@ -35,30 +36,30 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
     def features(self):
         if self.checkBoxFeatures.isChecked():
             self.checkBoxFeatures.setChecked(True)
-            self.settings['tables']['features'] = True
+            self.settings['tables']['criteria'] = True
         else:
             self.checkBoxFeatures.setChecked(False)
-            self.settings['tables']['features'] = False
+            self.settings['tables']['criteria'] = False
 
     def distrub(self):
         if self.checkBoxDistrub.isChecked():
             self.checkBoxDistrub.setChecked(True)
-            self.settings['tables']['distrub'] = True
+            self.settings['tables']['features'] = True
         else:
             self.checkBoxDistrub.setChecked(False)
-            self.settings['tables']['distrub'] = False
+            self.settings['tables']['features'] = False
 
     def powers(self):
-        if self.checkBoxFeatures.isChecked():
-            self.checkBoxFeatures.setChecked(True)
-            self.settings['tables']['powers'] = True
+        if self.checkBoxPowers.isChecked():
+            self.checkBoxPowers.setChecked(True)
+            self.settings['tables']['var'] = True
         else:
-            self.checkBoxFeatures.setChecked(False)
-            self.settings['tables']['powers'] = False
+            self.checkBoxPowers.setChecked(False)
+            self.settings['tables']['var'] = False
 
     def back(self):
         self.hide()
-        self.parent.show()
+        self.parent_parral.show()
 
     def next(self):
 
@@ -68,6 +69,6 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
         with open('settings.py', 'wb') as f:
             pickle.dump(settings, f)
         self.hide()
-        self.child.show()
+        self.child_parral.show()
 
 

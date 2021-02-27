@@ -137,6 +137,6 @@ dmypy.json
 *.csh
 
 # settings
-settings.py
-settings
-settings.pickle
+*/settings.py
+*/settings
+*/settings.pickle
