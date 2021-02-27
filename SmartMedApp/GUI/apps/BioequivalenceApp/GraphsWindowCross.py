@@ -55,5 +55,5 @@ class GraphsWindowCross(object):
         self.checkBoxAllinGroup.setText(_translate("MainWindow", "Графики, на которых показаны средние концентрации \n"
 " обоих препаратов по группам"))
         self.checkBoxLogForEachGroup.setText(_translate("MainWindow", "График, где данные обобщены по двум препаратам"))
-        self.pushButtonNext.setText(_translate("MainWindow", "вперед"))
-        self.pushButtonBack.setText(_translate("MainWindow", "назад"))
+        self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
+        self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
