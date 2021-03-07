@@ -18,6 +18,7 @@ class WrappedRocAnyl(RocAnyl, QtWidgets.QMainWindow):
         self.checkBoxPrecision.setChecked(True)
         self.checkBoxRecall.setChecked(True)
         self.checkBoxTrashhold.setChecked(True)
+        self.setWindowTitle('Метрики')
         self.settings = {'accuracy': True,
                             'confidence': True,
                             'F':True,

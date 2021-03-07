@@ -39,9 +39,9 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
         while self.settings['MODULE_SETTINGS']['path'] == '':
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)
-            msg.setText("Error")
-            msg.setInformativeText('Please, choose path to file')
-            msg.setWindowTitle("Error")
+            msg.setText("Ошибка")
+            msg.setInformativeText('Выберите файл')
+            msg.setWindowTitle("Ошибка")
             msg.exec_()
             return
         self.hide()

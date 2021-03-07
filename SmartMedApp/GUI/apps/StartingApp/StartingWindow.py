@@ -57,11 +57,11 @@ class StartingWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Пожалуйста, выберите способ анализа Ваших данных</span></p><p><span style=\" font-size:18pt;\"><br/></span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Выберите метод исследования данных</span></p><p><span style=\" font-size:18pt;\"><br/></span></p></body></html>"))
         self.pushButtonDone.setText(_translate("MainWindow", "Завершить"))
-        self.pushButtonStat.setText(_translate("MainWindow", "Описательный анализ"))
-        self.pushButtonBioeq.setText(_translate("MainWindow", "Биоэквивалентность"))
+        self.pushButtonStat.setText(_translate("MainWindow", "Статистический анализ"))
+        self.pushButtonBioeq.setText(_translate("MainWindow", "Биоэквивалентность"))   
         self.pushButtonPred.setText(_translate("MainWindow", "Предсказательные модели"))
-        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:11pt;\">Предсказательный анализ выполняет прогнозирование </span></p><p align=\"center\"><span style=\" font-size:11pt;\">на основе накопленной информации</span></p></body></html>"))
-        self.label_3.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:11pt;\">Биоэкивалентность проводит исследование идентичности свойств </span></p><p align=\"center\"><span style=\" font-size:11pt;\">биодоступности у исходного препарата и дженерика</span></p></body></html>"))
-        self.label_4.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:11pt;\">Описательный анализ подразумевает получение обощенной</span></p><p align=\"center\"><span style=\" font-size:11pt;\">информации о данных</span></p><p align=\"center\"><br/></p></body></html>"))
+        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:11pt;\">Построение  статистических и предсказательных моделей </span></p><p align=\"center\"><span style=\" font-size:11pt;\">по исследуемым данным: регрессионные модели, ROC-анализ</span></p></body></html>"))
+        self.label_3.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:11pt;\">Исследование идентичности свойств </span></p><p align=\"center\"><span style=\" font-size:11pt;\">биодоступности у исходного препарата и дженерика</span></p></body></html>"))
+        self.label_4.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:11pt;\">Подразумевает получение обобщенной</span></p><p align=\"center\"><span style=\" font-size:11pt;\">информации о данных</span></p><p align=\"center\"><br/></p></body></html>"))

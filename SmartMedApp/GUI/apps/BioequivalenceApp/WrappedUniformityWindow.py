@@ -16,7 +16,7 @@ class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
         self.setupUi(self)
         self.__build_buttons()
         self.radioButtonF.setChecked(True)
-        #self.setWindowTitle('Что-то там')
+        self.setWindowTitle(' ')
     
 
     def __build_buttons(self):
