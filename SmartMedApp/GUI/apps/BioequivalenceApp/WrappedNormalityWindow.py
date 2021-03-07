@@ -15,7 +15,7 @@ class WrappedNormalityWindow(NormalityWindow, QtWidgets.QMainWindow):
         self.setupUi(self)
         self.__build_buttons()
         self.radioButtonColm.setChecked(True)
-        #self.setWindowTitle('Что-то там')
+        self.setWindowTitle(' ')
     
 
     def __build_buttons(self):
@@ -31,7 +31,7 @@ class WrappedNormalityWindow(NormalityWindow, QtWidgets.QMainWindow):
         if design['MODULE_SETTINGS']['design'] == 'parallel':
             self.parent_parral.show()
         else:
-            self.parent_cross.show()
+            self.parent_parall.show()
 
     def next(self):
         with open('settings.py', 'rb') as f:

@@ -20,6 +20,7 @@ class WrappedRocGraphsWindow(RocGraphsWindow, QtWidgets.QMainWindow):
                         'spec_and_sens': True,
                         'spec_and_sens_table':True}
         self.__build_buttons()
+        self.setWindowTitle(' ')
 
     def __build_buttons(self):
         self.pushButtonDone.clicked.connect(self.done)

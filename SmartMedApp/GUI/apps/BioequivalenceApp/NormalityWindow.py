@@ -48,6 +48,6 @@ class NormalityWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "Вперед"))
         self.pushButton_2.setText(_translate("MainWindow", "Назад"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\"> Выберите, каким способом выполнется </span></p><p align=\"center\"><span style=\" font-size:18pt;\"> проверка данных на нормальность:</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\"> Выберите, каким способом выполнется </span></p><p align=\"center\"><span style=\" font-size:18pt;\"> проверка данных на нормальность</span></p></body></html>"))
         self.radioButtonColm.setText(_translate("MainWindow", "Критерий Колмогорова-Смирнова"))
         self.radioButtonShap.setText(_translate("MainWindow", "Критерий Шапиро-Уилка"))

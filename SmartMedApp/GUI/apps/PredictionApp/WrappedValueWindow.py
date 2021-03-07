@@ -18,7 +18,7 @@ class WrappedValueWindow(ValueWindow, QtWidgets.QMainWindow):
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
         self.pushButtonBack.clicked.connect(self.back)
-
+        self.setWindowTitle('Выбор целевой переменной')
     def back(self):
         self.hide()
         self.parent.show()

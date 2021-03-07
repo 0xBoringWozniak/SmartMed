@@ -14,7 +14,7 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        #self.setWindowTitle('Что-то там')
+        self.setWindowTitle('Результаты')
         
         self.checkBoxDistrub.setChecked(True)
         self.checkBoxFeatures.setChecked(True)

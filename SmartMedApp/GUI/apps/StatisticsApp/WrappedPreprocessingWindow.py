@@ -24,13 +24,14 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
             'path': ''
         }
         self.__build_buttons()
-        self.setWindowTitle('Препроцессинг')
-        self.comboBox1.addItems(["средним/модой (аналогично)",
-                                 "заданным значием (требуется ввод для каждого столбца отдельно)",
-                                 "откидывание строк с пропущенными значениями",
-                                 "медианным/модой (численные/категориальные соответсвенно)"
+        self.setWindowTitle('Загрузка данных')
+        '''
+        self.comboBox1.addItems(["Средним/модой (численные/категориальные значения)",
+                                 "Введенным значением (требуется ввод для каждого столбца отдельно)",
+                                 "Удаление строк с пропущенными значениями",
+                                 "Медианной/модой (численные/категориальные значения)"
                                  ])
-
+'''
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
@@ -51,6 +52,7 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
             msg.setWindowTitle("Error")
             msg.exec_()
             return 
+            '''
         value_na = self.comboBox1.currentText()
 
         if value_na == 'средним/модой (аналогично)':
@@ -61,7 +63,7 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
             self.settings['MODULE_SETTINGS']['data']['fillna'] = 'dropna'
         else:
             self.settings['MODULE_SETTINGS']['data']['fillna'] = 'median'
-        
+        '''
         with open('settings.py', 'wb') as f:
             pickle.dump(self.settings, f)
 

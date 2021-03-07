@@ -22,6 +22,7 @@ class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
         self.checkBoxTree.setChecked(True)
         self.checkBoxTablr.setChecked(True)
         self.checkBoxValue.setChecked(True)
+        self.setWindowTitle('Выбор графиков и таблиц')
 
     def __build_buttons(self):
         self.pushButtonDone.clicked.connect(self.done)
