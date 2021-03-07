@@ -30,7 +30,7 @@ class DownloadWindowCross(object):
         self.pushButtonDownload1.setGeometry(QtCore.QRect(30, 400, 231, 32))
         self.pushButtonDownload1.setObjectName("pushButtonDownload1")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(70, 310, 201, 21))
+        self.label_3.setGeometry(QtCore.QRect(80, 310, 201, 21))
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(80, 380, 141, 31))

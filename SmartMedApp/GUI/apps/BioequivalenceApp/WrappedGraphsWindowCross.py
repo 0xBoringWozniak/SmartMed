@@ -18,7 +18,7 @@ class WrappedGraphsWindowCross(GraphsWindowCross, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        #self.setWindowTitle('Что-то там')
+        self.setWindowTitle('Графики')
 
         self.checkBoxAllinGroup.setChecked(True)
         self.checkBoxLogAllinGroup.setChecked(True)
