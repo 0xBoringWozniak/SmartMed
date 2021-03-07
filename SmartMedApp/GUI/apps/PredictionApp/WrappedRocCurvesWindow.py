@@ -19,6 +19,7 @@ class WrappedRocCurvesWindow(RocCurvesWindow, QtWidgets.QMainWindow):
                         'diff_graphics': True,
                         'paint': True}
         self.__build_buttons()
+        self.setWindowTitle(' ')
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)

@@ -11,7 +11,7 @@ class WrappedMetricsWindow(MetricsWindow, QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowTitle('Выбор статистические метрики')
+        self.setWindowTitle('Метрики')
         self.settings = {
             'count': True,
             'mean': True,

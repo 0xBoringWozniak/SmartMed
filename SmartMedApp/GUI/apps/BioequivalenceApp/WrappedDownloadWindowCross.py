@@ -18,7 +18,7 @@ class WrappedDownloadWindowCross(DownloadWindowCross, QtWidgets.QMainWindow):
   
     def __build_buttons(self):
         # плохо с неймингом, надо переделать бек некст
-        self.pushButtonNext.clicked.connect(self.next)
+        self.pushButton_.clicked.connect(self.next)
         self.pushButtonBack.clicked.connect(self.back)
         self.pushButtonDownload.clicked.connect(self.download)
         self.pushButtonDownload1.clicked.connect(self.download1)
@@ -31,9 +31,9 @@ class WrappedDownloadWindowCross(DownloadWindowCross, QtWidgets.QMainWindow):
         while self.settings['path_test'] == '' or self.settings['path_ref'] == '':
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)
-            msg.setText("Error")
-            msg.setInformativeText('Please, choose path to file')
-            msg.setWindowTitle("Error")
+            msg.setText("Ошибка")
+            msg.setInformativeText('Выберите файл')
+            msg.setWindowTitle("Ошибка")
             msg.exec_()
 
             return 

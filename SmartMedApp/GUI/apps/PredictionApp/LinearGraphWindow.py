@@ -21,7 +21,7 @@ class LinearGraphWindow(object):
         self.label.setGeometry(QtCore.QRect(60, 40, 511, 41))
         self.label.setObjectName("label")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(120, 90, 418, 211))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(120, 120, 418, 211))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -59,7 +59,7 @@ class LinearGraphWindow(object):
         self.checkBoxQuality.setText(_translate("MainWindow", "Таблица с критериями качества построенной модели"))
         self.checkBoxSignif.setText(_translate("MainWindow", "Таблица с критериями значимости для каждой \n"
 " независимой переменной"))
-        self.checkBoxEq.setText(_translate("MainWindow", "Полученное уравнение регрессии с возможностью ввода собственных переменных"))
+        self.checkBoxEq.setText(_translate("MainWindow", "Полученное уравнение регрессии с возможностью  \n ввода собственных переменных"))
         self.checkBoxResid.setText(_translate("MainWindow", "Таблица с анализами остатков"))
         self.checkBoxDistribResid.setText(_translate("MainWindow", "Графики распределения остатков "))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))

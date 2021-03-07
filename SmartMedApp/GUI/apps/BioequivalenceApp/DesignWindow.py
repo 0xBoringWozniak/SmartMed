@@ -18,7 +18,7 @@ class DesignWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(80, 50, 441, 41))
+        self.label.setGeometry(QtCore.QRect(70, 50, 480, 101))
         self.label.setObjectName("label")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
@@ -46,7 +46,9 @@ class DesignWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите, с результатами какого типа исследования \n будет проводиться работа </span></p></body></html>"))
+        #self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите, с результатами какого типа исследования \n  \n будет проводиться работа </span></p></body></html>"))
+        #self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите, с результатами какого типа исследования</span></p><p><span style=\" font-size:18pt;\">будет проводиться работа</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Выберите, с результатами какого типа исследования </span></p><p align=\"center\"><span style=\" font-size:18pt;\">будет проводиться работа</span></p></body></html>"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
         self.radioButton_cross.setText(_translate("MainWindow", "Перекрестный дизайн"))

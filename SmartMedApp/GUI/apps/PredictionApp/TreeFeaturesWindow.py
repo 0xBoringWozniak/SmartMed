@@ -40,7 +40,7 @@ class TreeFeaturesWindow(object):
         self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
-        self.label_5.setGeometry(QtCore.QRect(20, 280, 221, 21))
+        self.label_5.setGeometry(QtCore.QRect(30, 280, 221, 21))
         self.label_5.setObjectName("label_5")
         self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEdit.setGeometry(QtCore.QRect(310, 110, 113, 21))
