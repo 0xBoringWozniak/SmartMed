@@ -24,7 +24,7 @@ class NormalityWindow(object):
         self.pushButton_2.setGeometry(QtCore.QRect(330, 420, 113, 32))
         self.pushButton_2.setObjectName("pushButton_2")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(90, 50, 401, 81))
+        self.label.setGeometry(QtCore.QRect(90, 60, 391, 71))
         self.label.setObjectName("label")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(150, 160, 261, 151))
