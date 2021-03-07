@@ -50,7 +50,7 @@ class RocCurvesWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Выбор параметров отображения ROC кривых</span></p></body></html>"))
-        self.checkBoxAuc.setText(_translate("MainWindow", "Выводить значение площади на график"))
+        self.checkBoxAuc.setText(_translate("MainWindow", "ROC AUC"))
         self.checkBoxDiff.setText(_translate("MainWindow", "Построить кривые на отдельных графиках"))
         self.checkBoxPaint.setText(_translate("MainWindow", "Закрасить площадь под графиком"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))

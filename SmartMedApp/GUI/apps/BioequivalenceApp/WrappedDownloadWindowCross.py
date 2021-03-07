@@ -13,7 +13,7 @@ class WrappedDownloadWindowCross(DownloadWindowCross, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        #self.setWindowTitle('Что-то там')
+        self.setWindowTitle('Загрузка данных')
         self.settings = {'path_test': '', 'path_ref': '' }
   
     def __build_buttons(self):

@@ -40,8 +40,8 @@ class DownloadWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Загрузка данных</span></p><p><br/></p></body></html>"))
-        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">Для того, чтобы выполнить загрузку данных, кликните на кнопку ниже &quot;Загрузка данных&quot;.</p><p align=\"center\">В открывшемся окне выберите файл в формате &quot;xlsx&quot; или &quot;csv&quot;.</p><p><br/></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Загрузите данные</span></p><p><br/></p></body></html>"))
+        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">Для того, чтобы выполнить загрузку данных, кликните на кнопку ниже.</p><p align=\"center\">В открывшемся окне выберите файл в формате &quot;xlsx&quot; или &quot;csv&quot;.</p><p><br/></p></body></html>"))
         self.pushButton.setText(_translate("MainWindow", "Загрузить"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))

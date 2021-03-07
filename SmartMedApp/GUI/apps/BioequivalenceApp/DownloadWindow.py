@@ -45,9 +45,10 @@ class DownloadWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Загрузка данных</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Загрузите результаты исследования</span></p></body></html>"))
         self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Для того, чтобы выполнить загрузку данных, кликните на кнопку ниже “Загрузка данных”. </span></p><p><span style=\" font-size:12pt;\">В открывшемся окне выберите 2 файла в формате “.xlsx”, “xs” </span></p><p><span style=\" font-size:12pt;\">или “csv”. Первый файл должен содержать информацию о пациентах, принимавших</span></p><p><span style=\" font-size:12pt;\">тестовый препарат, а второй - о пациентах, принимавший референсный препарат.</span></p><p><span style=\" font-size:12pt;\">Обратите внимание, что в первой строке должен быть указан момент времени </span></p><p><span style=\" font-size:12pt;\">в часах, в который зафиксирована концентрация. </span></p><p><span style=\" font-size:12pt;\">В первом столбце должен быть порядковый номер пациента, а в следующих - показатели </span></p><p><span style=\" font-size:12pt;\">концентрации в фиксированный момент </span></p><p><span style=\" font-size:12pt;\">времени.</span></p><p><span style=\" font-size:12pt;\"><br/></span></p></body></html>"))
-        self.pushButtonDownload.setText(_translate("MainWindow", "Загрузите первый файл"))
+        self.pushButtonDownload.setText(_translate("MainWindow", "Загрузить"))
+        # данные по тестовому данные по референсному
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
-        self.pushButtonDownload1.setText(_translate("MainWindow", "Загрузите второй файл"))
+        self.pushButtonDownload1.setText(_translate("MainWindow", "Загрузить"))

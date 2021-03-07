@@ -14,7 +14,7 @@ class WrappedTablesWindowCross(TablesWindowCross, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        #self.setWindowTitle('Что-то там')
+        self.setWindowTitle('Результаты')
         
         self.checkBoxFeatures.setChecked(True)
         self.checkBoxCriteria.setChecked(True)

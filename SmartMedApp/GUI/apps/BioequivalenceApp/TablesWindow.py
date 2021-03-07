@@ -52,10 +52,10 @@ class TablesWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Выберите таблицы, Вы которые хотели бы увидеть:</span></p></body></html>"))
-        self.checkBoxFeatures.setText(_translate("MainWindow", "Выполнение проверявшихся критериев"))
-        self.checkBoxDistrub.setText(_translate("MainWindow", "Распределение ключевых параметров по группам "))
-        self.checkBoxPowers.setText(_translate("MainWindow", "Результаты классического дисперсионного анализа"))
+        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Выберите результаты, которые хотите увидеть</span></p></body></html>"))
+        self.checkBoxFeatures.setText(_translate("MainWindow", "Таблица с анализом концентраций по группам"))
+        self.checkBoxDistrub.setText(_translate("MainWindow", "Таблица с анализом концентраций по группам: AUC, максимальная концетрация, время достижения макс. концентрации"))
+        self.checkBoxPowers.setText(_translate("MainWindow", "Результаты классического дисперсионного анализа (ANOVA)"))
         self.checkBoxRes.setText(_translate("MainWindow", "Результаты оценки биоэквивалентности"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))

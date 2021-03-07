@@ -46,7 +46,7 @@ class DesignWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Укажите, с какой выборкой проводится работа:</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите, с результатами какого типа исследования \n будет проводиться работа </span></p></body></html>"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
         self.radioButton_cross.setText(_translate("MainWindow", "Перекрестный дизайн"))
