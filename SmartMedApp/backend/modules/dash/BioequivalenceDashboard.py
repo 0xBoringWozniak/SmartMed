@@ -98,10 +98,24 @@ class BioequivalenceDashboard(Dashboard):
                 ], style={'margin':'50px'}
             )
         else:
-            data = {'Критерий':['Бартлетта', 'Бартлетта'],
-                'Выборки':['Первая и вторая группы', 'Период 1 и период 2'],
-                'Значение критерия':[self.settings[0].bartlett_groups[0], self.settings[0].bartlett_period[0]],
-                'p-уровень':[self.settings[0].bartlett_groups[1], self.settings[0].bartlett_period[1]]}
+            if self.settings[0].check_normal =='Kolmogorov':
+                data = {'Критерий':['Бартлетта', 'Бартлетта', 'Колмогорова-Смирнова', 'Колмогорова-Смирнова', 'Колмогорова-Смирнова',
+                    'Колмогорова-Смирнова'],
+                    'Выборки':['Первая и вторая группы', 'Период 1 и период 2', 'Первая группа тестовый препарат', 'Первая группа референсный препарат', 
+                    'Вторая группа тестовый препарат', 'Вторя группа референсный препарат'],
+                    'Значение критерия':[self.settings[0].bartlett_groups[0], self.settings[0].bartlett_period[0], self.settings[0].kstest_t_1[0],
+                    self.settings[0].kstest_r_1[0], self.settings[0].kstest_t_2[0], self.settings[0].kstest_r_2[0]],
+                    'p-уровень':[self.settings[0].bartlett_groups[1], self.settings[0].bartlett_period[1], self.settings[0].kstest_t_1[1],
+                    self.settings[0].kstest_r_1[1], self.settings[0].kstest_t_2[1], self.settings[0].kstest_r_2[1]]}
+            else:
+                data = {'Критерий':['Бартлетта', 'Бартлетта', 'Шапиро-Уилка', 'Шапиро-Уилка', 'Шапиро-Уилка',
+                    'Шапиро-Уилка'],
+                    'Выборки':['Первая и вторая группы', 'Период 1 и период 2', 'Первая группа тестовый препарат', 'Первая группа референсный препарат', 
+                    'Вторая группа тестовый препарат', 'Вторя группа референсный препарат'],
+                    'Значение критерия':[self.settings[0].bartlett_groups[0], self.settings[0].bartlett_period[0], self.settings[0].shapiro_t_1[0],
+                    self.settings[0].shapiro_r_1[0], self.settings[0].shapiro_t_2[0], self.settings[0].shapiro_r_2[0]],
+                    'p-уровень':[self.settings[0].bartlett_groups[1], self.settings[0].bartlett_period[1], self.settings[0].shapiro_t_1[1],
+                    self.settings[0].shapiro_r_1[1], self.settings[0].shapiro_t_2[1], self.settings[0].shapiro_r_2[1]]}
             df = pd.DataFrame(data)
             df = round_df(df)
             return html.Div([html.Div(html.H1(children='Выполнение критериев'), style={'text-align':'center'}),

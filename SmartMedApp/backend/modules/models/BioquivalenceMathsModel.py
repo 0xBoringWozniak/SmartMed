@@ -164,11 +164,15 @@ class BioquivalenceMathsModel:
             self.concentration_r_1 = data['concentration_r_1']
             self.concentration_t_2 = data['concentration_t_2']
             self.concentration_r_2 = data['concentration_r_2']
-            #self.check_normal = settings['normality']
-            self.kstest_t = 0
-            self.kstest_r = 0
-            self.shapiro_t = 0
-            self.shapiro_r = 0
+            self.check_normal = settings['normality']
+            self.kstest_t_1 = 0
+            self.kstest_r_1 = 0
+            self.kstest_t_2 = 0
+            self.kstest_r_2 = 0
+            self.shapiro_t_1 = 0
+            self.shapiro_r_1 = 0
+            self.shapiro_t_2 = 0
+            self.shapiro_r_2 = 0
             self.auc_t_1 = 0
             self.auc_r_1 = 0
             self.auc_t_2 = 0
@@ -254,6 +258,16 @@ class BioquivalenceMathsModel:
             self.auc_t_2_infty_log = self.get_log_array(self.auc_t_2_infty)
             self.auc_r_2_infty_log = self.get_log_array(self.auc_r_2_infty)
             self.log_auc()
+            if self.check_normal == 'Kolmogorov':
+                self.kstest_t_1 = self.get_kstest(self.auc_t_1)
+                self.kstest_r_1 = self.get_kstest(self.auc_r_1)
+                self.kstest_t_2 = self.get_kstest(self.auc_t_2)
+                self.kstest_r_2 = self.get_kstest(self.auc_r_2)
+            elif self.check_normal == 'Shapiro':
+                self.shapiro_t_1 = self.get_shapiro(self.auc_t_1)
+                self.shapiro_r_1 = self.get_shapiro(self.auc_r_1)
+                self.shapiro_t_2 = self.get_shapiro(self.auc_t_2)
+                self.shapiro_r_2 = self.get_shapiro(self.auc_r_2)
             self.bartlett_groups = self.get_bartlett(np.concatenate((self.auc_t_1, self.auc_r_1)).ravel(), 
                 np.concatenate((self.auc_t_2, self.auc_r_2)).ravel())
             self.bartlett_period = self.get_bartlett(np.concatenate((self.auc_t_1, self.auc_r_2)).ravel(), 
