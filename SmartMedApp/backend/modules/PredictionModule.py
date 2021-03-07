@@ -64,14 +64,6 @@ class PredictionModule(Module, PredictionDashboard):
             elif self.settings[metric]:
                 settings['metrics'].append(metric)
 
-        #self.metric_to_method = {
-        #    'distrib_resid': self.get_linear_distrib,
-        #    'equation': self.get_linear_equation,
-        #    'model_quality': self.get_linear_quality,
-        #    'resid': self.get_linear_resid,
-        #    'signif': self.get_linear_signif,
-        #}
-
         prep = {'fillna': self.settings['preprocessing'],
                 'encoding': 'label_encoding',
                 'scaling': False}
