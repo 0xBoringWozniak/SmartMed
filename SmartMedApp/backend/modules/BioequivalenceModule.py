@@ -74,8 +74,8 @@ class BioequivalenceModule(Module, BioequivalenceDashboard):
             self._generate_drug_mean_log()], 
 	        'avg_auc' : [self._generate_log_auc(),
             self._generate_criteria()], 
-	        'anal_resylts' : [self._generate_anova(),
-            self._generate_interval()]}
+	        'anal_resylts' : self._generate_anova(),
+            'results' : self._generate_interval()}
 			for graph in temp_list:
 				if type(graph_to_method[graph]) == list:
 					for elem in graph_to_method[graph]:
