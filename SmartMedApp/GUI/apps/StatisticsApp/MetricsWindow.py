@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class MetricsWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(600, 454)
+        MainWindow.resize(600, 480)
         MainWindow.setToolTipDuration(5)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
