@@ -19,7 +19,7 @@ class MetricsWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonNext.setGeometry(QtCore.QRect(470, 420, 113, 32))
+        self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonNext.setToolTipDuration(10)
         self.pushButtonNext.setObjectName("pushButtonNext")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)

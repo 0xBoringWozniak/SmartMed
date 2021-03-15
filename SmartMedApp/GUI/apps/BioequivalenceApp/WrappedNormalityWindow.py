@@ -31,7 +31,7 @@ class WrappedNormalityWindow(NormalityWindow, QtWidgets.QMainWindow):
         if design['MODULE_SETTINGS']['design'] == 'parallel':
             self.parent_parral.show()
         else:
-            self.parent_parall.show()
+            self.parent_parral.show()
 
     def next(self):
         with open('settings.py', 'rb') as f:
