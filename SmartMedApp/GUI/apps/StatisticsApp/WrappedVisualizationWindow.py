@@ -42,6 +42,7 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         self.checkBoxBox.setChecked(True)
         self.checkBoxScatter.setChecked(True)
         self.checkBoxDot.setChecked(True)
+        self.checkBoxBar.setChecked(True)
         self.__build_buttons()
 
 
