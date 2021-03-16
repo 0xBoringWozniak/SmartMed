@@ -22,7 +22,7 @@ class WrappedGraphsWindowCross(GraphsWindowCross, QtWidgets.QMainWindow):
 
         self.checkBoxAllinGroup.setChecked(True)
         self.checkBoxLogAllinGroup.setChecked(True)
-        self.checkBoxLogForEachGroup.setChecked(True)
+        self.checkBoxForEachGroup.setChecked(True)
 
         self.settings = {'graphs' : {'indiv_concet': True,
                                     'avg_concet': True,
@@ -35,7 +35,7 @@ class WrappedGraphsWindowCross(GraphsWindowCross, QtWidgets.QMainWindow):
         self.pushButtonBack.clicked.connect(self.back)
         self.checkBoxAllinGroup.clicked.connect(self.indiv_concet)
         self.checkBoxLogAllinGroup.clicked.connect(self.avg_concet)
-        self.checkBoxLogForEachGroup.clicked.connect(self.gen_concet)
+        self.checkBoxForEachGroup.clicked.connect(self.gen_concet)
 
     def indiv_concet(self):
         if self.checkBoxAllinGroup.isChecked():

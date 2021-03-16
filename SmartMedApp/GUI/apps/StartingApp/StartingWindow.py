@@ -64,4 +64,4 @@ class StartingWindow(object):
         self.pushButtonPred.setText(_translate("MainWindow", "Предсказательные модели"))
         self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"justify\">Построение статистических </p><p align=\"justify\">и предсказательных моделей, </p><p align=\"justify\">ROC-анализ</p></body></html>"))
         self.label_3.setText(_translate("MainWindow", "<html><head/><body><p align=\"justify\">Исследование идентичности</p><p align=\"justify\">свойств биодоступности </p><p align=\"justify\">у исходного препарата </p><p align=\"justify\">и дженерика</p></body></html>"))
-        self.label_4.setText(_translate("MainWindow", "<html><head/><body><p align=\"justify\">Получение обощенной </p><p align=\"justify\">информации о данных, </p><p align=\"justify\">визуальный анализ</p><p align=\"justify\"><br/></p></body></html>"))
+        self.label_4.setText(_translate("MainWindow", "<html><head/><body><p align=\"justify\">Получение обобщенной </p><p align=\"justify\">информации о данных, </p><p align=\"justify\">визуальный анализ</p><p align=\"justify\"><br/></p></body></html>"))

@@ -18,7 +18,7 @@ class PreprocessingWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(80, 140, 361, 81))
+        self.label_2.setGeometry(QtCore.QRect(80, 120, 361, 81))
         self.label_2.setObjectName("label_2")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
