@@ -12,6 +12,7 @@ from .dataprep import PandasPreprocessor
 class PredictionModule(Module, PredictionDashboard):
 
     def _prepare_data(self):
+
         prep = {'fillna': self.settings['preprocessing'],
                 'encoding': 'label_encoding',
                 'scaling': False}
@@ -20,11 +21,11 @@ class PredictionModule(Module, PredictionDashboard):
             'path': self.settings['path'],
             'fillna': self.settings['preprocessing']
         }
+
         self.pp = PandasPreprocessor(dict_pp)
         self.pp.preprocess()
 
         return self.pp.df
-        pass
 
     def _prepare_dashboard_settings(self):
         if self.settings['model'] == 'linreg' or self.settings['model'] == 'logreg':

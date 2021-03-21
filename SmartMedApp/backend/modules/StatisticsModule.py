@@ -11,7 +11,7 @@ class StatisticsModule(Module, StatisticsDashboard):
     def _prepare_data(self):
         # custom class preprocessor with pandas
         self.pp = PandasPreprocessor(self.settings['data'])
-        self.pp.preprocess()
+        self.pp.fillna()
         return self.pp.df
 
     def _prepare_dashboard_settings(self):
