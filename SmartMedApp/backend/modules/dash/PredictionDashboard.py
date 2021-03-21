@@ -218,7 +218,8 @@ class LinearRegressionDashboard(Dashboard):
                          html.Div([html.Div(dash_table.DataTable(
                              id='table1',
                              columns=[{"name": i, "id": i} for i in df_result_1.columns],
-                             data=df_result_1.to_dict('records')
+                             data=df_result_1.to_dict('records'),
+                             export_format='xlsx'
                          ), style={'width': str(len(df_result_1.columns) * 8 - 10) + '%', 'display': 'inline-block'}),
                              html.Div(dcc.Markdown(markdown_linear_table1))],
                              style={'width': '78%', 'display': 'inline-block',
@@ -287,7 +288,8 @@ class LinearRegressionDashboard(Dashboard):
                              fixed_rows={'headers': True},
                              style_table={'height': '330px', 'overflowY': 'auto'},
                              tooltip_delay=0,
-                             tooltip_duration=None
+                             tooltip_duration=None,
+                             export_format='xlsx'
                          ), style={'width': str(len(df_result_3.columns) * 8 - 10) + '%', 'display': 'inline-block'}),
                              html.Div(dcc.Markdown(markdown_linear_table3))],
                              style={'width': '78%', 'display': 'inline-block',
@@ -360,6 +362,7 @@ class LinearRegressionDashboard(Dashboard):
                                  'textOverflow': 'ellipsis',
                                  'maxWidth': 0,  # len(df_result_3.columns)*5,
                              },
+                             export_format='xlsx'
 
                          ), style={'width': str(len(df_result_2.columns) * 6) + '%', 'display': 'inline-block'}),
                              html.Div(dcc.Markdown(markdown_linear_table2))],  # style={'margin': '50px'},
