@@ -11,7 +11,7 @@ import pandas as pd
 
 from math import e
 
-from .markdown_bio import *
+from .text.markdown_bio import *
 from .Dashboard import Dashboard
 
 

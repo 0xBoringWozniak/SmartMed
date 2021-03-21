@@ -15,10 +15,12 @@ import scipy.stats as sps
 import plotly.graph_objects as go
 import plotly.express as px
 
-from .linear_text import *
-from .roc_text import *
+from .text.linear_text import *
+from .text.roc_text import *
+
 from .DashExceptions import ModelChoiceException
 from .Dashboard import Dashboard
+
 from ..models.LinearRegressionModel import *
 
 
