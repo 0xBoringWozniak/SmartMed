@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'DownloadWindow.ui'
 #
@@ -18,11 +18,8 @@ class PreprocessingWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(10, 120, 581, 91))
+        self.label_2.setGeometry(QtCore.QRect(80, 120, 361, 81))
         self.label_2.setObjectName("label_2")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(200, 230, 181, 32))
-        self.pushButton.setObjectName("pushButton")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
         self.pushButtonBack.setObjectName("pushButtonBack")
@@ -30,8 +27,11 @@ class PreprocessingWindow(object):
         self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(200, 30, 171, 51))
+        self.label.setGeometry(QtCore.QRect(70, 30, 171, 51))
         self.label.setObjectName("label")
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(80, 250, 183, 32))
+        self.pushButton.setObjectName("pushButton")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -40,8 +40,8 @@ class PreprocessingWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">Для того, чтобы выполнить загрузку данных, кликните на кнопку ниже.</p><p align=\"center\">В открывшемся окне выберите файл в формате &quot;xlsx&quot;, &quot;csv&quot;, &quot;tsv&quot;.</p><p><br/></p></body></html>"))
-        self.pushButton.setText(_translate("MainWindow", "Загрузить"))
+        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p>Для того, чтобы выполнить загрузку данных, кликните </p><p>на кнопку ниже. В открывшемся окне выберите файл</p><p>в формате &quot;xlsx&quot;, &quot;csv&quot;, &quot;tsv&quot;.</p><p><br/></p></body></html>"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
         self.pushButtonNext.setText(_translate("MainWindow", "Вперед"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Загрузите данные</span></p></body></html>"))
+        self.pushButton.setText(_translate("MainWindow", "Загрузить"))
