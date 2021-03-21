@@ -3,12 +3,12 @@ import pickle
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, QTableWidget)
+
 from .PrepWindow import RadioWindow
 
 
-
 class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
-   
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -17,10 +17,10 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
         self.__build_buttons()
         self.setWindowTitle('Предобработка данных')
         self.comboBox.addItems(["Средним/модой (численные/категориальные значения)",
-                                 "Введенным значением (требуется ввод для каждого столбца отдельно)",
-                                 "Удаление строк с пропущенными значениями",
-                                 "Медианной/модой (численные/категориальные значения)"
-                                 ])
+                                "Введенным значением (требуется ввод для каждого столбца отдельно)",
+                                "Удаление строк с пропущенными значениями",
+                                "Медианной/модой (численные/категориальные значения)"
+                                ])
         self.settings = {'preprocessing': {
             'fillna': 'mean',
             'encoding': 'label_encoding',
@@ -53,4 +53,3 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
             pickle.dump(data, f)
         self.hide()
         self.child.show()
-

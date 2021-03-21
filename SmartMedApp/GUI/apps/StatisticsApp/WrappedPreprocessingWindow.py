@@ -51,7 +51,7 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
             msg.setInformativeText('Please, choose path to file')
             msg.setWindowTitle("Error")
             msg.exec_()
-            return 
+            return
             '''
         value_na = self.comboBox1.currentText()
 
@@ -71,6 +71,5 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
         self.child.show()
 
     def path_to_file(self):
-        self.settings['MODULE_SETTINGS']['data']['path'] = QtWidgets.QFileDialog.getOpenFileName()[0]
-
-
+        self.settings['MODULE_SETTINGS']['data'][
+            'path'] = QtWidgets.QFileDialog.getOpenFileName()[0]

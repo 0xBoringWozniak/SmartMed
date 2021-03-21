@@ -11,12 +11,12 @@ from .WrappedGraphsWindowCross import WrappedGraphsWindowCross
 #from..StartingApp.WrappedStartingWindow import WrappedStartingWindow
 
 # logging decorator
-import sys
 from SmartMedApp.logs.logger import debug
 
 
 class BioequivalenceApp():
 
+    @debug
     def __init__(self, menu_window):
         self.settings = {}
         self.menu_window = menu_window
@@ -32,9 +32,9 @@ class BioequivalenceApp():
         self.graphs_window_cross = WrappedGraphsWindowCross()
         self.normality_window_cross = WrappedNormalityWindow()
 
-        self.__build_connections(
-        )
+        self.__build_connections()
 
+    @debug
     def __build_connections(self):
         '''
         ordered_windows[0].child = ordered_windows[1]

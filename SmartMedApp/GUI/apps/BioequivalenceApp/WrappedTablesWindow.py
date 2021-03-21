@@ -7,7 +7,6 @@ from PyQt5.QtWidgets import (
 from .TablesWindow import TablesWindow
 
 
-
 class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
 
     def __init__(self):
@@ -15,16 +14,15 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
         self.setupUi(self)
         self.__build_buttons()
         self.setWindowTitle('Результаты')
-        
+
         self.checkBoxDistrub.setChecked(True)
         self.checkBoxFeatures.setChecked(True)
         self.checkBoxPowers.setChecked(True)
         self.checkBoxRes.setChecked(True)
 
-        self.settings = {'tables' : {'criteria': 'True',
+        self.settings = {'tables': {'criteria': 'True',
                                     'features': 'True',
                                     'var': 'True'}}
-
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
@@ -70,5 +68,3 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
             pickle.dump(settings, f)
         self.hide()
         self.child_parral.show()
-
-
