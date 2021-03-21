@@ -14,7 +14,8 @@ class WrappedNormalityWindow(NormalityWindow, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.__build_buttons()
-        #self.setWindowTitle('Что-то там')
+        self.radioButtonColm.setChecked(True)
+        self.setWindowTitle(' ')
     
 
     def __build_buttons(self):
@@ -25,7 +26,12 @@ class WrappedNormalityWindow(NormalityWindow, QtWidgets.QMainWindow):
 
     def back(self):
         self.hide()
-        self.parent.show()
+        with open('settings.py', 'rb') as f:
+            design = pickle.load(f)
+        if design['MODULE_SETTINGS']['design'] == 'parallel':
+            self.parent_parral.show()
+        else:
+            self.parent_parall.show()
 
     def next(self):
         with open('settings.py', 'rb') as f:
@@ -37,6 +43,6 @@ class WrappedNormalityWindow(NormalityWindow, QtWidgets.QMainWindow):
         with open('settings.py', 'wb') as f:
             pickle.dump(settings, f)
         self.hide()
-        self.child.show()
+        self.child_parral.show()
 
 

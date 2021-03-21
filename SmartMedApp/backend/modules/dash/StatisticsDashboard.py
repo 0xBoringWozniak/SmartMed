@@ -254,7 +254,7 @@ class StatisticsDashboard(Dashboard):
 						id='yaxis_column_name_log',
 						options=[{'label': i, 'value': i}
 								 for i in available_indicators],
-						 value=available_indicators[1]
+						value=available_indicators[1]
 					)
 				], style={'width': '48%', 'float': 'right', 'display': 'inline-block'})
 			], style={'padding': '5px'}),

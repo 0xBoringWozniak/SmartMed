@@ -4,10 +4,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
 
-from .DownloadWindow import DownloadWindow
+from .DownloadWindowCross import DownloadWindowCross
 
 
-class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
+class WrappedDownloadWindowCross(DownloadWindowCross, QtWidgets.QMainWindow):
 
     def __init__(self):
         super().__init__()
@@ -25,7 +25,7 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
 
     def back(self):
         self.hide()
-        self.parent_parral.show()
+        self.parent_cross.show()
 
     def next(self):
         while self.settings['path_test'] == '' or self.settings['path_ref'] == '':
@@ -44,7 +44,7 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
             pickle.dump(data, f)
 
         self.hide()
-        self.child_parral.show()
+        self.child_cross.show()
 
 
     def download(self):

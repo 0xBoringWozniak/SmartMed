@@ -11,7 +11,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class DownloadWindow(object):
+class DownloadWindowCross(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(600, 480)
@@ -30,10 +30,10 @@ class DownloadWindow(object):
         self.pushButtonDownload1.setGeometry(QtCore.QRect(30, 400, 231, 32))
         self.pushButtonDownload1.setObjectName("pushButtonDownload1")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
-        self.label_3.setGeometry(QtCore.QRect(50, 310, 201, 21))
+        self.label_3.setGeometry(QtCore.QRect(80, 310, 201, 21))
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(40, 380, 241, 31))
+        self.label_4.setGeometry(QtCore.QRect(80, 380, 141, 31))
         self.label_4.setObjectName("label_4")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
@@ -50,10 +50,10 @@ class DownloadWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Загрузка данных</span></p></body></html>"))
-        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Данные должны быть загружены в формате “.xlsx”, “.xs” или “.csv”. </span></p><p><span style=\" font-size:12pt;\">Необходима загрузка двух файлов. Первый файл должен содержать данные </span></p><p><span style=\" font-size:12pt;\">с концентрацией тестового препарата в крови пациентов. </span></p><p><span style=\" font-size:12pt;\">Второй файл должен содержать данные с концентрацией референсного</span></p><p><span style=\" font-size:12pt;\">препарата в крови пациентов. </span></p><p><span style=\" font-size:12pt;\">Необходимо, чтобы в первой строке каждого файла был указан момент</span></p><p><span style=\" font-size:12pt;\"> времени (в часах),в который была зафиксирована концентрация. </span></p><p><span style=\" font-size:12pt;\">В первом столбце каждого файла нужно указать порядковый номер пациента. </span></p></body></html>"))
+        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Данные должны быть загружены в формате “.xlsx”, “.xs” или “.csv”. </span></p><p><span style=\" font-size:12pt;\">Необходима загрузка двух файлов. Первый файл должен содержать</span></p><p><span style=\" font-size:12pt;\"> информацию о пациентах, принимавших первым - тестовый препарат,</span></p><p><span style=\" font-size:12pt;\"> а за ним - референсный. Второй файл должен содержать информацию о пациентах,</span></p><p><span style=\" font-size:12pt;\"> которые сначала принимали референсный препарат, затем - тестовый.</span></p><p><span style=\" font-size:12pt;\">Необходимо, чтобы в первой строке каждого файла был указан момент</span></p><p><span style=\" font-size:12pt;\"> времени (в часах), в который была зафиксирована концентрация. </span></p><p><span style=\" font-size:12pt;\">В первом столбце каждого файла нужно указать порядковый номер пациента. </span></p><p><br/></p></body></html>"))
         self.pushButtonDownload.setText(_translate("MainWindow", "Загрузить"))
         self.pushButtonDownload1.setText(_translate("MainWindow", "Загрузить"))
-        self.label_3.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Данные по тестовому препарату</span></p></body></html>"))
-        self.label_4.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Данные по референсному препарату</span></p><p><span style=\" font-size:12pt;\"><br/></span></p></body></html>"))
+        self.label_3.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:12pt;\">Данные в порядке TR</span></p></body></html>"))
+        self.label_4.setText(_translate("MainWindow", "<html><head/><body><p>Данные в порядке RT</p></body></html>"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
         self.pushButton_.setText(_translate("MainWindow", "Вперед"))

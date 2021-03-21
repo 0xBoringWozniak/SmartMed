@@ -6,6 +6,9 @@ from PyQt5.QtWidgets import (
 
 from .TreeVisualWindow import TreeVisualWindow
 from SmartMedApp.backend import ModuleManipulator
+from ..utils import remove_if_exists
+from ..WaitingSpinnerWidget import QtWaitingSpinner
+from PyQt5.QtCore import QTimer, QEventLoop
 
 class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
 
@@ -19,6 +22,7 @@ class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
         self.checkBoxTree.setChecked(True)
         self.checkBoxTablr.setChecked(True)
         self.checkBoxValue.setChecked(True)
+        self.setWindowTitle('Выбор графиков и таблиц')
 
     def __build_buttons(self):
         self.pushButtonDone.clicked.connect(self.done)
@@ -66,8 +70,18 @@ class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
             pickle.dump(data, f)
         self.close()
         self.child.show()
-        module_starter = ModuleManipulator(settings)
+        module_starter = ModuleManipulator(data)
         threading.Thread(target=module_starter.start, daemon=True).start()
+        self.spinner = QtWaitingSpinner(self)
+        self.layout().addWidget(self.spinner)
+        remove_if_exists()
+        self.spinner.start()
+        #QTimer.singleShot(10000, self.spinner.stop)
+        loop = QEventLoop()
+        QTimer.singleShot(10000, loop.quit)
+        loop.exec_()
+        self.spinner.stop()
         print(data)
+        
 
         
