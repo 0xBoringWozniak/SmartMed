@@ -41,7 +41,9 @@ class StatisticsDashboard(Dashboard):
 					html.Div([dash_table.DataTable(
 					    id='table',
 					    columns=[{"name": i, "id": i, "deletable":True} for i in df.columns],
-					    data=df.to_dict('records')
+					    data=df.to_dict('records'),
+					    style_table={'overflowX': 'auto'},
+                        export_format='xlsx'
 					)],style={'border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px','margin':'5px'})],
 					style={'width': len_t, 'display': 'inline-block'}),
 					html.Div(dcc.Markdown(children=markdown_text_table), style={'width': len_text, 'float': 'right', 'display': 'inline-block'})
@@ -54,7 +56,9 @@ class StatisticsDashboard(Dashboard):
 					html.Div([dash_table.DataTable(
 					    id='table',
 					    columns=[{"name": i, "id": i, "deletable":True} for i in df.columns],
-					    data=df.to_dict('records')
+					    data=df.to_dict('records'),
+					    style_table={'overflowX': 'auto'},
+                        export_format='xlsx'
     			)],style={'border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px','margin':'5px'})
 				], style={'margin':'50px'}
 			)
@@ -154,7 +158,9 @@ class StatisticsDashboard(Dashboard):
 					html.Div([dash_table.DataTable(
 					    id='corr',
 					    columns=[{"name": i, "id": i} for i in df.columns],
-					    data=df.to_dict('records')
+					    data=df.to_dict('records'),
+					    style_table={'overflowX': 'auto'},
+                        export_format='xlsx'
 					    )],style={'border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'})],
 					style={'width': len_t, 'display': 'inline-block'}),
 					html.Div(dcc.Markdown(children=markdown_text_corr), style={'width': len_text, 'float': 'right', 'display': 'inline-block'})
