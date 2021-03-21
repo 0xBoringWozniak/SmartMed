@@ -39,6 +39,16 @@ class BioequivalenceModule(Module, BioequivalenceDashboard):
 	def _prepare_dashboard(self):
 		graphs = self.settings[1][0]
 		tables = self.settings[1][1]
+		if self.settings[0].plan == 'parallel':
+			if graphs['each_in_group'] and graphs['log_each_in_group']:
+				graphs['each_in_group'] = False
+				graphs['log_each_in_group'] = False
+				graphs['linlog_each_in_group'] = True
+			if graphs['all_in_group'] and graphs['log_all_in_group']:
+				graphs['all_in_group'] = False
+				graphs['log_all_in_group'] = False
+				graphs['linlog_all_in_group'] = True
+		
 		self.graphs_and_lists = []
 		temp_list = []
 		for graph, boo in graphs.items():
@@ -50,6 +60,7 @@ class BioequivalenceModule(Module, BioequivalenceDashboard):
 		if self.settings[0].plan == 'parallel':
 			graph_to_method = {'linlog_each_in_group':[self._generate_concentration_time_linlog(True), 
 			self._generate_concentration_time_linlog(False)],
+			'linlog_all_in_group':self._generate_concentration_time_linlog_mean(),
 			'each_in_group' : [self._generate_concentration_time(True), self._generate_concentration_time(False)], 
 	        'log_each_in_group' : [self._generate_concentration_time_log(True), self._generate_concentration_time_log(False)],
 	        'all_in_group' : self._generate_concentration_time_mean(), 

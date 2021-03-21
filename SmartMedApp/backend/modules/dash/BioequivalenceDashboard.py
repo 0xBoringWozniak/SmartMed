@@ -103,8 +103,8 @@ class BioequivalenceDashboard(Dashboard):
             if self.settings[0].check_normal =='Kolmogorov':
                 data = {'Критерий':['Бартлетта', 'Бартлетта', 'Колмогорова-Смирнова', 'Колмогорова-Смирнова', 'Колмогорова-Смирнова',
                     'Колмогорова-Смирнова'],
-                    'Выборки':['Первая и вторая группы', 'Период 1 и период 2', 'Первая группа тестовый препарат', 'Первая группа референсный препарат', 
-                    'Вторая группа тестовый препарат', 'Вторя группа референсный препарат'],
+                    'Выборки':['Первая и вторая группы', 'Период 1 и период 2', 'Первая группа тестовый препарат', 'Первая группа референтный препарат', 
+                    'Вторая группа тестовый препарат', 'Вторя группа референтный препарат'],
                     'Значение критерия':[self.settings[0].bartlett_groups[0], self.settings[0].bartlett_period[0], self.settings[0].kstest_t_1[0],
                     self.settings[0].kstest_r_1[0], self.settings[0].kstest_t_2[0], self.settings[0].kstest_r_2[0]],
                     'p-уровень':[self.settings[0].bartlett_groups[1], self.settings[0].bartlett_period[1], self.settings[0].kstest_t_1[1],
@@ -112,8 +112,8 @@ class BioequivalenceDashboard(Dashboard):
             else:
                 data = {'Критерий':['Бартлетта', 'Бартлетта', 'Шапиро-Уилка', 'Шапиро-Уилка', 'Шапиро-Уилка',
                     'Шапиро-Уилка'],
-                    'Выборки':['Первая и вторая группы', 'Период 1 и период 2', 'Первая группа тестовый препарат', 'Первая группа референсный препарат', 
-                    'Вторая группа тестовый препарат', 'Вторя группа референсный препарат'],
+                    'Выборки':['Первая и вторая группы', 'Период 1 и период 2', 'Первая группа тестовый препарат', 'Первая группа референтный препарат', 
+                    'Вторая группа тестовый препарат', 'Вторя группа референтный препарат'],
                     'Значение критерия':[self.settings[0].bartlett_groups[0], self.settings[0].bartlett_period[0], self.settings[0].shapiro_t_1[0],
                     self.settings[0].shapiro_r_1[0], self.settings[0].shapiro_t_2[0], self.settings[0].shapiro_r_2[0]],
                     'p-уровень':[self.settings[0].bartlett_groups[1], self.settings[0].bartlett_period[1], self.settings[0].shapiro_t_1[1],
@@ -280,7 +280,7 @@ class BioequivalenceDashboard(Dashboard):
 
             available_indicators = df.index
 
-            return html.Div([html.Div(html.H1(children='График зависимости концентрации от времени группа референсного препарата'), style={'text-align':'center'}),
+            return html.Div([html.Div(html.H1(children='График зависимости концентрации от времени группа референтного препарата'), style={'text-align':'center'}),
                 html.Div([
                 html.Div([
                     html.Div([
@@ -350,7 +350,7 @@ class BioequivalenceDashboard(Dashboard):
 
             available_indicators = df.index
 
-            return html.Div([html.Div(html.H1(children='График зависимости прологарифмированной концентрации от времени группа референсного препарата'), style={'text-align':'center'}),
+            return html.Div([html.Div(html.H1(children='График зависимости прологарифмированной концентрации от времени группа референтного препарата'), style={'text-align':'center'}),
                 html.Div([
                 html.Div([
                     html.Div([
@@ -421,7 +421,7 @@ class BioequivalenceDashboard(Dashboard):
 
             available_indicators = df.index
 
-            return html.Div([html.Div(html.H1(children='График зависимости прологарифмированной концентрации от времени группа референсного препарата'), style={'text-align':'center'}),
+            return html.Div([html.Div(html.H1(children='График зависимости концентрации от времени группа референтного препарата'), style={'text-align':'center'}),
                 html.Div([
                 html.Div([
                     html.Div([
@@ -441,7 +441,7 @@ class BioequivalenceDashboard(Dashboard):
                             )], style={'width': '48%', 'display': 'inline-block', 'float':'right'})
                 ], style={'padding': '5px'}),
                 dcc.Graph(id='concentration_time_r_linlog')], style={'width': '78%', 'display': 'inline-block','border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
-                html.Div(dcc.Markdown(children=markdown_text_conc_time_r_log), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
+                html.Div(dcc.Markdown(children=markdown_text_conc_time_r), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
             )
         else:
             df = self.settings[0].concentration_t
@@ -462,7 +462,7 @@ class BioequivalenceDashboard(Dashboard):
 
             available_indicators = df.index
 
-            return html.Div([html.Div(html.H1(children='График зависимости прологарифмированной концентрации от времени группа тестового препарата'), style={'text-align':'center'}),
+            return html.Div([html.Div(html.H1(children='График зависимости концентрации от времени группа тестового препарата'), style={'text-align':'center'}),
                 html.Div([
                 html.Div([
                     html.Div([
@@ -482,7 +482,7 @@ class BioequivalenceDashboard(Dashboard):
                             )], style={'width': '48%', 'display': 'inline-block', 'float':'right'})
                 ], style={'padding': '5px'}),
                 dcc.Graph(id='concentration_time_t_linlog')], style={'width': '78%', 'display': 'inline-block','border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
-                html.Div(dcc.Markdown(children=markdown_text_conc_time_t_log), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
+                html.Div(dcc.Markdown(children=markdown_text_conc_time_t), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
             )
 
     def _generate_concentration_time_cross(self, tr=True):
@@ -614,6 +614,40 @@ class BioequivalenceDashboard(Dashboard):
             dcc.Graph(id='concentration_time_r_log_mean', figure=fig)], 
             style={'width': '78%', 'display': 'inline-block','border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
             html.Div(dcc.Markdown(children=markdown_text_conc_time_log_mean), 
+                style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
+        )
+
+    def _generate_concentration_time_linlog_mean(self):
+        df_r = self.settings[0].concentration_r.mean()
+        df_t = self.settings[0].concentration_t.mean()
+        time = df_t.index
+
+        def update_graph(yaxis_type_conc_linlog_mean):
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(x = time, y = df_r, name='R'))
+            fig.add_trace(go.Scatter(x = time, y = df_t, name='T'))
+            fig.update_xaxes(title='Время')
+            fig.update_yaxes(title='Концентрация',
+                                type=yaxis_type_conc_linlog_mean)
+            return fig
+
+        self.app.callback(dash.dependencies.Output('concentration_time_linlog_mean', 'figure'),
+                          [dash.dependencies.Input('yaxis_type_conc_linlog_mean', 'value')])(update_graph)
+
+
+        return html.Div([html.Div(html.H1(children='Обобщенный график зависимости концентрации от времени'), style={'text-align':'center'}),
+            html.Div([
+            html.Div([
+                html.Div([dcc.RadioItems(
+                            id='yaxis_type_conc_linlog_mean',
+                            options=[{'label': i, 'value': i}
+                                     for i in ['linear', 'log']],
+                            value='linear'
+                        )], style={'width': '48%', 'display': 'inline-block'})
+            ], style={'padding': '5px'}),
+            dcc.Graph(id='concentration_time_linlog_mean')], 
+            style={'width': '78%', 'display': 'inline-block','border-color': 'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
+            html.Div(dcc.Markdown(children=markdown_text_conc_time_mean), 
                 style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
         )
 
