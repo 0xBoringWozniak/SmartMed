@@ -55,11 +55,11 @@ class WrappedGraphsWindowCross(GraphsWindowCross, QtWidgets.QMainWindow):
 
 
     def gen_concet(self):
-        if self.checkBoxLogForEachGroup.isChecked():
-            self.checkBoxLogForEachGroup.setChecked(True)
+        if self.checkBoxForEachGroup.isChecked():
+            self.checkBoxForEachGroup.setChecked(True)
             self.settings['graphs']['gen_concet'] = True
         else:
-            self.checkBoxLogForEachGroup.setChecked(False)
+            self.checkBoxForEachGroup.setChecked(False)
             self.settings['graphs']['gen_concet']  = False
 
     def back(self):
