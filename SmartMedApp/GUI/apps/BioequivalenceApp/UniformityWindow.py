@@ -48,6 +48,6 @@ class UniformityWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButtonDone.setText(_translate("MainWindow", "Вперед"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите, каким способом выполняется </span></p><p><span style=\" font-size:18pt;\">проверка данных на однородность</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите способ проверки данных </span></p><p><span style=\" font-size:18pt;\"> на однородность</span></p></body></html>"))
         self.radioButtonF.setText(_translate("MainWindow", "  F-критерий "))
         self.radioButtonLev.setText(_translate("MainWindow", "  Критерий Левена"))
