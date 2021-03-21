@@ -18,7 +18,13 @@ class WrappedRocGraphsWindow(RocGraphsWindow, QtWidgets.QMainWindow):
         self.settings = {'points_table': True,
                         'metrics_table': True,
                         'spec_and_sens': True,
-                        'spec_and_sens_table':True}
+                        'spec_and_sens_table':True,
+                        'classificators_comparison': True}
+        self.checkBox.setChecked(True)
+        self.checkBox_2.setChecked(True)
+        self.checkBox_3.setChecked(True)
+        self.checkBox_4.setChecked(True)
+        self.checkBox_9.setChecked(True)
         self.__build_buttons()
         self.setWindowTitle(' ')
 
@@ -39,6 +45,8 @@ class WrappedRocGraphsWindow(RocGraphsWindow, QtWidgets.QMainWindow):
             self.settings['spec_and_sens'] = False
         if self.checkBox_3.isChecked() != True:
             self.settings['spec_and_sens_table'] = False
+        if self.checkBox_9.isChecked() != True:
+            self.settings['classificators_comparison'] = False
         with open('settings.py', 'rb') as f:
             data = pickle.load(f)
         data['MODULE_SETTINGS'].update(self.settings)

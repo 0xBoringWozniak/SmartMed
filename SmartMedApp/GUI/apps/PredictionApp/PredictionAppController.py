@@ -28,7 +28,7 @@ class PredictionApp():
         self.value_window = WrappedValueWindow()
         self.roc_value_window = WrappedRocValueWindow()
         self.roc_anyl_window = WrappedRocAnyl()
-        self.roc_curves_window = WrappedRocCurvesWindow()
+        #self.roc_curves_window = WrappedRocCurvesWindow()
         self.roc_graphs_window = WrappedRocGraphsWindow()
         self.linear_graph_window = WrappedLinearGraphWindow()
         self.tree_features_window = WrappedTreeFeaturesWindow()
@@ -59,10 +59,8 @@ class PredictionApp():
         self.roc_value_window.parent = self.choice_window
         self.roc_value_window.child = self.roc_anyl_window
         self.roc_anyl_window.parent = self.roc_value_window
-        self.roc_anyl_window.child = self.roc_curves_window
-        self.roc_curves_window.parent = self.roc_anyl_window
-        self.roc_curves_window.child = self.roc_graphs_window
-        self.roc_graphs_window.parent = self.roc_curves_window
+        self.roc_anyl_window.child = self.roc_graphs_window
+        self.roc_graphs_window.parent = self.roc_anyl_window
         self.roc_graphs_window.child = self.menu_window
 
         self.choice_window.child_tree = self.tree_features_window
