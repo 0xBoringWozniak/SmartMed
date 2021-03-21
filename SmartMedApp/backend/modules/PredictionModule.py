@@ -25,7 +25,7 @@ class PredictionModule(Module, PredictionDashboard):
         pass
 
     def _prepare_dashboard_settings(self):
-        if self.settings['model'] == 'linreg':
+        if self.settings['model'] == 'linreg' or self.settings['model'] == 'logreg':
             names = self.pp.df.columns.tolist()
             names.remove(self.settings['variable'])
             self.df_X = pd.DataFrame()
