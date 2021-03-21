@@ -39,6 +39,16 @@ class BioequivalenceModule(Module, BioequivalenceDashboard):
 	def _prepare_dashboard(self):
 		graphs = self.settings[1][0]
 		tables = self.settings[1][1]
+		if self.settings[0].plan == 'parallel':
+			if graphs['each_in_group'] and graphs['log_each_in_group']:
+				graphs['each_in_group'] = False
+				graphs['log_each_in_group'] = False
+				graphs['linlog_each_in_group'] = True
+			if graphs['all_in_group'] and graphs['log_all_in_group']:
+				graphs['all_in_group'] = False
+				graphs['log_all_in_group'] = False
+				graphs['linlog_all_in_group'] = True
+		
 		self.graphs_and_lists = []
 		temp_list = []
 		for graph, boo in graphs.items():
@@ -48,10 +58,13 @@ class BioequivalenceModule(Module, BioequivalenceDashboard):
 			if boo:
 				temp_list.append(table)
 		if self.settings[0].plan == 'parallel':
-			graph_to_method = {'all_in_group' : [self._generate_concentration_time_mean(True), self._generate_concentration_time_mean(False)], 
-			'log_all_in_group' : [self._generate_concentration_time_log_mean(True), self._generate_concentration_time_log_mean(False)],
-	        'each_in_group' : [self._generate_concentration_time(True), self._generate_concentration_time(False)], 
-	        'log_each_in_group' : [self._generate_concentration_time_log(True), self._generate_concentration_time_log(False)], 
+			graph_to_method = {'linlog_each_in_group':[self._generate_concentration_time_linlog(True), 
+			self._generate_concentration_time_linlog(False)],
+			'linlog_all_in_group':self._generate_concentration_time_linlog_mean(),
+			'all_in_group' : [self._generate_concentration_time(True), self._generate_concentration_time(False)], 
+	        'log_all_in_group' : [self._generate_concentration_time_log(True), self._generate_concentration_time_log(False)],
+	        'each_in_group' : self._generate_concentration_time_mean(), 
+			'log_each_in_group' : self._generate_concentration_time_log_mean(), 
 	        'criteria' : self._generate_criteria(), 'features' : self._generate_param(), 
 	        'var' : self._generate_anova()}
 			for graph in temp_list:
@@ -63,15 +76,10 @@ class BioequivalenceModule(Module, BioequivalenceDashboard):
 			self.graphs_and_lists.append(self._generate_interval())
 		else:
 			graph_to_method = {'indiv_concet' : [self._generate_concentration_time_cross(True),
-            self._generate_concentration_time_cross(False),
-            self._generate_concentration_time_cross_log(True),
-            self._generate_concentration_time_cross_log(False)], 
+            self._generate_concentration_time_cross(False)], 
 			'avg_concet' : [self._generate_group_mean(True),
-            self._generate_group_mean(False),
-            self._generate_group_mean_log(True),
-            self._generate_group_mean_log(False)],
-	        'gen_concet' : [self._generate_drug_mean(),
-            self._generate_drug_mean_log()], 
+            self._generate_group_mean(False)],
+	        'gen_concet' : self._generate_drug_mean(), 
 	        'avg_auc' : [self._generate_log_auc(),
             self._generate_criteria()], 
 	        'anal_resylts' : self._generate_anova(),
