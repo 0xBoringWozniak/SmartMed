@@ -39,7 +39,7 @@ class RocGraphsWindow(object):
         self.checkBox_9.setObjectName("checkBox_9")
         self.verticalLayout.addWidget(self.checkBox_9)
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(80, 30, 271, 51))
+        self.label.setGeometry(QtCore.QRect(70, 30, 271, 51))
         self.label.setObjectName("label")
         self.pushButtonDone = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonDone.setGeometry(QtCore.QRect(460, 420, 113, 32))
@@ -58,10 +58,10 @@ class RocGraphsWindow(object):
         self.checkBox_2.setText(_translate("MainWindow", "  Таблица со значениями каждой точки, по которым \n"
 "  строились кривые "))
         self.checkBox_4.setText(_translate("MainWindow", "  Таблица со значениями AUC и остальными метриками,\n"
-"   выбранными ранее"))
+"  выбранными ранее"))
         self.checkBox_3.setText(_translate("MainWindow", "  График пересечения чувствительности и специфичности "))
-        self.checkBox.setText(_translate("MainWindow", "  Таблица с точками построения графика пересечения \n"
-"  чувствительности и специфичности"))
+        self.checkBox.setText(_translate("MainWindow", "  Таблица с точками построения графика  \n"
+"  пересечения чувствительности и специфичности"))
         self.checkBox_9.setText(_translate("MainWindow", "  Сравнение классификаторов"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите графики и таблицы</span></p></body></html>"))
         self.pushButtonDone.setText(_translate("MainWindow", "Завершить"))

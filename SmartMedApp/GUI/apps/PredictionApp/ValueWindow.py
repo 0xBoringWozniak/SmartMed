@@ -24,7 +24,7 @@ class ValueWindow(object):
         self.label_2.setGeometry(QtCore.QRect(160, 140, 321, 16))
         self.label_2.setObjectName("label_2")
         self.comboBox = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox.setGeometry(QtCore.QRect(140, 180, 183, 32))
+        self.comboBox.setGeometry(QtCore.QRect(70, 180, 183, 32))
         self.comboBox.setObjectName("comboBox")
         self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))

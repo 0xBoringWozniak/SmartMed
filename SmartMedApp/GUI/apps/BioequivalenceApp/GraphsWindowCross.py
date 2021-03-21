@@ -60,4 +60,3 @@ class GraphsWindowCross(object):
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
 
 
-
