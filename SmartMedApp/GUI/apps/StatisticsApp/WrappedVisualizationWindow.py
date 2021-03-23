@@ -42,8 +42,8 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         self.checkBoxBox.setChecked(True)
         self.checkBoxScatter.setChecked(True)
         self.checkBoxDot.setChecked(True)
+        self.checkBoxBar.setChecked(True)
         self.__build_buttons()
-
 
     def __build_buttons(self):
         self.pushButton.clicked.connect(self.back)
@@ -59,7 +59,7 @@ class WrappedVisualizationWindow(VisualizationWindow, QtWidgets.QMainWindow):
         self.checkBoxDot.clicked.connect(self.check_dot)
 
     def back(self):
-        
+
         self.hide()
         self.hide()
         self.parent.show()

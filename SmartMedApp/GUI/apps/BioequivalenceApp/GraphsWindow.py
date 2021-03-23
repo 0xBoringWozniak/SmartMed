@@ -18,10 +18,10 @@ class GraphsWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(60, 50, 461, 51))
+        self.label_2.setGeometry(QtCore.QRect(35, 25, 461, 71))
         self.label_2.setObjectName("label_2")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(90, 150, 421, 181))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(110, 140, 421, 181))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -52,14 +52,14 @@ class GraphsWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Выберите графики, которые хотите увидеть</span></p></body></html>"))
-        self.checkBoxLogAllinGroup.setText(_translate("MainWindow", "Прологорифмированный график зависимости концентрации \n"
+        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Выберите графики для визуализации</span></p></body></html>"))
+        self.checkBoxLogAllinGroup.setText(_translate("MainWindow", "  Прологорифмированный график зависимости концентрации \n"
 " препарата от времени для всех пациентов в каждой группе"))
-        self.checkBoxAllinGroup.setText(_translate("MainWindow", "График зависимости концентрации препарата от времени \n"
+        self.checkBoxAllinGroup.setText(_translate("MainWindow", "  График зависимости концентрации препарата от времени \n"
 " для всех пациентов в каждой группе"))
-        self.checkBoxForEachGroup.setText(_translate("MainWindow", "Обобщенный график зависимости концентрации препарата \n"
+        self.checkBoxForEachGroup.setText(_translate("MainWindow", "  Обобщенный график зависимости концентрации препарата \n"
 " от времени для каждой группы"))
-        self.checkBoxLogForEachGroup.setText(_translate("MainWindow", "Прологорифмированный обощенный график зависимости \n"
+        self.checkBoxLogForEachGroup.setText(_translate("MainWindow", "  Прологорифмированный обощенный график зависимости \n"
 " концентрации препарата от времени для каждой группы"))
         self.pushButtonNext.setText(_translate("MainWindow", "Завершить"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))

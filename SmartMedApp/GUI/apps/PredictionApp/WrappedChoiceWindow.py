@@ -1,5 +1,6 @@
 import pickle
 import threading
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
@@ -40,7 +41,7 @@ class WrappedChoiceWindow(ChoiceWindow, QtWidgets.QMainWindow):
     def next(self):
         self.hide()
         with open('settings.py', 'rb') as f:
-                data = pickle.load(f)
+            data = pickle.load(f)
         col = data['MODULE_SETTINGS']['columns']
         self.child_linear.comboBox.addItems(col)
         self.child_roc.comboBox.addItems(col)
@@ -53,5 +54,3 @@ class WrappedChoiceWindow(ChoiceWindow, QtWidgets.QMainWindow):
         data['MODULE_SETTINGS']['model'] = self.get_model()
         with open('settings.py', 'wb') as f:
             pickle.dump(data, f)
-
-   

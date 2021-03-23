@@ -5,13 +5,12 @@ from .WrappedPrepWindow import WrappedRadioWindow
 #from..StartingApp.WrappedStartingWindow import WrappedStartingWindow
 
 # logging decorator
-import sys
-sys.path.append("...")
-from logs.logger import debug
+from SmartMedApp.logs.logger import debug
 
 
 class StatisticsApp():
 
+    @debug
     def __init__(self, menu_window):
         self.settings = {}
         self.menu_window = menu_window
@@ -23,6 +22,7 @@ class StatisticsApp():
         self.__build_connections(
             [self.menu_window, self.down_window, self.prep_window, self.metrics_window, self.graphs_window])
 
+    @debug
     def __build_connections(self, ordered_windows):
 
         ordered_windows[0].child = ordered_windows[1]

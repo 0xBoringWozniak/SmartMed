@@ -7,7 +7,6 @@ from PyQt5.QtWidgets import (
 from .NormalityWindow import NormalityWindow
 
 
-
 class WrappedNormalityWindow(NormalityWindow, QtWidgets.QMainWindow):
 
     def __init__(self):
@@ -16,13 +15,12 @@ class WrappedNormalityWindow(NormalityWindow, QtWidgets.QMainWindow):
         self.__build_buttons()
         self.radioButtonColm.setChecked(True)
         self.setWindowTitle(' ')
-    
 
     def __build_buttons(self):
         self.pushButton.clicked.connect(self.next)
         self.pushButton_2.clicked.connect(self.back)
-        #self.radioButton_cross.clicked.connect(self.cross)
-        #self.radioButton_parall.clicked.connect(self.parall)
+        # self.radioButton_cross.clicked.connect(self.cross)
+        # self.radioButton_parall.clicked.connect(self.parall)
 
     def back(self):
         self.hide()
@@ -31,7 +29,7 @@ class WrappedNormalityWindow(NormalityWindow, QtWidgets.QMainWindow):
         if design['MODULE_SETTINGS']['design'] == 'parallel':
             self.parent_parral.show()
         else:
-            self.parent_parall.show()
+            self.parent_parral.show()
 
     def next(self):
         with open('settings.py', 'rb') as f:
@@ -44,5 +42,3 @@ class WrappedNormalityWindow(NormalityWindow, QtWidgets.QMainWindow):
             pickle.dump(settings, f)
         self.hide()
         self.child_parral.show()
-
-

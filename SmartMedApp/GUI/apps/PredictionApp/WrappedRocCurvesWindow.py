@@ -3,12 +3,12 @@ import pickle
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, QTableWidget)
+
 from .RocCurvesWindow import RocCurvesWindow
 
 
-
 class WrappedRocCurvesWindow(RocCurvesWindow, QtWidgets.QMainWindow):
-   
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -16,8 +16,8 @@ class WrappedRocCurvesWindow(RocCurvesWindow, QtWidgets.QMainWindow):
         self.checkBoxDiff.setChecked(True)
         self.checkBoxPaint.setChecked(True)
         self.settings = {'auc': True,
-                        'diff_graphics': True,
-                        'paint': True}
+                         'diff_graphics': True,
+                         'paint': True}
         self.__build_buttons()
         self.setWindowTitle(' ')
 
@@ -43,4 +43,3 @@ class WrappedRocCurvesWindow(RocCurvesWindow, QtWidgets.QMainWindow):
             pickle.dump(data, f)
         self.hide()
         self.child.show()
-

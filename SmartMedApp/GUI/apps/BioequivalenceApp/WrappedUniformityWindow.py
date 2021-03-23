@@ -8,7 +8,6 @@ from PyQt5.QtWidgets import (
 from .UniformityWindow import UniformityWindow
 
 
-
 class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
 
     def __init__(self):
@@ -17,13 +16,12 @@ class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
         self.__build_buttons()
         self.radioButtonF.setChecked(True)
         self.setWindowTitle(' ')
-    
 
     def __build_buttons(self):
         self.pushButtonDone.clicked.connect(self.done)
         self.pushButtonBack.clicked.connect(self.back)
-        #self.radioButton_cross.clicked.connect(self.cross)
-        #self.radioButton_parall.clicked.connect(self.parall)
+        # self.radioButton_cross.clicked.connect(self.cross)
+        # self.radioButton_parall.clicked.connect(self.parall)
 
     def back(self):
         self.hide()
@@ -40,5 +38,3 @@ class WrappedUniformityWindow(UniformityWindow, QtWidgets.QMainWindow):
             pickle.dump(settings, f)
         self.hide()
         self.child_parral.show()
-
-

@@ -1,14 +1,22 @@
+DEGUG_MODE = True
+
+
 import logging
 
+
 def debug(fn):
-	print('debug...')
 
-	def wrapper(*args, **kwargs):
-		print("Entering {:s}.{:s}...".format(fn.__module__,
-													 fn.__name__))
-		result = fn(*args, **kwargs)
-		print("Finished {:s}.{:s}.".format(fn.__module__,
-												   fn.__name__))
-		return result
+    def wrapper(*args, **kwargs):
 
-	return wrapper
+        if DEGUG_MODE:
+            print("Entering {:s}.{:s}...".format(fn.__module__,
+                                                 fn.__name__))
+            result = fn(*args, **kwargs)
+            print("Finished {:s}.{:s}.".format(fn.__module__,
+                                               fn.__name__))
+        else:
+            result = fn(*args, **kwargs)
+
+        return result
+
+    return wrapper

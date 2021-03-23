@@ -1,15 +1,16 @@
 import pickle
+import threading
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .GraphsWindow import GraphsWindow
-from SmartMedApp.backend import ModuleManipulator
 from ..WaitingSpinnerWidget import QtWaitingSpinner
 from PyQt5.QtCore import QTimer, QEventLoop
 from ..utils import remove_if_exists
-import threading
+
+from SmartMedApp.backend import ModuleManipulator
 
 
 class WrappedGraphsWindow(GraphsWindow, QtWidgets.QMainWindow):
@@ -25,12 +26,10 @@ class WrappedGraphsWindow(GraphsWindow, QtWidgets.QMainWindow):
         self.checkBoxForEachGroup.setChecked(True)
         self.checkBoxLogForEachGroup.setChecked(True)
 
-        self.settings = {'graphs' : {'all_in_group': True,
+        self.settings = {'graphs': {'all_in_group': True,
                                     'log_all_in_group': True,
                                     'each_in_group': True,
                                     'log_each_in_group': True}}
-
-
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
@@ -46,7 +45,7 @@ class WrappedGraphsWindow(GraphsWindow, QtWidgets.QMainWindow):
             self.settings['graphs']['all_in_group'] = True
         else:
             self.checkBoxAllinGroup.setChecked(False)
-            self.settings['graphs']['all_in_group']  = False
+            self.settings['graphs']['all_in_group'] = False
 
     def log_all_in_group(self):
         if self.checkBoxLogAllinGroup.isChecked():
@@ -54,7 +53,7 @@ class WrappedGraphsWindow(GraphsWindow, QtWidgets.QMainWindow):
             self.settings['graphs']['log_all_in_group'] = True
         else:
             self.checkBoxLogAllinGroup.setChecked(False)
-            self.settings['graphs']['log_all_in_group']  = False
+            self.settings['graphs']['log_all_in_group'] = False
 
     def each_in_group(self):
         if self.checkBoxForEachGroup.isChecked():
@@ -62,7 +61,7 @@ class WrappedGraphsWindow(GraphsWindow, QtWidgets.QMainWindow):
             self.settings['graphs']['each_in_group'] = True
         else:
             self.checkBoxForEachGroup.setChecked(False)
-            self.settings['graphs']['each_in_group']  = False
+            self.settings['graphs']['each_in_group'] = False
 
     def log_each_in_group(self):
         if self.checkBoxLogForEachGroup.isChecked():
@@ -70,7 +69,7 @@ class WrappedGraphsWindow(GraphsWindow, QtWidgets.QMainWindow):
             self.settings['graphs']['log_each_in_group'] = True
         else:
             self.checkBoxLogForEachGroup.setChecked(False)
-            self.settings['graphs']['log_each_in_group']  = False
+            self.settings['graphs']['log_each_in_group'] = False
 
     def back(self):
         self.hide()
@@ -96,4 +95,3 @@ class WrappedGraphsWindow(GraphsWindow, QtWidgets.QMainWindow):
         self.hide()
         self.child_parral.show()
         remove_if_exists()
-

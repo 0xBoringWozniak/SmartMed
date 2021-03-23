@@ -18,10 +18,10 @@ class GraphsWindowCross(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(60, 50, 461, 51))
+        self.label_2.setGeometry(QtCore.QRect(70, 30, 461, 51))
         self.label_2.setObjectName("label_2")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(90, 150, 421, 181))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(100, 130, 510, 181))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -32,9 +32,9 @@ class GraphsWindowCross(object):
         self.checkBoxAllinGroup = QtWidgets.QCheckBox(self.verticalLayoutWidget)
         self.checkBoxAllinGroup.setObjectName("checkBoxAllinGroup")
         self.verticalLayout.addWidget(self.checkBoxAllinGroup)
-        self.checkBoxLogForEachGroup = QtWidgets.QCheckBox(self.verticalLayoutWidget)
-        self.checkBoxLogForEachGroup.setObjectName("checkBoxLogForEachGroup")
-        self.verticalLayout.addWidget(self.checkBoxLogForEachGroup)
+        self.checkBoxForEachGroup = QtWidgets.QCheckBox(self.verticalLayoutWidget)
+        self.checkBoxForEachGroup.setObjectName("checkBoxForEachGroup")
+        self.verticalLayout.addWidget(self.checkBoxForEachGroup)
         self.pushButtonNext = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
@@ -49,11 +49,14 @@ class GraphsWindowCross(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Выберите графики, которые хотите увидеть:</span></p></body></html>"))
-        self.checkBoxLogAllinGroup.setText(_translate("MainWindow", "Индивидуальные графики для пациентов, с концентрациями \n"
-" обоих препаратов"))
-        self.checkBoxAllinGroup.setText(_translate("MainWindow", "Графики со средними концентрациями \n"
-" обоих препаратов по группам"))
-        self.checkBoxLogForEachGroup.setText(_translate("MainWindow", "График с обобщеными данными по двум препаратам"))
+        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите графики для визуализации</span></p></body></html>"))
+        self.checkBoxLogAllinGroup.setText(_translate("MainWindow", "  Индивидуальные графики для пациентов \n"
+"  c концентрациями обоих препаратов"))
+        self.checkBoxAllinGroup.setText(_translate("MainWindow", "  Графики со средними концентрациями \n"
+"  препаратов по группам"))
+        self.checkBoxForEachGroup.setText(_translate("MainWindow", "  График, где данные обобщены \n"
+" по двум препаратам"))
         self.pushButtonNext.setText(_translate("MainWindow", "Завершить"))
         self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
+
+
