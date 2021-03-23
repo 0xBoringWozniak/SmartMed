@@ -9,9 +9,9 @@ FN (False Negatives) — положительные примеры, класси
 
 FP (False Positives) — отрицательные примеры, классифицированные как положительные.
 
-$\Se=\\frac\left\{TP\\right\}\left\{TP+FN\\right\}$— чувствительность.
+$Se=\\frac{TP}{TP+FN}$ — чувствительность.
 
-$\Sp=\\frac\left\{TN\\right\}\left\{TN+FP\\right\}$— специфичность.
+$Sp=\\frac{TN}{TN+FP}$ — специфичность.
 '''
 
 roc_roc='''
