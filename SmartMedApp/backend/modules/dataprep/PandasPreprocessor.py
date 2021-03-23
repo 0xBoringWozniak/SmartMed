@@ -20,6 +20,7 @@ class PandasPreprocessor:
 
     def __init__(self, settings: Dict):
         self.settings = settings  # settings['data']
+        self.__read_file()
         self.numerics_list = {'int16', 'int32', 'int', 'float', 'bool',
                               'int64', 'float16', 'float32', 'float64'}
 
@@ -44,14 +45,13 @@ class PandasPreprocessor:
 
     @debug
     def preprocess(self):
-
-        self.__read_file()
-        self.fillna(self.settings['preprocessing']['fillna'])
-        self.encoding(self.settings['preprocessing']['encoding'])
-        self.scale(self.settings['preprocessing']['scaling'])
+        self.fillna()
+        self.encoding()
+        self.scale()
 
     @debug
-    def fillna(self, value):
+    def fillna(self):
+        value = self.settings['preprocessing']['fillna']
         if value == 'mean':
             for col in self.df.columns:
                 if self.df[col].dtype in self.numerics_list:
@@ -70,7 +70,8 @@ class PandasPreprocessor:
             self.df = self.df[col].dropna()
 
     @debug
-    def encoding(self, method):
+    def encoding(self):
+        method = self.settings['preprocessing']['encoding']
         if method == 'label_encoding':
             transformer = preprocessing.LabelEncoder()
 
@@ -80,7 +81,8 @@ class PandasPreprocessor:
                 self.df[column].astype(str).values)
 
     @debug
-    def scale(self, method):
+    def scale(self):
+        method = self.settings['preprocessing']['scaling']
         if method:
             scaler = preprocessing.StandardScaler()
             scaler.fit(self.df)
