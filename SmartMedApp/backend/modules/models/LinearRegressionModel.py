@@ -20,11 +20,6 @@ class LinearRegressionModel(Model):
     def get_resid(self) -> np.array:
         return self.model.coef_
 
-    def _test(self):
-        x = 5
-        print('LinearRegressionModel test', 2 * x)
-        return x
-
     def predict(self, x: np.array) -> float:  # предсказанное значение для числа или списка
         return self.model.predict(x)
 

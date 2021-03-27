@@ -34,6 +34,15 @@ class PredictionModule(Module, PredictionDashboard):
             self.df_X = pd.DataFrame()
             for name in names:
                 self.df_X = pd.concat([self.df_X, self.pp.df[name]], axis=1)
+            self.df_X = self.pp.get_numeric_df(self.df_X)
+
+            # похоже что работает и без этого, но на всякий случай оставлю
+            df_cat = self.pp.get_categorical_df(self.df_X)
+            names_cat = df_cat.columns.tolist()
+            if len(names_cat) > 0:
+                df_dum = pd.get_dummies(df_cat, prefix=[names_cat])
+                self.df_X = pd.concat([self.df_X, df_dum], axis=1)
+
             self.df_Y = self.pp.df[self.settings['variable']]
             dfX_train, dfX_test, dfY_train, dfY_test = sm.train_test_split(
                 self.df_X, self.df_Y, test_size=0.3, random_state=42)
@@ -85,6 +94,14 @@ class PredictionModule(Module, PredictionDashboard):
             self.df_X = pd.DataFrame()
             for name in names:
                 self.df_X = pd.concat([self.df_X, self.pp.df[name]], axis=1)
+            self.df_X = self.pp.get_numeric_df(self.df_X)
+
+            df_cat = self.pp.get_categorical_df(self.df_X)
+            names_cat = df_cat.columns.tolist()
+            if len(names_cat) > 0:
+                df_dum = pd.get_dummies(df_cat, prefix=[names_cat])
+                self.df_X = pd.concat([self.df_X, df_dum], axis=1)
+
             self.df_Y = self.pp.df[self.settings['variable']]
             dfX_train, dfX_test, dfY_train, dfY_test = sm.train_test_split(self.df_X, self.df_Y, test_size=0.3,
                                                                            random_state=42)
@@ -137,6 +154,14 @@ class PredictionModule(Module, PredictionDashboard):
             self.df_Y = self.pp.df[self.settings['variable']]
             for name in names:
                 self.df_X = pd.concat([self.df_X, self.pp.df[name]], axis=1)
+            self.df_X = self.pp.get_numeric_df(self.df_X)
+
+            df_cat = self.pp.get_categorical_df(self.df_X)
+            names_cat = df_cat.columns.tolist()
+            if len(names_cat) > 0:
+                df_dum = pd.get_dummies(df_cat, prefix=[names_cat])
+                self.df_X = pd.concat([self.df_X, df_dum], axis=1)
+
             settings = dict()
 
             # prepare metrics as names list from str -> bool
@@ -186,6 +211,13 @@ class PredictionModule(Module, PredictionDashboard):
             self.df_X = pd.DataFrame()
             for name in names:
                 self.df_X = pd.concat([self.df_X, self.pp.df[name]], axis=1)
+            self.df_X = self.pp.get_numeric_df(self.df_X)
+
+            df_cat = self.pp.get_categorical_df(self.df_X)
+            names_cat = df_cat.columns.tolist()
+            if len(names_cat) > 0:
+                df_dum = pd.get_dummies(df_cat, prefix=[names_cat])
+                self.df_X = pd.concat([self.df_X, df_dum], axis=1)
 
             count = len(self.df_X.columns)
             for i in range(count):

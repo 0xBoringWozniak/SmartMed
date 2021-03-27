@@ -434,7 +434,7 @@ class LogisticRegressionDashboard(Dashboard):
         return self._generate_layout()
 
     def _generate_layout(self):
-        metrics_list = []
+        metrics_list = [self._generate_matrix()]
         metrics_method = {
             'model_quality': self._generate_quality(),
             'signif': self._generate_signif(),
@@ -447,6 +447,35 @@ class LogisticRegressionDashboard(Dashboard):
         #    metrics_list.append(metrics_method[metrics])
 
         return html.Div(metrics_list)
+
+    def _generate_matrix(self):
+        df_X = self.predict.df_X_test
+        y_true = self.predict.df_Y_test
+        y_pred = LogisticRegressionModel.predict(self.predict.model, df_X)
+        TN, FP, FN, TP = sm.confusion_matrix(y_true, y_pred).ravel()
+        df_matrix = pd.DataFrame(columns=['y_pred\y_true', 'True', 'False'])
+        df_matrix.loc[1] = ['True', TP, FP]
+        df_matrix.loc[2] = ['False', FN, TN]
+        return html.Div([html.Div(html.H2(children='Матрица классификации'), style={'text-align': 'center'}),
+                         html.Div([html.Div(dash_table.DataTable(
+                             id='table_matrix',
+                             columns=[{"name": i, "id": i} for i in df_matrix.columns],
+                             data=df_matrix.to_dict('records'),
+                             tooltip={i: {
+                                 'value': i,
+                                 'use_with': 'both'
+                             } for i in df_matrix.columns},
+                             export_format='csv',
+                             style_header={
+                                 'textDecoration': 'underline',
+                                 'textDecorationStyle': 'dotted',
+                             },
+                         ), style={'width': str(len(df_matrix.columns) * 8) + '%', 'display': 'inline-block'}),
+                             #html.Div(dcc.Markdown(markdown_linear_table1))
+                         ],
+                             style={'width': '78%', 'display': 'inline-block',
+                                    'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid', 'padding': '5px'})],
+                        style={'margin': '50px'})
 
     # качество модели
     def _generate_quality(self):
@@ -474,6 +503,7 @@ class LogisticRegressionDashboard(Dashboard):
                                  'textDecoration': 'underline',
                                  'textDecorationStyle': 'dotted',
                              },
+                             export_format='csv'
                          ), style={'width': str(len(df_result_1.columns) * 8) + '%', 'display': 'inline-block'}),
                              html.Div(dcc.Markdown(markdown_linear_table1))],
                              style={'width': '78%', 'display': 'inline-block',
@@ -967,7 +997,6 @@ class PolynomRegressionDashboard(Dashboard):
                          ], style={'margin': '50px'})
 
 
-
 class ROC(Dashboard):
 
     def __init__(self, predict: PredictionDashboard):
@@ -1351,6 +1380,7 @@ class ROC(Dashboard):
         self.predict.app.callback(dash.dependencies.Output('table_metrics', 'data'),
                                   dash.dependencies.Input('metric_name', 'value'))(update_metrics)
 
+
         return html.Div([
             html.Div([
                 dcc.Markdown(children="Выберите группирующую переменную:"),
@@ -1396,7 +1426,8 @@ class ROC(Dashboard):
                         id='table_dot',
                         columns=[{"name": i, "id": i}
                                  for i in df_dots.columns],
-                        data=df_dots.to_dict('records')
+                        data=df_dots.to_dict('records'),
+                        export_format='csv'
                     ), style={'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid', 'text-align': 'center',
                               'width': str(len(df_dots.columns) * 10 - 10) + '%', 'display': 'inline-block'}),
                     html.Div(dcc.Markdown(roc_table))])
