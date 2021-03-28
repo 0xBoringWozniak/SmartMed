@@ -1,5 +1,3 @@
-import pandas as pd
-
 from .ModuleInterface import Module
 from .dash import StatisticsDashboard
 
@@ -10,20 +8,16 @@ class StatisticsModule(Module, StatisticsDashboard):
         self.pp.preprocess()
         return self.pp.df
 
+    @staticmethod
+    def _loc_from_dict(mapping):
+        return [metric for metric, metric_value in mapping.items() if metric_value]
+
     def _prepare_dashboard_settings(self):
         settings = dict()
 
         # prepare metrics as names list from str -> bool
-        settings['metrics'] = []
-        for metric in self.settings['metrics'].keys():
-            if self.settings['metrics'][metric]:
-                settings['metrics'].append(metric)
-
-        # prepare graphs as names list from str -> bool
-        settings['graphs'] = []
-        for graph in self.settings['graphs'].keys():
-            if self.settings['graphs'][graph]:
-                settings['graphs'].append(graph)
+        settings['metrics'] = self._loc_from_dict(self.settings["metrics"])
+        settings['graphs'] = self._loc_from_dict(self.settings["graphs"])
 
         # replace log and linear to linlog multiple graph
         if 'linear' in settings['graphs'] and 'log' in settings['graphs']:
