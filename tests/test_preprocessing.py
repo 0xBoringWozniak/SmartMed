@@ -2,6 +2,8 @@ import unittest
 
 import pandas as pd
 
+from backend.modules.dataprep.PandasPreprocessor import PandasPreprocessor
+
 class TestPreprocessing(unittest.TestCase):
     def SetUp(self):
         self.prepocessor = PandasPreprocessor({})
@@ -13,12 +15,12 @@ class TestPreprocessing(unittest.TestCase):
     def test_fillna():
         self.set_df()
         self.prepocessor.__fillna("fill_str")
-        self.assertEqual(self.prepocessor.df.isna().sum() == 0)
+        self.assertEqual(self.prepocessor.df.isna().sum(), 0)
 
         self.set_df()
         self.prepocessor.__fillna("mean")
-        self.assertEqual(self.prepocessor.df.isna().sum() == 0)
+        self.assertEqual(self.prepocessor.df.isna().sum(), 0)
 
         self.set_df()
         self.prepocessor.__fillna("median")
-        self.assertEqual(self.prepocessor.df.isna().sum() == 0)
+        self.assertEqual(self.prepocessor.df.isna().sum(), 0)
