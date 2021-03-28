@@ -14,8 +14,8 @@ class WrappedDownloadWindowCross(DownloadWindowCross, QtWidgets.QMainWindow):
         self.setupUi(self)
         self.__build_buttons()
         self.setWindowTitle('Загрузка данных')
-        self.settings = {'path_test': '', 'path_ref': '' }
-  
+        self.settings = {'path_test': '', 'path_ref': ''}
+
     def __build_buttons(self):
         # плохо с неймингом, надо переделать бек некст
         self.pushButton_.clicked.connect(self.next)
@@ -36,7 +36,7 @@ class WrappedDownloadWindowCross(DownloadWindowCross, QtWidgets.QMainWindow):
             msg.setWindowTitle("Ошибка")
             msg.exec_()
 
-            return 
+            return
         with open('settings.py', 'rb') as f:
             data = pickle.load(f)
             data['MODULE_SETTINGS'].update(self.settings)
@@ -46,10 +46,8 @@ class WrappedDownloadWindowCross(DownloadWindowCross, QtWidgets.QMainWindow):
         self.hide()
         self.child_cross.show()
 
-
     def download(self):
         self.settings['path_test'] = QtWidgets.QFileDialog.getOpenFileName()[0]
-
 
     def download1(self):
         self.settings['path_ref'] = QtWidgets.QFileDialog.getOpenFileName()[0]

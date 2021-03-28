@@ -13,12 +13,12 @@ from .WrappedRocGraphsWindow import WrappedRocGraphsWindow
 #from..StartingApp.WrappedStartingWindow import WrappedStartingWindow
 
 # logging decorator
-import sys
 from SmartMedApp.logs.logger import debug
 
 
 class PredictionApp():
 
+    @debug
     def __init__(self, menu_window):
         self.settings = {}
         self.menu_window = menu_window
@@ -28,7 +28,7 @@ class PredictionApp():
         self.value_window = WrappedValueWindow()
         self.roc_value_window = WrappedRocValueWindow()
         self.roc_anyl_window = WrappedRocAnyl()
-        self.roc_curves_window = WrappedRocCurvesWindow()
+        #self.roc_curves_window = WrappedRocCurvesWindow()
         self.roc_graphs_window = WrappedRocGraphsWindow()
         self.linear_graph_window = WrappedLinearGraphWindow()
         self.tree_features_window = WrappedTreeFeaturesWindow()
@@ -37,6 +37,7 @@ class PredictionApp():
         self.__build_connections(
             [self.menu_window, self.down_window, self.radio_window, self.choice_window])
 
+    @debug
     def __build_connections(self, ordered_windows):
 
         ordered_windows[0].child = ordered_windows[1]
@@ -59,10 +60,8 @@ class PredictionApp():
         self.roc_value_window.parent = self.choice_window
         self.roc_value_window.child = self.roc_anyl_window
         self.roc_anyl_window.parent = self.roc_value_window
-        self.roc_anyl_window.child = self.roc_curves_window
-        self.roc_curves_window.parent = self.roc_anyl_window
-        self.roc_curves_window.child = self.roc_graphs_window
-        self.roc_graphs_window.parent = self.roc_curves_window
+        self.roc_anyl_window.child = self.roc_graphs_window
+        self.roc_graphs_window.parent = self.roc_anyl_window
         self.roc_graphs_window.child = self.menu_window
 
         self.choice_window.child_tree = self.tree_features_window
@@ -71,13 +70,13 @@ class PredictionApp():
         self.tree_visual_window.parent = self.tree_features_window
         self.tree_visual_window.child = self.menu_window
 
-
         #self.choice_window.child_regression = self.regression_value_window
         #self.regression_value_window.parent_regression = self.choice_window
         #self.choice_window.child_rock = self.rock_value_window
         #self.rock_value_window.parent_rock = self.choice_window
         #self.regression_value_window.child_linear = self.linear_graph_window
-        #self.linear_graph_window.parent_linear = self.
+        # self.linear_graph_window.parent_linear = self.
+
     @debug
     def start(self):
         self.down_window.show()

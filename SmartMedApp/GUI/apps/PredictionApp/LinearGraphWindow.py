@@ -55,10 +55,10 @@ class LinearGraphWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите, какие таблицы и графики Вы хотите увидеть:</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите таблицы и графики</span></p></body></html>"))
         self.checkBoxQuality.setText(_translate("MainWindow", "  Таблица с критериями качества построенной модели"))
         self.checkBoxSignif.setText(_translate("MainWindow", "  Таблица с критериями значимости для каждой \n "
-"  независимой переменной"))
+" независимой переменной"))
         self.checkBoxEq.setText(_translate("MainWindow", "  Полученное уравнение регрессии с возможностью  \n  ввода собственных переменных"))
         self.checkBoxResid.setText(_translate("MainWindow", "  Таблица с анализами остатков"))
         self.checkBoxDistribResid.setText(_translate("MainWindow", "  Графики распределения остатков "))

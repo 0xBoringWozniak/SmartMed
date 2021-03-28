@@ -1,15 +1,16 @@
 import pickle
+import threading
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .GraphsWindowCross import GraphsWindowCross
-from SmartMedApp.backend import ModuleManipulator
 from ..WaitingSpinnerWidget import QtWaitingSpinner
 from PyQt5.QtCore import QTimer, QEventLoop
 from ..utils import remove_if_exists
-import threading
+
+from SmartMedApp.backend import ModuleManipulator
 
 
 class WrappedGraphsWindowCross(GraphsWindowCross, QtWidgets.QMainWindow):
@@ -24,11 +25,9 @@ class WrappedGraphsWindowCross(GraphsWindowCross, QtWidgets.QMainWindow):
         self.checkBoxLogAllinGroup.setChecked(True)
         self.checkBoxForEachGroup.setChecked(True)
 
-        self.settings = {'graphs' : {'indiv_concet': True,
+        self.settings = {'graphs': {'indiv_concet': True,
                                     'avg_concet': True,
                                     'gen_concet': True}}
-
-
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
@@ -43,7 +42,7 @@ class WrappedGraphsWindowCross(GraphsWindowCross, QtWidgets.QMainWindow):
             self.settings['graphs']['indiv_concet'] = True
         else:
             self.checkBoxAllinGroup.setChecked(False)
-            self.settings['graphs']['indiv_concet']  = False
+            self.settings['graphs']['indiv_concet'] = False
 
     def avg_concet(self):
         if self.checkBoxLogAllinGroup.isChecked():
@@ -51,16 +50,15 @@ class WrappedGraphsWindowCross(GraphsWindowCross, QtWidgets.QMainWindow):
             self.settings['graphs']['avg_concet'] = True
         else:
             self.checkBoxLogAllinGroup.setChecked(False)
-            self.settings['graphs']['avg_concet']  = False
-
+            self.settings['graphs']['avg_concet'] = False
 
     def gen_concet(self):
-        if self.checkBoxLogForEachGroup.isChecked():
-            self.checkBoxLogForEachGroup.setChecked(True)
+        if self.checkBoxForEachGroup.isChecked():
+            self.checkBoxForEachGroup.setChecked(True)
             self.settings['graphs']['gen_concet'] = True
         else:
-            self.checkBoxLogForEachGroup.setChecked(False)
-            self.settings['graphs']['gen_concet']  = False
+            self.checkBoxForEachGroup.setChecked(False)
+            self.settings['graphs']['gen_concet'] = False
 
     def back(self):
         self.hide()
@@ -72,7 +70,7 @@ class WrappedGraphsWindowCross(GraphsWindowCross, QtWidgets.QMainWindow):
         settings['MODULE_SETTINGS'].update(self.settings)
         with open('settings.py', 'wb') as f:
             pickle.dump(settings, f)
-        
+
         module_starter = ModuleManipulator(settings)
         threading.Thread(target=module_starter.start, daemon=True).start()
         self.spinner = QtWaitingSpinner(self)
@@ -86,4 +84,3 @@ class WrappedGraphsWindowCross(GraphsWindowCross, QtWidgets.QMainWindow):
         self.hide()
         self.child_cross.show()
         remove_if_exists()
-

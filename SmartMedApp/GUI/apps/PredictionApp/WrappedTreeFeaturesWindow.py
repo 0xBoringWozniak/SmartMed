@@ -1,5 +1,6 @@
 import pickle
 import threading
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
@@ -22,7 +23,6 @@ class WrappedTreeFeaturesWindow(TreeFeaturesWindow, QtWidgets.QMainWindow):
         self.checkBox.clicked.connect(self.sort)
         self.setWindowTitle(' ')
 
-
     def back(self):
         self.hide()
         self.parent.show()
@@ -38,7 +38,7 @@ class WrappedTreeFeaturesWindow(TreeFeaturesWindow, QtWidgets.QMainWindow):
     def next(self):
         depth = self.lineEdit.text()
         min_sample_number = self.lineEdit_2.text()
-        features_count = self.lineEdit_3.text() 
+        features_count = self.lineEdit_3.text()
         with open('settings.py', 'rb') as f:
             data = pickle.load(f)
             data['MODULE_SETTINGS'].update({'tree_depth': depth,
@@ -49,6 +49,3 @@ class WrappedTreeFeaturesWindow(TreeFeaturesWindow, QtWidgets.QMainWindow):
             pickle.dump(data, f)
         self.hide()
         self.child.show()
-
-
-        

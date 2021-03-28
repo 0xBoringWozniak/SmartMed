@@ -7,7 +7,6 @@ from PyQt5.QtWidgets import (
 from .TablesWindowCross import TablesWindowCross
 
 
-
 class WrappedTablesWindowCross(TablesWindowCross, QtWidgets.QMainWindow):
 
     def __init__(self):
@@ -15,15 +14,14 @@ class WrappedTablesWindowCross(TablesWindowCross, QtWidgets.QMainWindow):
         self.setupUi(self)
         self.__build_buttons()
         self.setWindowTitle('Результаты')
-        
+
         self.checkBoxFeatures.setChecked(True)
         self.checkBoxCriteria.setChecked(True)
         self.checkBox.setChecked(True)
-        
-        self.settings = {'tables' : {'avg_auc': True,
+
+        self.settings = {'tables': {'avg_auc': True,
                                     'anal_resylts': True,
                                     'results': True}}
-
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
@@ -57,7 +55,6 @@ class WrappedTablesWindowCross(TablesWindowCross, QtWidgets.QMainWindow):
             self.checkBox.setChecked(False)
             self.settings['tables']['results'] = False
 
-
     def back(self):
         self.hide()
         self.parent_cross.show()
@@ -71,4 +68,3 @@ class WrappedTablesWindowCross(TablesWindowCross, QtWidgets.QMainWindow):
             pickle.dump(settings, f)
         self.hide()
         self.child_cross.show()
-

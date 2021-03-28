@@ -1,18 +1,18 @@
 import numpy as np
-from sklearn.linear_model import LogisticRegression
-from sklearn import preprocessing
+from sklearn.linear_model import LinearRegression
+import sklearn.metrics as sm
+from scipy import stats
+import pandas as pd
 
 from .ModelInterface import Model
 
 
 class LogisticRegressionModel(Model):
-    
+
     def __init__(self, x, y):
-        self.model = LogisticRegression()
-        le = preprocessing.LabelEncoder()
-        y = le.fit_transform(y)
+        self.model = LinearRegression()
         super().__init__(x, y)
-    
+
     def score(self) -> float:
         return self.model.score(self.x, self.y)
 
@@ -124,9 +124,7 @@ class LogisticRegressionModel(Model):
         df2_X.insert(0, '1', np.ones((df2_X.shape[0], 1)))
         sd = np.sqrt(s * (np.diag(np.linalg.pinv(np.dot(df2_X.T, df2_X)))))
         def_t_stat = []
-        print(len(def_b))
         for i in range(len(def_b)):
-            print(i)
             def_t_stat.append(def_b[i] / sd[i])
         return def_t_stat
 

@@ -1,5 +1,6 @@
 import pickle
 import threading
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
@@ -20,11 +21,11 @@ class WrappedRocAnyl(RocAnyl, QtWidgets.QMainWindow):
         self.checkBoxTrashhold.setChecked(True)
         self.setWindowTitle('Метрики')
         self.settings = {'accuracy': True,
-                            'confidence': True,
-                            'F':True,
-                            'precision':True,
-                            'recall': True,
-                            'trashhold':True}
+                         'confidence': True,
+                         'F': True,
+                         'precision': True,
+                         'recall': True,
+                         'trashhold': True}
         self.__build_buttons()
 
     def __build_buttons(self):
@@ -55,4 +56,3 @@ class WrappedRocAnyl(RocAnyl, QtWidgets.QMainWindow):
             pickle.dump(data, f)
         self.hide()
         self.child.show()
-        

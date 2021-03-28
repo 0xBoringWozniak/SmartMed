@@ -1,7 +1,8 @@
 import pickle
 
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import (QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
+from PyQt5.QtWidgets import (
+    QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
 
 from .StartingWindow import *
 from ..StatisticsApp.StatisticsAppController import StatisticsApp

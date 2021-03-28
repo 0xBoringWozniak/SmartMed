@@ -1,8 +1,9 @@
 import numpy as np
-from sklearn.linear_model import LinearRegression
 import sklearn.metrics as sm
 from scipy import stats
 import pandas as pd
+
+from sklearn.linear_model import LinearRegression
 
 from .ModelInterface import Model
 
@@ -80,7 +81,8 @@ class LinearRegressionModel(Model):
         df2_X_T = df2_X.values.transpose()
         return np.linalg.inv(np.dot(df2_X_T, df2_X))
 
-    def get_cov_matrix_2(self, df_X):  # обратная ковариационная матрица для расстояний Махалонобиса
+    # обратная ковариационная матрица для расстояний Махалонобиса
+    def get_cov_matrix_2(self, df_X):
         df2_X = df_X.copy()
         df2_X_T = df2_X.values.transpose()
         return np.linalg.inv(np.dot(df2_X_T, df2_X))
@@ -91,7 +93,8 @@ class LinearRegressionModel(Model):
             if def_b[i] > 0:
                 def_st += ' + ' + str(round(def_b[i], 3)) + 'X(' + str(i) + ')'
             else:
-                def_st += ' - ' + str(round(abs(def_b[i]), 3)) + 'X(' + str(i) + ')'
+                def_st += ' - ' + \
+                    str(round(abs(def_b[i]), 3)) + 'X(' + str(i) + ')'
         def_st += ', где:'  # \nX(0)-константа'
         uravlist = [def_st]
         uravlist.append('\n')
@@ -139,13 +142,15 @@ class LinearRegressionModel(Model):
 
     def get_R2_adj(self, def_df_X, def_df_Y, def_predict_Y):  # R^2 adjusted
         return 1 - (1 - sm.r2_score(def_df_Y, def_predict_Y)) * (
-                (len(def_df_X) - 1) / (len(def_df_X) - def_df_X.shape[1] - 1))
+            (len(def_df_X) - 1) / (len(def_df_X) - def_df_X.shape[1] - 1))
 
     def get_Fst(self, def_df_X, def_df_Y, def_predict_Y):  # F-статистика
         r2 = sm.r2_score(def_df_Y, def_predict_Y)
         return r2 / (1 - r2) * (len(def_df_X) - def_df_X.shape[1] - 1) / def_df_X.shape[1]
 
     def p_values(self, def_df_X, def_t_stat):
-        newX = pd.DataFrame({"Constant": np.ones(def_df_X.shape[0])}).join(def_df_X)
-        p_values = [2 * (1 - stats.t.cdf(np.abs(i), (len(newX) - len(newX.columns) - 1))) for i in def_t_stat]
+        newX = pd.DataFrame(
+            {"Constant": np.ones(def_df_X.shape[0])}).join(def_df_X)
+        p_values = [2 * (1 - stats.t.cdf(np.abs(i), (len(newX) -
+                                                     len(newX.columns) - 1))) for i in def_t_stat]
         return p_values

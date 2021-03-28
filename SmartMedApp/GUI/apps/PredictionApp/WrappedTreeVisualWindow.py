@@ -1,14 +1,17 @@
 import pickle
 import threading
+
+from PyQt5.QtCore import QTimer, QEventLoop
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
 
 from .TreeVisualWindow import TreeVisualWindow
-from SmartMedApp.backend import ModuleManipulator
 from ..utils import remove_if_exists
 from ..WaitingSpinnerWidget import QtWaitingSpinner
-from PyQt5.QtCore import QTimer, QEventLoop
+
+from SmartMedApp.backend import ModuleManipulator
+
 
 class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
 
@@ -55,8 +58,6 @@ class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
             self.checkBoxValue.setChecked(False)
             self.settings['indicators'] = False
 
-
-
     def back(self):
         self.hide()
         self.parent.show()
@@ -82,6 +83,3 @@ class WrappedTreeVisualWindow(TreeVisualWindow, QtWidgets.QMainWindow):
         loop.exec_()
         self.spinner.stop()
         print(data)
-        
-
-        

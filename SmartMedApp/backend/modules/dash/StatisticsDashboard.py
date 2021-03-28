@@ -9,7 +9,7 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 
-from .markdown_text import *
+from .text.markdown_text import *
 
 from .Dashboard import Dashboard
 
@@ -63,6 +63,7 @@ class StatisticsDashboard(Dashboard):
                 )],style={'border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px','margin':'5px'})
                 ], style={'margin':'50px'}
             )
+
 
     def _generate_linear(self):
 
@@ -126,6 +127,7 @@ class StatisticsDashboard(Dashboard):
                 html.Div(dcc.Markdown(children=markdown_text_scatter), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])
             ], style={'margin':'100px'})
 
+
     def _generate_heatmap(self):
         df = self.pp.get_numeric_df(self.settings['data']).copy()
         numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
@@ -140,6 +142,7 @@ class StatisticsDashboard(Dashboard):
                 ),style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
                 html.Div(dcc.Markdown(children=markdown_text_heatmap), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])
             ], style={'margin':'100px'})
+
 
     def _generate_corr(self, max_rows=10):
         df = self.pp.get_numeric_df(self.settings['data'])
@@ -180,6 +183,7 @@ class StatisticsDashboard(Dashboard):
                 ], style={'margin':'50px'}
             )
 
+
     def _generate_box(self):
         df = self.pp.get_numeric_df(self.settings['data'])
         #df.rename(columns=lambda x: x[:11], inplace=True)
@@ -192,6 +196,7 @@ class StatisticsDashboard(Dashboard):
                 ),style={'width': '78%', 'display': 'inline-block','border-color':'rgb(220, 220, 220)','border-style': 'solid','padding':'5px'}),
                 html.Div(dcc.Markdown(children=markdown_text_box), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})])
             ], style={'margin':'100px'})
+
 
     def _generate_hist(self):
         def update_hist(xaxis_column_name_hist):
@@ -270,6 +275,7 @@ class StatisticsDashboard(Dashboard):
             html.Div(dcc.Markdown(children=markdown_text_log), style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], style={'margin':'100px'}
         )
 
+
     def _generate_linlog(self):
 
         def update_graph(xaxis_column_name_linlog, yaxis_column_name_linlog,
@@ -339,6 +345,7 @@ class StatisticsDashboard(Dashboard):
         def update_pie(xaxis_column_name_pie):
             df_counts = df[xaxis_column_name_pie].value_counts()
             df_unique = df[xaxis_column_name_pie].unique()
+
             fig = px.pie(
                 df, values=df_counts, names=df_unique)
             fig.update_xaxes(title=xaxis_column_name_pie)
@@ -378,6 +385,7 @@ class StatisticsDashboard(Dashboard):
                              children='Ошибка: невозможно построить круговую диаграмму, т.к. нет категориальных данных.'),
                              style={'width': '80%', 'display': 'inline-block'})],
                         style={'margin': '100px'})
+
 
     def _generate_dotplot(self):
         df = self.settings['data']
@@ -447,6 +455,7 @@ class StatisticsDashboard(Dashboard):
         df = self.pp.get_numeric_df(self.settings['data'])
         fig_hist = px.histogram(df)
         fig_box = px.box(df)
+
         def update_hist(xaxis_column_name_box_hist):
             fig_hist = px.histogram(
                 self.settings['data'], x=xaxis_column_name_box_hist)
@@ -493,118 +502,5 @@ class StatisticsDashboard(Dashboard):
                          html.Div(dcc.Markdown(children=markdown_text_histbox),style={'width': '18%', 'float': 'right',
                                                             'display': 'inline-block'})],style={'margin': '100px'})
 
-    def _generate_pivot(self):
-        available_indicators_cat = self.pp.get_categorical_df(self.settings['data']).columns.unique()
-        available_indicators_num = self.pp.get_numeric_df(self.settings['data']).columns.unique()
-        df = self.settings['data']
-        if len(available_indicators_cat) > 1:
-
-            def df_for_dash_func(table, indexes_pivot):
-                df_for_dash = pd.DataFrame()
-                print(table)
-                print(table.index)
-                print(table.columns.names)
-                '''
-                for i in range(len(indexes_pivot)):
-                    if type(table.index[0]==str):
-                        df_for_dash[indexes_pivot[i]] = [x for x in table.index]
-                    else:
-                        df_for_dash[indexes_pivot[i]] = [x[i] for x in table.index]
-                '''
-                
-                for i in range(1, len(table.columns.names)):
-                    val = []
-                    for j in table.columns:
-                        for elem in [j[i]] * table.shape[0]:
-                            val.append(elem)
-                    df_for_dash[table.columns.names[i]] = val
-
-                values = []
-                for column in table.columns[1]:
-                    for val in table[column].values:
-                        values.append(val)
-                df_for_dash['values'] = values
-                '''
-                for column in table.columns:
-                    df_for_dash[column[-1]] = table[column].values
-                '''
-
-                return df_for_dash
-
-            def update_pivot(columns_pivot, indexes_pivot, values_pivot, aggfunc_pivot):
-                to_func = {'Среднее' : np.mean, 'Сумма' : np.sum, 'Минимум' : np.min, 'Максимум' : np.max,
-                'Мода' : np.mod}
-                table = pd.pivot_table(df, values=values_pivot, index=indexes_pivot,
-                        columns=columns_pivot, aggfunc=to_func[aggfunc_pivot])
-                df_for_dash = df_for_dash_func(table, indexes_pivot)
-                return df_for_dash.to_dict('records'), [{'name' : i, 'id' : i, 'deletable' : True} for i in df_for_dash.columns]
-
-            self.app.callback(dash.dependencies.Output('pivot', 'data'),
-                            dash.dependencies.Output('pivot', 'columns'),
-                              [dash.dependencies.Input('columns_pivot', 'value'),
-                              dash.dependencies.Input('indexes_pivot', 'value'),
-                              dash.dependencies.Input('values_pivot', 'value'),
-                              dash.dependencies.Input('aggfunc_pivot', 'value')
-                              ])(update_pivot)
-
-
-
-
-            return html.Div([html.Div(html.H1(children='Сводная таблица'), style={'text-align': 'center'}),
-                            html.Div([
-                                html.Div([dcc.Markdown(children="Выберите индексы сводной таблицы:"),
-                            dcc.Checklist(
-                                id = 'columns_pivot',
-                                options= [{'label' : available_indicators_cat[i], 
-                                'value' : available_indicators_cat[i]} for i in range(len(available_indicators_cat))],
-                                value=[available_indicators_cat[0]]
-                             )], style={'width': '48%', 'display': 'inline-block'}),
-                            html.Div([dcc.Markdown(children="Выберите столбцы сводной таблицы:"),
-                            dcc.Checklist(
-                                id = 'indexes_pivot',
-                                options= [{'label' : available_indicators_cat[i], 
-                                'value' : available_indicators_cat[i]} for i in range(len(available_indicators_cat))],
-                                value=[available_indicators_cat[1]]
-                             )], style={'width': '48%', 'float': 'right', 'display': 'inline-block'}),
-                             html.Div([
-                                        dcc.Markdown(children="Выберите столбец для агрегирования:"),
-                                        dcc.Dropdown(
-                                            id='values_pivot',
-                                            options=[{'label': i, 'value': i}
-                                                     for i in available_indicators_num],
-                                            value=[available_indicators_num[0]]
-                                        )
-
-                                    ], style={'width': '48%', 'display': 'inline-block', 'padding': '5px'}),
-                            
-                                html.Div([
-                                        dcc.Markdown(children="Выберите функцию агрегирования:"),
-                                        dcc.Dropdown(
-                                            id='aggfunc_pivot',
-                                            options=[{'label': 'Среднее', 'value': 'Среднее'},
-                                            {'label': 'Сумма', 'value': 'Сумма'},
-                                            {'label': 'Минимум', 'value': 'Минимум'},
-                                            {'label': 'Максимум', 'value': 'Максимум'},
-                                            {'label': 'Мода', 'value': 'Мода'}],
-                                            value='Среднее'
-                                        )
-                                    ], style={'width': '48%', 'float': 'right', 'display': 'inline-block', 'padding': '5px'}),
-                                dash_table.DataTable(
-                                id = 'pivot',
-                                style_table={'overflowX': 'auto'},
-                                export_format='xlsx'
-                            )
-                                ],
-                                 style={'width': '78%', 'display': 'inline-block', 'border-color': 'rgb(220, 220, 220)',
-                                        'border-style': 'solid', 'padding': '5px'}),
-                             html.Div(dcc.Markdown(children=markdown_text_pivot),
-                                      style={'width': '18%', 'float': 'right', 'display': 'inline-block'})],
-                            style={'margin': '100px'}
-                            )
-        else:
-            return html.Div([html.Div(html.H1(children='Сводная таблица'), style={'text-align': 'center'}),
-                         html.Div(dcc.Markdown(
-                             children='Ошибка: невозможно построить сводную таблицу, т.к. недостаточно категориальных данных.'),
-                             style={'width': '80%', 'display': 'inline-block'})
-                        ], style={'margin': '100px'})
+    
 

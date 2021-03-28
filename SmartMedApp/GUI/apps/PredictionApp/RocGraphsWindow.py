@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'RocGraphsWindow.ui'
+# Form implementation generated from reading ui file 'rocgraph.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.0
 #
@@ -17,37 +17,36 @@ class RocGraphsWindow(object):
         MainWindow.resize(600, 480)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(110, 30, 401, 61))
-        self.label.setObjectName("label")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(80, 110, 501, 231))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(120, 100, 451, 241))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.checkBox_2 = QtWidgets.QCheckBox(self.verticalLayoutWidget)
-        self.checkBox_2.setChecked(True)
         self.checkBox_2.setObjectName("checkBox_2")
         self.verticalLayout.addWidget(self.checkBox_2)
         self.checkBox_4 = QtWidgets.QCheckBox(self.verticalLayoutWidget)
-        self.checkBox_4.setChecked(True)
         self.checkBox_4.setObjectName("checkBox_4")
         self.verticalLayout.addWidget(self.checkBox_4)
         self.checkBox_3 = QtWidgets.QCheckBox(self.verticalLayoutWidget)
-        self.checkBox_3.setChecked(True)
         self.checkBox_3.setObjectName("checkBox_3")
         self.verticalLayout.addWidget(self.checkBox_3)
         self.checkBox = QtWidgets.QCheckBox(self.verticalLayoutWidget)
-        self.checkBox.setChecked(True)
         self.checkBox.setObjectName("checkBox")
         self.verticalLayout.addWidget(self.checkBox)
-        self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
-        self.pushButtonBack.setObjectName("pushButtonBack")
+        self.checkBox_9 = QtWidgets.QCheckBox(self.verticalLayoutWidget)
+        self.checkBox_9.setObjectName("checkBox_9")
+        self.verticalLayout.addWidget(self.checkBox_9)
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(70, 30, 271, 51))
+        self.label.setObjectName("label")
         self.pushButtonDone = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonDone.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonDone.setObjectName("pushButtonDone")
+        self.pushButtonBack = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
+        self.pushButtonBack.setObjectName("pushButtonBack")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -56,11 +55,14 @@ class RocGraphsWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Выбор дополнительных графиков и таблиц</span></p></body></html>"))
-        self.checkBox_2.setText(_translate("MainWindow", "Таблица со значениями каждой точки, по которым строились кривые "))
-        self.checkBox_4.setText(_translate("MainWindow", "Таблица со значениями AUC и остальных метрик, выбранных ранее"))
-        self.checkBox_3.setText(_translate("MainWindow", "График пересечения чуувствительности и специфичности"))
-        self.checkBox.setText(_translate("MainWindow", "Таблица с точками построение графика пересечения чувствительности \n"
-" и специфичности"))
-        self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
+        self.checkBox_2.setText(_translate("MainWindow", "  Таблица со значениями каждой точки, по которым \n"
+"  строились кривые "))
+        self.checkBox_4.setText(_translate("MainWindow", "  Таблица со значениями AUC и остальными метриками,\n"
+"  выбранными ранее"))
+        self.checkBox_3.setText(_translate("MainWindow", "  График пересечения чувствительности и специфичности "))
+        self.checkBox.setText(_translate("MainWindow", "  Таблица с точками построения графика  \n"
+"  пересечения чувствительности и специфичности"))
+        self.checkBox_9.setText(_translate("MainWindow", "  Сравнение классификаторов"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите графики и таблицы</span></p></body></html>"))
         self.pushButtonDone.setText(_translate("MainWindow", "Завершить"))
+        self.pushButtonBack.setText(_translate("MainWindow", "Назад"))
