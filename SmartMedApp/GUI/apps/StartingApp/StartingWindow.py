@@ -57,7 +57,7 @@ class StartingWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите способ анализа</span></p><p><span style=\" font-size:18pt;\"><br/></span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:13pt;\">Выберите способ анализа</span></p><p><span style=\" font-size:18pt;\"><br/></span></p></body></html>"))
         self.pushButtonDone.setText(_translate("MainWindow", "Завершить"))
         self.pushButtonStat.setText(_translate("MainWindow", "Описательный анализ"))
         self.pushButtonBioeq.setText(_translate("MainWindow", "Биоэквивалентность"))

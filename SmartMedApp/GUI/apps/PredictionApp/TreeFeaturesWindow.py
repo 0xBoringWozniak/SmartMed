@@ -18,7 +18,7 @@ class TreeFeaturesWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(70, 30, 301, 51))
+        self.label_2.setGeometry(QtCore.QRect(70, 30, 401, 51))
         self.label_2.setObjectName("label_2")
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(70, 160, 231, 16))
@@ -59,7 +59,7 @@ class TreeFeaturesWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите значения параметров:</span></p></body></html>"))
+        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:13pt;\">Выберите значения параметров:</span></p></body></html>"))
         self.label_3.setText(_translate("MainWindow", "<html><head/><body><p>минимальное количество выборок:</p></body></html>"))
         self.label_4.setText(_translate("MainWindow", "<html><head/><body><p>число признаков для поиска лучшей </p><p>точки разбиения:</p><p><br/></p></body></html>"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p>максимальная глубина дерева:<br/></p></body></html>"))

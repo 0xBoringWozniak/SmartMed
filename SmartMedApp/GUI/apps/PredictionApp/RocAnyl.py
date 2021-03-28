@@ -18,7 +18,7 @@ class RocAnyl(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(70, 35, 441, 41))
+        self.label.setGeometry(QtCore.QRect(70, 35, 461, 41))
         self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(130, 140, 341, 21))
@@ -61,7 +61,7 @@ class RocAnyl(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите метрики,  которые хотите увидеть</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:13pt;\">Выберите метрики,  которые хотите увидеть</span></p></body></html>"))
       
         self.checkBoxTrashhold.setText(_translate("MainWindow", "  Оптимальный порог отсечения"))
         self.checkBoxRecall.setText(_translate("MainWindow", "  Полнота"))

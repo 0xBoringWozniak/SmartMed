@@ -49,7 +49,7 @@ class GraphsWindowCross(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите графики для визуализации</span></p></body></html>"))
+        self.label_2.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:13pt;\">Выберите графики для визуализации</span></p></body></html>"))
         self.checkBoxLogAllinGroup.setText(_translate("MainWindow", "  Индивидуальные графики для пациентов \n"
 "  c концентрациями обоих препаратов"))
         self.checkBoxAllinGroup.setText(_translate("MainWindow", "  Графики со средними концентрациями \n"

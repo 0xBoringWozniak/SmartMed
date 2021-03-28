@@ -49,7 +49,7 @@ class TreeVisualWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите таблицы и графики </span></p><p><span style=\" font-size:18pt;\"></span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:13pt;\">Выберите таблицы и графики </span></p><p><span style=\" font-size:18pt;\"></span></p></body></html>"))
         self.checkBoxTree.setText(_translate("MainWindow", "  Графическое преставление дерева"))
         self.checkBoxTablr.setText(_translate("MainWindow", "  Классификационная таблица, в которой наблюдаемые показатели\n  "
 "противопоставляются предсказанным "))

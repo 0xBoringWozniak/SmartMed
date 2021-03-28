@@ -18,7 +18,7 @@ class RocCurvesWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(100, 60, 421, 61))
+        self.label.setGeometry(QtCore.QRect(100, 60, 481, 61))
         self.label.setObjectName("label")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(150, 160, 331, 121))
@@ -49,7 +49,7 @@ class RocCurvesWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt;\">Выбор параметров отображения ROC кривых</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:13pt;\">Выбор параметров отображения ROC кривых</span></p></body></html>"))
         self.checkBoxAuc.setText(_translate("MainWindow", "ROC AUC"))
         self.checkBoxDiff.setText(_translate("MainWindow", "Построить кривые на отдельных графиках"))
         self.checkBoxPaint.setText(_translate("MainWindow", "Закрасить площадь под графиком"))

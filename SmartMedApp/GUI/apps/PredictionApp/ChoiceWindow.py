@@ -18,7 +18,7 @@ class ChoiceWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(70, 30, 321, 71))
+        self.label.setGeometry(QtCore.QRect(70, 30, 391, 71))
         self.label.setObjectName("label")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(140, 130, 341, 201))
@@ -55,7 +55,7 @@ class ChoiceWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Для начала основого этапа выберите</span></p><p><span style=\" font-size:18pt;\"> одну из регрессионных моделей:</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:13pt;\">Для начала основого этапа выберите</span></p><p><span style=\" font-size:13pt;\"> одну из регрессионных моделей:</span></p></body></html>"))
         self.radioButtonLinear.setText(_translate("MainWindow", "  Множественная(линейная) регрессия"))
         self.radioButtonLogit.setText(_translate("MainWindow", "  Логистическая регрессия"))
         self.radioButtonTree.setText(_translate("MainWindow", "  Деревья классификации"))

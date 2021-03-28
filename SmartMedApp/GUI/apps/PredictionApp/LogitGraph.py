@@ -52,7 +52,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:18pt;\">Выберите, какие таблицы и графики Вы бы хотели увидеть:</span></p></body></html>"))
+        self.label.setText(_translate("MainWindow", "<html><head/><body><p><span style=\" font-size:13pt;\">Выберите, какие таблицы и графики Вы бы хотели увидеть:</span></p></body></html>"))
         self.checkBoxQuality.setText(_translate("MainWindow", "Таблица с критериями качества построенной модели"))
         self.checkBoxSignif.setText(_translate("MainWindow", "Таблица с критериями значимости \n"
 " для каждой независимой переменной"))
