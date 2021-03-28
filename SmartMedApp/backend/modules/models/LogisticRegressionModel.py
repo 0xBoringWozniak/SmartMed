@@ -1,8 +1,9 @@
 import numpy as np
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression, LogisticRegression
 import sklearn.metrics as sm
 from scipy import stats
 import pandas as pd
+from sklearn.feature_selection import chi2
 
 from .ModelInterface import Model
 
@@ -10,19 +11,18 @@ from .ModelInterface import Model
 class LogisticRegressionModel(Model):
 
     def __init__(self, x, y):
-        self.model = LinearRegression()
+        self.model = LogisticRegression()
         super().__init__(x, y)
 
     def score(self) -> float:
         return self.model.score(self.x, self.y)
 
+    #def chi2(self, def_dfX, def_ytrue):
+    #    return chi2(def_dfX, def_ytrue)
+
+
     def get_resid(self) -> np.array:
         return self.model.coef_
-
-    def _test(self):
-        x = 5
-        print('LinearRegressionModel test', 2 * x)
-        return x
 
     def predict(self, x: np.array) -> float:  # предсказанное значение для числа или списка
         return self.model.predict(x)
