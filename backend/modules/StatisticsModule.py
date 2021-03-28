@@ -15,7 +15,7 @@ class StatisticsModule(Module, StatisticsDashboard):
     def _prepare_dashboard_settings(self):
         settings = dict()
 
-        # prepare metrics as names list from str -> bool
+        # prepare metrics and graphs as names list from str -> bool
         settings['metrics'] = self._loc_from_dict(self.settings["metrics"])
         settings['graphs'] = self._loc_from_dict(self.settings["graphs"])
 
