@@ -16,10 +16,9 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
         self.setWindowTitle('Предобработка данных')
         self.__build_buttons()
         self.setWindowTitle('Предобработка данных')
-        self.comboBox.addItems(["Средним/модой (численные/категориальные значения)",
-                                 "Введенным значением (требуется ввод для каждого столбца отдельно)",
-                                 "Удаление строк с пропущенными значениями",
-                                 "Медианной/модой (численные/категориальные значения)"
+        self.comboBox.addItems(["Средним/модой",
+                                 "Удаление строк",
+                                 "Медианной/модой"
                                  ])
         self.settings = {'preprocessing': {
             'fillna': 'mean',
@@ -40,8 +39,6 @@ class WrappedRadioWindow(RadioWindow, QtWidgets.QMainWindow):
         value_na = self.comboBox.currentText()
         if value_na == 'Средним/модой (численные/категориальные значения)':
             self.settings['fillna'] = 'mean'
-        elif value_na == 'Введенным значением (требуется ввод для каждого столбца отдельно)':
-            self.settings['fillna'] = 'exact_value'
         elif value_na == 'Удаление строк с пропущенными значениями':
             self.settings['fillna'] = 'dropna'
         else:

@@ -21,7 +21,7 @@ class GraphsWindow(object):
         self.label_2.setGeometry(QtCore.QRect(35, 25, 461, 71))
         self.label_2.setObjectName("label_2")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(110, 140, 421, 181))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(110, 140, 491, 181))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)

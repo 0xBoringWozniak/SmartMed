@@ -21,7 +21,7 @@ class LinearGraphWindow(object):
         self.label.setGeometry(QtCore.QRect(70, 30, 511, 41))
         self.label.setObjectName("label")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(110, 120, 418, 211))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(110, 120, 488, 211))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)

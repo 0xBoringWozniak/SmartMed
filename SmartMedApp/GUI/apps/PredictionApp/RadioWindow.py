@@ -27,7 +27,7 @@ class RadioWindow(object):
         self.pushButtonNext.setGeometry(QtCore.QRect(460, 420, 113, 32))
         self.pushButtonNext.setObjectName("pushButtonNext")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(70, 30, 381, 51))
+        self.label.setGeometry(QtCore.QRect(70, 30, 481, 51))
         self.label.setObjectName("label")
         self.comboBox = QtWidgets.QComboBox(self.centralwidget)
         self.comboBox.setGeometry(QtCore.QRect(80, 250, 183, 32))

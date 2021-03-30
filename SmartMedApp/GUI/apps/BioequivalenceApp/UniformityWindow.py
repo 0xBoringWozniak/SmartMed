@@ -24,7 +24,7 @@ class UniformityWindow(object):
         self.pushButtonBack.setGeometry(QtCore.QRect(330, 420, 113, 32))
         self.pushButtonBack.setObjectName("pushButtonBack")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(70, 35, 391, 71))
+        self.label.setGeometry(QtCore.QRect(70, 35, 491, 71))
         self.label.setObjectName("label")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(110, 140, 261, 151))

@@ -21,7 +21,7 @@ class TablesWindowCross(object):
         self.label_2.setGeometry(QtCore.QRect(70, 20, 461, 71))
         self.label_2.setObjectName("label_2")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(100, 130, 449, 181))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(100, 130, 499, 181))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
