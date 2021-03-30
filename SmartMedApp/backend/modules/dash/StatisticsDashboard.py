@@ -134,6 +134,7 @@ class StatisticsDashboard(Dashboard):
         df = df.select_dtypes(include=numerics)
         #df.rename(columns=lambda x: x[:11], inplace=True)
         fig = px.imshow(df)
+        fig.update_yaxes(title='Индекс записи в датасете')
         return html.Div([html.Div(html.H1(children='Хитмап'), style={'text-align':'center'}),
             html.Div([
                 html.Div(dcc.Graph(
@@ -188,6 +189,8 @@ class StatisticsDashboard(Dashboard):
         df = self.pp.get_numeric_df(self.settings['data'])
         #df.rename(columns=lambda x: x[:11], inplace=True)
         fig = px.box(df)
+        fig.update_xaxes(title='Переменные')
+        fig.update_yaxes(title='Значения квантилей')
         return html.Div([html.Div(html.H1(children='Ящик с усами'), style={'text-align':'center'}),
             html.Div([
                 html.Div(dcc.Graph(
@@ -203,6 +206,7 @@ class StatisticsDashboard(Dashboard):
             fig = go.Figure(data=go.Histogram(
                 x=self.pp.get_numeric_df(self.settings['data'])[xaxis_column_name_hist]))
             fig.update_xaxes(title=xaxis_column_name_hist)
+            fig.update_yaxes(title='Частота')
             fig.update_layout(bargap=0.1)
 
             return fig
@@ -349,6 +353,7 @@ class StatisticsDashboard(Dashboard):
             fig = px.pie(
                 df, values=df_counts, names=df_unique)
             fig.update_xaxes(title=xaxis_column_name_pie)
+            fig.update_traces(textposition='inside')
             return fig
 
         self.app.callback(dash.dependencies.Output('Pie Chart', 'figure'),
@@ -372,7 +377,7 @@ class StatisticsDashboard(Dashboard):
 
                                  ], style={'width': '48%', 'display': 'inline-block', 'padding': '5px'})
                              ]),
-                             dcc.Graph(id='Pie Chart', figure={'data':fig, 'layout' : {'height' : 750}})], 
+                             dcc.Graph(id='Pie Chart', figure={'data':fig})], 
                              style={'width': '78%', 'display': 'inline-block',
                                                                             'border-color': 'rgb(220, 220, 220)',
                                                                             'border-style': 'solid', 'padding': '5px'}),
@@ -460,6 +465,7 @@ class StatisticsDashboard(Dashboard):
             fig_hist = px.histogram(
                 self.settings['data'], x=xaxis_column_name_box_hist)
             fig_hist.update_xaxes(title=xaxis_column_name_box_hist)
+            fig_hist.update_yaxes(title='Частота')
             fig_hist.update_layout(bargap=0.1)
             return fig_hist
 
@@ -470,7 +476,6 @@ class StatisticsDashboard(Dashboard):
             fig_box = px.box(
                 self.settings['data'], x=xaxis_column_name_box_hist)
             fig_box.update_xaxes(title=xaxis_column_name_box_hist)
-
             return fig_box
 
         self.app.callback(dash.dependencies.Output('Box_boxhist', 'figure'),

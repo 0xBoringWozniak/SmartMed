@@ -289,10 +289,12 @@ class BioequivalenceDashboard(Dashboard):
                               yaxis_column_name_conc_r], name='График'))
                 fig.add_trace(go.Scatter(x=[time[np.argmax(df.loc[
                               yaxis_column_name_conc_r])]], y = [max(df.loc[
-                              yaxis_column_name_conc_r])], mode='markers', fillcolor='violet', name='Максимум'))
+                              yaxis_column_name_conc_r])], mode='markers', name='Максимум',
+                              marker=dict(size = 15, color = 'violet')))
                 fig.add_trace(go.Scatter(x=[time[np.argmin(df.loc[
                               yaxis_column_name_conc_r])]], y = [min(df.loc[
-                              yaxis_column_name_conc_r])], mode='markers', fillcolor='green', name='Минимум'))
+                              yaxis_column_name_conc_r])], mode='markers', name='Минимум',
+                              marker=dict(size = 15, color = 'green')))
                 fig.update_xaxes(title='Время')
                 fig.update_yaxes(title=yaxis_column_name_conc_r,
                                  type='linear')
@@ -327,7 +329,15 @@ class BioequivalenceDashboard(Dashboard):
             def update_graph(yaxis_column_name_conc_t):
                 fig = go.Figure()
                 fig.add_trace(go.Scatter(x=time, y=df.loc[
-                              yaxis_column_name_conc_t]))
+                              yaxis_column_name_conc_t], name='График'))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df.loc[
+                              yaxis_column_name_conc_t])]], y = [max(df.loc[
+                              yaxis_column_name_conc_t])], mode='markers', name='Максимум',
+                              marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df.loc[
+                              yaxis_column_name_conc_t])]], y = [min(df.loc[
+                              yaxis_column_name_conc_t])], mode='markers', name='Минимум',
+                              marker=dict(size = 15, color = 'green')))
                 fig.update_xaxes(title='Время')
                 fig.update_yaxes(title=yaxis_column_name_conc_t,
                                  type='linear')
@@ -364,7 +374,15 @@ class BioequivalenceDashboard(Dashboard):
             def update_graph(yaxis_column_name_conc_r_log):
                 fig = go.Figure()
                 fig.add_trace(go.Scatter(x=time, y=df.loc[
-                              yaxis_column_name_conc_r_log]))
+                              yaxis_column_name_conc_r_log], name='График'))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df.loc[
+                              yaxis_column_name_conc_r_log])]], y = [max(df.loc[
+                              yaxis_column_name_conc_r_log])], mode='markers', name='Максимум',
+                              marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df.loc[
+                              yaxis_column_name_conc_r_log])]], y = [min(df.loc[
+                              yaxis_column_name_conc_r_log])], mode='markers', name='Минимум',
+                              marker=dict(size = 15, color = 'green')))
                 fig.update_xaxes(title='Время')
                 fig.update_yaxes(title=yaxis_column_name_conc_r_log,
                                  type='log')
@@ -399,7 +417,15 @@ class BioequivalenceDashboard(Dashboard):
             def update_graph(yaxis_column_name_conc_t_log):
                 fig = go.Figure()
                 fig.add_trace(go.Scatter(x=time, y=df.loc[
-                              yaxis_column_name_conc_t_log]))
+                              yaxis_column_name_conc_t_log], name='График'))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df.loc[
+                              yaxis_column_name_conc_t_log])]], y = [max(df.loc[
+                              yaxis_column_name_conc_t_log])], mode='markers', name='Максимум',
+                              marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df.loc[
+                              yaxis_column_name_conc_t_log])]], y = [min(df.loc[
+                              yaxis_column_name_conc_t_log])], mode='markers', name='Минимум',
+                              marker=dict(size = 15, color = 'green')))
                 fig.update_xaxes(title='Время')
                 fig.update_yaxes(title=yaxis_column_name_conc_t_log,
                                  type='log')
@@ -436,7 +462,15 @@ class BioequivalenceDashboard(Dashboard):
             def update_graph(yaxis_column_name_conc_r_linlog, yaxis_type_conc_r_linlog):
                 fig = go.Figure()
                 fig.add_trace(go.Scatter(x=time, y=df.loc[
-                              yaxis_column_name_conc_r_linlog]))
+                              yaxis_column_name_conc_r_linlog], name='График'))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df.loc[
+                              yaxis_column_name_conc_r_linlog])]], y = [max(df.loc[
+                              yaxis_column_name_conc_r_linlog])], mode='markers', name='Максимум',
+                              marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df.loc[
+                              yaxis_column_name_conc_r_linlog])]], y = [min(df.loc[
+                              yaxis_column_name_conc_r_linlog])], mode='markers', name='Минимум',
+                              marker=dict(size = 15, color = 'green')))
                 fig.update_xaxes(title='Время')
                 fig.update_yaxes(title=yaxis_column_name_conc_r_linlog,
                                  type=yaxis_type_conc_r_linlog)
@@ -478,7 +512,15 @@ class BioequivalenceDashboard(Dashboard):
             def update_graph(yaxis_column_name_conc_t_linlog, yaxis_type_conc_t_linlog):
                 fig = go.Figure()
                 fig.add_trace(go.Scatter(x=time, y=df.loc[
-                              yaxis_column_name_conc_t_linlog]))
+                              yaxis_column_name_conc_t_linlog], name='График'))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df.loc[
+                              yaxis_column_name_conc_t_linlog])]], y = [max(df.loc[
+                              yaxis_column_name_conc_t_linlog])], mode='markers', name='Максимум',
+                              marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df.loc[
+                              yaxis_column_name_conc_t_linlog])]], y = [min(df.loc[
+                              yaxis_column_name_conc_t_linlog])], mode='markers', name='Минимум',
+                              marker=dict(size = 15, color = 'green')))
                 fig.update_xaxes(title='Время')
                 fig.update_yaxes(title=yaxis_column_name_conc_t_linlog,
                                  type=yaxis_type_conc_t_linlog)
@@ -526,6 +568,22 @@ class BioequivalenceDashboard(Dashboard):
                               yaxis_column_name_conc_tr], name='T'))
                 fig.add_trace(go.Scatter(x=time, y=df_r.loc[
                               yaxis_column_name_conc_tr], name='R'))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df_t.loc[
+                              yaxis_column_name_conc_tr])]], y = [max(df_t.loc[
+                              yaxis_column_name_conc_tr])], mode='markers', name='Максимум T',
+                              marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df_t.loc[
+                              yaxis_column_name_conc_tr])]], y = [min(df_t.loc[
+                              yaxis_column_name_conc_tr])], mode='markers', name='Минимум T',
+                              marker=dict(size = 15, color = 'green')))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df_r.loc[
+                              yaxis_column_name_conc_tr])]], y = [max(df_r.loc[
+                              yaxis_column_name_conc_tr])], mode='markers', name='Максимум R',
+                              marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df_r.loc[
+                              yaxis_column_name_conc_tr])]], y = [min(df_r.loc[
+                              yaxis_column_name_conc_tr])], mode='markers', name='Минимум R',
+                              marker=dict(size = 15, color = 'green')))
                 fig.update_xaxes(title='Время')
                 fig.update_yaxes(title=yaxis_column_name_conc_tr,
                                  type=yaxis_type_conc_tr)
@@ -571,6 +629,22 @@ class BioequivalenceDashboard(Dashboard):
                               yaxis_column_name_conc_rt], name='T'))
                 fig.add_trace(go.Scatter(x=time, y=df_r.loc[
                               yaxis_column_name_conc_rt], name='R'))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df_t.loc[
+                              yaxis_column_name_conc_rt])]], y = [max(df_t.loc[
+                              yaxis_column_name_conc_rt])], mode='markers', name='Максимум T',
+                              marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df_t.loc[
+                              yaxis_column_name_conc_rt])]], y = [min(df_t.loc[
+                              yaxis_column_name_conc_rt])], mode='markers', name='Минимум T',
+                              marker=dict(size = 15, color = 'green')))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df_r.loc[
+                              yaxis_column_name_conc_rt])]], y = [max(df_r.loc[
+                              yaxis_column_name_conc_rt])], mode='markers', name='Максимум R',
+                              marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df_r.loc[
+                              yaxis_column_name_conc_rt])]], y = [min(df_r.loc[
+                              yaxis_column_name_conc_rt])], mode='markers', name='Минимум R',
+                              marker=dict(size = 15, color = 'green')))
                 fig.update_xaxes(title='Время')
                 fig.update_yaxes(title=yaxis_column_name_conc_rt,
                                  type=yaxis_type_conc_rt)
@@ -614,6 +688,14 @@ class BioequivalenceDashboard(Dashboard):
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=time, y=df_r, name='R'))
         fig.add_trace(go.Scatter(x=time, y=df_t, name='T'))
+        fig.add_trace(go.Scatter(x=[time[np.argmax(df_t)]], y = [max(df_t)], mode='markers', name='Максимум T',
+                              marker=dict(size = 15, color = 'violet')))
+        fig.add_trace(go.Scatter(x=[time[np.argmin(df_t)]], y = [min(df_t)], mode='markers', name='Минимум T',
+                              marker=dict(size = 15, color = 'green')))
+        fig.add_trace(go.Scatter(x=[time[np.argmax(df_r)]], y = [max(df_r)], mode='markers', name='Максимум R',
+                              marker=dict(size = 15, color = 'violet')))
+        fig.add_trace(go.Scatter(x=[time[np.argmin(df_r)]], y = [min(df_r)], mode='markers', name='Минимум R',
+                              marker=dict(size = 15, color = 'green')))
         fig.update_xaxes(title='Время')
         fig.update_yaxes(title='Концентрация',
                          type='linear')
@@ -635,6 +717,14 @@ class BioequivalenceDashboard(Dashboard):
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=time, y=df_r, name='R'))
         fig.add_trace(go.Scatter(x=time, y=df_t, name='T'))
+        fig.add_trace(go.Scatter(x=[time[np.argmax(df_t)]], y = [max(df_t)], mode='markers', name='Максимум T',
+                              marker=dict(size = 15, color = 'violet')))
+        fig.add_trace(go.Scatter(x=[time[np.argmin(df_t)]], y = [min(df_t)], mode='markers', name='Минимум T',
+                              marker=dict(size = 15, color = 'green')))
+        fig.add_trace(go.Scatter(x=[time[np.argmax(df_r)]], y = [max(df_r)], mode='markers', name='Максимум R',
+                              marker=dict(size = 15, color = 'violet')))
+        fig.add_trace(go.Scatter(x=[time[np.argmin(df_r)]], y = [min(df_r)], mode='markers', name='Минимум R',
+                              marker=dict(size = 15, color = 'green')))
         fig.update_xaxes(title='Время')
         fig.update_yaxes(title='Концентрация',
                          type='log')
@@ -658,6 +748,14 @@ class BioequivalenceDashboard(Dashboard):
             fig = go.Figure()
             fig.add_trace(go.Scatter(x=time, y=df_r, name='R'))
             fig.add_trace(go.Scatter(x=time, y=df_t, name='T'))
+            fig.add_trace(go.Scatter(x=[time[np.argmax(df_t)]], y = [max(df_t)], mode='markers', name='Максимум T',
+                              marker=dict(size = 15, color = 'violet')))
+            fig.add_trace(go.Scatter(x=[time[np.argmin(df_t)]], y = [min(df_t)], mode='markers', name='Минимум T',
+                              marker=dict(size = 15, color = 'green')))
+            fig.add_trace(go.Scatter(x=[time[np.argmax(df_r)]], y = [max(df_r)], mode='markers', name='Максимум R',
+                              marker=dict(size = 15, color = 'violet')))
+            fig.add_trace(go.Scatter(x=[time[np.argmin(df_r)]], y = [min(df_r)], mode='markers', name='Минимум R',
+                              marker=dict(size = 15, color = 'green')))
             fig.update_xaxes(title='Время')
             fig.update_yaxes(title='Концентрация',
                              type=yaxis_type_conc_linlog_mean)
@@ -692,6 +790,14 @@ class BioequivalenceDashboard(Dashboard):
                 fig = go.Figure()
                 fig.add_trace(go.Scatter(x=time, y=df_t, name='T'))
                 fig.add_trace(go.Scatter(x=time, y=df_r, name='R'))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df_t)]], y = [max(df_t)], mode='markers', name='Максимум T',
+                              marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df_t)]], y = [min(df_t)], mode='markers', name='Минимум T',
+                                  marker=dict(size = 15, color = 'green')))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df_r)]], y = [max(df_r)], mode='markers', name='Максимум R',
+                                  marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df_r)]], y = [min(df_r)], mode='markers', name='Минимум R',
+                                  marker=dict(size = 15, color = 'green')))
                 fig.update_xaxes(title='Время')
                 fig.update_yaxes(type=group_mean_type_tr, title='Концентрация')
                 return fig
@@ -721,6 +827,14 @@ class BioequivalenceDashboard(Dashboard):
                 fig = go.Figure()
                 fig.add_trace(go.Scatter(x=time, y=df_t, name='T'))
                 fig.add_trace(go.Scatter(x=time, y=df_r, name='R'))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df_t)]], y = [max(df_t)], mode='markers', name='Максимум T',
+                              marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df_t)]], y = [min(df_t)], mode='markers', name='Минимум T',
+                              marker=dict(size = 15, color = 'green')))
+                fig.add_trace(go.Scatter(x=[time[np.argmax(df_r)]], y = [max(df_r)], mode='markers', name='Максимум R',
+                              marker=dict(size = 15, color = 'violet')))
+                fig.add_trace(go.Scatter(x=[time[np.argmin(df_r)]], y = [min(df_r)], mode='markers', name='Минимум R',
+                              marker=dict(size = 15, color = 'green')))
                 fig.update_xaxes(title='Время')
                 fig.update_yaxes(type=group_mean_type_rt, title='Концентрация')
                 return fig
@@ -755,6 +869,16 @@ class BioequivalenceDashboard(Dashboard):
                 df_t_1 + df_t_2) / 2, name='T'))
             fig.add_trace(go.Scatter(x=time, y=(
                 df_r_1 + df_r_2) / 2, name='R'))
+            fig.add_trace(go.Scatter(x=[time[np.argmax((df_t_1 + df_t_2) / 2)]], y = [max((df_t_1 + df_t_2) / 2)], 
+                mode='markers', name='Максимум T',
+                              marker=dict(size = 15, color = 'violet')))
+            fig.add_trace(go.Scatter(x=[time[np.argmin((df_t_1 + df_t_2) / 2)]], y = [min((df_t_1 + df_t_2) / 2)],
+                mode='markers', name='Минимум T',
+                              marker=dict(size = 15, color = 'green')))
+            fig.add_trace(go.Scatter(x=[time[np.argmax((df_r_1 + df_r_2) / 2)]], y = [max((df_r_1 + df_r_2) / 2)], mode='markers', name='Максимум R',
+                              marker=dict(size = 15, color = 'violet')))
+            fig.add_trace(go.Scatter(x=[time[np.argmin((df_r_1 + df_r_2) / 2)]], y = [min((df_r_1 + df_r_2) / 2)], mode='markers', name='Минимум R',
+                              marker=dict(size = 15, color = 'green')))
             fig.update_xaxes(title='Время')
             fig.update_yaxes(type=drug_mean_type, title='Концентрация')
             return fig

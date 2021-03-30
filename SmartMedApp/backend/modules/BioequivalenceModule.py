@@ -59,9 +59,9 @@ class BioequivalenceModule(Module, BioequivalenceDashboard):
             if boo:
                 temp_list.append(table)
         if self.settings[0].plan == 'parallel':
-            graph_to_method = {'linlog_each_in_group': [self._generate_concentration_time_linlog(True),
+            graph_to_method = {'linlog_all_in_group': [self._generate_concentration_time_linlog(True),
                                                         self._generate_concentration_time_linlog(False)],
-                               'linlog_all_in_group': self._generate_concentration_time_linlog_mean(),
+                               'linlog_each_in_group': self._generate_concentration_time_linlog_mean(),
                                'all_in_group': [self._generate_concentration_time(True), self._generate_concentration_time(False)],
                                'log_all_in_group': [self._generate_concentration_time_log(True), self._generate_concentration_time_log(False)],
                                'each_in_group': self._generate_concentration_time_mean(),
@@ -76,9 +76,9 @@ class BioequivalenceModule(Module, BioequivalenceDashboard):
                     self.graphs_and_lists.append(graph_to_method[graph])
             self.graphs_and_lists.append(self._generate_interval())
         else:
-            graph_to_method = {'indiv_concet': [self._generate_concentration_time_cross(True),
+            graph_to_method = {'avg_concet': [self._generate_concentration_time_cross(True),
                                                 self._generate_concentration_time_cross(False)],
-                               'avg_concet': [self._generate_group_mean(True),
+                               'indiv_concet': [self._generate_group_mean(True),
                                               self._generate_group_mean(False)],
                                'gen_concet': self._generate_drug_mean(),
                                'avg_auc': [self._generate_log_auc(),
