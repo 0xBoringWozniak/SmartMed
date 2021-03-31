@@ -12,7 +12,7 @@ class GUI:
     '''Qt apps manipulator'''
 
     def __init__(self):
-        '''create QApp'''
+        # create QApp
         self.__make_QAapp()
 
     @debug

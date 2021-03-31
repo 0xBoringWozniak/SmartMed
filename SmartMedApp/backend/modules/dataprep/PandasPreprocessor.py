@@ -1,8 +1,11 @@
 from typing import Dict
 
-import pandas as pd
 import pathlib
 import sys
+
+import pandas as pd
+
+from sklearn import preprocessing
 
 # logging decorator
 from SmartMedApp.logs.logger import debug
@@ -11,12 +14,14 @@ from SmartMedApp.logs.logger import debug
 class ExtentionFileException(Exception):
     pass
 
+
 class PandasPreprocessor:
     '''Class to preprocessing any datasets'''
 
     def __init__(self, settings: Dict):
         self.settings = settings  # settings['data']
-        self.numerics_list = {'int16', 'int32',
+        self.__read_file()
+        self.numerics_list = {'int16', 'int32', 'int', 'float', 'bool',
                               'int64', 'float16', 'float32', 'float64'}
 
     @debug
@@ -37,25 +42,17 @@ class PandasPreprocessor:
 
         else:
             raise ExtentionFileException
-            
 
     @debug
     def preprocess(self):
-
-        self.__read_file()
-        self.__fillna(self.settings['preprocessing']['fillna'])
-        self.__encoding(self.settings['preprocessing']['encoding'])
-        self.__scale(self.settings['preprocessing']['scaling'])
+        self.fillna()
+        self.encoding()
+        self.scale()
 
     @debug
-    def __fillna(self, value):
-        if type(value) != 'str':
-            for col in self.df.columns:
-                if self.df[col].dtype in self.numerics_list:
-                    self.df[col] = self.df[col].fillna(value)
-                else:
-                    self.df[col] = self.df[col].fillna(str(value))
-        elif value == 'mean':
+    def fillna(self):
+        value = self.settings['preprocessing']['fillna']
+        if value == 'mean':
             for col in self.df.columns:
                 if self.df[col].dtype in self.numerics_list:
                     self.df[col] = self.df[col].fillna(self.df[col].mean())
@@ -73,12 +70,25 @@ class PandasPreprocessor:
             self.df = self.df[col].dropna()
 
     @debug
-    def __encoding(self, method):
-        return self.df
+    def encoding(self):
+        method = self.settings['preprocessing']['encoding']
+        if method == 'label_encoding':
+            transformer = preprocessing.LabelEncoder()
+
+        for column in self.df.select_dtypes(exclude=self.numerics_list):
+            transformer.fit(self.df[column].astype(str).values)
+            self.df[column] = transformer.transform(
+                self.df[column].astype(str).values)
 
     @debug
-    def __scale(self, method):
-        return self.df
+    def scale(self):
+        method = self.settings['preprocessing']['scaling']
+        if method:
+            scaler = preprocessing.StandardScaler()
+            scaler.fit(self.df)
+            self.df = scaler.transform(self.df)
+        else:
+            pass
 
     def get_numeric_df(self, df):
         return df.select_dtypes(include=self.numerics_list)

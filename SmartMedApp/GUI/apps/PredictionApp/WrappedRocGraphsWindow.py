@@ -1,14 +1,17 @@
 import pickle
 import threading
+
+from PyQt5.QtCore import QTimer, QEventLoop
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
 
 from .RocGraphsWindow import RocGraphsWindow
-from SmartMedApp.backend import ModuleManipulator
 from ..utils import remove_if_exists
 from ..WaitingSpinnerWidget import QtWaitingSpinner
-from PyQt5.QtCore import QTimer, QEventLoop
+
+from SmartMedApp.backend import ModuleManipulator
+
 
 class WrappedRocGraphsWindow(RocGraphsWindow, QtWidgets.QMainWindow):
 
@@ -16,10 +19,10 @@ class WrappedRocGraphsWindow(RocGraphsWindow, QtWidgets.QMainWindow):
         super().__init__()
         self.setupUi(self)
         self.settings = {'points_table': True,
-                        'metrics_table': True,
-                        'spec_and_sens': True,
-                        'spec_and_sens_table':True,
-                        'classificators_comparison': True}
+                         'metrics_table': True,
+                         'spec_and_sens': True,
+                         'spec_and_sens_table': True,
+                         'classificators_comparison': True}
         self.checkBox.setChecked(True)
         self.checkBox_2.setChecked(True)
         self.checkBox_3.setChecked(True)
@@ -67,4 +70,3 @@ class WrappedRocGraphsWindow(RocGraphsWindow, QtWidgets.QMainWindow):
         self.child.show()
         print(data)
         remove_if_exists()
-        

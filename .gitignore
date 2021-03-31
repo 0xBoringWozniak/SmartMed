@@ -133,10 +133,12 @@ dmypy.json
 *.csv
 *.tsv
 *.xlsx
-*.tsc
+*.tsv
 *.csh
+data/
 
 # settings
 */settings.py
 */settings
 */settings.pickle
+

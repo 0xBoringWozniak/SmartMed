@@ -14,7 +14,6 @@ class WrappedFinishWindow(FinishWindow, QtWidgets.QMainWindow):
         self.setupUi(self)
         self.__build_buttons()
         self.setWindowTitle('Что-то там')
-       
 
     def __build_buttons(self):
         self.pushButtonDone.clicked.connect(self.done)
@@ -25,6 +24,5 @@ class WrappedFinishWindow(FinishWindow, QtWidgets.QMainWindow):
         self.parent.show()
 
     def done(self):
-        
+
         self.close()
-        
