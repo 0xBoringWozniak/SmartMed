@@ -86,7 +86,7 @@ class PolynomialRegressionModel(Model):
         return np.linalg.inv(np.dot(df2_X_T, df2_X))
 
     def uravnenie(self, def_b, def_names, def_name):  # уравнение регрессии
-        def_st = 'Y=' + str(round(def_b[0], 3))
+        def_st = 'Y = ' + str(round(def_b[0], 3))
 
         for i in range(1, len(def_b)):
             if def_b[i] > 0:

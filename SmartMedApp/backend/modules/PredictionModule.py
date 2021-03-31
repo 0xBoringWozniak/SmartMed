@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 import sklearn.model_selection as sm
-
+import sklearn.preprocessing as sp
 from .ModuleInterface import Module
 from .dash import PredictionDashboard
 from .ModelManipulator import ModelManipulator
@@ -101,8 +101,34 @@ class PredictionModule(Module, PredictionDashboard):
             if len(names_cat) > 0:
                 df_dum = pd.get_dummies(df_cat, prefix=[names_cat])
                 self.df_X = pd.concat([self.df_X, df_dum], axis=1)
+            numerics_list = {'int16', 'int32', 'int', 'float', 'bool',
+                                  'int64', 'float16', 'float32', 'float64'}
 
-            self.df_Y = self.pp.df[self.settings['variable']]
+            #self.df_Y = self.pp.df[self.settings['variable']]
+            df_Y = self.pp.df[self.settings['variable']]
+            print('first', type(df_Y), df_Y.dtype, df_Y.nunique())
+            print(df_Y)
+            if df_Y.nunique() == 2:
+                print('12')
+                self.df_Y = df_Y
+            else:
+                if df_Y.dtype not in numerics_list:
+                    print('23')
+                    labelencoder = sp.LabelEncoder()
+                    df_Y = labelencoder.fit_transform(df_Y)
+                mean_Y = df_Y.mean()
+                df_Y1 = df_Y
+                print('type', type(df_Y1))
+                for i in range(len(df_Y)):
+                    if df_Y[i] < mean_Y:
+                        df_Y1[i] = 0
+                    else:
+                        df_Y1[i] = 1
+                self.df_Y = pd.Series(df_Y1)
+                print('second', type(self.df_Y), self.df_Y.dtype, self.df_Y.nunique())
+                print(self.df_Y)
+
+
             dfX_train, dfX_test, dfY_train, dfY_test = sm.train_test_split(self.df_X, self.df_Y, test_size=0.3,
                                                                            random_state=42)
             self.df_X_train = dfX_train
@@ -151,7 +177,7 @@ class PredictionModule(Module, PredictionDashboard):
             names = self.pp.df.columns.tolist()
             names.remove(self.settings['variable'])
             self.df_X = pd.DataFrame()
-            self.df_Y = self.pp.df[self.settings['variable']]
+            #self.df_Y = self.pp.df[self.settings['variable']]
             for name in names:
                 self.df_X = pd.concat([self.df_X, self.pp.df[name]], axis=1)
             self.df_X = self.pp.get_numeric_df(self.df_X)
@@ -161,6 +187,31 @@ class PredictionModule(Module, PredictionDashboard):
             if len(names_cat) > 0:
                 df_dum = pd.get_dummies(df_cat, prefix=[names_cat])
                 self.df_X = pd.concat([self.df_X, df_dum], axis=1)
+
+            numerics_list = {'int16', 'int32', 'int', 'float', 'bool',
+                                  'int64', 'float16', 'float32', 'float64'}
+            df_Y = self.pp.df[self.settings['variable']]
+            #print('first', type(df_Y), df_Y.dtype, df_Y.nunique())
+            #print(df_Y)
+            if df_Y.nunique() == 2:
+                #print('12')
+                self.df_Y = df_Y
+            else:
+                if df_Y.dtype not in numerics_list:
+                    #print('23')
+                    labelencoder = sp.LabelEncoder()
+                    df_Y = labelencoder.fit_transform(df_Y)
+                mean_Y = df_Y.mean()
+                df_Y1 = df_Y
+                #print('type', type(df_Y1))
+                for i in range(len(df_Y)):
+                    if df_Y[i] < mean_Y:
+                        df_Y1[i] = 0
+                    else:
+                        df_Y1[i] = 1
+                self.df_Y = pd.Series(df_Y1)
+                #print('second', type(self.df_Y), self.df_Y.dtype, self.df_Y.nunique())
+                #print(self.df_Y)
 
             settings = dict()
 
@@ -187,11 +238,11 @@ class PredictionModule(Module, PredictionDashboard):
                     settings['x'].remove(self.settings['variable'])
                 elif metric == 'auc' or metric == 'diff_graphics' or metric == 'paint':
                     settings['graphs'].append(metric)
-                elif metric == 'spec_and_sens':
-                    settings['spec_and_sens'] = self.settings['spec_and_sens']
-                elif metric == 'spec_and_sens_table':
-                    settings['spec_and_sens_table'] = self.settings[
-                        'spec_and_sens_table']
+                #elif metric == 'spec_and_sens':
+                #    settings['spec_and_sens'] = self.settings['spec_and_sens']
+                #elif metric == 'spec_and_sens_table':
+                #    settings['spec_and_sens_table'] = self.settings[
+                #        'spec_and_sens_table']
                 elif self.settings[metric]:
                     settings['metrics'].append(metric)
 
@@ -232,6 +283,13 @@ class PredictionModule(Module, PredictionDashboard):
                     self.df_X.insert(len(self.df_X.columns), data_name, data_list, True)
 
             self.df_Y = self.pp.df[self.settings['variable']]
+            numerics_list = {'int16', 'int32', 'int', 'float', 'bool',
+                                  'int64', 'float16', 'float32', 'float64'}
+
+            if self.df_Y.dtype not in numerics_list:
+                labelencoder = sp.LabelEncoder()
+                self.df_Y = labelencoder.fit_transform(self.df_Y)
+
             dfX_train, dfX_test, dfY_train, dfY_test = sm.train_test_split(self.df_X, self.df_Y, test_size=0.3,
                                                                            random_state=42)
             self.df_X_train = dfX_train
