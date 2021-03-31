@@ -106,27 +106,20 @@ class PredictionModule(Module, PredictionDashboard):
 
             #self.df_Y = self.pp.df[self.settings['variable']]
             df_Y = self.pp.df[self.settings['variable']]
-            print('first', type(df_Y), df_Y.dtype, df_Y.nunique())
-            print(df_Y)
             if df_Y.nunique() == 2:
-                print('12')
                 self.df_Y = df_Y
             else:
                 if df_Y.dtype not in numerics_list:
-                    print('23')
                     labelencoder = sp.LabelEncoder()
                     df_Y = labelencoder.fit_transform(df_Y)
                 mean_Y = df_Y.mean()
                 df_Y1 = df_Y
-                print('type', type(df_Y1))
                 for i in range(len(df_Y)):
                     if df_Y[i] < mean_Y:
                         df_Y1[i] = 0
                     else:
                         df_Y1[i] = 1
                 self.df_Y = pd.Series(df_Y1)
-                print('second', type(self.df_Y), self.df_Y.dtype, self.df_Y.nunique())
-                print(self.df_Y)
 
 
             dfX_train, dfX_test, dfY_train, dfY_test = sm.train_test_split(self.df_X, self.df_Y, test_size=0.3,
@@ -191,27 +184,20 @@ class PredictionModule(Module, PredictionDashboard):
             numerics_list = {'int16', 'int32', 'int', 'float', 'bool',
                                   'int64', 'float16', 'float32', 'float64'}
             df_Y = self.pp.df[self.settings['variable']]
-            #print('first', type(df_Y), df_Y.dtype, df_Y.nunique())
-            #print(df_Y)
             if df_Y.nunique() == 2:
-                #print('12')
                 self.df_Y = df_Y
             else:
                 if df_Y.dtype not in numerics_list:
-                    #print('23')
                     labelencoder = sp.LabelEncoder()
                     df_Y = labelencoder.fit_transform(df_Y)
                 mean_Y = df_Y.mean()
                 df_Y1 = df_Y
-                #print('type', type(df_Y1))
                 for i in range(len(df_Y)):
                     if df_Y[i] < mean_Y:
                         df_Y1[i] = 0
                     else:
                         df_Y1[i] = 1
                 self.df_Y = pd.Series(df_Y1)
-                #print('second', type(self.df_Y), self.df_Y.dtype, self.df_Y.nunique())
-                #print(self.df_Y)
 
             settings = dict()
 

@@ -1103,7 +1103,6 @@ class ROC(Dashboard):
                     t_ind] / (self.tp_list[ind][t_ind] + self.fn_list[ind][t_ind]), 3)
         PPV = round(self.tp_list[ind][
                     t_ind] / (self.tp_list[ind][t_ind] + self.fp_list[ind][t_ind]), 3)
-        print(ind, TPR, PPV)
         accuracy = round((self.tp_list[ind][t_ind] + self.tn_list[ind][t_ind]) / (
             self.tp_list[ind][t_ind] + self.fn_list[ind][t_ind] + self.tn_list[ind][t_ind] + self.fp_list[ind][
                 t_ind]), 3)
