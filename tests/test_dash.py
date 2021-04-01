@@ -4,7 +4,7 @@ from backend.modules.dash.Dashboard import Dashboard
 from backend.DashExceptions import ModelChoiceException
 
 class TestDashboard(unittest.TestCase):
-    def SetUp(self):
+    def setUp(self):
         self.dashboard = Dashboard()
 
     def test_start(self):
