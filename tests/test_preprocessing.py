@@ -5,7 +5,7 @@ import pandas as pd
 from backend.modules.dataprep.PandasPreprocessor import PandasPreprocessor
 
 class TestPreprocessing(unittest.TestCase):
-    def SetUp(self):
+    def setUp(self):
         self.prepocessor = PandasPreprocessor({})
         self.df = pd.DataFrame({"col_str": ["A", None, "C"], "col_float": [1.0, 2.0, 3.0]})
 
