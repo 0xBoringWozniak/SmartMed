@@ -6,7 +6,7 @@ from backend.modules.models.PolynomialRegressionModel import PolynomialRegressio
 
 
 class TestModel(unittest.Testcase):
-    def SetUp(self):
+    def setUp(self):
         self.linreg = LinearRegressionModel()
         self.logreg = LogisticRegressionModel()
         self.polyreg = PolynomialRegressionModel()
