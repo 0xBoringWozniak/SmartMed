@@ -30,8 +30,8 @@ class StatisticsDashboard(Dashboard):
         df = df[df['index'].isin(self.settings['metrics'])]
         df = df.rename(columns={"index": "metrics"})
         cols = df.columns
-        len_t = str(len(df.columns)*10-10)+'%'
-        len_text = str(98-len(df.columns)*10+10)+'%'
+        len_t = str(len(df.columns)*10)+'%'
+        len_text = str(98-len(df.columns)*10)+'%'
         for j in range(1,len(cols)):
             for i in range(len(df)):
                 df.iloc[i, j] = float('{:.3f}'.format(float(df.iloc[i, j])))
@@ -151,8 +151,8 @@ class StatisticsDashboard(Dashboard):
 
         df = df.corr()
         cols = df.columns
-        len_t = str(len(df.columns)*10)+'%'
-        len_text = str(98-len(df.columns)*10)+'%'
+        len_t = str(len(df.columns)*10 + 10)+'%'
+        len_text = str(98-len(df.columns)*10 - 10)+'%'
         for j in range(len(cols)):
             for i in range(len(df)):
                 df.iloc[i, j] = float('{:.3f}'.format(float(df.iloc[i, j])))
@@ -179,6 +179,7 @@ class StatisticsDashboard(Dashboard):
                         id='corr',
                         columns=[{"name": i, "id": i} for i in df.columns],
                         data=df.to_dict('records'),
+                        style_table={'overflowX': 'auto'},
                         export_format='xlsx')
                     ],style={'border-color':'rgb(192, 192, 192)','border-style': 'solid','padding':'5px'})  
                 ], style={'margin':'50px'}
