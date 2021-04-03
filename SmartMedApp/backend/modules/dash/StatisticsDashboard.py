@@ -179,6 +179,7 @@ class StatisticsDashboard(Dashboard):
                         id='corr',
                         columns=[{"name": i, "id": i} for i in df.columns],
                         data=df.to_dict('records'),
+                        style_table={'overflowX': 'auto'},
                         export_format='xlsx')
                     ],style={'border-color':'rgb(192, 192, 192)','border-style': 'solid','padding':'5px'})  
                 ], style={'margin':'50px'}
