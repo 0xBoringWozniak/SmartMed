@@ -1,5 +1,8 @@
 import unittest
 
+import sys
+sys.path.append("C:\\Users\\grikurov\\Desktop\\SmartMed-dev-tests")
+
 from backend.modules.dash.Dashboard import Dashboard
 from backend.DashExceptions import ModelChoiceException
 
