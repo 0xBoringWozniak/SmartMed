@@ -3,6 +3,9 @@ import os
 import re
 import sys
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--bp", help="path to backend package", type=str)
+
 
 def get_module_name_by_path(path):
     curdir = os.getcwd()
