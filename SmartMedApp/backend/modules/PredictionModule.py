@@ -28,7 +28,7 @@ class PredictionModule(Module, PredictionDashboard):
         return self.pp.df
 
     def _init_settings(self, model_type: str) -> dict:
-        if model_type != 'linreg' or model_type != 'logreg':
+        if model_type != 'linreg' and model_type != 'logreg':
             return {}
         dfX_train, dfX_test, dfY_train, dfY_test = sm.train_test_split(
             self.df_X, self.df_Y, test_size=0.3, random_state=42)
