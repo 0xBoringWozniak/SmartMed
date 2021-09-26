@@ -73,6 +73,14 @@ class LinearRegressionDashboard(Dashboard):
             html.Div(html.H1(children='Множественная регрессия'), style={'text-align': 'center'}),
             html.Div(metrics_list)])
 
+    def __get_feature_graphic(self):
+        df_Y = self.predict.df_Y_test
+        predict_Y = LinearRegressionModel.predict(self.predict.model, self.predict.df_X_test)
+        df_ost_2 = pd.DataFrame({'Изначальный Y': df_Y, 'Предсказанный Y': predict_Y})
+        fig_rasp_2 = px.scatter(df_ost_2, x="Изначальный Y", y="Предсказанный Y",
+                                trendline="ols", trendline_color_override='red', labels='Данные')
+        fig_rasp_2.update_traces(marker_size=20)
+
     # графики
     def _generate_distrib(self):
         df_Y = self.predict.df_Y_test
@@ -81,8 +89,7 @@ class LinearRegressionDashboard(Dashboard):
 
         # График распределения остатков
         fig_rasp_2 = go.Figure()
-        df_ost_2 = pd.DataFrame(
-            {'Изначальный Y': df_Y, 'Предсказанный Y': predict_Y})
+        df_ost_2 = pd.DataFrame({'Изначальный Y': df_Y, 'Предсказанный Y': predict_Y})
         fig_rasp_2 = px.scatter(df_ost_2, x="Изначальный Y", y="Предсказанный Y",
                                 trendline="ols", trendline_color_override='red', labels='Данные')
         fig_rasp_2.update_traces(marker_size=20)
@@ -144,32 +151,38 @@ class LinearRegressionDashboard(Dashboard):
                 'title': 'Экспериментальные квантили'},
             showlegend=True,
         )
-
+        graph_styles = {
+            'text-align': 'center',
+            'width': '78%',
+            'display': 'inline-block',
+            'border-color': 'rgb(220, 220, 220)',
+            'border-style': 'solid'
+        }
         return html.Div([html.Div(html.H2(children='Графики остатков'), style={'text-align': 'center'}),
                          html.Div([
                              html.Div(
                                  html.H4(children='Гистограмма распределения остатков'), style={'text-align': 'center'}),
-                             html.Div(dcc.Graph(id='Graph_ost_1', figure=fig),
-                                      style={'text-align': 'center', 'width': '78%', 'display': 'inline-block',
-                                             'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid'}),
+                             html.Div(dcc.Graph(id='Graph_ost_1', figure=fig), style=graph_styles),
                          ], style={'margin': '50px'}),
 
                          html.Div([
                              html.Div(
                                  html.H4(children='График соответствия предсказанных значений зависимой переменной '
                                                    'и исходных значений'), style={'text-align': 'center'}),
-                             html.Div(dcc.Graph(id='Graph_ost_2', figure=fig_rasp_2),
-                                      style={'text-align': 'center', 'width': '78%', 'display': 'inline-block',
-                                             'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid'}),
+                             html.Div(dcc.Graph(id='Graph_ost_2', figure=fig_rasp_2), style=graph_styles),
                              html.Div(dcc.Markdown(markdown_graph))
                          ], style={'margin': '50px'}),
 
                          html.Div([
                              html.Div(
                                  html.H4(children='График квантиль-квантиль'), style={'text-align': 'center'}),
-                             html.Div(dcc.Graph(id='graph_qqplot', figure=fig_qqplot),
-                                      style={'text-align': 'center', 'width': '78%', 'display': 'inline-block',
-                                             'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid'}),
+                             html.Div(dcc.Graph(id='graph_qqplot', figure=fig_qqplot), style=graph_styles),
+                         ], style={'margin': '50px'}),
+
+                         html.Div([
+                             html.Div(html.H4(children='График ???'), style={'text-align': 'center'}),
+                             html.Div(dcc.Graph(id='graph_new_feature', figure=self.__get_feature_graphic()),
+                                      style=graph_styles),
                          ], style={'margin': '50px'}),
 
                          ], style={'margin': '50px'})
