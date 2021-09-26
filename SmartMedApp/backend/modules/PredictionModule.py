@@ -27,80 +27,73 @@ class PredictionModule(Module, PredictionDashboard):
 
         return self.pp.df
 
+    def _init_settings(self, model_type: str) -> dict:
+        if model_type != 'linreg' or model_type != 'logreg':
+            return {}
+        dfX_train, dfX_test, dfY_train, dfY_test = sm.train_test_split(
+            self.df_X, self.df_Y, test_size=0.3, random_state=42)
+        self.df_X_train = dfX_train
+        self.df_X_test = dfX_test
+        self.df_Y_train = dfY_train
+        self.df_Y_test = dfY_test
+        self.model = ModelManipulator(
+            x=self.df_X_train, y=self.df_Y_train, model_type=self.settings['model']).create()
+        self.model.fit()
+        self.mean = sum(dfY_test) / len(dfY_test)
+
+        settings = dict()
+
+        # prepare metrics as names list from str -> bool
+        settings['path'] = []
+        settings['preprocessing'] = []
+        settings['model'] = []
+        settings['metrics'] = []
+        settings['y'] = []
+        settings['x'] = self.pp.df.columns.tolist()
+
+        for metric in self.settings.keys():
+            if metric == 'model':
+                settings['model'] = self.settings['model']
+            elif metric == 'path':
+                settings['path'] = self.settings['path']
+            elif metric == 'preprocessing':
+                settings['preprocessing'] = self.settings['preprocessing']
+            elif metric == 'variable':
+                settings['y'] = self.settings['variable']
+                settings['x'].remove(self.settings['variable'])
+            elif self.settings[metric]:
+                settings['metrics'].append(metric)
+
+        prep = {'fillna': self.settings['preprocessing'],
+                'encoding': 'label_encoding',
+                'scaling': False}
+        dict_pp = {
+            'preprocessing': prep,
+            'path': self.settings['path'],
+            'fillna': self.settings['preprocessing']
+        }
+        settings['data'] = dict_pp
+        return settings
+
     def _prepare_dashboard_settings(self):
+        names = self.pp.df.columns.tolist()
+        names.remove(self.settings['variable'])
+        self.df_X = pd.DataFrame()
+        for name in names:
+            self.df_X = pd.concat([self.df_X, self.pp.df[name]], axis=1)
+        self.df_X = self.pp.get_numeric_df(self.df_X)
+
+        # похоже что работает и без этого, но на всякий случай оставлю
+        df_cat = self.pp.get_categorical_df(self.df_X)
+        settings = dict()
+        names_cat = df_cat.columns.tolist()
+        if len(names_cat) > 0:
+            df_dum = pd.get_dummies(df_cat, prefix=[names_cat])
+            self.df_X = pd.concat([self.df_X, df_dum], axis=1)
         if self.settings['model'] == 'linreg':
-            names = self.pp.df.columns.tolist()
-            names.remove(self.settings['variable'])
-            self.df_X = pd.DataFrame()
-            for name in names:
-                self.df_X = pd.concat([self.df_X, self.pp.df[name]], axis=1)
-            self.df_X = self.pp.get_numeric_df(self.df_X)
-
-            # похоже что работает и без этого, но на всякий случай оставлю
-            df_cat = self.pp.get_categorical_df(self.df_X)
-            names_cat = df_cat.columns.tolist()
-            if len(names_cat) > 0:
-                df_dum = pd.get_dummies(df_cat, prefix=[names_cat])
-                self.df_X = pd.concat([self.df_X, df_dum], axis=1)
-
             self.df_Y = self.pp.df[self.settings['variable']]
-            dfX_train, dfX_test, dfY_train, dfY_test = sm.train_test_split(
-                self.df_X, self.df_Y, test_size=0.3, random_state=42)
-            self.df_X_train = dfX_train
-            self.df_X_test = dfX_test
-            self.df_Y_train = dfY_train
-            self.df_Y_test = dfY_test
-            self.model = ModelManipulator(
-                x=self.df_X_train, y=self.df_Y_train, model_type=self.settings['model']).create()
-            self.model.fit()
-            self.mean = sum(dfY_test) / len(dfY_test)
-
-            settings = dict()
-
-            # prepare metrics as names list from str -> bool
-            settings['path'] = []
-            settings['preprocessing'] = []
-            settings['model'] = []
-            settings['metrics'] = []
-            settings['y'] = []
-            settings['x'] = self.pp.df.columns.tolist()
-
-            for metric in self.settings.keys():
-                if metric == 'model':
-                    settings['model'] = self.settings['model']
-                elif metric == 'path':
-                    settings['path'] = self.settings['path']
-                elif metric == 'preprocessing':
-                    settings['preprocessing'] = self.settings['preprocessing']
-                elif metric == 'variable':
-                    settings['y'] = self.settings['variable']
-                    settings['x'].remove(self.settings['variable'])
-                elif self.settings[metric]:
-                    settings['metrics'].append(metric)
-
-            prep = {'fillna': self.settings['preprocessing'],
-                    'encoding': 'label_encoding',
-                    'scaling': False}
-            dict_pp = {
-                'preprocessing': prep,
-                'path': self.settings['path'],
-                'fillna': self.settings['preprocessing']
-            }
-            settings['data'] = dict_pp
-
+            settings = self._init_settings('linreg')
         elif self.settings['model'] == 'logreg':
-            names = self.pp.df.columns.tolist()
-            names.remove(self.settings['variable'])
-            self.df_X = pd.DataFrame()
-            for name in names:
-                self.df_X = pd.concat([self.df_X, self.pp.df[name]], axis=1)
-            self.df_X = self.pp.get_numeric_df(self.df_X)
-
-            df_cat = self.pp.get_categorical_df(self.df_X)
-            names_cat = df_cat.columns.tolist()
-            if len(names_cat) > 0:
-                df_dum = pd.get_dummies(df_cat, prefix=[names_cat])
-                self.df_X = pd.concat([self.df_X, df_dum], axis=1)
             numerics_list = {'int16', 'int32', 'int', 'float', 'bool',
                                   'int64', 'float16', 'float32', 'float64'}
 
@@ -127,67 +120,8 @@ class PredictionModule(Module, PredictionDashboard):
                 self.df_Y = pd.Series(df_Y1)
                 print('second', type(self.df_Y), self.df_Y.dtype, self.df_Y.nunique())
                 print(self.df_Y)
-
-
-            dfX_train, dfX_test, dfY_train, dfY_test = sm.train_test_split(self.df_X, self.df_Y, test_size=0.3,
-                                                                           random_state=42)
-            self.df_X_train = dfX_train
-            self.df_X_test = dfX_test
-            self.df_Y_train = dfY_train
-            self.df_Y_test = dfY_test
-            self.model = ModelManipulator(
-                x=self.df_X_train, y=self.df_Y_train, model_type=self.settings['model']).create()
-            self.model.fit()
-            self.mean = sum(dfY_test) / len(dfY_test)
-
-            settings = dict()
-
-            # prepare metrics as names list from str -> bool
-            settings['path'] = []
-            settings['preprocessing'] = []
-            settings['model'] = []
-            settings['metrics'] = []
-            settings['y'] = []
-            settings['x'] = self.pp.df.columns.tolist()
-
-            for metric in self.settings.keys():
-                if metric == 'model':
-                    settings['model'] = self.settings['model']
-                elif metric == 'path':
-                    settings['path'] = self.settings['path']
-                elif metric == 'preprocessing':
-                    settings['preprocessing'] = self.settings['preprocessing']
-                elif metric == 'variable':
-                    settings['y'] = self.settings['variable']
-                    settings['x'].remove(self.settings['variable'])
-                elif self.settings[metric]:
-                    settings['metrics'].append(metric)
-
-            prep = {'fillna': self.settings['preprocessing'],
-                    'encoding': 'label_encoding',
-                    'scaling': False}
-            dict_pp = {
-                'preprocessing': prep,
-                'path': self.settings['path'],
-                'fillna': self.settings['preprocessing']
-            }
-            settings['data'] = dict_pp
-
+            settings = self._init_settings('logreg')
         elif self.settings['model'] == 'roc':
-            names = self.pp.df.columns.tolist()
-            names.remove(self.settings['variable'])
-            self.df_X = pd.DataFrame()
-            #self.df_Y = self.pp.df[self.settings['variable']]
-            for name in names:
-                self.df_X = pd.concat([self.df_X, self.pp.df[name]], axis=1)
-            self.df_X = self.pp.get_numeric_df(self.df_X)
-
-            df_cat = self.pp.get_categorical_df(self.df_X)
-            names_cat = df_cat.columns.tolist()
-            if len(names_cat) > 0:
-                df_dum = pd.get_dummies(df_cat, prefix=[names_cat])
-                self.df_X = pd.concat([self.df_X, df_dum], axis=1)
-
             numerics_list = {'int16', 'int32', 'int', 'float', 'bool',
                                   'int64', 'float16', 'float32', 'float64'}
             df_Y = self.pp.df[self.settings['variable']]
@@ -212,8 +146,6 @@ class PredictionModule(Module, PredictionDashboard):
                 self.df_Y = pd.Series(df_Y1)
                 #print('second', type(self.df_Y), self.df_Y.dtype, self.df_Y.nunique())
                 #print(self.df_Y)
-
-            settings = dict()
 
             # prepare metrics as names list from str -> bool
             settings['path'] = []
@@ -257,19 +189,6 @@ class PredictionModule(Module, PredictionDashboard):
             settings['data'] = dict_pp
 
         elif self.settings['model'] == 'polynomreg':
-            names = self.pp.df.columns.tolist()
-            names.remove(self.settings['variable'])
-            self.df_X = pd.DataFrame()
-            for name in names:
-                self.df_X = pd.concat([self.df_X, self.pp.df[name]], axis=1)
-            self.df_X = self.pp.get_numeric_df(self.df_X)
-
-            df_cat = self.pp.get_categorical_df(self.df_X)
-            names_cat = df_cat.columns.tolist()
-            if len(names_cat) > 0:
-                df_dum = pd.get_dummies(df_cat, prefix=[names_cat])
-                self.df_X = pd.concat([self.df_X, df_dum], axis=1)
-
             count = len(self.df_X.columns)
             for i in range(count):
                 for j in range(i, count):
@@ -300,8 +219,6 @@ class PredictionModule(Module, PredictionDashboard):
                 x=self.df_X_train, y=self.df_Y_train, model_type='polyreg').create()
             self.model.fit()
             self.mean = sum(dfY_test) / len(dfY_test)
-
-            settings = dict()
 
             # prepare metrics as names list from str -> bool
             settings['path'] = []

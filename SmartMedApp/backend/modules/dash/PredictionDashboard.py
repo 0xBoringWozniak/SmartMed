@@ -1,4 +1,5 @@
 import re
+import numpy as np
 
 import pylatex
 
@@ -813,97 +814,6 @@ class PolynomRegressionDashboard(Dashboard):
                          ], style={'margin': '50px'}),
 
                          ], style={'margin': '50px'})
-
-
-    # уравнение
-    def _generate_equation(self):
-        names = self.predict.settings['x']
-        name_Y = self.predict.settings['y']
-        b = self.predict.model.get_all_coef()
-        uravnenie = LinearRegressionModel.uravnenie(self.predict.model, b, names, name_Y)
-        df_X = self.predict.df_X_test
-        b = self.predict.model.get_all_coef()
-
-        def update_output(n_clicks, input1):
-            number = len(self.coord_list)
-            if n_clicks == 0 or input1 == 'Да':
-                self.coord_list = []
-                number = len(self.coord_list)
-                return u'''Введите значение параметра "{}"'''.format(df_X.columns[0])
-            if re.fullmatch(r'^([-+])?\d+([,.]\d+)?$', input1):
-                number += 1
-                if input1.find(',') > 0:
-                    input1 = float(input1[0:input1.find(',')] + '.' + input1[input1.find(',') + 1:len(input1)])
-                self.coord_list.append(float(input1))
-                if len(self.coord_list) < len(df_X.columns):
-                    return u'''Введите значение параметра  "{}".'''.format(df_X.columns[number])
-                    # максимальное значение - len(df_X.columns)-1
-                if len(self.coord_list) == len(df_X.columns):
-                    number = -1
-                    yzn = b[0]
-                    for i in range(len(self.coord_list)):
-                        yzn += self.coord_list[i] * b[i + 1]
-                    return u'''Предсказанное значение равно {} \n Если желаете посчитать ещё для одного набор признаков
-                    , напишите "Да".'''.format(round(yzn, 3))
-            elif n_clicks > 0:
-                return u'''Введено не число, введите значение параметра "{}" повторно.'''.format(df_X.columns[number])
-            if number == -1 and input1 != 0 and input1 != 'Да' and input1 != '0':
-                return u'''Если желаете посчитать ещё для {} набор признаков, напишите "Да".'''.format('одного')
-
-        self.predict.app.callback(dash.dependencies.Output('output-state', 'children'),
-                                  [dash.dependencies.Input('submit-button-state', 'n_clicks')],
-                                  [dash.dependencies.State('input-1-state', 'value')])(update_output)
-
-        #def update_input(n_clicks):
-        #    return ' '
-
-        #self.predict.app.callback(dash.dependencies.Output('input-1-state', 'value'),
-        #                            [dash.dependencies.Input('submit-button-state', 'n_clicks')])(update_input)
-
-        return html.Div([html.Div(html.H2(children='Уравнение множественной регрессии'),
-                                  style={'text-align': 'center'}),
-                         html.Div([html.Div(dcc.Markdown(id='Markdown', children=uravnenie)),
-                                   html.Div(html.H4(children='Предсказание новых значений'),
-                                            style={'text-align': 'center'}),
-                                   dcc.Markdown(children='Чтобы получить значение зависимой переменной, '
-                                                         'введите значение независимых признаков ниже:'),
-                                   dcc.Input(id='input-1-state', type='text', value=''),
-                                   html.Button(id='submit-button-state', n_clicks=0, children='Submit'),
-                                   html.Div(id='output-state', children='')],
-                                  style={'width': '78%', 'display': 'inline-block',
-                                         'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid',
-                                         'padding': '5px'})
-                         ], style={'margin': '50px'})
-
-    # качество модели
-    def _generate_quality(self):
-        df_result_1 = pd.DataFrame(columns=['Параметр', 'R', 'R2', 'R2adj', 'df', 'Fst', 'St.Error'])
-        df_Y = self.predict.df_Y_test
-        df_X = self.predict.df_X_test
-        predict_Y = LinearRegressionModel.predict(self.predict.model, self.predict.df_X_test)
-        mean_Y = LinearRegressionModel.get_mean(self.predict.model, df_Y)
-        RSS = LinearRegressionModel.get_RSS(self.predict.model, predict_Y, mean_Y)
-        de_fr = LinearRegressionModel.get_deg_fr(self.predict.model, self.predict.df_X_test)
-        df_result_1.loc[1] = ['Значение', round(LinearRegressionModel.get_R(self.predict.model, df_Y, predict_Y), 3),
-                              round(LinearRegressionModel.score(self.predict.model), 3),
-                              round(LinearRegressionModel.get_R2_adj(self.predict.model, df_X, df_Y, predict_Y), 3),
-                              str(str(LinearRegressionModel.get_deg_fr(self.predict.model, df_X)[0]) + '; ' +
-                                  str(LinearRegressionModel.get_deg_fr(self.predict.model, df_X)[1])),
-                              round(LinearRegressionModel.get_Fst(self.predict.model, df_X, df_Y, predict_Y), 3),
-                              round(LinearRegressionModel.get_st_err(self.predict.model, RSS, de_fr), 3)
-                              ]
-
-        return html.Div([html.Div(html.H2(children='Критерии качества модели'), style={'text-align': 'center'}),
-                         html.Div([html.Div(dash_table.DataTable(
-                             id='table1',
-                             columns=[{"name": i, "id": i} for i in df_result_1.columns],
-                             data=df_result_1.to_dict('records'),
-                             export_format='xlsx'
-                         ), style={'width': str(len(df_result_1.columns) * 8 - 10) + '%', 'display': 'inline-block'}),
-                             html.Div(dcc.Markdown(markdown_linear_table1))],
-                             style={'width': '78%', 'display': 'inline-block',
-                                    'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid', 'padding': '5px'})],
-                        style={'margin': '50px'})
 
     # таблица остатков
     def _generate_resid(self):
