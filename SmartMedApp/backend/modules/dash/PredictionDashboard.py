@@ -14,6 +14,7 @@ import pandas as pd
 import scipy.stats as sps
 from scipy.sparse import issparse
 from sklearn.feature_selection import chi2
+from sklearn.preprocessing import KBinsDiscretizer
 
 import plotly.graph_objects as go
 import plotly.express as px
@@ -29,6 +30,10 @@ from ..models.LogisticRegressionModel import *
 
 
 class PredictionDashboard(Dashboard):
+
+    def __init__(self):
+        # self.settings = {}
+        super().__init__()
 
     def _generate_layout(self):
         if self.settings['model'] == 'linreg':
@@ -74,12 +79,19 @@ class LinearRegressionDashboard(Dashboard):
             html.Div(metrics_list)])
 
     def __get_feature_graphic(self):
-        df_Y = self.predict.df_Y_test
+        # selected_features = [] # todo: add select into GUI
+        selected_features = self.predict.settings['x'][:1]
+        X = self.predict.data[selected_features].iloc[self.predict.df_X_test.index].reset_index()
+        X = X.drop('index', axis=1)
+        # df_X_test = self.predict.df_X_test.copy(deep=True)
+        # t = KBinsDiscretizer(n_bins=3, encode='onehot-dense')
+        # df_with_bins = pd.concat([df_X_test.reset_index(), pd.DataFrame(t.fit_transform(X))], axis=1).drop(selected_features, axis=1)
         predict_Y = LinearRegressionModel.predict(self.predict.model, self.predict.df_X_test)
-        df_ost_2 = pd.DataFrame({'Изначальный Y': df_Y, 'Предсказанный Y': predict_Y})
-        fig_rasp_2 = px.scatter(df_ost_2, x="Изначальный Y", y="Предсказанный Y",
+        df_ost_2 = pd.DataFrame({'X': X.iloc[:, 0], 'Предсказанный Y': predict_Y})
+        fig = px.scatter(df_ost_2, x='X', y='Предсказанный Y',
                                 trendline="ols", trendline_color_override='red', labels='Данные')
-        fig_rasp_2.update_traces(marker_size=20)
+        fig.update_traces(marker_size=20)
+        return fig
 
     # графики
     def _generate_distrib(self):
@@ -189,7 +201,7 @@ class LinearRegressionDashboard(Dashboard):
 
     # уравнение
     def _generate_equation(self):
-        names = self.predict.settings['x']
+        names = self.predict.settings['x'] + []
         name_Y = self.predict.settings['y']
         b = self.predict.model.get_all_coef()
         uravnenie = LinearRegressionModel.uravnenie(
@@ -320,7 +332,7 @@ class LinearRegressionDashboard(Dashboard):
             aa = self.predict.df_X_test.iloc[j, :]  # строка с признаками
             meann = []  # список отличий от среднего
             for i in range(self.predict.df_X_test.shape[1]):
-                meann.append(mean_list[i] - aa[i])
+                meann.append(mean_list[i] - aa.iloc[i])
             # расстояние для наблюдения
             mah_df.append(
                 np.dot(np.dot(np.transpose(meann), cov_mat_2), meann))

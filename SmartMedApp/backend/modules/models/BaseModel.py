@@ -94,7 +94,7 @@ class BaseModel(Model):
         uravlist.append('Y - ' + def_name + ';')
         for i in range(1, len(def_b)):
             uravlist.append('\n')
-            uravlist.append('X(' + str(i) + ') - ' + def_names[i - 1] + ';')
+            uravlist.append(f'X({i}) - {def_names[i - 1]};')
         return uravlist
 
     def st_coef(self, def_df_X, def_TSS, b):  # стандартизованнные коэффициенты

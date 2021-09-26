@@ -3,6 +3,8 @@ import numpy as np
 
 import sklearn.model_selection as sm
 import sklearn.preprocessing as sp
+
+from sklearn.preprocessing import KBinsDiscretizer
 from .ModuleInterface import Module
 from .dash import PredictionDashboard
 from .ModelManipulator import ModelManipulator
@@ -30,8 +32,17 @@ class PredictionModule(Module, PredictionDashboard):
     def _init_settings(self, model_type: str) -> dict:
         if model_type != 'linreg' and model_type != 'logreg':
             return {}
-        dfX_train, dfX_test, dfY_train, dfY_test = sm.train_test_split(
-            self.df_X, self.df_Y, test_size=0.3, random_state=42)
+        if self.settings['bin'] is not None:
+            n_bins = self.settings['bin']
+            selected_features = self.df_X.columns[:1]  # todo: fix me
+            X = self.df_X[selected_features]
+            t = KBinsDiscretizer(n_bins=n_bins, encode='onehot-dense')
+            self.df_X = pd.concat([self.df_X.reset_index(), pd.DataFrame(t.fit_transform(X))], axis=1).drop(
+                selected_features, axis=1)
+            self.df_X = self.df_X.drop('index', axis=1)
+            # self.df_Y = self.df_Y.reset_index()
+
+        dfX_train, dfX_test, dfY_train, dfY_test = sm.train_test_split(self.df_X, self.df_Y, test_size=0.3, random_state=42)
         self.df_X_train = dfX_train
         self.df_X_test = dfX_test
         self.df_Y_train = dfY_train
@@ -49,7 +60,7 @@ class PredictionModule(Module, PredictionDashboard):
         settings['model'] = []
         settings['metrics'] = []
         settings['y'] = []
-        settings['x'] = self.pp.df.columns.tolist()
+        settings['x'] = self.pp.df.columns.tolist() + [i for i in range(self.settings['bin'])]
 
         for metric in self.settings.keys():
             if metric == 'model':
@@ -77,6 +88,8 @@ class PredictionModule(Module, PredictionDashboard):
 
     def _prepare_dashboard_settings(self):
         names = self.pp.df.columns.tolist()
+        # this setting is totally artificial. It should be selected by user from the menu
+        self.settings['bin'] = 3  # todo: remove it
         names.remove(self.settings['variable'])
         self.df_X = pd.DataFrame()
         for name in names:
