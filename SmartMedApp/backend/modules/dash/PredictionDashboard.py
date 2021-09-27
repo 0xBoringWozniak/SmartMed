@@ -1,4 +1,5 @@
 import re
+import numpy as np
 
 import pylatex
 
@@ -13,6 +14,7 @@ import pandas as pd
 import scipy.stats as sps
 from scipy.sparse import issparse
 from sklearn.feature_selection import chi2
+from sklearn.preprocessing import KBinsDiscretizer
 
 import plotly.graph_objects as go
 import plotly.express as px
@@ -28,6 +30,10 @@ from ..models.LogisticRegressionModel import *
 
 
 class PredictionDashboard(Dashboard):
+
+    def __init__(self):
+        # self.settings = {}
+        super().__init__()
 
     def _generate_layout(self):
         if self.settings['model'] == 'linreg':
@@ -72,6 +78,21 @@ class LinearRegressionDashboard(Dashboard):
             html.Div(html.H1(children='Множественная регрессия'), style={'text-align': 'center'}),
             html.Div(metrics_list)])
 
+    def __get_feature_graphic(self):
+        # selected_features = [] # todo: add select into GUI
+        selected_features = self.predict.settings['x'][:1]
+        X = self.predict.data[selected_features].iloc[self.predict.df_X_test.index].reset_index()
+        X = X.drop('index', axis=1)
+        # df_X_test = self.predict.df_X_test.copy(deep=True)
+        # t = KBinsDiscretizer(n_bins=3, encode='onehot-dense')
+        # df_with_bins = pd.concat([df_X_test.reset_index(), pd.DataFrame(t.fit_transform(X))], axis=1).drop(selected_features, axis=1)
+        predict_Y = LinearRegressionModel.predict(self.predict.model, self.predict.df_X_test)
+        df_ost_2 = pd.DataFrame({'X': X.iloc[:, 0], 'Предсказанный Y': predict_Y})
+        fig = px.scatter(df_ost_2, x='X', y='Предсказанный Y',
+                                trendline="ols", trendline_color_override='red', labels='Данные')
+        fig.update_traces(marker_size=20)
+        return fig
+
     # графики
     def _generate_distrib(self):
         df_Y = self.predict.df_Y_test
@@ -80,8 +101,7 @@ class LinearRegressionDashboard(Dashboard):
 
         # График распределения остатков
         fig_rasp_2 = go.Figure()
-        df_ost_2 = pd.DataFrame(
-            {'Изначальный Y': df_Y, 'Предсказанный Y': predict_Y})
+        df_ost_2 = pd.DataFrame({'Изначальный Y': df_Y, 'Предсказанный Y': predict_Y})
         fig_rasp_2 = px.scatter(df_ost_2, x="Изначальный Y", y="Предсказанный Y",
                                 trendline="ols", trendline_color_override='red', labels='Данные')
         fig_rasp_2.update_traces(marker_size=20)
@@ -143,39 +163,45 @@ class LinearRegressionDashboard(Dashboard):
                 'title': 'Экспериментальные квантили'},
             showlegend=True,
         )
-
+        graph_styles = {
+            'text-align': 'center',
+            'width': '78%',
+            'display': 'inline-block',
+            'border-color': 'rgb(220, 220, 220)',
+            'border-style': 'solid'
+        }
         return html.Div([html.Div(html.H2(children='Графики остатков'), style={'text-align': 'center'}),
                          html.Div([
                              html.Div(
                                  html.H4(children='Гистограмма распределения остатков'), style={'text-align': 'center'}),
-                             html.Div(dcc.Graph(id='Graph_ost_1', figure=fig),
-                                      style={'text-align': 'center', 'width': '78%', 'display': 'inline-block',
-                                             'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid'}),
+                             html.Div(dcc.Graph(id='Graph_ost_1', figure=fig), style=graph_styles),
                          ], style={'margin': '50px'}),
 
                          html.Div([
                              html.Div(
                                  html.H4(children='График соответствия предсказанных значений зависимой переменной '
                                                    'и исходных значений'), style={'text-align': 'center'}),
-                             html.Div(dcc.Graph(id='Graph_ost_2', figure=fig_rasp_2),
-                                      style={'text-align': 'center', 'width': '78%', 'display': 'inline-block',
-                                             'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid'}),
+                             html.Div(dcc.Graph(id='Graph_ost_2', figure=fig_rasp_2), style=graph_styles),
                              html.Div(dcc.Markdown(markdown_graph))
                          ], style={'margin': '50px'}),
 
                          html.Div([
                              html.Div(
                                  html.H4(children='График квантиль-квантиль'), style={'text-align': 'center'}),
-                             html.Div(dcc.Graph(id='graph_qqplot', figure=fig_qqplot),
-                                      style={'text-align': 'center', 'width': '78%', 'display': 'inline-block',
-                                             'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid'}),
+                             html.Div(dcc.Graph(id='graph_qqplot', figure=fig_qqplot), style=graph_styles),
+                         ], style={'margin': '50px'}),
+
+                         html.Div([
+                             html.Div(html.H4(children='График ???'), style={'text-align': 'center'}),
+                             html.Div(dcc.Graph(id='graph_new_feature', figure=self.__get_feature_graphic()),
+                                      style=graph_styles),
                          ], style={'margin': '50px'}),
 
                          ], style={'margin': '50px'})
 
     # уравнение
     def _generate_equation(self):
-        names = self.predict.settings['x']
+        names = self.predict.settings['x'] + []
         name_Y = self.predict.settings['y']
         b = self.predict.model.get_all_coef()
         uravnenie = LinearRegressionModel.uravnenie(
@@ -306,7 +332,7 @@ class LinearRegressionDashboard(Dashboard):
             aa = self.predict.df_X_test.iloc[j, :]  # строка с признаками
             meann = []  # список отличий от среднего
             for i in range(self.predict.df_X_test.shape[1]):
-                meann.append(mean_list[i] - aa[i])
+                meann.append(mean_list[i] - aa.iloc[i])
             # расстояние для наблюдения
             mah_df.append(
                 np.dot(np.dot(np.transpose(meann), cov_mat_2), meann))
@@ -813,97 +839,6 @@ class PolynomRegressionDashboard(Dashboard):
                          ], style={'margin': '50px'}),
 
                          ], style={'margin': '50px'})
-
-
-    # уравнение
-    def _generate_equation(self):
-        names = self.predict.settings['x']
-        name_Y = self.predict.settings['y']
-        b = self.predict.model.get_all_coef()
-        uravnenie = LinearRegressionModel.uravnenie(self.predict.model, b, names, name_Y)
-        df_X = self.predict.df_X_test
-        b = self.predict.model.get_all_coef()
-
-        def update_output(n_clicks, input1):
-            number = len(self.coord_list)
-            if n_clicks == 0 or input1 == 'Да':
-                self.coord_list = []
-                number = len(self.coord_list)
-                return u'''Введите значение параметра "{}"'''.format(df_X.columns[0])
-            if re.fullmatch(r'^([-+])?\d+([,.]\d+)?$', input1):
-                number += 1
-                if input1.find(',') > 0:
-                    input1 = float(input1[0:input1.find(',')] + '.' + input1[input1.find(',') + 1:len(input1)])
-                self.coord_list.append(float(input1))
-                if len(self.coord_list) < len(df_X.columns):
-                    return u'''Введите значение параметра  "{}".'''.format(df_X.columns[number])
-                    # максимальное значение - len(df_X.columns)-1
-                if len(self.coord_list) == len(df_X.columns):
-                    number = -1
-                    yzn = b[0]
-                    for i in range(len(self.coord_list)):
-                        yzn += self.coord_list[i] * b[i + 1]
-                    return u'''Предсказанное значение равно {} \n Если желаете посчитать ещё для одного набор признаков
-                    , напишите "Да".'''.format(round(yzn, 3))
-            elif n_clicks > 0:
-                return u'''Введено не число, введите значение параметра "{}" повторно.'''.format(df_X.columns[number])
-            if number == -1 and input1 != 0 and input1 != 'Да' and input1 != '0':
-                return u'''Если желаете посчитать ещё для {} набор признаков, напишите "Да".'''.format('одного')
-
-        self.predict.app.callback(dash.dependencies.Output('output-state', 'children'),
-                                  [dash.dependencies.Input('submit-button-state', 'n_clicks')],
-                                  [dash.dependencies.State('input-1-state', 'value')])(update_output)
-
-        #def update_input(n_clicks):
-        #    return ' '
-
-        #self.predict.app.callback(dash.dependencies.Output('input-1-state', 'value'),
-        #                            [dash.dependencies.Input('submit-button-state', 'n_clicks')])(update_input)
-
-        return html.Div([html.Div(html.H2(children='Уравнение множественной регрессии'),
-                                  style={'text-align': 'center'}),
-                         html.Div([html.Div(dcc.Markdown(id='Markdown', children=uravnenie)),
-                                   html.Div(html.H4(children='Предсказание новых значений'),
-                                            style={'text-align': 'center'}),
-                                   dcc.Markdown(children='Чтобы получить значение зависимой переменной, '
-                                                         'введите значение независимых признаков ниже:'),
-                                   dcc.Input(id='input-1-state', type='text', value=''),
-                                   html.Button(id='submit-button-state', n_clicks=0, children='Submit'),
-                                   html.Div(id='output-state', children='')],
-                                  style={'width': '78%', 'display': 'inline-block',
-                                         'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid',
-                                         'padding': '5px'})
-                         ], style={'margin': '50px'})
-
-    # качество модели
-    def _generate_quality(self):
-        df_result_1 = pd.DataFrame(columns=['Параметр', 'R', 'R2', 'R2adj', 'df', 'Fst', 'St.Error'])
-        df_Y = self.predict.df_Y_test
-        df_X = self.predict.df_X_test
-        predict_Y = LinearRegressionModel.predict(self.predict.model, self.predict.df_X_test)
-        mean_Y = LinearRegressionModel.get_mean(self.predict.model, df_Y)
-        RSS = LinearRegressionModel.get_RSS(self.predict.model, predict_Y, mean_Y)
-        de_fr = LinearRegressionModel.get_deg_fr(self.predict.model, self.predict.df_X_test)
-        df_result_1.loc[1] = ['Значение', round(LinearRegressionModel.get_R(self.predict.model, df_Y, predict_Y), 3),
-                              round(LinearRegressionModel.score(self.predict.model), 3),
-                              round(LinearRegressionModel.get_R2_adj(self.predict.model, df_X, df_Y, predict_Y), 3),
-                              str(str(LinearRegressionModel.get_deg_fr(self.predict.model, df_X)[0]) + '; ' +
-                                  str(LinearRegressionModel.get_deg_fr(self.predict.model, df_X)[1])),
-                              round(LinearRegressionModel.get_Fst(self.predict.model, df_X, df_Y, predict_Y), 3),
-                              round(LinearRegressionModel.get_st_err(self.predict.model, RSS, de_fr), 3)
-                              ]
-
-        return html.Div([html.Div(html.H2(children='Критерии качества модели'), style={'text-align': 'center'}),
-                         html.Div([html.Div(dash_table.DataTable(
-                             id='table1',
-                             columns=[{"name": i, "id": i} for i in df_result_1.columns],
-                             data=df_result_1.to_dict('records'),
-                             export_format='xlsx'
-                         ), style={'width': str(len(df_result_1.columns) * 8 - 10) + '%', 'display': 'inline-block'}),
-                             html.Div(dcc.Markdown(markdown_linear_table1))],
-                             style={'width': '78%', 'display': 'inline-block',
-                                    'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid', 'padding': '5px'})],
-                        style={'margin': '50px'})
 
     # таблица остатков
     def _generate_resid(self):
