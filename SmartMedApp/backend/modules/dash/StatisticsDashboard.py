@@ -3,6 +3,8 @@ import dash
 import dash_table
 import dash_core_components as dcc
 import dash_html_components as html
+from dash.exceptions import PreventUpdate
+import plotly.figure_factory as ff
 
 import plotly.graph_objects as go
 import plotly.express as px
@@ -530,6 +532,84 @@ class StatisticsDashboard(Dashboard):
                                        'padding': '5px'}),
                          html.Div(dcc.Markdown(children=markdown_text_histbox),style={'width': '18%', 'float': 'right',
                                                             'display': 'inline-block'})],style={'margin': '100px'})
+
+
+
+
+
+    def _generate_multi_hist(self):
+        df = self.settings['data']
+        df_dummies = pd.get_dummies(df)
+        columns = df.columns.to_numpy()
+        option_list = [{'label': str(i), 'value': str(i)} for i in columns]   
+        bins = [{'label': str(i), 'value': i} for i in np.arange(1, 100)]   
+
+        def update_multi_hist(xaxis_column_name_multi_hist, nbins_multi_hist):
+            if not xaxis_column_name_multi_hist or not nbins_multi_hist:
+                raise PreventUpdate
+            else:
+                if type(xaxis_column_name_multi_hist) is str:
+                    data = [df_dummies[xaxis_column_name_multi_hist]]
+                    names = [xaxis_column_name_multi_hist]
+                else:
+                    data = [df_dummies[str(i)] for i in xaxis_column_name_multi_hist]
+                    names = xaxis_column_name_multi_hist
+            fig_multi_hist = ff.create_distplot(data, names, bin_size=nbins_multi_hist)
+            return fig_multi_hist
+
+        self.app.callback(dash.dependencies.Output('Histogram_multi_hist', 'figure'),
+                        dash.dependencies.Input('xaxis_chosen_fearures_multi_hist', 'value'),
+                        dash.dependencies.Input('nbins_multi_hist', 'value'))(update_multi_hist)
+
+        def update_dropdown_milti_hist(features_multi_hist):
+            if not features_multi_hist:
+                raise PreventUpdate
+            else:
+                columns = pd.get_dummies(df[features_multi_hist]).columns
+                Options = [{'label': str(i), 'value': str(i)} for i in columns]
+                return Options
+
+        self.app.callback(dash.dependencies.Output('xaxis_chosen_fearures_multi_hist', 'options'),
+                        dash.dependencies.Input('xaxis_features_multi_hist', 'value'))(update_dropdown_milti_hist)
+
+
+
+        return html.Div([html.Div(html.H1(children='Множественная гистограмма'), style={'text-align': 'center'}),
+                         html.Div([
+                            html.Div([
+                                dcc.Markdown(children="Возможные показатели:"),
+                                dcc.Dropdown(
+                                    id='xaxis_features_multi_hist',                    
+                                    options=option_list,
+                                    value=columns,
+                                    multi=True)],
+                                    style={'width': '100%', 'display': 'inline-block'}),
+
+                            html.Div([
+                                dcc.Markdown(children="Выберите показатель:"),
+                                dcc.Dropdown(
+                                    id='xaxis_chosen_fearures_multi_hist',
+                                    multi=True)],
+                                style={'width': '48%', 'float': 'left', 'display': 'inline-block', 'padding': '5px'}),
+
+                            html.Div([
+
+                                dcc.Markdown(children="Выберите ширину ячейки:"),
+                                dcc.Dropdown(
+                                    id='nbins_multi_hist',                    
+                                    options=bins,
+                                    value=bins[0]['value'])
+                            ],
+                            style={'width': '48%', 'float': 'right', 'display': 'inline-block', 'padding': '5px'}),
+                            
+                            html.Div([dcc.Graph(id='Histogram_multi_hist')], style={'width': '100%', 'display': 'inline-block'})
+                        ], style={'width': '78%', 'display': 'inline-block',
+                                    'border-color': 'rgb(220, 220, 220)', 'border-style': 'solid',
+                                    'padding': '5px'}),
+                    html.Div(dcc.Markdown(children=markdown_text_histbox),style={'width': '18%', 'float': 'right',
+                                                        'display': 'inline-block'})],style={'margin': '100px'})
+
+       
 
     
 
