@@ -67,6 +67,9 @@ class VisualizationWindow(object):
         self.checkBoxLog = QtWidgets.QCheckBox(self.verticalLayoutWidget)
         self.checkBoxLog.setObjectName("checkBoxLog")
         self.verticalLayout.addWidget(self.checkBoxLog)
+        self.checkMultiHist = QtWidgets.QCheckBox(self.verticalLayoutWidget)
+        self.checkMultiHist.setObjectName("checkMultiHist")
+        self.verticalLayout.addWidget(self.checkMultiHist)
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -89,3 +92,4 @@ class VisualizationWindow(object):
         self.checkBoxBar.setText(_translate("MainWindow", "  Столбцовая диаграмма"))
         self.checkBoxPie.setText(_translate("MainWindow", "  Круговая диаграмма"))
         self.checkBoxLog.setText(_translate("MainWindow", "  График логарифмической зависимости"))
+        self.checkMultiHist.setText(_translate("MainWindow", "  Множественная гистограмма"))

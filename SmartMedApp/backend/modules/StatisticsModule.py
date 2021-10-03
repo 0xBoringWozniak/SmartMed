@@ -51,7 +51,8 @@ class StatisticsModule(Module, StatisticsDashboard):
             'linlog': self._generate_linlog,
             'dotplot': self._generate_dotplot,
             'piechart': self._generate_piechart,
-            'boxhist': self._generate_box_hist
+            'boxhist': self._generate_box_hist,
+            'multihist': self._generate_multi_hist
         }
 
         settings['data'] = self.data
