@@ -69,7 +69,7 @@ class BioequivalenceModule(Module, BioequivalenceDashboard):
                                'each_in_group': self._generate_concentration_time_mean(),
                                'log_each_in_group': self._generate_concentration_time_log_mean(),
                                'criteria': self._generate_criteria(), 'features': self._generate_param(),
-                               'var': self._generate_anova()}
+                               'var': self._generate_anova(), 'statistics': self._generate_statistics()}
             for graph in temp_list:
                 if type(graph_to_method[graph]) == list:
                     self.graphs_and_lists.append((graph_to_method[graph])[0])
@@ -86,7 +86,8 @@ class BioequivalenceModule(Module, BioequivalenceDashboard):
                                'avg_auc': [self._generate_log_auc(),
                                            self._generate_criteria()],
                                'anal_resylts': self._generate_anova(),
-                               'results': self._generate_interval()}
+                               'results': self._generate_interval(),
+                               'statistics' : self._generate_statistics()}
             for graph in temp_list:
                 if type(graph_to_method[graph]) == list:
                     for elem in graph_to_method[graph]:

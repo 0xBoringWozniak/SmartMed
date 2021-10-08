@@ -19,10 +19,12 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
         self.checkBoxFeatures.setChecked(True)
         self.checkBoxPowers.setChecked(True)
         self.checkBoxRes.setChecked(True)
+        self.checkBoxStat.setChecked(True)
 
         self.settings = {'tables': {'criteria': 'True',
                                     'features': 'True',
-                                    'var': 'True'}}
+                                    'var': 'True',
+                                    'statistics' : 'True'}}
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
@@ -30,6 +32,7 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
         self.checkBoxFeatures.clicked.connect(self.features)
         self.checkBoxDistrub.clicked.connect(self.distrub)
         self.checkBoxPowers.clicked.connect(self.powers)
+        self.checkBoxStat.clicked.connect(self.statistics)
 
     def features(self):
         if self.checkBoxFeatures.isChecked():
@@ -54,6 +57,15 @@ class WrappedTablesWindow(TablesWindow, QtWidgets.QMainWindow):
         else:
             self.checkBoxPowers.setChecked(False)
             self.settings['tables']['var'] = False
+
+
+    def statistics(self):
+        if self.checkBoxStat.isChecked():
+            self.checkBoxStat.setChecked(True)
+            self.settings['tables']['statistics'] = True
+        else:
+            self.checkBoxStat.setChecked(False)
+            self.settings['tables']['statistics'] = False
 
     def back(self):
         self.hide()
