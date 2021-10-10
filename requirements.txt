@@ -33,6 +33,6 @@ six==1.15.0
 sklearn==0.0
 statsmodels==0.12.2
 threadpoolctl==2.1.0
-urllib3==1.25.10
+urllib3==1.26.5
 Werkzeug==1.0.1
 xlrd==1.2.0
