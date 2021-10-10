@@ -978,3 +978,68 @@ class BioequivalenceDashboard(Dashboard):
                      style={'width': '18%', 'float': 'right', 'display': 'inline-block'})], 
             style={'margin': '100px'}
         )
+
+
+    def _generate_statistics(self):
+        if self.settings[0].plan == 'parallel':
+            data = {'Группа': ['R', 'T'],
+                    'Mean': [float(self.settings[0].mean_r), 
+                    float(self.settings[0].mean_t)],
+                    'Std': [float(self.settings[0].std_r), 
+                    float(self.settings[0].std_t)],
+                    'Min': [float(self.settings[0].min_r),
+                     float(self.settings[0].min_t)],
+                    'Max': [float(self.settings[0].max_r), 
+                    float(self.settings[0].max_t)],
+                    'Geom Mean': [float(self.settings[0].geom_mean_r), 
+                    float(self.settings[0].geom_mean_t)],
+                    'Variation': [float(self.settings[0].variation_r), 
+                    float(self.settings[0].variation_t)]}
+        else:
+            data = {'Группа': ['TR', 'RT'],
+                    'Mean_T': [float(self.settings[0].mean_t_1), 
+                    float(self.settings[0].mean_t_2)],
+                    'Mean_R': [float(self.settings[0].mean_r_1), 
+                    float(self.settings[0].mean_r_2)],
+                    'Std_T': [float(self.settings[0].std_t_1), 
+                    float(self.settings[0].std_t_2)],
+                    'Std_R': [float(self.settings[0].std_r_1), 
+                    float(self.settings[0].std_r_2)],
+                    'Min_T': [float(self.settings[0].min_t_1),
+                     float(self.settings[0].min_t_2)],
+                    'Min_R': [float(self.settings[0].min_r_1),
+                     float(self.settings[0].min_r_2)],
+                    'Max_T': [float(self.settings[0].max_t_1), 
+                    float(self.settings[0].max_t_2)],
+                    'Max_R': [float(self.settings[0].max_r_1), 
+                    float(self.settings[0].max_r_2)],
+                    'Geom_mean_T': [float(self.settings[0].geom_mean_t_1), 
+                    float(self.settings[0].geom_mean_t_2)],
+                    'Geom_mean_R': [float(self.settings[0].geom_mean_r_1), 
+                    float(self.settings[0].geom_mean_r_2)],
+                    'Variation_T': [float(self.settings[0].variation_t_1), 
+                    float(self.settings[0].variation_t_2)],
+                    'Variation_R': [float(self.settings[0].variation_r_1), 
+                    float(self.settings[0].variation_r_2)]}
+        df = pd.DataFrame(data)
+        df = round_df(df)
+        return html.Div([html.Div(html.H1(children='Таблица с распределением статистики по группам'), 
+            style={'text-align': 'center'}),
+                            html.Div([
+                                html.Div([
+                                    html.Div([dash_table.DataTable(
+                                        id='param_1',
+                                        columns=[{"name": i, "id": i, "deletable": True}
+                                                for i in df.columns],
+                                        data=df.to_dict('records'),
+                                        style_table={'overflowX': 'auto'},
+                                        export_format='xlsx'
+                                    )], style={'border-color': 'rgb(220, 220, 220)', 
+                                    'border-style': 'solid', 'padding': '5px', 'margin': '5px'})],
+                                    style={'width': '78%', 'display': 'inline-block'}),
+                                html.Div(dcc.Markdown(children=markdown_statistics), 
+                                style={'width': '18%', 'float': 'right', 'display': 'inline-block',
+                                                                                            'padding': '5px', 'margin': '5px'})
+                            ])
+                            ], style={'margin': '50px'}
+                        )

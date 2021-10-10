@@ -18,18 +18,20 @@ class WrappedTablesWindowCross(TablesWindowCross, QtWidgets.QMainWindow):
         self.checkBoxFeatures.setChecked(True)
         self.checkBoxCriteria.setChecked(True)
         self.checkBox.setChecked(True)
+        self.checkBoxStat.setChecked(True)
 
         self.settings = {'tables': {'avg_auc': True,
                                     'anal_resylts': True,
-                                    'results': True}}
+                                    'results': True,
+                                    'statistics' : True}}
 
     def __build_buttons(self):
         self.pushButtonNext.clicked.connect(self.next)
         self.pushButtonBack.clicked.connect(self.back)
-
         self.checkBoxCriteria.clicked.connect(self.features)
         self.checkBoxFeatures.clicked.connect(self.distrub)
         self.checkBox.clicked.connect(self.res)
+        self.checkBoxStat.clicked.connect(self.statistics)
 
     def features(self):
         if self.checkBoxCriteria.isChecked():
@@ -54,6 +56,15 @@ class WrappedTablesWindowCross(TablesWindowCross, QtWidgets.QMainWindow):
         else:
             self.checkBox.setChecked(False)
             self.settings['tables']['results'] = False
+
+
+    def statistics(self):
+        if self.checkBoxStat.isChecked():
+            self.checkBoxStat.setChecked(True)
+            self.settings['tables']['statistics'] = True
+        else:
+            self.checkBoxStat.setChecked(False)
+            self.settings['tables']['statistics'] = False
 
     def back(self):
         self.hide()

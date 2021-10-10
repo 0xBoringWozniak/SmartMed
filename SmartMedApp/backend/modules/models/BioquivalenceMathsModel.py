@@ -9,6 +9,16 @@ from math import e
 
 class BioquivalenceMathsModel:
 
+    def get_describe(self, x) -> tuple:
+        df = x.mean(axis=0).describe()
+        return df
+    
+    def get_geom_mean(self, x: np.array) -> float:
+        return np.exp(np.log(x).mean())
+    
+    def get_variation(self, x: np.array) -> float:
+        return stats.variation(x)
+
     def get_auc(self, x: np.array, y: np.array) -> float:
         return auc(x, y)
 
@@ -170,6 +180,21 @@ class BioquivalenceMathsModel:
             self.auc_r_infty = 0
             self.auc_t_infty_log = 0
             self.auc_r_infty_log = 0
+            #statistics
+            self.mean_t = 0
+            self.mean_r = 0
+            self.std_t = 0
+            self.std_r = 0
+            self.min_t = 0
+            self.min_r = 0
+            self.max_t = 0
+            self.max_r = 0
+            self.median_t = 0
+            self.median_r = 0
+            self.variation_t = 0
+            self.variation_r = 0
+            self.geom_mean_t = 0
+            self.geom_mean_r = 0
         if self.plan == 'cross':
             self.concentration_t_1 = data['concentration_t_1']
             self.concentration_r_1 = data['concentration_r_1']
@@ -206,6 +231,35 @@ class BioquivalenceMathsModel:
             self.anova = 0
             self.oneside_eq = 0
             self.oneside_noteq = 0
+            #statistics
+            self.mean_t_1 = 0
+            self.mean_t_2 = 0
+            self.mean_r_1 = 0
+            self.mean_r_2 = 0
+            self.std_t_1 = 0
+            self.std_t_2 = 0
+            self.std_r_1 = 0
+            self.std_r_2 = 0
+            self.min_t_1 = 0
+            self.min_t_2 = 0
+            self.min_r_1 = 0
+            self.min_r_2 = 0
+            self.max_t_1 = 0
+            self.max_t_2 = 0
+            self.max_r_1 = 0
+            self.max_r_2 = 0
+            self.median_t_1 = 0
+            self.median_t_2 = 0
+            self.median_r_1 = 0
+            self.median_r_2 = 0
+            self.variation_t_1 = 0
+            self.variation_t_2 = 0
+            self.variation_r_1 = 0
+            self.variation_r_2 = 0
+            self.geom_mean_t_1 = 0
+            self.geom_mean_t_2 = 0
+            self.geom_mean_r_1 = 0
+            self.geom_mean_r_2 = 0
 
     def run_bio_model(self):
         if self.plan == 'parallel':
@@ -254,6 +308,27 @@ class BioquivalenceMathsModel:
                 self.auc_t, self.auc_r, self.anova[0])
             self.oneside_noteq = self.get_oneside_noteq(
                 self.auc_t, self.auc_r, self.anova[0])
+
+            self.mean_r = self.get_describe(self.concentration_r).loc['mean']
+            self.mean_t = self.get_describe(self.concentration_t).loc['mean']
+
+            self.std_r = self.get_describe(self.concentration_r).loc['std']
+            self.std_t = self.get_describe(self.concentration_t).loc['std']
+
+            self.min_r = self.get_describe(self.concentration_r).loc['min']
+            self.min_t = self.get_describe(self.concentration_t).loc['min']
+
+            self.median_r = self.get_describe(self.concentration_r).loc['50%']
+            self.median_t = self.get_describe(self.concentration_t).loc['50%']
+
+            self.max_r = self.get_describe(self.concentration_r).loc['max']
+            self.max_t = self.get_describe(self.concentration_t).loc['max']
+
+            self.geom_mean_r = self.get_geom_mean(self.concentration_r.mean(axis=0))
+            self.geom_mean_t = self.get_geom_mean(self.concentration_t.mean(axis=0))
+
+            self.variation_r = self.get_variation(self.concentration_r.mean(axis=0))
+            self.variation_t = self.get_variation(self.concentration_t.mean(axis=0))
         else:
             self.auc_t_1 = self.create_auc(self.concentration_t_1)
             self.auc_r_1 = self.create_auc(self.concentration_r_1)
@@ -292,3 +367,38 @@ class BioquivalenceMathsModel:
                                                             np.concatenate((self.auc_r_1, self.auc_r_2)).ravel(), self.anova)
             self.oneside_noteq = self.get_crossover_oneside_noteq(np.concatenate((self.auc_t_1, self.auc_t_2)).ravel(),
                                                                   np.concatenate((self.auc_r_1, self.auc_r_2)).ravel(), self.anova)
+                                                                
+            self.mean_r_1 = self.get_describe(self.concentration_r_1).loc['mean']
+            self.mean_t_1 = self.get_describe(self.concentration_t_1).loc['mean']
+            self.mean_r_2 = self.get_describe(self.concentration_r_2).loc['mean']
+            self.mean_t_2 = self.get_describe(self.concentration_t_2).loc['mean']
+
+            self.std_r_1 = self.get_describe(self.concentration_r_1).loc['std']
+            self.std_t_1 = self.get_describe(self.concentration_t_1).loc['std']
+            self.std_r_2 = self.get_describe(self.concentration_r_2).loc['std']
+            self.std_t_2 = self.get_describe(self.concentration_t_2).loc['std']
+
+            self.min_r_1 = self.get_describe(self.concentration_r_1).loc['min']
+            self.min_t_1 = self.get_describe(self.concentration_t_1).loc['min']
+            self.min_r_2 = self.get_describe(self.concentration_r_2).loc['min']
+            self.min_t_2 = self.get_describe(self.concentration_t_2).loc['min']
+
+            self.median_r_1 = self.get_describe(self.concentration_r_1).loc['50%']
+            self.median_t_1 = self.get_describe(self.concentration_t_1).loc['50%']
+            self.median_r_2 = self.get_describe(self.concentration_r_2).loc['50%']
+            self.median_t_2 = self.get_describe(self.concentration_t_2).loc['50%']
+
+            self.max_r_1 = self.get_describe(self.concentration_r_1).loc['max']
+            self.max_t_1 = self.get_describe(self.concentration_t_1).loc['max']
+            self.max_r_2 = self.get_describe(self.concentration_r_2).loc['max']
+            self.max_t_2 = self.get_describe(self.concentration_t_2).loc['max']
+
+            self.geom_mean_r_1 = self.get_geom_mean(self.concentration_r_1.mean(axis=0))
+            self.geom_mean_t_1 = self.get_geom_mean(self.concentration_t_1.mean(axis=0))
+            self.geom_mean_r_2 = self.get_geom_mean(self.concentration_r_2.mean(axis=0))
+            self.geom_mean_t_2 = self.get_geom_mean(self.concentration_t_2.mean(axis=0))
+
+            self.variation_r_1 = self.get_variation(self.concentration_r_1.mean(axis=0))
+            self.variation_t_1 = self.get_variation(self.concentration_t_1.mean(axis=0))
+            self.variation_r_2 = self.get_variation(self.concentration_r_2.mean(axis=0))
+            self.variation_t_2 = self.get_variation(self.concentration_t_2.mean(axis=0))
