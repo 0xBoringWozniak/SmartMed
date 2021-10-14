@@ -41,3 +41,10 @@ def check_first_group_cross(path):
 	else:
 		return 'T'
 
+def check_group_column(path):
+	df = get_columns(path)
+	if 'Group' in df.columns:
+		return True
+	else:
+		return False
+
