@@ -12,7 +12,6 @@ class Module(ABC):
 
         # get settings['MODULE_SETTINGS']
         self.settings = settings
-        print(settings)
 
         # call dash.Dashboard __init__ to create Dashboard object
         super().__init__()
