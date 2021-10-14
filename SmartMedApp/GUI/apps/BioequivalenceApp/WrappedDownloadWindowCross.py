@@ -52,8 +52,7 @@ class WrappedDownloadWindowCross(DownloadWindowCross, QtWidgets.QMainWindow):
             return
         
 
-        while self.settings['path_test'] != '' and self.settings['path_ref'] != '' \
-            and (check_first_group_cross(self.settings['path_test']) != 'T' \
+        while (check_first_group_cross(self.settings['path_test']) != 'T' \
             or check_first_group_cross(self.settings['path_ref']) != 'R'):
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)

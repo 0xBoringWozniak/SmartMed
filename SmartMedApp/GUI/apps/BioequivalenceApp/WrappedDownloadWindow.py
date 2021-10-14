@@ -37,9 +37,10 @@ class WrappedDownloadWindow(DownloadWindow, QtWidgets.QMainWindow):
             msg.setInformativeText('Выберите файл')
             msg.setWindowTitle("Ошибка")
             msg.exec_()
+            
+            return
 
-        while self.settings['path_test'] != '' and self.settings['path_ref'] != '' \
-            and (check_group_column(self.settings['path_test'])\
+        while (check_group_column(self.settings['path_test'])\
             or check_group_column(self.settings['path_ref'])):
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)
