@@ -4,6 +4,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
 
+from GUI.apps.utils import check_first_group_cross
+
 from .DownloadWindowCross import DownloadWindowCross
 
 
@@ -33,6 +35,18 @@ class WrappedDownloadWindowCross(DownloadWindowCross, QtWidgets.QMainWindow):
             msg.setIcon(QMessageBox.Warning)
             msg.setText("Ошибка")
             msg.setInformativeText('Выберите файл')
+            msg.setWindowTitle("Ошибка")
+            msg.exec_()
+
+            return
+
+        while self.settings['path_test'] != '' and self.settings['path_ref'] != '' \
+            and (check_first_group_cross(self.settings['path_test']) != 'T' \
+            or check_first_group_cross(self.settings['path_ref']) != 'R'):
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Ошибка")
+            msg.setInformativeText('Выберите файлы правильно')
             msg.setWindowTitle("Ошибка")
             msg.exec_()
 
