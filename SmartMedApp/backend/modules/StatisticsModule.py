@@ -1,5 +1,3 @@
-import pandas as pd
-
 from .ModuleInterface import Module
 from .dash import StatisticsDashboard
 

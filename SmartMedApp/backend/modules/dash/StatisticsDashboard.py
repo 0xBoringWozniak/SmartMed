@@ -1,4 +1,3 @@
-import pylatex
 import dash
 import dash_table
 import dash_core_components as dcc
@@ -12,7 +11,7 @@ import pandas as pd
 import numpy as np
 from scipy.stats import variation
 
-from .text.markdown_text import *
+from .text.markdown_stats import *
 
 from .Dashboard import Dashboard
 

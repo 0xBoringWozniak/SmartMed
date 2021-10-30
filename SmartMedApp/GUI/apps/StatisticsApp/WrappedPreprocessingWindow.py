@@ -1,12 +1,11 @@
 import pickle
 import os
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import (
-    QWidget, QToolTip, QPushButton, QApplication, QMessageBox)
+from PyQt5 import  QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 
 from .PreprocessingWindow import PreprocessingWindow
-from ..utils import remove_if_exists
+from ..utils import get_columns, remove_if_exists
 
 
 class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
@@ -47,11 +46,12 @@ class WrappedPreprocessingWindow(PreprocessingWindow, QtWidgets.QMainWindow):
         while self.settings['MODULE_SETTINGS']['data']['path'] == '':
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Warning)
-            msg.setText("Error")
-            msg.setInformativeText('Please, choose path to file')
-            msg.setWindowTitle("Error")
+            msg.setText("Ошибка")
+            msg.setInformativeText('Выберите файл')
+            msg.setWindowTitle("Ошибка")
             msg.exec_()
             return
+
             '''
         value_na = self.comboBox1.currentText()
 
