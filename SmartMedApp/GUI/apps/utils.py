@@ -34,3 +34,17 @@ def get_columns(path):
 		df = pd.read_csv(path)
 	return df
 
+def check_first_group_cross(path):
+	df = get_columns(path)
+	if df.loc[0, 'Group'] == 'R':
+		return 'R'
+	else:
+		return 'T'
+
+def check_group_column(path):
+	df = get_columns(path)
+	if 'Group' in df.columns:
+		return True
+	else:
+		return False
+

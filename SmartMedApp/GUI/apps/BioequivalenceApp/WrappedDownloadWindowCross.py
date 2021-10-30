@@ -4,6 +4,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (
     QWidget, QToolTip, QPushButton, QApplication, QMessageBox, )
 
+from GUI.apps.utils import check_first_group_cross, check_group_column
+
 from .DownloadWindowCross import DownloadWindowCross
 
 
@@ -37,6 +39,30 @@ class WrappedDownloadWindowCross(DownloadWindowCross, QtWidgets.QMainWindow):
             msg.exec_()
 
             return
+
+        while ~check_group_column(self.settings['path_test'])\
+            or ~check_group_column(self.settings['path_ref']):
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Ошибка")
+            msg.setInformativeText('Выберите файл правильно')
+            msg.setWindowTitle("Ошибка")
+            msg.exec_()
+
+            return
+        
+
+        while (check_first_group_cross(self.settings['path_test']) != 'T' \
+            or check_first_group_cross(self.settings['path_ref']) != 'R'):
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Warning)
+            msg.setText("Ошибка")
+            msg.setInformativeText('Выберите файлы правильно')
+            msg.setWindowTitle("Ошибка")
+            msg.exec_()
+
+            return
+
         with open('settings.py', 'rb') as f:
             data = pickle.load(f)
             data['MODULE_SETTINGS'].update(self.settings)
